@@ -1,0 +1,17 @@
+{
+  "name": "windplay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A playground for point clouds, particle animation, interactive art, and browser games",
+  "workspaces": [
+    "works/*"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev:point-cloud": "npm run dev --workspace @windplay/point-cloud-studio",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

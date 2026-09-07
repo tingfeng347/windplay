@@ -1,0 +1,17 @@
+{
+  "name": "@windplay/point-cloud-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "将照片转换为彩色交互 SVG 和三维点云的本地生成器",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "sharp": "0.35.4"
+  }
+}
