@@ -1,5 +1,6 @@
 node_modules/
 dist/
+_site/
 .cache/
 coverage/
 *.log
@@ -7,4 +8,3 @@ coverage/
 .env
 .env.*
 !.env.example
-

@@ -10,8 +10,12 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "dev": "npm run build && node scripts/dev.mjs",
     "dev:point-cloud": "npm run dev --workspace @windplay/point-cloud-studio",
-    "build": "npm run build --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "build": "npm run build:works && npm run build:site",
+    "build:works": "npm run build --workspaces --if-present",
+    "build:site": "node scripts/build-site.mjs",
+    "test": "node --test tests/*.test.cjs && npm run test:works",
+    "test:works": "npm run test --workspaces --if-present"
   }
 }

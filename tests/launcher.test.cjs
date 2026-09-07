@@ -1,0 +1,29 @@
+const assert = require('node:assert/strict');
+const { access, readdir, readFile } = require('node:fs/promises');
+const path = require('node:path');
+const test = require('node:test');
+
+const root = path.resolve(__dirname, '..');
+
+test('启动台链接所有作品的完整成品', async () => {
+  const homepage = await readFile(path.join(root, 'index.html'), 'utf8');
+  const entries = await readdir(path.join(root, 'works'), { withFileTypes:true });
+  const works = entries.filter(entry => entry.isDirectory()).map(entry => entry.name);
+
+  assert.ok(works.length > 0);
+  for (const work of works) {
+    const relativeDemo = `works/${work}/demo/index.html`;
+    await access(path.join(root, relativeDemo));
+    assert.match(homepage, new RegExp(`href=["']${relativeDemo}["']`));
+  }
+});
+
+test('启动台可以通过文件协议完整加载', async () => {
+  const homepage = await readFile(path.join(root, 'index.html'), 'utf8');
+  const preview = 'assets/point-cloud-studio-preview.png';
+
+  assert.doesNotMatch(homepage, /(?:href|src)=["']\//, '本地入口必须使用相对路径');
+  assert.doesNotMatch(homepage, /__[A-Z0-9_]+__/, '启动台不能含有构建占位符');
+  assert.match(homepage, new RegExp(`src=["']${preview}["']`));
+  await access(path.join(root, preview));
+});

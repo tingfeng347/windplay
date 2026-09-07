@@ -3,6 +3,16 @@
 WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、交互艺术和小游戏。
 这里的每个作品都可以独立开发与构建，也可以随着想法成熟继续扩展。
 
+## 启动台
+
+```bash
+npm ci
+npm run dev
+```
+
+浏览器打开 `http://localhost:4173`，从启动台进入任一作品。不启动服务时也可以直接双击
+根目录的 `index.html`；所有链接均使用相对路径。
+
 ## 作品
 
 | 作品 | 类型 | 状态 | 说明 |
@@ -14,13 +24,18 @@ WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、�
 ```text
 windplay/
 ├── .github/workflows/       # 持续集成
+├── assets/                  # 启动台预览素材
 ├── docs/                    # 仓库级设计与约定
+├── scripts/                 # 启动台构建与本地服务
+├── tests/                   # 启动台入口检查
 ├── works/                   # 可独立运行的网页作品
 │   └── point-cloud-studio/  # 点云人像生成器
 │       └── demo/index.html  # 可直接打开的完整成品
 ├── AGENTS.md                # 自动化协作规则
 ├── CONTRIBUTING.md          # 新增作品与开发说明
+├── index.html               # 作品启动台
 ├── package.json             # 仓库统一命令和 workspace 声明
+├── styles.css               # 启动台样式
 └── README.md
 ```
 

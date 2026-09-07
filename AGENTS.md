@@ -13,8 +13,9 @@ Do not create a shared package until at least two works use the code and its int
 ## Development Commands
 
 - `npm ci`: install all workspace dependencies from the root lockfile.
-- `npm run build`: build every work that declares a build script.
-- `npm test`: test every work that declares a test script.
+- `npm run dev`: build and serve the launcher at `http://localhost:4173`.
+- `npm run build`: build every work and assemble the deployable `_site/` directory.
+- `npm test`: test the launcher and every work that declares a test script.
 - `npm run dev --workspace <package-name>`: start one work locally.
 
 For Point Cloud Studio, use package name `@windplay/point-cloud-studio` or the root alias
@@ -40,6 +41,6 @@ For Point Cloud Studio, use package name `@windplay/point-cloud-studio` or the r
 
 Keep edits scoped to the affected work unless a repository-level contract changes. When adding a
 work, register its `demo/index.html` in the root README table and ensure root `npm run build` and
-`npm test` still pass.
+`index.html`, then ensure root `npm run build` and `npm test` still pass.
 Preserve unrelated user changes and never commit secrets or source media without redistribution
 rights.
