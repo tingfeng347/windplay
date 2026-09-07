@@ -1,0 +1,54 @@
+# WindPlay
+
+WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、交互艺术和小游戏。
+这里的每个作品都可以独立开发与构建，也可以随着想法成熟继续扩展。
+
+## 作品
+
+| 作品 | 类型 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| [Point Cloud Studio](works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
+
+## 目录
+
+```text
+windplay/
+├── .github/workflows/       # 持续集成
+├── docs/                    # 仓库级设计与约定
+├── works/                   # 可独立运行的网页作品
+│   └── point-cloud-studio/  # 点云人像生成器
+│       └── demo/index.html  # 可直接打开的完整成品
+├── AGENTS.md                # 自动化协作规则
+├── CONTRIBUTING.md          # 新增作品与开发说明
+├── package.json             # 仓库统一命令和 workspace 声明
+└── README.md
+```
+
+每个作品自行维护源码、素材、测试、文档和构建脚本。只有被多个作品实际复用的代码，
+才会提取到仓库级共享目录，避免为了目录完整而制造空壳。
+
+每个作品的 `demo/index.html` 是提交到 Git 的单文件成品，可以直接双击体验，不需要安装依赖
+或启动开发服务。`dist/` 则是构建时生成的完整输出，仍然不会提交。
+
+## 开始使用
+
+需要 Node.js 22 或更新版本，推荐 Node.js 24。
+
+```bash
+npm ci
+npm run dev --workspace @windplay/point-cloud-studio
+```
+
+开发服务启动后，访问终端显示的本机地址。也可以进入作品目录，按该作品 README
+中的方式单独开发。
+
+## 统一检查
+
+```bash
+npm run build
+npm test
+```
+
+根级命令会依次执行所有已声明对应脚本的作品。新增作品的规则见
+[CONTRIBUTING.md](CONTRIBUTING.md)。仓库的目录决策见
+[docs/STRUCTURE.md](docs/STRUCTURE.md)。
