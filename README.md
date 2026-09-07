@@ -13,6 +13,9 @@ npm run dev
 浏览器打开 `http://localhost:4173`，从启动台进入任一作品。不启动服务时也可以直接双击
 根目录的 `index.html`；所有链接均使用相对路径。
 
+推送到 GitHub 的 `main` 分支并在仓库设置中启用 GitHub Pages（来源选择 GitHub Actions）后，
+公开入口为 `https://tingfeng347.github.io/windplay/`。
+
 ## 作品
 
 | 作品 | 类型 | 状态 | 说明 |
