@@ -5,11 +5,10 @@ const sliders = ['spacing','radius','contrast','gamma','threshold'];
 let currentImage = null, currentModel = null, destroyMotion = null, cloud = null;
 let savedView = null;
 let renderFrame = 0, loadTicket = 0, pngBusy = false;
-let currentTheme = 'dark', followsTheme = true;
-const palettes = {
-  dark:{foreground:'#f4f3ef',background:'#100f0b'},
-  light:{foreground:'#252a33',background:'#ffffff'}
-};
+let currentTheme = 'dark';
+// 点阵以照片自身亮度成像，只在深色画布上还原人像；界面主题不改动画面配色。
+const ART = {foreground:'#f4f3ef',background:'#100f0b'};
+const DEFAULT_DEPTH = 0.1;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function recolor() {
@@ -20,16 +19,29 @@ function recolor() {
     sourceColors:$('sourceColors').checked } };
   showModel();
 }
-function themeColors() {
-  for (const key of ['foreground','background']) $(key).value = palettes[currentTheme][key];
+function defaultColors() {
+  for (const key of ['foreground','background']) $(key).value = ART[key];
   recolor();
+}
+const setVar = (el, name, value) => { if (el.style.setProperty) el.style.setProperty(name, value); };
+/** 画布上的 HUD 随背景明暗选择浅色或深色描边。 */
+function stageInk(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const light = (0.2126 * (n >> 16 & 255) + 0.7152 * (n >> 8 & 255) + 0.0722 * (n & 255)) / 255;
+  return light > 0.55 ? '21,21,19' : '243,241,236';
+}
+function updateView() {
+  if (!$('threeD').checked || !cloud) { $('hudView').textContent = '平面点阵 · 1:1'; return; }
+  const view = cloud.getView();
+  const degrees = radians => { const d = Math.round(radians * 180 / Math.PI) % 360; return d > 180 ? d - 360 : d < -180 ? d + 360 : d; };
+  const sign = n => n < 0 ? '−' + Math.abs(n) : String(n);
+  $('hudView').textContent = `YAW ${sign(degrees(view.yaw))}° · PITCH ${sign(degrees(view.pitch))}° · ${Math.round(view.zoom * 100)}%`;
 }
 function setTheme(name, persist = true) {
   currentTheme = name === 'light' ? 'light' : 'dark';
   document.documentElement.dataset.theme = currentTheme;
   $('themeLight').setAttribute('aria-pressed', String(currentTheme === 'light'));
   $('themeDark').setAttribute('aria-pressed', String(currentTheme === 'dark'));
-  if (followsTheme) themeColors();
   if (persist) {
     try { window.localStorage.setItem('point-cloud-editor-theme', currentTheme); } catch (_) {}
   }
@@ -50,6 +62,12 @@ function syncLabels() {
   $('depth').disabled = !$('threeD').checked;
   $('resetView').disabled = !$('threeD').checked;
   $('foreground').disabled = $('sourceColors').checked;
+  $('mode2d').setAttribute('aria-pressed', String(!$('threeD').checked));
+  $('mode3d').setAttribute('aria-pressed', String($('threeD').checked));
+  for (const key of [...sliders, 'depth']) {
+    const el = $(key), min = Number(el.min || 0), max = Number(el.max || 1);
+    setVar(el, '--fill', `${((Number(el.value) - min) / (max - min || 1) * 100).toFixed(1)}%`);
+  }
 }
 function setInteraction() {
   if ($('threeD').checked) { showModel(); return; }
@@ -66,7 +84,9 @@ function showModel() {
   if (!currentModel) return;
   if (cloud) { savedView = cloud.getView(); cloud.destroy(); cloud = null; }
   if (destroyMotion) { destroyMotion(); destroyMotion = null; }
-  $('preview').parentElement.style.background = currentModel.config.background;
+  const stage = $('stage');
+  stage.style.background = currentModel.config.background;
+  setVar(stage, '--stage-ink', stageInk(currentModel.config.background));
   if ($('threeD').checked) {
     const canvas = document.createElement('canvas');
     canvas.width = currentModel.width; canvas.height = currentModel.height;
@@ -82,7 +102,9 @@ function showModel() {
     if ($('motion').checked) destroyMotion = Halftone.interact($('preview').querySelector('svg'), currentModel);
   }
   $('gestureHint').textContent = $('threeD').checked ? '拖拽旋转 · 滚轮缩放 · 双击复位' : '移动鼠标扰动 · 移开自动回位';
-  $('stats').textContent = `${currentModel.dots.length.toLocaleString('zh-CN')} 点 · ${$('threeD').checked ? '3D' : '2D'}`;
+  stage.classList?.remove('loading');
+  $('stats').textContent = `${currentModel.dots.length.toLocaleString('zh-CN')} 点 · ${$('threeD').checked ? '3D' : '2D'} · 纵深 ${Number($('depth').value).toFixed(2)}`;
+  updateView();
 }
 function render() {
   renderFrame = 0;
@@ -101,7 +123,7 @@ function loadImage(src, label, ticket) {
     if (img.naturalWidth * img.naturalHeight > 50000000) {
       status('照片过大，请先缩小到 5000 万像素以内。', true); return;
     }
-    currentImage = img; $('source').textContent = '当前：' + label;
+    currentImage = img; $('source').textContent = '当前：' + label; $('hudSource').textContent = label;
     status(''); render();
   };
   img.onerror = () => { if (ticket === loadTicket) status('无法读取照片，请使用 JPG、PNG 或 WebP。', true); };
@@ -116,9 +138,7 @@ function saveBlob(blob, name) {
 // 导出从原始坐标开始；SVG 内嵌扰动脚本，PNG 保存静态图。
 function flush() { if (renderFrame) { cancelAnimationFrame(renderFrame); render(); } return currentModel; }
 
-$('choose').addEventListener('click', () => $('file').click());
-$('file').addEventListener('change', event => {
-  const file = event.target.files[0]; if (!file) return;
+function openFile(file) {
   const ticket = ++loadTicket;
   if (file.size > 20 * 1024 * 1024) { status('请选择小于 20 MB 的照片。', true); return; }
   if (!/^image\/(jpeg|png|webp|avif)$/.test(file.type)) { status('请使用 JPG、PNG、WebP 或 AVIF 照片。', true); return; }
@@ -126,18 +146,41 @@ $('file').addEventListener('change', event => {
   const reader = new FileReader();
   reader.onload = () => { if (ticket === loadTicket) loadImage(reader.result, file.name, ticket); };
   reader.onerror = () => { if (ticket === loadTicket) status('读取失败，请重新选择照片。', true); };
-  reader.readAsDataURL(file); event.target.value = '';
+  reader.readAsDataURL(file);
+}
+$('choose').addEventListener('click', () => $('file').click());
+$('file').addEventListener('change', event => {
+  const file = event.target.files[0]; if (!file) return;
+  openFile(file); event.target.value = '';
 });
+// 照片可以直接拖到画布上。
+let dragDepth = 0;
+const dragging = on => { $('stage').classList?.toggle('dragging', on); $('dropHint').hidden = !on; };
+$('stage').addEventListener('dragenter', event => { event.preventDefault(); dragDepth += 1; dragging(true); });
+$('stage').addEventListener('dragover', event => event.preventDefault());
+$('stage').addEventListener('dragleave', () => { dragDepth = Math.max(0, dragDepth - 1); if (!dragDepth) dragging(false); });
+$('stage').addEventListener('drop', event => {
+  event.preventDefault(); dragDepth = 0; dragging(false);
+  const file = event.dataTransfer && event.dataTransfer.files[0];
+  if (file) openFile(file);
+});
+['pointermove','pointerup','wheel','dblclick','keydown'].forEach(type => $('preview').addEventListener(type, updateView, { passive:true }));
 sliders.forEach(key => $(key).addEventListener('input', schedule));
 ['autoLevels','invert'].forEach(key => $(key).addEventListener('input', schedule));
-['foreground','background'].forEach(key => $(key).addEventListener('input', () => { followsTheme = false; recolor(); }));
+['foreground','background'].forEach(key => $(key).addEventListener('input', recolor));
 $('sourceColors').addEventListener('change', () => {
   syncLabels();
   if (currentImage) render(); else recolor();
 });
 $('themeLight').addEventListener('click', () => setTheme('light'));
 $('themeDark').addEventListener('click', () => setTheme('dark'));
-$('resetColors').addEventListener('click', () => { followsTheme = true; themeColors(); });
+$('resetColors').addEventListener('click', defaultColors);
+function setMode(threeD) {
+  if ($('threeD').checked === threeD) return;
+  $('threeD').checked = threeD; syncLabels(); showModel();
+}
+$('mode2d').addEventListener('click', () => setMode(false));
+$('mode3d').addEventListener('click', () => setMode(true));
 ['threeD','depth'].forEach(key => $(key).addEventListener('input', () => { syncLabels(); showModel(); }));
 $('motion').addEventListener('change', setInteraction);
 reducedMotion.addEventListener('change', event => {
@@ -145,11 +188,10 @@ reducedMotion.addEventListener('change', event => {
 });
 $('reset').addEventListener('click', () => {
   sliders.forEach(key => { $(key).value = Halftone.defaults[key]; });
-  followsTheme = true;
-  ['foreground','background'].forEach(key => { $(key).value = palettes[currentTheme][key]; });
+  ['foreground','background'].forEach(key => { $(key).value = ART[key]; });
   $('autoLevels').checked = true; $('invert').checked = false; $('motion').checked = true;
   $('sourceColors').checked = true;
-  $('threeD').checked = true; $('depth').value = 0.38;
+  $('threeD').checked = true; $('depth').value = DEFAULT_DEPTH;
   if (cloud) { cloud.destroy(); cloud = null; } savedView = null;
   status('参数已重置'); schedule();
 });

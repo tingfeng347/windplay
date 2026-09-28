@@ -1,0 +1,2545 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="tingfeng347 的动态作品片头：编码 Agent、RAG、Agent 编排与终端工具">
+  <meta name="color-scheme" content="dark light">
+  <title>Tingfeng Reel</title>
+  <style>
+:root {
+  color-scheme: dark;
+  --bg: #0a0a0b;
+  --ink: #f3f1ec;
+  --muted: rgba(243, 241, 236, 0.58);
+  --line: rgba(243, 241, 236, 0.16);
+  --panel: rgba(16, 16, 18, 0.72);
+  --accent: #ff3b2e;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: "Helvetica Neue", Inter, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--sans);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f1eee6;
+  --ink: #151513;
+  --muted: rgba(21, 21, 19, 0.6);
+  --line: rgba(21, 21, 19, 0.16);
+  --panel: rgba(252, 250, 245, 0.78);
+  --accent: #e0301e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 400ms ease;
+}
+
+.viewport {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  perspective: 1600px;
+  perspective-origin: 50% 46%;
+}
+
+.stage {
+  position: relative;
+  width: min(100vw, 177.78vh);
+  aspect-ratio: 16 / 9;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  will-change: transform;
+}
+
+.back-link {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  font: 600 12px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity 300ms ease, color 160ms ease;
+}
+
+.back-link:hover {
+  color: var(--ink);
+}
+
+.back-link svg,
+.controls svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.controls {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 3;
+  width: min(980px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  backdrop-filter: blur(14px) saturate(1.2);
+  color: var(--ink);
+  font: 500 12px/1 var(--mono);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+body.idle .controls {
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  pointer-events: none;
+}
+
+body.idle .back-link {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.idle {
+  cursor: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.icon-button,
+.text-button,
+.segmented button {
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.icon-button {
+  width: 32px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.icon-button:hover,
+.text-button:hover,
+.segmented button:hover {
+  background: var(--line);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#play .icon-play,
+#play[aria-label="暂停"] .icon-pause {
+  display: block;
+}
+
+#play .icon-pause,
+#play[aria-label="暂停"] .icon-play {
+  display: none;
+}
+
+#play .icon-play {
+  fill: currentColor;
+}
+
+.scrub {
+  position: relative;
+  flex: 1;
+  min-width: 80px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.scrub-marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scrub-marks span {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 10px;
+  transform: translateY(-50%);
+  background: var(--muted);
+  opacity: 0.55;
+}
+
+input[type="range"] {
+  --progress: 0%;
+  position: relative;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) var(--progress), var(--line) var(--progress));
+}
+
+input[type="range"]::-moz-range-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) var(--progress), var(--line) var(--progress));
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.time {
+  flex: none;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter {
+  flex: none;
+  width: 118px;
+  overflow: hidden;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.segmented {
+  flex: none;
+  display: flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.segmented button {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 7px;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.segmented button[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--ink);
+}
+
+.text-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+#sound[aria-pressed="true"] {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+#sound .icon-sound,
+#sound[aria-pressed="true"] .icon-muted {
+  display: none;
+}
+
+#sound[aria-pressed="true"] .icon-sound {
+  display: block;
+}
+
+:root[data-theme="light"] .icon-sun,
+:root:not([data-theme="light"]) .icon-moon {
+  display: none;
+}
+
+.sound-hint {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 62px);
+  z-index: 3;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 999px;
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  color: var(--muted);
+  font: 500 12px/1 var(--mono);
+  animation: hint-in 500ms 1.2s both ease;
+}
+
+.sound-hint b {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@keyframes hint-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@media (max-width: 760px) {
+  .chapter,
+  .time {
+    display: none;
+  }
+
+  .controls {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  #sound-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .controls,
+  .back-link,
+  html,
+  body {
+    transition: none;
+  }
+
+  .sound-hint {
+    animation: none;
+  }
+}
+</style>
+</head>
+<body>
+  <main class="viewport" id="viewport">
+    <div class="stage" id="stage" role="img" aria-label="tingfeng347 的动态作品演示">
+      <canvas class="layer layer-back" data-layer="back"></canvas>
+      <canvas class="layer layer-mid" data-layer="mid"></canvas>
+      <canvas class="layer layer-front" data-layer="front"></canvas>
+    </div>
+  </main>
+
+  <a class="back-link" href="../../../index.html">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
+    <span>WindPlay</span>
+  </a>
+
+  <p class="sound-hint" id="sound-hint" hidden>点击 <b>声音</b> 开启配乐</p>
+
+  <div class="controls" id="controls">
+    <button class="icon-button" id="play" type="button" aria-label="暂停" title="播放 / 暂停（空格）">
+      <svg class="icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10"/></svg>
+      <svg class="icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L13 8z"/></svg>
+    </button>
+
+    <div class="scrub">
+      <div class="scrub-marks" id="marks" aria-hidden="true"></div>
+      <input id="scrub" type="range" min="0" max="28000" step="10" value="0" aria-label="播放进度">
+    </div>
+
+    <span class="time" id="time">00:00 / 00:28</span>
+    <span class="chapter" id="chapter">INTRO</span>
+
+    <div class="segmented" role="group" aria-label="画面维度">
+      <button type="button" data-dim="2d" aria-pressed="true" title="平面（D）">2D</button>
+      <button type="button" data-dim="3d" aria-pressed="false" title="立体（D）">3D</button>
+    </div>
+
+    <button class="text-button" id="sound" type="button" aria-pressed="false" title="声音（M）">
+      <svg class="icon-muted" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h2.5L8.5 3v10L5 10H2.5zM11 6l3.5 4M14.5 6 11 10"/></svg>
+      <svg class="icon-sound" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h2.5L8.5 3v10L5 10H2.5zM11 5.5c1.3 1.3 1.3 3.7 0 5M12.8 3.8c2.3 2.3 2.3 6.1 0 8.4"/></svg>
+      <span id="sound-label">声音 关</span>
+    </button>
+
+    <button class="icon-button" id="theme" type="button" aria-label="切换亮色 / 暗色" title="主题（T）">
+      <svg class="icon-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+      <svg class="icon-moon" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z"/></svg>
+    </button>
+
+    <button class="icon-button" id="fullscreen" type="button" aria-label="全屏" title="全屏（F）">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>
+    </button>
+  </div>
+
+  <script>
+/**
+ * 时间线 · 零依赖
+ * 场景表、打字窗口、时间码与缓动；画面和配乐共用同一份时间定义。
+ * 浏览器用 window.Timeline；Node.js 用 require('./timeline.js')。
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.Timeline = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  const BPM = 120;
+  const BEAT = 60 / BPM;
+  const BAR = BEAT * 4;
+  const FPS = 30;
+
+  // 每个场景都落在小节线上，配乐的鼓点和转场因此天然对齐。
+  const SCENES = Object.freeze([
+    { id:'intro',     label:'INTRO',          start:0,  dur:4 },
+    { id:'agent',     label:'CODING AGENT',   start:4,  dur:4 },
+    { id:'identity',  label:'IDENTITY',       start:8,  dur:4 },
+    { id:'rag',       label:'RAG · SUPPORT',  start:12, dur:2 },
+    { id:'graph',     label:'ORCHESTRATION',  start:14, dur:2 },
+    { id:'workbench', label:'WORKBENCH',      start:16, dur:2, invert:true },
+    { id:'career',    label:'EVIDENCE',       start:18, dur:2 },
+    { id:'a2a',       label:'A2A PROTOCOL',   start:20, dur:2 },
+    { id:'arch',      label:'TERMINAL',       start:22, dur:2 },
+    { id:'outro',     label:'OUTRO',          start:24, dur:4 }
+  ].map(scene => Object.freeze(scene)));
+
+  const DURATION = SCENES[SCENES.length - 1].start + SCENES[SCENES.length - 1].dur;
+
+  /** 绝对时间（秒）上的打字区间；配乐在这些区间里生成键盘声。 */
+  const TYPING = Object.freeze({
+    introA:  Object.freeze([0.30, 1.15]),
+    introB:  Object.freeze([1.15, 1.45]),
+    introC:  Object.freeze([1.60, 2.20]),
+    introD:  Object.freeze([2.20, 2.45]),
+    command: Object.freeze([4.20, 5.00]),
+    confirm: Object.freeze([6.40, 6.50]),
+    answer:  Object.freeze([13.00, 13.60]),
+    career:  Object.freeze([18.25, 19.00]),
+    pack:    Object.freeze([22.35, 22.90]),
+    outro:   Object.freeze([24.80, 26.00])
+  });
+
+  const clamp = (value, low = 0, high = 1) => Math.min(high, Math.max(low, value));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  /** t 在 [a, b] 内的线性进度，区间外夹到 0 或 1。 */
+  const range = (t, a, b) => b === a ? (t >= b ? 1 : 0) : clamp((t - a) / (b - a));
+  const wrap = t => ((t % DURATION) + DURATION) % DURATION;
+
+  const ease = Object.freeze({
+    outCubic: p => 1 - Math.pow(1 - p, 3),
+    inCubic: p => p * p * p,
+    inOutCubic: p => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    outExpo: p => p >= 1 ? 1 : 1 - Math.pow(2, -10 * p),
+    outBack: p => { const c = 1.70158; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); }
+  });
+
+  function sceneIndexAt(t) {
+    const time = wrap(t);
+    for (let i = SCENES.length - 1; i >= 0; i -= 1) if (time >= SCENES[i].start) return i;
+    return 0;
+  }
+
+  function sceneAt(t) {
+    const time = wrap(t);
+    const index = sceneIndexAt(time);
+    const scene = SCENES[index];
+    const local = time - scene.start;
+    return { index, scene, local, progress: local / scene.dur };
+  }
+
+  /** 广播式时间码 HH:MM:SS:FF。 */
+  function timecode(t, fps = FPS) {
+    const total = Math.floor(Math.max(0, t) * fps + 1e-6);
+    const seconds = Math.floor(total / fps);
+    return [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60, total % fps]
+      .map(n => String(n).padStart(2, '0')).join(':');
+  }
+
+  /** 播放器用的 MM:SS。 */
+  function clock(t) {
+    const seconds = Math.floor(Math.max(0, t) + 1e-6);
+    return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+  }
+
+  /** mulberry32：同一种子总是得到同一串数，画面可以任意拖动回放。 */
+  function rng(seed) {
+    let a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let r = Math.imul(a ^ (a >>> 15), 1 | a);
+      r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const hash = n => rng(Math.floor(n * 7919) ^ 0x9E3779B9)();
+
+  /** 按区间进度截取文本；按码点切分，中文不会被截成半个字。 */
+  function typed(text, t, window) {
+    const chars = Array.from(text);
+    return chars.slice(0, Math.round(range(t, window[0], window[1]) * chars.length)).join('');
+  }
+
+  const GLYPHS = '#%&*+=<>/\\|01ABCDEFGHKLMNPRSTUVWXYZ';
+
+  /** 从左到右解码：未揭示的位置显示随机字符，空格保持不变。 */
+  function scramble(text, p, seed = 1) {
+    const chars = Array.from(text);
+    const revealed = Math.floor(clamp(p) * (chars.length + 3));
+    const frame = Math.floor(p * 36);
+    return chars.map((ch, i) => {
+      if (ch === ' ' || i < revealed - 3) return ch;
+      if (i >= revealed) return p <= 0 ? ' ' : (hash(seed * 131 + i * 17 + frame) < 0.35 ? ' ' : GLYPHS[Math.floor(hash(seed + i * 7 + frame * 3) * GLYPHS.length)]);
+      return GLYPHS[Math.floor(hash(seed * 3 + i + frame) * GLYPHS.length)];
+    }).join('');
+  }
+
+  return Object.freeze({
+    BPM, BEAT, BAR, FPS, SCENES, DURATION, TYPING,
+    clamp, lerp, range, wrap, ease, sceneIndexAt, sceneAt, timecode, clock, rng, hash, typed, scramble
+  });
+});
+</script>
+  <script>
+/**
+ * 配乐总谱 · 零依赖
+ * 把 120 BPM 的 A 小调循环、鼓组和转场音效展开成按时间排序的事件表。
+ * 事件只描述“何时、什么声音”，由浏览器端 audio.js 合成；Node.js 中可直接测试。
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./timeline.js'));
+  else root.Score = factory(root.Timeline);
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (Timeline) {
+  'use strict';
+
+  const { BEAT, BAR, SCENES, DURATION, TYPING } = Timeline;
+  const STEP = BEAT / 4;
+
+  // Am → F → C → G，和弦用三音近距离排列，避免长音垫层互相打架。
+  const PROGRESSION = Object.freeze([
+    Object.freeze({ root:45, chord:Object.freeze([57, 60, 64]) }),
+    Object.freeze({ root:41, chord:Object.freeze([57, 60, 65]) }),
+    Object.freeze({ root:48, chord:Object.freeze([55, 60, 64]) }),
+    Object.freeze({ root:43, chord:Object.freeze([55, 59, 62]) })
+  ]);
+  const ARP = [0, 1, 2, 3, 2, 1, 3, 4];
+  const BASS = [0, 0, 12, 0, 0, 12, 0, 7];
+
+  /** 每小节所在段落：intro 只有垫层，build 进鼓，drop 全编制，outro 收尾。 */
+  function section(bar) {
+    if (bar < 2) return 'intro';
+    if (bar < 4) return 'build';
+    if (bar < 12) return 'drop';
+    return 'outro';
+  }
+
+  function build() {
+    const events = [];
+    const add = (time, kind, props = {}) => events.push(Object.freeze({ time:Math.round(time * 1e6) / 1e6, kind, ...props }));
+    const bars = Math.round(DURATION / BAR);
+
+    for (let bar = 0; bar < bars; bar += 1) {
+      const t0 = bar * BAR;
+      const part = section(bar);
+      const { root, chord } = PROGRESSION[bar % PROGRESSION.length];
+      const tones = [...chord, chord[0] + 12, chord[1] + 12].map(n => n + 12);
+
+      if (part === 'outro') {
+        if (bar === 12) add(t0, 'pad', { notes:PROGRESSION[0].chord, dur:BAR * 2, gain:0.5 });
+      } else {
+        add(t0, 'pad', { notes:chord, dur:BAR, gain:part === 'drop' ? 0.34 : 0.5 });
+      }
+
+      for (let step = 0; step < 16; step += 1) {
+        const t = t0 + step * STEP;
+        const beat = step % 4 === 0;
+        if (part === 'intro' && bar === 1 && step % 2 === 0) add(t, 'arp', { note:tones[ARP[step % 8]], gain:0.16 });
+        if (part === 'build') {
+          if (step % 8 === 0) add(t, 'kick', { gain:0.7 });
+          if (step % 2 === 0) add(t, 'hat', { gain:step % 4 === 2 ? 0.26 : 0.14 });
+          if (step % 2 === 0) add(t, 'arp', { note:tones[ARP[step % 8]], gain:0.18 });
+          if (bar === 3 && step % 2 === 0) add(t, 'bass', { note:root + BASS[(step / 2) % 8], dur:STEP * 1.6, gain:0.45 });
+        }
+        if (part === 'drop') {
+          if (beat) add(t, 'kick', { gain:1 });
+          if (step === 4 || step === 12) add(t, 'clap', { gain:0.62 });
+          if (step % 4 === 2) add(t, 'hat', { gain:0.34, open:step === 14 });
+          else if (!beat) add(t, 'hat', { gain:0.1 });
+          add(t, 'arp', { note:tones[ARP[step % 8]] + (bar % 2 && step > 11 ? 12 : 0), gain:0.15 });
+          if (step % 2 === 0) add(t, 'bass', { note:root + BASS[(step / 2) % 8], dur:STEP * 1.6, gain:0.55 });
+        }
+        if (part === 'outro' && bar === 12 && step % 2 === 0) {
+          add(t, 'arp', { note:PROGRESSION[0].chord[ARP[step % 8] % 3] + 24, gain:0.16 * (1 - step / 20) });
+        }
+      }
+    }
+
+    add(26, 'bell', { note:81, dur:2, gain:0.22 });
+    add(26, 'pad', { notes:[57, 64, 69], dur:1.8, gain:0.3 });
+
+    // 转场：每个场景切入前一点点起风声；大标题落点用冲击音。
+    for (const scene of SCENES.slice(1)) add(scene.start - 0.22, 'whoosh', { dur:0.42, gain:0.34 });
+    add(6, 'riser', { dur:2, gain:0.32 });
+    add(22.5, 'riser', { dur:1.5, gain:0.22 });
+    for (const time of [8, 24]) add(time, 'impact', { gain:1 });
+    add(16, 'impact', { gain:0.55 });
+    for (const [time, dur] of [[11.78, 0.2], [16, 0.16], [17.82, 0.16], [21.84, 0.14], [2.78, 0.1]]) add(time, 'glitch', { dur, gain:0.2 });
+
+    // 打字声：固定间隔并带轻微摆动，听起来像真人敲键盘。
+    for (const [start, end] of Object.values(TYPING)) {
+      for (let t = start, i = 0; t < end; i += 1, t = start + i * 0.052 + (i % 3 === 1 ? 0.012 : 0)) add(t, 'type', { gain:0.22, seed:i });
+    }
+
+    return Object.freeze(events.filter(e => e.time >= 0 && e.time < DURATION).sort((a, b) => a.time - b.time || a.kind.localeCompare(b.kind)));
+  }
+
+  const EVENTS = build();
+
+  function lowerBound(time) {
+    let low = 0;
+    let high = EVENTS.length;
+    while (low < high) {
+      const mid = (low + high) >> 1;
+      if (EVENTS[mid].time < time) low = mid + 1;
+      else high = mid;
+    }
+    return low;
+  }
+
+  /** 单个循环内 [from, to) 的事件。 */
+  function eventsBetween(from, to) {
+    return EVENTS.slice(lowerBound(from), lowerBound(to));
+  }
+
+  /**
+   * 连续播放时钟上 [from, to) 的事件；跨过循环终点时自动展开到下一轮。
+   * 返回 { at, event }，at 为连续时钟时间。
+   */
+  function eventsInRange(from, to) {
+    const result = [];
+    if (!(to > from)) return result;
+    for (let loop = Math.floor(from / DURATION); loop * DURATION < to; loop += 1) {
+      const offset = loop * DURATION;
+      for (const event of eventsBetween(Math.max(0, from - offset), Math.min(DURATION, to - offset))) {
+        result.push({ at:offset + event.time, event });
+      }
+    }
+    return result;
+  }
+
+  return Object.freeze({ STEP, PROGRESSION, EVENTS, section, eventsBetween, eventsInRange });
+});
+</script>
+  <script>
+/**
+ * 三维模型与投影 · 零依赖
+ * 同一套点在 persp=0 时是正视平面图，persp=1 时带透视和纵深，用来实现 2D ⇄ 3D 平滑切换。
+ * 浏览器用 window.Models；Node.js 用 require('./models.js')。
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.Models = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  /**
+   * 先绕 Y 轴（yaw）再绕 X 轴（pitch）旋转，然后投影到屏幕。
+   * camera: { yaw, pitch, dist, persp, cx, cy, scale }；返回 { x, y, s, z }，s 为该点的缩放系数。
+   */
+  function project(point, camera) {
+    const { yaw = 0, pitch = 0, dist = 3.2, persp = 1, cx = 0, cy = 0, scale = 1 } = camera;
+    const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
+    const cosX = Math.cos(pitch), sinX = Math.sin(pitch);
+    const x1 = point.x * cosY + point.z * sinY;
+    const z1 = -point.x * sinY + point.z * cosY;
+    const y2 = point.y * cosX - z1 * sinX;
+    const z2 = point.y * sinX + z1 * cosX;
+    const s = 1 + (dist / Math.max(0.2, dist + z2) - 1) * persp;
+    return { x:cx + x1 * s * scale, y:cy + y2 * s * scale, s, z:z2 };
+  }
+
+  /**
+   * 从灰度蒙版生成带厚度的点云：越靠近笔画中心越厚，前后两层让旋转时有体积感。
+   * mask: 长度 width*height 的 0..255 数组；返回归一化到 [-1, 1] 的点。
+   */
+  function glyphCloud(mask, width, height, { step = 4, radius = 5, depth = 0.34, threshold = 96 } = {}) {
+    const inside = new Float32Array(width * height);
+    for (let i = 0; i < inside.length; i += 1) inside[i] = mask[i] >= threshold ? 1 : 0;
+    const blurred = boxBlur(inside, width, height, radius);
+    const half = Math.max(width, height) / 2;
+    const points = [];
+    for (let y = 0; y < height; y += step) {
+      for (let x = 0; x < width; x += step) {
+        const index = y * width + x;
+        if (!inside[index]) continue;
+        const v = blurred[index];
+        const base = { x:(x - width / 2) / half, y:(y - height / 2) / half, v };
+        points.push({ ...base, z:-v * depth, layer:0 });
+        if (v > 0.45) points.push({ ...base, z:v * depth, layer:1 });
+      }
+    }
+    return points;
+  }
+
+  function boxBlur(source, width, height, radius) {
+    const pass = (input, horizontal) => {
+      const output = new Float32Array(input.length);
+      const span = radius * 2 + 1;
+      for (let a = 0; a < (horizontal ? height : width); a += 1) {
+        let sum = 0;
+        const at = b => horizontal ? input[a * width + b] : input[b * width + a];
+        const limit = horizontal ? width : height;
+        for (let b = -radius; b <= radius; b += 1) sum += b >= 0 && b < limit ? at(b) : 0;
+        for (let b = 0; b < limit; b += 1) {
+          output[horizontal ? a * width + b : b * width + a] = sum / span;
+          const leave = b - radius, enter = b + radius + 1;
+          if (leave >= 0) sum -= at(leave);
+          if (enter < limit) sum += at(enter);
+        }
+      }
+      return output;
+    };
+    return pass(pass(source, true), false);
+  }
+
+  /** 均匀分布在球面上的点（斐波那契螺旋），用于检索向量空间。 */
+  function sphere(count, radius = 1) {
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    return Array.from({ length:count }, (_, i) => {
+      const y = 1 - (i / Math.max(1, count - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const theta = golden * i;
+      return { x:Math.cos(theta) * r * radius, y:y * radius, z:Math.sin(theta) * r * radius };
+    });
+  }
+
+  /** 圆环轨道：a2a 子 agent 在 XZ 平面绕主 agent 运行。 */
+  function orbit(angle, radius = 1, lift = 0) {
+    return { x:Math.cos(angle) * radius, y:lift, z:Math.sin(angle) * radius };
+  }
+
+  // WindAgent 编排图：plan-and-execute 加审阅回环。
+  const AGENT_GRAPH = Object.freeze({
+    nodes: Object.freeze([
+      Object.freeze({ id:'input',      label:'INPUT',      x:-1.25, y: 0.05, z: 0.00 }),
+      Object.freeze({ id:'planner',    label:'PLANNER',    x:-0.62, y:-0.38, z: 0.35 }),
+      Object.freeze({ id:'researcher', label:'RESEARCHER', x: 0.02, y: 0.12, z:-0.42 }),
+      Object.freeze({ id:'mcp',        label:'MCP TOOLS',  x: 0.12, y:-0.62, z: 0.55 }),
+      Object.freeze({ id:'writer',     label:'WRITER',     x: 0.64, y: 0.36, z: 0.22 }),
+      Object.freeze({ id:'reviewer',   label:'REVIEWER',   x: 1.18, y:-0.18, z:-0.25 })
+    ]),
+    edges: Object.freeze([
+      Object.freeze(['input', 'planner']),
+      Object.freeze(['planner', 'researcher']),
+      Object.freeze(['researcher', 'mcp']),
+      Object.freeze(['researcher', 'writer']),
+      Object.freeze(['writer', 'reviewer']),
+      Object.freeze(['reviewer', 'planner'])
+    ])
+  });
+
+  return Object.freeze({ project, glyphCloud, boxBlur, sphere, orbit, AGENT_GRAPH });
+});
+</script>
+  <script>
+/**
+ * 实时合成配乐 · 零依赖
+ * 不加载任何音频文件：鼓、贝斯、垫层、琶音和转场音效全部用 Web Audio 振荡器与噪声合成。
+ * 开启声音后画面改由音频时钟驱动，鼓点与转场保持采样级同步。
+ */
+(function (root) {
+  'use strict';
+
+  const { Score } = root;
+  const LOOKAHEAD = 0.14;
+  const mtof = note => 440 * Math.pow(2, (note - 69) / 12);
+
+  class ReelAudio {
+    constructor() {
+      this.ctx = null;
+      this.enabled = false;
+      this.cursor = null;
+      this.anchor = { ctx:0, abs:0 };
+    }
+
+    get supported() {
+      return Boolean(root.AudioContext || root.webkitAudioContext);
+    }
+
+    /** 声音开启且音频线程在运行时，播放时钟以音频为准。 */
+    get active() {
+      return this.enabled && this.ctx !== null && this.ctx.state === 'running';
+    }
+
+    init() {
+      if (this.ctx) return true;
+      const Context = root.AudioContext || root.webkitAudioContext;
+      if (!Context) return false;
+      const ctx = new Context({ latencyHint:'interactive' });
+      this.ctx = ctx;
+
+      this.master = ctx.createGain();
+      this.master.gain.value = 0;
+      const compressor = ctx.createDynamicsCompressor();
+      compressor.threshold.value = -16;
+      compressor.ratio.value = 4;
+      compressor.attack.value = 0.004;
+      compressor.release.value = 0.22;
+      this.master.connect(compressor).connect(ctx.destination);
+
+      this.reverb = ctx.createConvolver();
+      this.reverb.buffer = this.impulse(2.4);
+      const reverbOut = ctx.createGain();
+      reverbOut.gain.value = 0.36;
+      this.reverb.connect(reverbOut).connect(this.master);
+
+      this.echo = ctx.createDelay(1);
+      this.echo.delayTime.value = 0.375;
+      const feedback = ctx.createGain();
+      feedback.gain.value = 0.3;
+      const echoOut = ctx.createGain();
+      echoOut.gain.value = 0.26;
+      this.echo.connect(feedback).connect(this.echo);
+      this.echo.connect(echoOut).connect(this.master);
+
+      this.noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+      const data = this.noise.getChannelData(0);
+      for (let i = 0; i < data.length; i += 1) data[i] = Math.random() * 2 - 1;
+
+      this.newBus();
+      return true;
+    }
+
+    impulse(seconds) {
+      const { ctx } = this;
+      const length = Math.floor(ctx.sampleRate * seconds);
+      const buffer = ctx.createBuffer(2, length, ctx.sampleRate);
+      for (let channel = 0; channel < 2; channel += 1) {
+        const data = buffer.getChannelData(channel);
+        for (let i = 0; i < length; i += 1) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 3.2);
+      }
+      return buffer;
+    }
+
+    /** 每次暂停或跳转都换一组总线，已经排进未来的音符随旧总线一起淡出。 */
+    newBus() {
+      const { ctx } = this;
+      if (this.bus) {
+        const old = this.bus;
+        const now = ctx.currentTime;
+        for (const node of Object.values(old)) node.gain.setTargetAtTime(0, now, 0.015);
+        setTimeout(() => Object.values(old).forEach(node => node.disconnect()), 400);
+      }
+      const make = target => { const gain = ctx.createGain(); gain.connect(target); return gain; };
+      this.bus = { dry:make(this.master), wet:make(this.reverb), echo:make(this.echo) };
+    }
+
+    async setEnabled(on, abs) {
+      if (on && !this.init()) return false;
+      this.enabled = on;
+      if (!this.ctx) return on;
+      const now = this.ctx.currentTime;
+      this.master.gain.cancelScheduledValues(now);
+      this.master.gain.setTargetAtTime(on ? 0.6 : 0, now, 0.05);
+      if (on) {
+        if (this.ctx.state !== 'running') await this.ctx.resume();
+        this.sync(abs);
+      } else {
+        this.cursor = null;
+        this.newBus();
+      }
+      return on;
+    }
+
+    /** 以当前连续播放时间 abs 为锚点重新对齐音频时钟（播放、跳转后调用）。 */
+    sync(abs) {
+      if (!this.ctx) return;
+      this.newBus();
+      this.anchor = { ctx:this.ctx.currentTime + 0.03, abs };
+      this.cursor = abs;
+    }
+
+    stop() {
+      if (!this.ctx) return;
+      this.cursor = null;
+      this.newBus();
+    }
+
+    now() {
+      return this.anchor.abs + (this.ctx.currentTime - this.anchor.ctx);
+    }
+
+    update(abs) {
+      if (!this.active) return;
+      if (this.cursor === null) this.sync(abs);
+      const horizon = abs + LOOKAHEAD;
+      if (horizon <= this.cursor) return;
+      for (const { at, event } of Score.eventsInRange(this.cursor, horizon)) {
+        const when = this.anchor.ctx + (at - this.anchor.abs);
+        if (when >= this.ctx.currentTime - 0.01) this.play(event, Math.max(when, this.ctx.currentTime));
+      }
+      this.cursor = horizon;
+    }
+
+    play(event, when) {
+      const voice = this[event.kind];
+      if (voice) voice.call(this, event, when);
+    }
+
+    // ── 基础构件 ─────────────────────────────────────────────
+
+    gain(value = 0) {
+      const node = this.ctx.createGain();
+      node.gain.value = value;
+      return node;
+    }
+
+    envelope(param, when, peak, attack, decay, floor = 0.0001) {
+      param.setValueAtTime(floor, when);
+      param.linearRampToValueAtTime(peak, when + attack);
+      param.exponentialRampToValueAtTime(floor, when + attack + decay);
+    }
+
+    osc(type, frequency, when, stop) {
+      const node = this.ctx.createOscillator();
+      node.type = type;
+      node.frequency.setValueAtTime(frequency, when);
+      node.start(when);
+      node.stop(stop);
+      return node;
+    }
+
+    noiseSource(when, dur) {
+      const node = this.ctx.createBufferSource();
+      node.buffer = this.noise;
+      node.start(when, Math.random() * 1.2, dur + 0.05);
+      return node;
+    }
+
+    filter(type, frequency, q = 0.7) {
+      const node = this.ctx.createBiquadFilter();
+      node.type = type;
+      node.frequency.value = frequency;
+      node.Q.value = q;
+      return node;
+    }
+
+    send(node, { dry = 1, wet = 0, echo = 0 }) {
+      for (const [bus, amount] of [[this.bus.dry, dry], [this.bus.wet, wet], [this.bus.echo, echo]]) {
+        if (amount <= 0) continue;
+        const tap = this.gain(amount);
+        node.connect(tap).connect(bus);
+      }
+    }
+
+    // ── 乐器 ────────────────────────────────────────────────
+
+    kick({ gain = 1 }, when) {
+      const osc = this.osc('sine', 150, when, when + 0.5);
+      osc.frequency.exponentialRampToValueAtTime(44, when + 0.13);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.95, 0.004, 0.42);
+      osc.connect(amp);
+      this.send(amp, { dry:1 });
+      const click = this.noiseSource(when, 0.02);
+      const hp = this.filter('highpass', 3200);
+      const clickAmp = this.gain();
+      this.envelope(clickAmp.gain, when, gain * 0.18, 0.001, 0.018);
+      click.connect(hp).connect(clickAmp);
+      this.send(clickAmp, { dry:1 });
+    }
+
+    clap({ gain = 0.6 }, when) {
+      const src = this.noiseSource(when, 0.3);
+      const bp = this.filter('bandpass', 1500, 0.9);
+      const amp = this.gain();
+      const p = amp.gain;
+      p.setValueAtTime(0.0001, when);
+      for (const offset of [0, 0.011, 0.022]) {
+        p.linearRampToValueAtTime(gain, when + offset + 0.001);
+        p.exponentialRampToValueAtTime(gain * 0.2, when + offset + 0.009);
+      }
+      p.exponentialRampToValueAtTime(0.0001, when + 0.22);
+      src.connect(bp).connect(amp);
+      this.send(amp, { dry:0.9, wet:0.5 });
+    }
+
+    hat({ gain = 0.2, open = false }, when) {
+      const dur = open ? 0.22 : 0.045;
+      const src = this.noiseSource(when, dur);
+      const hp = this.filter('highpass', 7600);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.5, 0.001, dur);
+      src.connect(hp).connect(amp);
+      this.send(amp, { dry:1, wet:0.1 });
+    }
+
+    bass({ note, dur = 0.2, gain = 0.5 }, when) {
+      const saw = this.osc('sawtooth', mtof(note - 12), when, when + dur + 0.1);
+      const sub = this.osc('sine', mtof(note - 24), when, when + dur + 0.1);
+      const lp = this.filter('lowpass', 900, 3);
+      lp.frequency.setValueAtTime(1100, when);
+      lp.frequency.exponentialRampToValueAtTime(170, when + dur);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.42, 0.006, dur);
+      saw.connect(lp);
+      sub.connect(amp);
+      lp.connect(amp);
+      this.send(amp, { dry:1 });
+    }
+
+    pad({ notes, dur = 2, gain = 0.4 }, when) {
+      const amp = this.gain();
+      const peak = gain * 0.075;
+      amp.gain.setValueAtTime(0.0001, when);
+      amp.gain.linearRampToValueAtTime(peak, when + Math.min(0.6, dur * 0.3));
+      amp.gain.setValueAtTime(peak, when + dur * 0.75);
+      amp.gain.exponentialRampToValueAtTime(0.0001, when + dur + 0.6);
+      const lp = this.filter('lowpass', 1500, 0.5);
+      for (const note of notes) {
+        for (const detune of [-8, 7]) {
+          const osc = this.osc('sawtooth', mtof(note), when, when + dur + 0.7);
+          osc.detune.value = detune;
+          osc.connect(lp);
+        }
+      }
+      lp.connect(amp);
+      this.send(amp, { dry:0.55, wet:0.9 });
+    }
+
+    arp({ note, gain = 0.15 }, when) {
+      const tri = this.osc('triangle', mtof(note), when, when + 0.35);
+      const sq = this.osc('square', mtof(note), when, when + 0.35);
+      const sqAmp = this.gain(0.18);
+      const lp = this.filter('lowpass', 3200);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.5, 0.003, 0.24);
+      tri.connect(lp);
+      sq.connect(sqAmp).connect(lp);
+      lp.connect(amp);
+      this.send(amp, { dry:0.8, echo:0.7, wet:0.25 });
+    }
+
+    bell({ note, dur = 2, gain = 0.2 }, when) {
+      for (const [ratio, level] of [[1, 1], [2.76, 0.35], [5.4, 0.12]]) {
+        const osc = this.osc('sine', mtof(note) * ratio, when, when + dur);
+        const amp = this.gain();
+        this.envelope(amp.gain, when, gain * level * 0.6, 0.004, dur * (1.1 - ratio / 8));
+        osc.connect(amp);
+        this.send(amp, { dry:0.7, wet:0.8, echo:0.3 });
+      }
+    }
+
+    type({ gain = 0.2, seed = 0 }, when) {
+      const src = this.noiseSource(when, 0.03);
+      const bp = this.filter('bandpass', 2400 + (seed * 997 % 2200), 2.2);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.7, 0.001, 0.022);
+      src.connect(bp).connect(amp);
+      this.send(amp, { dry:1 });
+    }
+
+    whoosh({ dur = 0.4, gain = 0.3 }, when) {
+      const src = this.noiseSource(when, dur + 0.1);
+      const bp = this.filter('bandpass', 260, 1.3);
+      bp.frequency.exponentialRampToValueAtTime(3200, when + dur);
+      const amp = this.gain();
+      amp.gain.setValueAtTime(0.0001, when);
+      amp.gain.exponentialRampToValueAtTime(gain * 0.6, when + dur * 0.75);
+      amp.gain.exponentialRampToValueAtTime(0.0001, when + dur + 0.06);
+      src.connect(bp).connect(amp);
+      this.send(amp, { dry:0.8, wet:0.6 });
+    }
+
+    riser({ dur = 2, gain = 0.3 }, when) {
+      const src = this.noiseSource(when, dur);
+      const bp = this.filter('bandpass', 400, 1.6);
+      bp.frequency.exponentialRampToValueAtTime(6400, when + dur);
+      const saw = this.osc('sawtooth', 110, when, when + dur);
+      saw.frequency.exponentialRampToValueAtTime(880, when + dur);
+      const sawAmp = this.gain(0.05);
+      const amp = this.gain();
+      amp.gain.setValueAtTime(0.0001, when);
+      amp.gain.exponentialRampToValueAtTime(gain * 0.55, when + dur - 0.02);
+      amp.gain.linearRampToValueAtTime(0.0001, when + dur);
+      src.connect(bp).connect(amp);
+      saw.connect(sawAmp).connect(amp);
+      this.send(amp, { dry:0.8, wet:0.5 });
+    }
+
+    impact({ gain = 1 }, when) {
+      const osc = this.osc('sine', 120, when, when + 1.6);
+      osc.frequency.exponentialRampToValueAtTime(32, when + 0.9);
+      const amp = this.gain();
+      this.envelope(amp.gain, when, gain * 0.9, 0.003, 1.4);
+      osc.connect(amp);
+      this.send(amp, { dry:1, wet:0.35 });
+      const src = this.noiseSource(when, 1.2);
+      const lp = this.filter('lowpass', 1400);
+      lp.frequency.exponentialRampToValueAtTime(160, when + 1);
+      const noiseAmp = this.gain();
+      this.envelope(noiseAmp.gain, when, gain * 0.5, 0.002, 1);
+      src.connect(lp).connect(noiseAmp);
+      this.send(noiseAmp, { dry:0.7, wet:0.9 });
+    }
+
+    glitch({ dur = 0.15, gain = 0.2 }, when) {
+      const osc = this.osc('square', 400, when, when + dur);
+      let seed = Math.floor(when * 1000);
+      for (let t = 0; t < dur; t += 0.018) {
+        seed = (seed * 16807) % 2147483647;
+        osc.frequency.setValueAtTime(180 + (seed % 2400), when + t);
+      }
+      const amp = this.gain();
+      amp.gain.setValueAtTime(gain * 0.22, when);
+      amp.gain.setValueAtTime(0.0001, when + dur);
+      const hp = this.filter('highpass', 300);
+      osc.connect(hp).connect(amp);
+      this.send(amp, { dry:1 });
+    }
+  }
+
+  root.ReelAudio = ReelAudio;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+</script>
+  <script>
+/**
+ * Tingfeng Reel · 渲染与播放器
+ * 画面完全由时间 t 决定（render(t) 无隐藏状态），因此可以任意拖动、暂停和循环。
+ * 三层画布：back（背景与地面网格）、mid（主体）、front（HUD 与浮层）；
+ * 3D 模式下三层在 CSS 空间中拉开纵深，场景里的点云和节点图同时切换到透视投影。
+ */
+(function () {
+  'use strict';
+
+  const { SCENES, DURATION, TYPING, clamp, lerp, range, wrap, ease, sceneAt, timecode, clock, rng, hash, typed, scramble } = window.Timeline;
+  const { project, glyphCloud, sphere, orbit, AGENT_GRAPH } = window.Models;
+
+  const W = 1920;
+  const H = 1080;
+  const TAU = Math.PI * 2;
+  const SANS = '"Helvetica Neue", Inter, Arial, "PingFang SC", "Microsoft YaHei", sans-serif';
+  const DISPLAY = '"Helvetica Neue", Inter, "Arial Black", Arial, "PingFang SC", sans-serif';
+  const SERIF = 'Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", serif';
+  const MONO = 'ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", "PingFang SC", monospace';
+  const CJK = '"Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif';
+
+  // 来自 github.com/tingfeng347 的公开资料与仓库 README。
+  const PROFILE = Object.freeze({ handle:'tingfeng347', seal:'听风', repos:20, stars:70, since:2023 });
+
+  const PALETTES = Object.freeze({
+    dark: Object.freeze({
+      bg:'#0a0a0b', ink:'#f3f1ec', ink2:'rgba(243,241,236,0.66)', dim:'rgba(243,241,236,0.4)',
+      faint:'rgba(243,241,236,0.1)', line:'rgba(243,241,236,0.2)', panel:'rgba(17,17,19,0.86)',
+      accent:'#ff3b2e', accentDim:'rgba(255,59,46,0.42)', accentFaint:'rgba(255,59,46,0.13)',
+      cyan:'#35e0ff', onAccent:'#120807', glow:1, vignette:true, split:'screen',
+      bgClear:'rgba(10,10,11,0)', accentClear:'rgba(255,59,46,0)'
+    }),
+    light: Object.freeze({
+      bg:'#f1eee6', ink:'#151513', ink2:'rgba(21,21,19,0.72)', dim:'rgba(21,21,19,0.46)',
+      faint:'rgba(21,21,19,0.09)', line:'rgba(21,21,19,0.22)', panel:'rgba(252,250,245,0.9)',
+      accent:'#e0301e', accentDim:'rgba(224,48,30,0.42)', accentFaint:'rgba(224,48,30,0.1)',
+      cyan:'#0095b8', onAccent:'#fff8f4', glow:0.28, vignette:false, split:'multiply',
+      bgClear:'rgba(241,238,230,0)', accentClear:'rgba(224,48,30,0)'
+    })
+  });
+
+  let P = PALETTES.dark;
+
+  // ── 状态 ───────────────────────────────────────────────
+
+  const params = new URLSearchParams(location.search);
+  const storage = {
+    get(key) { try { return localStorage.getItem(`tingfeng-reel:${key}`); } catch { return null; } },
+    set(key, value) { try { localStorage.setItem(`tingfeng-reel:${key}`, value); } catch { /* 隐私模式下忽略 */ } }
+  };
+  const prefersDark = matchMedia('(prefers-color-scheme: dark)');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const initialTime = params.has('t') ? clamp(Number(params.get('t')) || 0, 0, DURATION - 0.001) : (reducedMotion ? 9.6 : 0);
+
+  const state = {
+    abs: initialTime,
+    t: initialTime,
+    playing: !params.has('t') && !reducedMotion || params.get('play') === '1',
+    theme: pick(params.get('theme'), ['dark', 'light']) || pick(storage.get('theme'), ['dark', 'light']) || (prefersDark.matches ? 'dark' : 'light'),
+    dim: pick(params.get('dim'), ['2d', '3d']) || pick(storage.get('dim'), ['2d', '3d']) || '2d',
+    mix: 0,
+    pointer: { x:0, y:0, sx:0, sy:0 },
+    scrubbing: false,
+    dirty: true
+  };
+  state.mix = state.dim === '3d' ? 1 : 0;
+
+  function pick(value, allowed) {
+    return allowed.includes(value) ? value : null;
+  }
+
+  // ── 画布 ───────────────────────────────────────────────
+
+  const stage = document.getElementById('stage');
+  const layers = {};
+  for (const canvas of stage.querySelectorAll('canvas')) layers[canvas.dataset.layer] = canvas.getContext('2d');
+  let pixelScale = 1;
+  const scratch = document.createElement('canvas');
+  const scratchCtx = scratch.getContext('2d');
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const width = Math.max(320, Math.min(2880, Math.round(stage.offsetWidth * dpr)));
+    const height = Math.round(width * 9 / 16);
+    for (const ctx of Object.values(layers)) {
+      ctx.canvas.width = width;
+      ctx.canvas.height = height;
+    }
+    scratch.width = width;
+    scratch.height = height;
+    pixelScale = width / W;
+    state.dirty = true;
+  }
+
+  // ── 预计算模型 ─────────────────────────────────────────
+
+  const GLYPH = (() => {
+    const size = 240;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = `900 ${size * 0.9}px ${CJK}`;
+    ctx.fillText('风', size / 2, size / 2 + size * 0.03);
+    const { data } = ctx.getImageData(0, 0, size, size);
+    const mask = new Uint8Array(size * size);
+    for (let i = 0; i < mask.length; i += 1) mask[i] = data[i * 4 + 3];
+    const points = glyphCloud(mask, size, size, { step:3, radius:6, depth:0.36 });
+    const random = rng(347);
+    const scatter = points.map(() => ({ x:(random() - 0.5) * 4.2, y:(random() - 0.5) * 3, z:(random() - 0.5) * 3 }));
+    const field = [];
+    for (let i = 0; i < 260; i += 1) field.push({ x:(random() - 0.5) * 2.2, y:(random() - 0.5) * 2.2, z:(random() - 0.5) * 1.4, v:random() * 0.3 });
+    return { points, scatter, field };
+  })();
+
+  const DOCS = (() => {
+    const random = rng(26);
+    return sphere(72).map((p, i) => {
+      const r = 0.55 + random() * 0.5;
+      return { x:p.x * r, y:p.y * r * 0.8, z:p.z * r, id:i };
+    });
+  })();
+  const TOP_DOCS = DOCS.map((doc, i) => ({ i, d:Math.hypot(doc.x - 0.1, doc.y + 0.05, doc.z - 0.2) })).sort((a, b) => a.d - b.d).slice(0, 5).map(item => item.i);
+
+  // ── 绘制工具 ───────────────────────────────────────────
+
+  function setFont(c, { weight = 400, size = 24, family = SANS, style = '', ls = 0 }) {
+    c.font = `${style} ${weight} ${size}px ${family}`.trim();
+    if ('letterSpacing' in c) c.letterSpacing = `${ls}px`;
+  }
+
+  function measure(c, str, options = {}) {
+    c.save();
+    setFont(c, options);
+    const width = c.measureText(str).width;
+    c.restore();
+    return width;
+  }
+
+  function text(c, str, x, y, options = {}) {
+    const { color = P.ink, align = 'left', base = 'alphabetic', alpha = 1, glow = 0, glowColor } = options;
+    if (!str || alpha <= 0) return 0;
+    c.save();
+    setFont(c, options);
+    c.textAlign = align;
+    c.textBaseline = base;
+    c.globalAlpha *= alpha;
+    c.fillStyle = color;
+    if (glow && P.glow) {
+      c.shadowColor = glowColor || color;
+      c.shadowBlur = glow * P.glow * pixelScale;
+      c.fillText(str, x, y);
+      c.shadowBlur = glow * P.glow * pixelScale * 0.3;
+    }
+    c.fillText(str, x, y);
+    const width = c.measureText(str).width;
+    c.restore();
+    return width;
+  }
+
+  const label = (c, str, x, y, options = {}) =>
+    text(c, str, x, y, { family:MONO, size:13, weight:500, ls:2.4, color:P.dim, ...options });
+
+  /** 依次打出多个样式片段，返回末尾 x；打字期间和结束后短暂保留闪烁光标。 */
+  function typeRun(c, x, y, parts, t, { hold = 0.8, cursorColor = P.accent, block = false } = {}) {
+    let cursorX = x;
+    let size = parts[0].size || 24;
+    for (const part of parts) {
+      const shown = typed(part.text, t, part.win);
+      cursorX += text(c, shown, cursorX, y, part);
+      size = part.size || size;
+      if (Array.from(shown).length < Array.from(part.text).length) break;
+    }
+    const first = parts[0].win[0];
+    const last = parts[parts.length - 1].win[1];
+    const typing = t >= first && t <= last;
+    if (t >= first - 0.35 && t < last + hold && (typing || Math.floor(t * 3.2) % 2 === 0)) {
+      c.save();
+      c.fillStyle = cursorColor;
+      if (block) c.fillRect(cursorX + size * 0.06, y - size * 0.76, size * 0.52, size * 0.9);
+      else c.fillRect(cursorX + 5, y - size * 0.78, Math.max(3, size * 0.07), size * 0.92);
+      c.restore();
+    }
+    return cursorX;
+  }
+
+  function roundRect(c, x, y, w, h, r) {
+    c.beginPath();
+    if (c.roundRect) c.roundRect(x, y, w, h, r);
+    else c.rect(x, y, w, h);
+  }
+
+  function panel(c, x, y, w, h, { radius = 14, fill = P.panel, stroke = P.line, alpha = 1 } = {}) {
+    c.save();
+    c.globalAlpha *= alpha;
+    roundRect(c, x, y, w, h, radius);
+    c.fillStyle = fill;
+    c.fill();
+    c.strokeStyle = stroke;
+    c.lineWidth = 1.2;
+    c.stroke();
+    c.restore();
+  }
+
+  function brackets(c, x, y, w, h, len = 26, color = P.line, width = 1.5) {
+    c.save();
+    c.strokeStyle = color;
+    c.lineWidth = width;
+    c.beginPath();
+    for (const [cx, cy, dx, dy] of [[x, y, 1, 1], [x + w, y, -1, 1], [x, y + h, 1, -1], [x + w, y + h, -1, -1]]) {
+      c.moveTo(cx + dx * len, cy);
+      c.lineTo(cx, cy);
+      c.lineTo(cx, cy + dy * len);
+    }
+    c.stroke();
+    c.restore();
+  }
+
+  /** 方框标签，y 为方框顶部；返回宽度。 */
+  function chip(c, str, x, y, { size = 12, color = P.ink2, filled = false, align = 'left', alpha = 1 } = {}) {
+    const width = measure(c, str, { family:MONO, size, weight:700, ls:2 }) + size * 1.5;
+    const height = size + 14;
+    const left = align === 'center' ? x - width / 2 : align === 'right' ? x - width : x;
+    c.save();
+    c.globalAlpha *= alpha;
+    c.strokeStyle = color;
+    c.fillStyle = color;
+    c.lineWidth = 1.2;
+    if (filled) c.fillRect(left, y, width, height);
+    else c.strokeRect(left + 0.5, y + 0.5, width - 1, height - 1);
+    c.restore();
+    text(c, str, left + width / 2 + 1, y + height / 2 + 1, { family:MONO, size, weight:700, ls:2, align:'center', base:'middle', color:filled ? P.bg : color, alpha });
+    return width;
+  }
+
+  function dot(c, x, y, r, color) {
+    c.beginPath();
+    c.arc(x, y, r, 0, TAU);
+    c.fillStyle = color;
+    c.fill();
+  }
+
+  function ring(c, x, y, r, color, width = 1.5, glow = 0) {
+    c.save();
+    c.beginPath();
+    c.arc(x, y, Math.max(0.1, r), 0, TAU);
+    c.strokeStyle = color;
+    c.lineWidth = width;
+    if (glow && P.glow) {
+      c.shadowColor = color;
+      c.shadowBlur = glow * P.glow * pixelScale;
+    }
+    c.stroke();
+    c.restore();
+  }
+
+  /** 横向切片错位 + 色条：只在转场瞬间作用于某一层。 */
+  function glitch(c, amount, seed) {
+    if (amount <= 0.02) return;
+    const { canvas } = c;
+    scratchCtx.clearRect(0, 0, scratch.width, scratch.height);
+    scratchCtx.drawImage(canvas, 0, 0);
+    const random = rng(seed);
+    c.save();
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    const slices = 3 + Math.floor(amount * 10);
+    for (let i = 0; i < slices; i += 1) {
+      const y = random() * canvas.height;
+      const h = (0.006 + random() * 0.07) * canvas.height;
+      const dx = (random() - 0.5) * canvas.width * 0.14 * amount;
+      c.clearRect(0, y, canvas.width, h);
+      c.drawImage(scratch, 0, y, canvas.width, h, dx, y, canvas.width, h);
+    }
+    for (let i = 0; i < 2 + amount * 5; i += 1) {
+      c.globalAlpha = 0.25 + random() * 0.55 * amount;
+      c.fillStyle = random() < 0.6 ? P.accent : P.ink;
+      c.fillRect(random() * canvas.width, random() * canvas.height, random() * canvas.width * 0.28, (1 + random() * 5) * pixelScale);
+    }
+    c.restore();
+  }
+
+  function camera(extra = {}) {
+    return { persp:state.mix, dist:3.2, ...extra };
+  }
+
+  /** 按深度分桶批量画点：几千个点只需要几次 fill。 */
+  function drawCloud(c, points, cam, { t, assemble = 1, scatter = null, alpha = 1, dotScale = 1, accentRate = 0.07, wobble = 0.006 }) {
+    const buckets = [[], [], [], []];
+    for (let i = 0; i < points.length; i += 1) {
+      const p = points[i];
+      let { x, y, z } = p;
+      if (scatter && assemble < 1) {
+        const k = ease.outCubic(clamp(assemble * 1.5 - hash(i) * 0.5));
+        const s = scatter[i];
+        x = lerp(s.x, x, k);
+        y = lerp(s.y, y, k);
+        z = lerp(s.z, z, k);
+      }
+      x += Math.sin(t * 1.7 + i * 0.37) * wobble;
+      y += Math.cos(t * 1.3 + i * 0.21) * wobble;
+      const q = project({ x, y, z }, cam);
+      const r = (1.3 + (p.v || 0) * 3.4) * q.s * dotScale;
+      const bucket = hash(i + 0.5) < accentRate ? 3 : q.z < -0.12 ? 2 : q.z < 0.12 ? 1 : 0;
+      buckets[bucket].push(q.x, q.y, r);
+    }
+    const styles = [[P.dim, 0.75], [P.ink2, 0.9], [P.ink, 1], [P.accent, 1]];
+    c.save();
+    buckets.forEach((list, b) => {
+      c.globalAlpha = alpha * styles[b][1];
+      c.fillStyle = styles[b][0];
+      c.beginPath();
+      for (let i = 0; i < list.length; i += 3) {
+        c.moveTo(list[i] + list[i + 2], list[i + 1]);
+        c.arc(list[i], list[i + 1], list[i + 2], 0, TAU);
+      }
+      c.fill();
+    });
+    c.restore();
+  }
+
+  function sceneEnvelope(local, dur, fadeIn = 0.3, fadeOut = 0.22) {
+    return ease.outCubic(range(local, 0, fadeIn)) * (1 - range(local, dur - fadeOut, dur));
+  }
+
+  // ── 背景与 HUD ─────────────────────────────────────────
+
+  const FOCUS = {
+    intro:[960, 560, 700, 0.5], agent:[960, 560, 800, 0.4], identity:[1480, 520, 640, 1],
+    rag:[1300, 500, 600, 0.8], graph:[1180, 540, 620, 0.8], workbench:[960, 560, 800, 0.6],
+    career:[960, 540, 900, 0.9], a2a:[1200, 540, 560, 0.9], arch:[960, 600, 700, 0.7], outro:[1440, 540, 700, 0.9]
+  };
+
+  function drawBackground(c, t, info) {
+    c.fillStyle = P.bg;
+    c.fillRect(0, 0, W, H);
+
+    const [fx, fy, fr, fa] = FOCUS[info.scene.id];
+    const glow = c.createRadialGradient(fx, fy, 0, fx, fy, fr);
+    glow.addColorStop(0, P.accentFaint);
+    glow.addColorStop(1, P.accentClear);
+    c.globalAlpha = fa;
+    c.fillStyle = glow;
+    c.fillRect(0, 0, W, H);
+    c.globalAlpha = 1;
+
+    const gap = 48;
+    const drift = (t * 8) % gap;
+    c.fillStyle = P.faint;
+    for (let x = gap / 2 - drift; x < W; x += gap) {
+      for (let y = gap / 2; y < H; y += gap) c.fillRect(x - 1, y - 1, 2, 2);
+    }
+
+    if (state.mix > 0.01) floorGrid(c, t, state.mix);
+
+    if (P.vignette) {
+      const v = c.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, W * 0.72);
+      v.addColorStop(0, 'rgba(0,0,0,0)');
+      v.addColorStop(1, 'rgba(0,0,0,0.6)');
+      c.fillStyle = v;
+      c.fillRect(0, 0, W, H);
+    }
+  }
+
+  /** 3D 模式的透视地面：给整块舞台一个可以“站上去”的空间。 */
+  function floorGrid(c, t, mix) {
+    const horizon = 700;
+    const vx = W / 2;
+    const vy = horizon - 260;
+    c.save();
+    c.globalAlpha = mix * 0.9;
+    c.strokeStyle = P.line;
+    c.lineWidth = 1;
+    c.beginPath();
+    for (let i = -14; i <= 14; i += 1) {
+      const bx = vx + i * 150;
+      const u = (horizon - vy) / (H - vy);
+      c.moveTo(lerp(vx, bx, u), horizon);
+      c.lineTo(bx, H);
+    }
+    for (let k = 0; k < 10; k += 1) {
+      const u = ((k + (t * 0.6) % 1) / 10);
+      const y = horizon + (H - horizon) * u * u;
+      c.moveTo(0, y);
+      c.lineTo(W, y);
+    }
+    c.stroke();
+    const fade = c.createLinearGradient(0, horizon - 40, 0, horizon + 120);
+    fade.addColorStop(0, P.bg);
+    fade.addColorStop(1, P.bgClear);
+    c.globalAlpha = mix;
+    c.fillStyle = fade;
+    c.fillRect(0, horizon - 40, W, 160);
+    c.restore();
+  }
+
+  function drawHud(c, t, info) {
+    const n = SCENES.length;
+    brackets(c, 40, 40, W - 80, H - 80, 34, P.line, 1.6);
+
+    label(c, PROFILE.handle.toUpperCase(), 76, 86, { size:14, weight:700, ls:3.2, color:P.ink2 });
+    label(c, 'FULL-STACK · AI AGENT · OPEN SOURCE', 76, 108, { size:11 });
+
+    label(c, `TC ${timecode(t)}`, W - 76, 86, { size:14, weight:600, align:'right', color:P.ink2 });
+    const rec = 'REC  30 FPS · 16:9';
+    label(c, rec, W - 76, 108, { size:11, align:'right' });
+    if (Math.floor(t * 2) % 2 === 0) dot(c, W - 76 - measure(c, rec, { family:MONO, size:11, weight:500, ls:2.4 }) - 10, 104, 4, P.accent);
+
+    label(c, `${String(info.index).padStart(2, '0')} — ${info.scene.label}`, 76, H - 88, { size:13, weight:600, color:P.ink2 });
+    c.fillStyle = P.faint;
+    c.fillRect(76, H - 72, 220, 2);
+    c.fillStyle = P.accent;
+    c.fillRect(76, H - 72, 220 * info.progress, 2);
+
+    for (let i = 0; i < n; i += 1) {
+      c.fillStyle = i === info.index ? P.accent : i < info.index ? P.ink2 : P.faint;
+      c.fillRect(W - 76 - (n - i) * 20 + 4, H - 96, 14, 5);
+    }
+    label(c, `SCN ${String(info.index + 1).padStart(2, '0')}/${n}`, W - 76, H - 68, { size:11, align:'right' });
+
+    // 右侧刻度尺：整条片子的位置。
+    c.fillStyle = P.faint;
+    for (let i = 0; i <= 28; i += 1) c.fillRect(W - 44 - (i % 4 === 0 ? 10 : 5), 240 + i * 21, i % 4 === 0 ? 10 : 5, 1);
+    c.fillStyle = P.accent;
+    c.fillRect(W - 60, 240 + (t / DURATION) * 588 - 1, 16, 2);
+  }
+
+  function grain(c, t) {
+    if (!P.vignette || reducedMotion) return;
+    const random = rng(Math.floor(t * 30) + 1);
+    c.save();
+    c.fillStyle = P.ink;
+    for (let i = 0; i < 220; i += 1) {
+      c.globalAlpha = 0.03 + random() * 0.07;
+      c.fillRect(random() * W, random() * H, 1.5, 1.5);
+    }
+    c.restore();
+  }
+
+  // ── 场景 ───────────────────────────────────────────────
+
+  const Scenes = {
+    intro(L, l, t) {
+      const c = L.mid;
+      const fadeOut = 1 - range(l, 3.5, 3.95);
+      const settle = ease.inOutCubic(range(l, 2.5, 3.3));
+      const amp = 46 * ease.outCubic(range(l, 0.1, 1.0)) * (1 - 0.6 * settle);
+      const x0 = 170;
+      const x1 = 1750;
+      const wave = (x, lane) => {
+        const u = (x - x0) / (x1 - x0);
+        const env = Math.pow(Math.max(0, Math.sin(Math.PI * u)), 0.7);
+        return 575 + lane * settle * 30 + amp * env * Math.sin(x * 0.0058 + l * 2.3 + lane * 0.55) * (1 - Math.abs(lane) * 0.15);
+      };
+
+      const reach = lerp(x0, x1, ease.outCubic(range(l, 0, 0.9)));
+      c.save();
+      for (const lane of [-2, -1, 0, 1, 2]) {
+        if (lane !== 0 && settle <= 0.001) continue;
+        c.beginPath();
+        for (let x = x0; x <= reach; x += 6) {
+          const y = wave(x, lane);
+          if (x === x0) c.moveTo(x, y);
+          else c.lineTo(x, y);
+        }
+        c.globalAlpha = fadeOut * (lane === 0 ? 1 : settle * 0.8);
+        c.strokeStyle = lane === 0 ? P.ink2 : P.dim;
+        c.lineWidth = lane === 0 ? 2 : 1.2;
+        c.stroke();
+      }
+      c.globalAlpha = fadeOut * range(l, 0.4, 0.9);
+      label(c, 'INPUT · PROMPT', x0, 660, { size:11 });
+      label(c, 'OUTPUT · SHIPPED', x1, 660, { size:11, align:'right' });
+
+      const pop = ease.outBack(range(l, 0.55, 0.95));
+      [[0, 34], [1, 22]].forEach(([k, r]) => {
+        const x = 760 + k * 420 + Math.sin(l * 1.25 + k * 2.1) * 100;
+        const y = wave(x, 0);
+        c.globalAlpha = fadeOut * clamp(pop);
+        ring(c, x, y, r * pop, P.accent, 1.8, 16);
+        dot(c, x, y, 4.5, P.accent);
+        c.strokeStyle = P.dim;
+        c.lineWidth = 1;
+        c.beginPath();
+        c.moveTo(x, y - r - 8);
+        c.lineTo(x, y - r - 42);
+        c.stroke();
+        label(c, `T${k} · ${(0.42 + 0.3 * Math.sin(l * 2 + k)).toFixed(2)}`, x, y - r - 52, { size:11, align:'center', color:P.ink2 });
+        label(c, k ? 'TOOL' : 'TOKEN', x, y + r + 26, { size:10, align:'center' });
+      });
+      c.restore();
+
+      const lift = ease.inOutCubic(range(l, 2.9, 3.6));
+      c.save();
+      c.globalAlpha = 1 - range(l, 3.0, 3.6);
+      typeRun(c, 300, 390 - lift * 40, [
+        { text:'build agents in ', win:TYPING.introA, size:70, weight:300, family:SANS, color:P.ink },
+        { text:'code,', win:TYPING.introB, size:64, weight:600, family:MONO, color:P.accent, glow:18 }
+      ], t, { hold:0.25 });
+      c.restore();
+
+      const second = [
+        { text:'play with the ', win:TYPING.introC, size:70, weight:300, family:SANS, color:P.ink },
+        { text:'wind.', win:TYPING.introD, size:84, style:'italic', weight:400, family:SERIF, color:P.accent, glow:18 }
+      ];
+      const width = second.reduce((sum, part) => sum + measure(c, part.text, part), 0);
+      c.save();
+      c.globalAlpha = 1 - range(l, 3.3, 3.9);
+      typeRun(c, 1640 - width, 830 + lift * 20, second, t, { hold:0.9 });
+      c.restore();
+    },
+
+    agent(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const show = sceneEnvelope(l, 4, 0.45, 0.25);
+      const x = 250;
+      const y = 300 + (1 - ease.outCubic(range(l, 0, 0.45))) * 50;
+      const w = 1420;
+      const h = 590;
+
+      c.save();
+      c.globalAlpha = show;
+      panel(c, x, y, w, h, { radius:16 });
+      c.fillStyle = P.line;
+      c.fillRect(x, y + 52, w, 1);
+      [P.accent, P.dim, P.dim].forEach((color, i) => dot(c, x + 28 + i * 20, y + 26, 5, color));
+      label(c, 'windcode — ~/projects/windplay', x + w / 2, y + 31, { size:13, align:'center', color:P.ink2, ls:1 });
+      label(c, 'DEEPSEEK · CLAUDE · MCP', x + w - 26, y + 31, { size:11, align:'right' });
+
+      const lh = 70;
+      const top = y + 118;
+      const left = x + 96;
+      for (let i = 0; i < 7; i += 1) label(c, String(i + 1), x + 50, top + i * lh - 4, { size:15, align:'right', ls:0, alpha:0.7 });
+      text(c, '›', left, top, { family:MONO, size:28, weight:700, color:P.accent });
+      typeRun(c, left + 34, top, [
+        { text:'windcode "修复失败的测试并提交"', win:TYPING.command, family:MONO, size:27, weight:500, color:P.ink }
+      ], t, { hold:0.2, cursorColor:P.ink });
+
+      const rows = [
+        { at:5.15, tag:'PLAN', text:'读取项目结构 · 定位 3 个相关文件', tail:'0.4s' },
+        { at:5.55, tag:'EDIT', text:'src/timeline.js', add:'+12', del:'−3' },
+        { at:5.95, tag:'ASK', text:'bash · npm test', ask:true },
+        { at:6.70, tag:'TEST', text:'24 passed · 0 failed', tail:'1.8s', ok:true },
+        { at:7.10, tag:'DONE', text:'会话已保存 · Trace 可回放 · 可回滚', ok:true }
+      ];
+      rows.forEach((row, i) => {
+        const p = ease.outCubic(range(t, row.at, row.at + 0.25));
+        if (p <= 0) return;
+        const ry = top + (i + 1) * lh;
+        const rx = left + (1 - p) * 18;
+        c.save();
+        c.globalAlpha *= p;
+        if (row.ask) {
+          c.fillStyle = P.accentFaint;
+          c.fillRect(x + 72, ry - 38, w - 102, 54);
+          c.fillStyle = P.accent;
+          c.fillRect(x + 72, ry - 38, 3, 54);
+        }
+        const tagWidth = chip(c, row.tag, rx, ry - 25, { size:12, color:row.ask || row.ok ? P.accent : P.ink2, filled:row.ask });
+        let cx = rx + tagWidth + 22;
+        cx += text(c, row.text, cx, ry, { family:MONO, size:24, color:P.ink });
+        if (row.add) {
+          cx += text(c, `  ${row.add}`, cx, ry, { family:MONO, size:24, color:P.accent });
+          text(c, `  ${row.del}`, cx, ry, { family:MONO, size:24, color:P.dim });
+        }
+        if (row.tail) text(c, row.tail, x + w - 40, ry, { family:MONO, size:18, color:P.dim, align:'right' });
+        if (row.ask) {
+          const answer = typed('y', t, TYPING.confirm);
+          const question = '允许执行？ [y/N] ';
+          const qx = x + w - 60 - measure(c, question, { family:MONO, size:22 }) - 16;
+          text(c, question, qx, ry, { family:MONO, size:22, color:P.ink2 });
+          text(c, answer, x + w - 60, ry, { family:MONO, size:24, weight:700, color:P.accent, glow:12 });
+        }
+        c.restore();
+      });
+      c.restore();
+
+      f.save();
+      f.globalAlpha = show;
+      const tx0 = 300;
+      const tx1 = 1620;
+      const ty = 200;
+      const progress = ease.inOutCubic(range(l, 0.3, 3.5));
+      const head = lerp(tx0, tx1, progress);
+      label(f, 'TRACE · SESSION 0347 · PLAN → ACT → VERIFY', tx0, ty - 30, { size:11 });
+      f.fillStyle = P.line;
+      f.fillRect(tx0, ty - 0.5, tx1 - tx0, 1);
+      f.fillStyle = P.accent;
+      f.fillRect(tx0, ty - 1, head - tx0, 2);
+      ['PLAN', 'READ', 'EDIT', 'TEST', 'REVIEW'].forEach((step, i, all) => {
+        const sx = lerp(tx0, tx1, i / (all.length - 1));
+        const done = head >= sx - 1;
+        dot(f, sx, ty, 6, done ? P.accent : P.bg);
+        ring(f, sx, ty, 6, done ? P.accent : P.line, 1.4);
+        label(f, step, sx, ty + 32, { size:11, align:'center', color:done ? P.ink2 : P.dim });
+      });
+      ring(f, head, ty, 15, P.accent, 1.6, 18);
+      label(f, `t+${(progress * 3.2).toFixed(2)}s`, head, ty - 28, { size:11, align:'center', color:P.accent });
+      label(f, 'WINDCODE · TERMINAL CODING AGENT', W - 250, 944, { size:13, align:'right', color:P.ink2, weight:600 });
+      label(f, 'TEXTUAL TUI · 权限审批 · 进程沙箱 · 长期记忆', W - 250, 968, { size:11, align:'right' });
+      f.restore();
+    },
+
+    identity(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const out = 1 - range(l, 3.8, 4);
+      const x = 140;
+
+      const nameStyle = { weight:900, size:196, family:DISPLAY, ls:-4 };
+      nameStyle.size = Math.min(196, 196 * 1010 / measure(c, 'TINGFENG', nameStyle));
+      const reveal = range(l, 0.02, 0.62);
+      c.save();
+      c.globalAlpha = out;
+      const jolt = (1 - ease.outExpo(range(l, 0, 0.35))) * 26;
+      text(c, scramble('TINGFENG', reveal, 11), x - jolt, 470, { ...nameStyle, color:P.ink, glow:38 });
+      const numberWidth = text(c, scramble('347', range(l, 0.18, 0.7), 12), x + jolt, 470 + nameStyle.size * 0.98, { ...nameStyle, color:P.ink, glow:38 });
+
+      // 印章：“听风”，标题落定后盖上。
+      const stamp = ease.outBack(range(l, 0.5, 0.82));
+      const sx = x + numberWidth + 44;
+      const sy = 470 + nameStyle.size * 0.98 - nameStyle.size * 0.78;
+      const sw = 92;
+      const sh = 178;
+      if (stamp > 0) {
+        c.save();
+        c.translate(sx + sw / 2, sy + sh / 2);
+        const s = lerp(1.7, 1, clamp(stamp));
+        c.scale(s, s);
+        c.globalAlpha *= clamp(stamp);
+        c.fillStyle = P.accentFaint;
+        c.fillRect(-sw / 2, -sh / 2, sw, sh);
+        c.strokeStyle = P.accent;
+        c.lineWidth = 2.4;
+        if (P.glow) {
+          c.shadowColor = P.accent;
+          c.shadowBlur = 20 * P.glow * pixelScale;
+        }
+        c.strokeRect(-sw / 2, -sh / 2, sw, sh);
+        c.restore();
+        c.save();
+        c.globalAlpha *= clamp(stamp);
+        Array.from(PROFILE.seal).forEach((ch, i) => text(c, ch, sx + sw / 2, sy + 52 + i * 78, {
+          family:CJK, size:68, weight:900, color:P.accent, align:'center', base:'middle', glow:16
+        }));
+        c.restore();
+      }
+
+      const infoX = sx + sw + 36;
+      const infoY = sy + 34;
+      [
+        ['GITHUB', `@${PROFILE.handle}`],
+        ['SINCE', String(PROFILE.since)],
+        ['REPOS', `${PROFILE.repos} · ★ ${PROFILE.stars}`],
+        ['BASED', 'CHINA']
+      ].forEach(([key, value], i) => {
+        const p = range(l, 0.75 + i * 0.08, 1.05 + i * 0.08);
+        label(c, key, infoX, infoY + i * 38, { size:11, alpha:p });
+        label(c, value, infoX + 96, infoY + i * 38, { size:13, color:P.ink2, weight:600, alpha:p, ls:1.6 });
+      });
+
+      const lineW = ease.inOutCubic(range(l, 0.55, 1.1)) * 1010;
+      c.fillStyle = P.accent;
+      c.fillRect(x, 790, lineW, 3);
+
+      const roleA = 'FULL-STACK DEVELOPER & LLM APPLICATIONS EXPLORER';
+      const roleB = 'BUILDING CODING AGENTS · OPEN SOURCE · KNOWLEDGE GRAPHS';
+      const roleP = range(l, 0.8, 1.3);
+      const role = l < 2.1 ? scramble(roleA, roleP, 21) : scramble(roleB, range(l, 2.1, 2.7), 22);
+      chip(c, 'ROLE', x, 818, { size:11, color:P.accent, filled:true, alpha:roleP });
+      label(c, role, x + 86, 838, { size:16, weight:700, color:P.ink, ls:3.4 });
+      label(c, 'PYTHON · TYPESCRIPT · JAVA · FASTAPI · VUE · LANGGRAPH · VLLM', x, 884, { size:11, alpha:range(l, 1.1, 1.5) });
+      c.restore();
+
+      // 右侧点云：“风”字从散点汇聚成形。
+      const px = 1200;
+      const py = 190;
+      const pw = 580;
+      const ph = 680;
+      const frameIn = ease.outCubic(range(l, 0.15, 0.6));
+      c.save();
+      c.globalAlpha = out * frameIn;
+      brackets(c, px, py, pw, ph, 30, P.accent, 1.8);
+      c.strokeStyle = P.faint;
+      c.strokeRect(px + 0.5, py + 0.5, pw, ph);
+      label(c, 'FIG.02 · 风 / POINT CLOUD', px + 20, py + 34, { size:11, color:P.ink2 });
+      label(c, `${GLYPH.points.length} PTS`, px + pw - 20, py + 34, { size:11, align:'right', color:P.accent });
+      label(c, state.mix > 0.5 ? 'VIEW · PERSPECTIVE' : 'VIEW · ORTHOGRAPHIC', px + 20, py + ph - 22, { size:11 });
+      label(c, `YAW ${(Math.sin(t * 0.9) * 32 * state.mix).toFixed(1)}°`, px + pw - 20, py + ph - 22, { size:11, align:'right' });
+      const scanY = py + 60 + ((l * 0.5) % 1) * (ph - 120);
+      const scan = c.createLinearGradient(0, scanY - 60, 0, scanY);
+      scan.addColorStop(0, P.accentClear);
+      scan.addColorStop(1, P.accentFaint);
+      c.fillStyle = scan;
+      c.fillRect(px + 1, scanY - 60, pw - 2, 60);
+      c.fillStyle = P.accentDim;
+      c.fillRect(px + 1, scanY, pw - 2, 1);
+      c.restore();
+
+      const cam = camera({ yaw:state.mix * (Math.sin(t * 0.9) * 0.56 + 0.18), pitch:state.mix * Math.sin(t * 0.6) * 0.16, cx:px + pw / 2, cy:py + ph / 2 + 10, scale:250 });
+      drawCloud(f, GLYPH.field, cam, { t, alpha:out * frameIn * 0.5, dotScale:0.8, accentRate:0.02, wobble:0.01 });
+      drawCloud(f, GLYPH.points, cam, { t, assemble:range(l, 0.1, 1.4), scatter:GLYPH.scatter, alpha:out, dotScale:1, accentRate:0.03 });
+    },
+
+    rag(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const show = sceneEnvelope(l, 2, 0.25, 0.18);
+      c.save();
+      c.globalAlpha = show;
+      label(c, 'SELECTED WORK · 01 / 06', 150, 330, { size:13, color:P.accent, weight:700 });
+      text(c, scramble('zst_agent', range(l, 0, 0.4), 31), 146, 452, { family:DISPLAY, weight:900, size:124, ls:-3, glow:30 });
+      text(c, '智扫通 · 扫地机器人智能客服', 150, 520, { size:36, weight:500, color:P.ink2 });
+      label(c, 'FASTAPI · VUE 3 · RAG · AI AGENT', 150, 572, { size:14, color:P.ink2 });
+      text(c, '★ 26', 150, 640, { family:MONO, size:30, weight:700, color:P.accent, glow:14 });
+      label(c, 'STARS · 最受欢迎', 250, 636, { size:11 });
+
+      const steps = ['EMBED', 'RETRIEVE', 'RERANK', 'GENERATE'];
+      steps.forEach((step, i) => {
+        const on = range(l, 0.2 + i * 0.28, 0.3 + i * 0.28);
+        const sx = 900 + i * 210;
+        chip(c, step, sx, 176, { size:11, color:on > 0.5 ? P.accent : P.dim, filled:on > 0.5 && i === Math.min(3, Math.floor((l - 0.2) / 0.28)) });
+        if (i < steps.length - 1) label(c, '→', sx + 172, 196, { size:13, color:on > 0.5 ? P.accent : P.dim });
+      });
+      c.restore();
+
+      const cam = camera({ yaw:t * 0.35 + state.mix * 0.3, pitch:0.25 * state.mix + 0.12, cx:1330, cy:520, scale:300 });
+      const query = project({ x:0.1, y:-0.05, z:0.2 }, cam);
+      const link = ease.outCubic(range(l, 0.35, 0.9));
+      f.save();
+      f.globalAlpha = show;
+      DOCS.forEach((doc, i) => {
+        const q = project(doc, cam);
+        const top = TOP_DOCS.includes(i);
+        const size = (top ? 13 : 9) * q.s;
+        f.globalAlpha = show * (top && link > 0 ? 1 : 0.35 + 0.4 * clamp(q.z + 0.6));
+        f.strokeStyle = top && link > 0 ? P.accent : P.ink2;
+        f.lineWidth = 1.2;
+        f.strokeRect(q.x - size / 2, q.y - size / 2, size, size);
+        if (top && link > 0.5) {
+          f.fillStyle = P.accent;
+          f.fillRect(q.x - size / 4, q.y - size / 4, size / 2, size / 2);
+        }
+      });
+      f.globalAlpha = show;
+      TOP_DOCS.forEach((i, rank) => {
+        const q = project(DOCS[i], cam);
+        const p = clamp(link * 1.6 - rank * 0.15);
+        if (p <= 0) return;
+        f.strokeStyle = P.accent;
+        f.lineWidth = 1.4;
+        f.beginPath();
+        f.moveTo(query.x, query.y);
+        f.lineTo(lerp(query.x, q.x, p), lerp(query.y, q.y, p));
+        f.stroke();
+        if (p >= 1) label(f, (0.94 - rank * 0.03).toFixed(2), q.x + 12, q.y - 10, { size:11, color:P.accent, ls:1 });
+      });
+      const pulse = (l * 1.4) % 1;
+      ring(f, query.x, query.y, 10 + pulse * 40, P.accent, 1.4 * (1 - pulse));
+      ring(f, query.x, query.y, 14, P.accent, 2, 18);
+      dot(f, query.x, query.y, 5, P.accent);
+      label(f, 'QUERY', query.x + 22, query.y + 30, { size:11, color:P.accent });
+      f.restore();
+
+      const bubble = ease.outCubic(range(l, 0.55, 0.8));
+      c.save();
+      c.globalAlpha = show * bubble;
+      const bx = 960;
+      const by = 800 + (1 - bubble) * 20;
+      panel(c, bx, by, 760, 112, { radius:12 });
+      label(c, 'USER', bx + 24, by + 40, { size:11, color:P.accent });
+      text(c, '扫地机器人为什么回充失败？', bx + 100, by + 44, { size:24, color:P.ink });
+      label(c, 'AGENT', bx + 24, by + 84, { size:11, color:P.accent });
+      typeRun(c, bx + 100, by + 88, [
+        { text:'已检索 5 条知识 · 充电座被遮挡，建议清理周边 1m…', win:TYPING.answer, size:22, color:P.ink2 }
+      ], t, { hold:0.5 });
+      c.restore();
+    },
+
+    graph(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const show = sceneEnvelope(l, 2, 0.25, 0.18);
+      const yaml = [
+        ['agent', ': research-team'],
+        ['paradigm', ': plan-and-execute'],
+        ['nodes', ':'],
+        ['  - ', 'planner'],
+        ['  - ', 'researcher'],
+        ['    tools', ': [mcp.search]'],
+        ['  - ', 'writer'],
+        ['runtime', ': [cli, api, sdk]']
+      ];
+      c.save();
+      c.globalAlpha = show;
+      label(c, 'SELECTED WORK · 02 / 06', 110, 230, { size:13, color:P.accent, weight:700 });
+      panel(c, 110, 260, 470, 420, { radius:12 });
+      label(c, 'windagent.yaml', 134, 296, { size:11, color:P.ink2 });
+      c.fillStyle = P.line;
+      c.fillRect(110, 314, 470, 1);
+      yaml.forEach(([key, value], i) => {
+        const p = range(l, 0.05 + i * 0.07, 0.2 + i * 0.07);
+        if (p <= 0) return;
+        const ly = 360 + i * 38;
+        const kw = text(c, key, 136, ly, { family:MONO, size:19, color:key.trim() === '-' ? P.dim : P.ink2, alpha:p });
+        text(c, value, 136 + kw, ly, { family:MONO, size:19, color:value.startsWith(':') ? P.ink : P.accent, alpha:p });
+      });
+      text(c, 'WindAgent', 1790, 880, { family:DISPLAY, weight:900, size:104, ls:-3, align:'right', glow:28 });
+      text(c, '编排者，不是创造者。', 1790, 938, { family:SERIF, size:32, style:'italic', color:P.ink2, align:'right' });
+      label(c, 'YAML DSL · LANGGRAPH · FASTMCP · A2A', 110, 730, { size:12 });
+      label(c, 'CLI · WEB API · PYTHON SDK · TS SDK', 110, 756, { size:12 });
+      c.restore();
+
+      const cam = camera({ yaw:state.mix * (Math.sin(t * 0.7) * 0.55 - 0.25), pitch:state.mix * 0.3, cx:1180, cy:500, scale:400 });
+      const nodes = new Map(AGENT_GRAPH.nodes.map(node => [node.id, { ...node, q:project(node, cam) }]));
+      const activeIndex = Math.floor(clamp((l - 0.4) / 0.24, 0, 5));
+      f.save();
+      f.globalAlpha = show;
+      AGENT_GRAPH.edges.forEach(([from, to], i) => {
+        const a = nodes.get(from).q;
+        const b = nodes.get(to).q;
+        const p = ease.inOutCubic(range(l, 0.15 + i * 0.12, 0.45 + i * 0.12));
+        if (p <= 0) return;
+        const loop = from === 'reviewer';
+        f.save();
+        f.strokeStyle = loop ? P.dim : P.ink2;
+        f.lineWidth = 1.6;
+        if (loop) f.setLineDash([6, 8]);
+        f.beginPath();
+        f.moveTo(a.x, a.y);
+        f.lineTo(lerp(a.x, b.x, p), lerp(a.y, b.y, p));
+        f.stroke();
+        f.restore();
+        if (p >= 1) {
+          const k = (t * 1.1 + i * 0.37) % 1;
+          dot(f, lerp(a.x, b.x, k), lerp(a.y, b.y, k), 4, P.accent);
+        }
+      });
+      AGENT_GRAPH.nodes.forEach((node, i) => {
+        const { q } = nodes.get(node.id);
+        const p = ease.outBack(range(l, 0.1 + i * 0.1, 0.35 + i * 0.1));
+        if (p <= 0) return;
+        const r = 30 * q.s * p;
+        const active = i === activeIndex;
+        dot(f, q.x, q.y, r, active ? P.accent : P.bg);
+        ring(f, q.x, q.y, r, active ? P.accent : P.ink2, 1.6, active ? 22 : 0);
+        dot(f, q.x, q.y, 3.5, active ? P.onAccent : P.ink2);
+        label(f, node.label, q.x, q.y + r + 26, { size:12, align:'center', color:active ? P.accent : P.ink2, weight:600 });
+      });
+      f.restore();
+    },
+
+    workbench(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const show = sceneEnvelope(l, 2, 0.05, 0.15);
+      c.save();
+      c.globalAlpha = show * 0.9;
+      const x = 250;
+      const y = 180;
+      const w = 1420;
+      const h = 720;
+      c.strokeStyle = P.line;
+      c.lineWidth = 1.2;
+      c.strokeRect(x, y, w, h);
+      c.strokeRect(x, y, 56, h);
+      c.strokeRect(x + 56, y, 260, h);
+      c.strokeRect(x + 316, y, w - 316, 44);
+      c.strokeRect(x + 316, y + h - 190, w - 316, 190);
+      for (let i = 0; i < 5; i += 1) c.strokeRect(x + 16, y + 22 + i * 54, 24, 24);
+      c.fillStyle = P.faint;
+      for (let i = 0; i < 12; i += 1) c.fillRect(x + 80 + (i % 3) * 18, y + 30 + i * 36, 90 + hash(i) * 110, 10);
+      ['reel.js', 'score.js', 'README.md'].forEach((tab, i) => {
+        c.fillStyle = i === 0 ? P.faint : 'rgba(0,0,0,0)';
+        c.fillRect(x + 316 + i * 170, y, 170, 44);
+        label(c, tab, x + 336 + i * 170, y + 28, { size:12, color:i === 0 ? P.ink2 : P.dim, ls:1 });
+      });
+      for (let i = 0; i < 11; i += 1) {
+        c.fillStyle = i % 4 === 1 ? P.accentFaint : P.faint;
+        c.fillRect(x + 380 + (i % 3) * 30, y + 80 + i * 36, 160 + hash(i + 40) * 520, 10);
+      }
+      typeRun(c, x + 340, y + h - 140, [
+        { text:'$ dsh plugin --profile web add dsh-vscode-workbench', win:[16.25, 17.1], family:MONO, size:20, color:P.ink2 }
+      ], t, { hold:1 });
+      label(c, '资源管理器 · MONACO · 源代码管理 · 分屏终端', x + 340, y + h - 90, { size:12 });
+      c.restore();
+
+      const word = 'workbench';
+      const style = { family:DISPLAY, weight:900, size:236, ls:-8, align:'center' };
+      const jitter = (range(l, 0, 0.3) < 1 || (l > 1.0 && l < 1.12)) ? (hash(Math.floor(t * 30)) - 0.5) * 30 : 0;
+      const split = 8 + (1 - range(l, 0, 0.4)) * 22;
+      c.save();
+      c.globalAlpha = show;
+      c.globalCompositeOperation = P.split;
+      text(c, word, 960 - split + jitter, 640, { ...style, color:P.accent });
+      text(c, word, 960 + split + jitter, 640, { ...style, color:P.cyan });
+      c.globalCompositeOperation = 'source-over';
+      text(c, word, 960 + jitter * 0.4, 640, { ...style, color:P.ink });
+      c.restore();
+
+      label(f, 'SELECTED WORK · 03 / 06', 960, 150, { size:13, align:'center', color:P.accent, weight:700, alpha:show });
+      label(f, 'DSH · VS CODE WORKBENCH', 250, 950, { size:13, color:P.ink2, weight:600, alpha:show });
+      label(f, 'TYPESCRIPT · DEEPSEEK HARNESS PLUGIN', 960, 950, { size:12, align:'center', alpha:show });
+      text(f, '★ 11', 1670, 952, { family:MONO, size:22, weight:700, color:P.accent, align:'right', alpha:show });
+
+      const flash = 1 - range(l, 0, 0.14);
+      if (flash > 0) {
+        f.save();
+        f.globalAlpha = flash * 0.85;
+        f.fillStyle = P.ink;
+        f.fillRect(0, 0, W, H);
+        f.restore();
+      }
+    },
+
+    career(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const inP = ease.outExpo(range(l, 0, 0.32));
+      const outP = ease.inCubic(range(l, 1.78, 2));
+      const bandX = -W * (1 - inP) + W * outP;
+      const show = 1 - outP;
+      c.save();
+      if (P.glow) {
+        c.shadowColor = P.accent;
+        c.shadowBlur = 40 * P.glow * pixelScale;
+      }
+      c.fillStyle = P.accent;
+      c.fillRect(bandX, 430, W, 220);
+      c.restore();
+      c.save();
+      c.beginPath();
+      c.rect(bandX, 430, W, 220);
+      c.clip();
+      typeRun(c, 330, 585, [
+        { text:'> repo2career', win:TYPING.career, family:MONO, size:128, weight:700, color:P.onAccent }
+      ], t, { hold:1.5, cursorColor:P.onAccent, block:true });
+      c.restore();
+
+      label(f, 'SELECTED WORK · 04 / 06', 960, 390, { size:13, align:'center', color:P.accent, weight:700, alpha:show * inP });
+      c.save();
+      c.globalAlpha = show * range(l, 0.35, 0.6);
+      label(c, '[ PYTHON · FASTAPI · REACT · DEEPSEEK ]', 960, 714, { size:15, align:'center', color:P.ink2 });
+      text(c, '从项目证据到面试表达。', 960, 778, { family:SERIF, style:'italic', size:40, align:'center', color:P.ink });
+      c.restore();
+
+      const flow = ['SOURCE', 'EVIDENCE', 'REASON', 'REPORT'];
+      const total = flow.reduce((sum, item) => sum + measure(c, item, { family:MONO, size:12, weight:700, ls:2 }) + 18, 0) + (flow.length - 1) * 52;
+      let fx = 960 - total / 2;
+      flow.forEach((item, i) => {
+        const on = range(l, 0.8 + i * 0.18, 0.9 + i * 0.18);
+        const w = chip(f, item, fx, 830, { size:12, color:on > 0.5 ? P.accent : P.dim, filled:on > 0.5 && i === flow.length - 1, alpha:show });
+        fx += w;
+        if (i < flow.length - 1) label(f, '→', fx + 18, 850, { size:14, color:on > 0.5 ? P.accent : P.dim, alpha:show });
+        fx += 52;
+      });
+      [['INPUT', 'GITHUB / PDF / MD'], ['TRACE', 'CODEGRAPH · MINERU'], ['OUTPUT', 'STAR · 面试报告'], ['STARS', '★ 5']].forEach(([key, value], i) => {
+        const x = 330 + i * 360;
+        label(f, key, x, 950, { size:11, alpha:show });
+        label(f, value, x, 972, { size:13, color:i === 3 ? P.accent : P.ink2, weight:600, alpha:show, ls:1.4 });
+      });
+    },
+
+    a2a(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const b = L.back;
+      const show = sceneEnvelope(l, 2, 0.25, 0.18);
+
+      b.save();
+      b.globalAlpha = show;
+      b.lineWidth = 2;
+      b.strokeStyle = P.faint;
+      b.globalAlpha = show * 0.7;
+      setFont(b, { family:DISPLAY, weight:900, size:460, ls:-10 });
+      b.textAlign = 'center';
+      b.strokeText('A2A', 1200, 700);
+      b.restore();
+
+      c.save();
+      c.globalAlpha = show;
+      label(c, 'SELECTED WORK · 05 / 06', 140, 330, { size:13, color:P.accent, weight:700 });
+      text(c, 'a2a_agent', 132, 470, { family:SERIF, style:'italic', size:132, glow:26 });
+      text(c, '主 Agent 扫描 AgentCard，', 140, 548, { size:32, color:P.ink2 });
+      text(c, '按能力动态路由子任务。', 140, 596, { size:32, color:P.ink2 });
+      label(c, 'PYTHON · A2A PROTOCOL · SKILLS', 140, 660, { size:13 });
+      text(c, '★ 2', 140, 720, { family:MONO, size:26, weight:700, color:P.accent });
+      c.restore();
+
+      const cx = 1250;
+      const cy = 540;
+      const cam = camera({ pitch:lerp(Math.PI / 2, 0.42, state.mix), yaw:0, cx, cy, scale:330 });
+      f.save();
+      f.globalAlpha = show;
+      f.beginPath();
+      for (let i = 0; i <= 96; i += 1) {
+        const q = project(orbit(i / 96 * TAU), cam);
+        if (i === 0) f.moveTo(q.x, q.y);
+        else f.lineTo(q.x, q.y);
+      }
+      f.strokeStyle = P.line;
+      f.lineWidth = 1.2;
+      f.setLineDash([4, 8]);
+      f.stroke();
+      f.setLineDash([]);
+
+      const agents = [['weather_agent.py', '天气'], ['news_agent.py', '新闻']];
+      const drawAgent = ({ name, cn, i, q }) => {
+        const s = q.s;
+        const pop = ease.outBack(range(l, 0.15 + i * 0.12, 0.45 + i * 0.12));
+        if (pop <= 0) return;
+        const cardW = 220 * s * pop;
+        const cardH = 76 * s * pop;
+        const packet = (l * 1.3 + i * 0.5) % 1;
+        const going = packet < 0.5;
+        const k = going ? packet * 2 : (1 - packet) * 2;
+        f.strokeStyle = P.dim;
+        f.lineWidth = 1;
+        f.beginPath();
+        f.moveTo(cx, cy);
+        f.lineTo(q.x, q.y);
+        f.stroke();
+        dot(f, lerp(cx, q.x, k), lerp(cy, q.y, k), 5, going ? P.accent : P.ink);
+        panel(f, q.x - cardW / 2, q.y - cardH / 2, cardW, cardH, { radius:10 * s, stroke:P.accentDim });
+        label(f, name, q.x, q.y - 4 * s, { size:Math.max(9, 14 * s), align:'center', color:P.ink, weight:700, ls:1 });
+        label(f, `AgentCard ✓ · ${cn}`, q.x, q.y + 22 * s, { size:Math.max(8, 11 * s), align:'center', ls:1 });
+      };
+      // 轨道远端的卡片先画，主 agent 压在上面；近端的卡片再盖住主 agent。
+      const placed = agents.map(([name, cn], i) => ({ name, cn, i, q:project(orbit(t * 1.1 + i * Math.PI + 0.6), cam) }));
+      placed.filter(a => a.q.z > 0).forEach(drawAgent);
+      ring(f, cx, cy, 64, P.accent, 2, 26);
+      ring(f, cx, cy, 64 + ((l * 1.5) % 1) * 50, P.accentDim, 1.2);
+      dot(f, cx, cy, 6, P.accent);
+      label(f, 'agent_loop.py', cx, cy + 96, { size:13, align:'center', color:P.ink, weight:700 });
+      placed.filter(a => a.q.z <= 0).forEach(drawAgent);
+
+      label(f, 'TASK →', cx - 150, cy - 110, { size:11, color:P.accent });
+      label(f, '← RESULT', cx + 90, cy - 110, { size:11 });
+      f.restore();
+    },
+
+    arch(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const b = L.back;
+      const show = sceneEnvelope(l, 2, 0.25, 0.16);
+
+      b.save();
+      b.globalAlpha = show;
+      const grow = 1 + l * 0.03;
+      b.translate(960, 640);
+      b.scale(grow, grow);
+      setFont(b, { family:DISPLAY, weight:900, size:640, ls:-20 });
+      b.textAlign = 'center';
+      b.fillStyle = P.faint;
+      b.fillText('06', 0, 180);
+      b.restore();
+
+      label(c, 'SELECTED WORK · 06 / 06', 960, 330, { size:13, align:'center', color:P.accent, weight:700, alpha:show });
+      const word = 'archtools';
+      const style = { family:SERIF, style:'italic', size:176, weight:400 };
+      let x = 960 - measure(c, word, style) / 2;
+      Array.from(word).forEach((ch, i) => {
+        const p = ease.outCubic(range(l, 0.05 + i * 0.035, 0.4 + i * 0.035));
+        x += text(c, ch, x, 560 + (1 - p) * 30, { ...style, alpha:show * p, glow:24 });
+      });
+      label(c, '[ SHELL · ARCH LINUX · TUI ]', 960, 626, { size:15, align:'center', color:P.accent, alpha:show });
+      text(c, '一个 TUI，统一 Pacman / AUR / Flatpak 三个源', 960, 684, { family:SERIF, size:30, align:'center', color:P.ink2, alpha:show });
+
+      c.save();
+      c.globalAlpha = show;
+      const cmdX = 700;
+      const end = typeRun(c, cmdX, 776, [
+        { text:'$ pack neovim', win:TYPING.pack, family:MONO, size:28, weight:600, color:P.ink }
+      ], t, { hold:0.4, cursorColor:P.accent });
+      let chipX = Math.max(end + 40, 1000);
+      ['pacman', 'aur', 'flatpak'].forEach((src, i) => {
+        const on = range(t, 23.0 + i * 0.14, 23.08 + i * 0.14);
+        chipX += chip(c, src, chipX, 752, { size:12, color:on > 0.5 ? P.accent : P.dim, filled:on > 0.5 && i === 0 }) + 12;
+      });
+      c.restore();
+
+      [['pack', '安装'], ['pacr', '卸载'], ['pacd', '降级'], ['★ 4', 'STARS']].forEach(([cmd, desc], i) => {
+        const x = 520 + i * 260;
+        text(f, cmd, x, 950, { family:MONO, size:20, weight:700, color:i === 3 ? P.accent : P.ink, alpha:show });
+        label(f, desc, x, 976, { size:11, alpha:show });
+      });
+    },
+
+    outro(L, l, t) {
+      const c = L.mid;
+      const f = L.front;
+      const b = L.back;
+      const end = 1 - range(l, 3.45, 3.95);
+
+      const cam = camera({ yaw:Math.sin(t * 0.5) * (0.2 + state.mix * 0.5), pitch:state.mix * 0.12, cx:1540, cy:470, scale:330 });
+      drawCloud(b, GLYPH.points, cam, { t, alpha:end * 0.15 * range(l, 0, 0.6), dotScale:1.1, accentRate:0.02 });
+
+      c.save();
+      c.globalAlpha = end;
+      const x = 190;
+      label(c, 'FULL-STACK DEVELOPER  /  AI AGENT  /  OPEN SOURCE', x, 340, { size:15, color:P.accent, weight:700, ls:4, alpha:range(l, 0.1, 0.4) });
+      const nameStyle = { family:DISPLAY, weight:900, size:172, ls:-5 };
+      const nameW = text(c, scramble(PROFILE.handle, range(l, 0, 0.55), 41), x, 520, { ...nameStyle, glow:36 });
+
+      const stamp = ease.outBack(range(l, 0.45, 0.75));
+      if (stamp > 0) {
+        const sx = x + measure(c, PROFILE.handle, nameStyle) + 34;
+        const s = lerp(1.6, 1, clamp(stamp));
+        c.save();
+        c.translate(sx + 36, 450);
+        c.scale(s, s);
+        c.globalAlpha *= clamp(stamp);
+        c.strokeStyle = P.accent;
+        c.lineWidth = 2.2;
+        c.fillStyle = P.accentFaint;
+        c.fillRect(-36, -70, 72, 140);
+        c.strokeRect(-36, -70, 72, 140);
+        c.restore();
+        c.save();
+        c.globalAlpha *= clamp(stamp);
+        Array.from(PROFILE.seal).forEach((ch, i) => text(c, ch, sx + 36, 418 + i * 62, { family:CJK, size:52, weight:900, color:P.accent, align:'center', base:'middle', glow:14 }));
+        c.restore();
+      }
+
+      const lineW = ease.inOutCubic(range(l, 0.3, 1.0)) * 1340;
+      c.fillStyle = P.line;
+      c.fillRect(x, 572, lineW, 1.5);
+      for (let i = 0; i <= 10; i += 1) if (i / 10 * 1340 <= lineW) c.fillRect(x + i * 134, 566, 1.5, 12);
+
+      typeRun(c, x, 660, [
+        { text:'build agents in ', win:[24.8, 25.25], family:SERIF, style:'italic', size:46, color:P.ink2 },
+        { text:'code', win:[25.25, 25.4], family:SERIF, style:'italic', size:46, color:P.accent },
+        { text:', play with the ', win:[25.4, 25.85], family:SERIF, style:'italic', size:46, color:P.ink2 },
+        { text:'wind', win:[25.85, 26.0], family:SERIF, style:'italic', size:46, color:P.accent },
+        { text:'.', win:[26.0, 26.02], family:SERIF, style:'italic', size:46, color:P.ink2 }
+      ], t, { hold:1.4 });
+
+      const links = range(l, 1.4, 1.8);
+      label(c, 'github.com/tingfeng347', 1730, 760, { size:18, align:'right', color:P.ink, weight:600, ls:1.2, alpha:links });
+      label(c, 'tingfeng347.github.io', 1730, 792, { size:14, align:'right', color:P.ink2, ls:1.2, alpha:links });
+      [['REPOS', String(PROFILE.repos)], ['STARS', `★ ${PROFILE.stars}`], ['LANG', 'PYTHON / TS / SHELL'], ['PLAYGROUND', 'WINDPLAY · 2026']].forEach(([key, value], i) => {
+        const p = range(l, 1.6 + i * 0.1, 1.9 + i * 0.1);
+        label(c, key, x + i * 320, 880, { size:11, alpha:p });
+        label(c, value, x + i * 320, 906, { size:15, color:i === 1 ? P.accent : P.ink, weight:700, ls:1.6, alpha:p });
+      });
+      c.restore();
+
+      const wipe = range(l, 3.5, 4);
+      if (wipe > 0 && wipe < 1) {
+        f.save();
+        f.fillStyle = P.accent;
+        f.globalAlpha = 0.9;
+        f.fillRect(0, 538, W * ease.inOutCubic(wipe), 4);
+        f.restore();
+      }
+    }
+  };
+
+  /** 每个场景切入时的短促错帧，离场时轻微拉扯。 */
+  function transitionGlitch(info) {
+    if (reducedMotion || info.index === 0) return 0;
+    const { local } = info;
+    const dur = info.scene.dur;
+    return (1 - ease.outCubic(range(local, 0, 0.22))) * 0.95 + range(local, dur - 0.1, dur) * 0.5;
+  }
+
+  function render() {
+    const t = state.t;
+    const info = sceneAt(t);
+    const base = state.theme;
+    P = PALETTES[info.scene.invert ? (base === 'dark' ? 'light' : 'dark') : base];
+    const L = layers;
+    for (const ctx of Object.values(L)) {
+      ctx.setTransform(pixelScale, 0, 0, pixelScale, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = 1;
+    }
+    drawBackground(L.back, t, info);
+    Scenes[info.scene.id](L, info.local, t, info);
+    const amount = transitionGlitch(info);
+    if (amount > 0) {
+      glitch(L.mid, amount, Math.floor(t * 30) + info.index * 97);
+      if (amount > 0.4) glitch(L.front, amount * 0.6, Math.floor(t * 30) + 7);
+    }
+    drawHud(L.front, t, info);
+    grain(L.front, t);
+    state.dirty = false;
+  }
+
+  // ── 2D ⇄ 3D 舞台 ───────────────────────────────────────
+
+  function applyStage(now) {
+    const m = state.mix;
+    const { pointer } = state;
+    pointer.sx += (pointer.x - pointer.sx) * 0.06;
+    pointer.sy += (pointer.y - pointer.sy) * 0.06;
+    const depth = stage.offsetWidth / 1400;
+    const swayX = reducedMotion ? 0 : Math.sin(now * 0.00041) * 2.6;
+    const swayY = reducedMotion ? 0 : Math.sin(now * 0.00029) * 4.2;
+    const rx = (8 - pointer.sy * 10 + swayX) * m;
+    const ry = (pointer.sx * 16 + swayY) * m;
+    stage.style.transform = `scale(${1 - 0.1 * m}) rotateX(${rx.toFixed(3)}deg) rotateY(${ry.toFixed(3)}deg)`;
+    layers.back.canvas.style.transform = `translateZ(${(-180 * depth * m).toFixed(2)}px) scale(${(1 + 0.14 * m).toFixed(4)})`;
+    layers.mid.canvas.style.transform = 'translateZ(0)';
+    layers.front.canvas.style.transform = `translateZ(${(90 * depth * m).toFixed(2)}px) scale(${(1 - 0.05 * m).toFixed(4)})`;
+  }
+
+  // ── 播放器 ─────────────────────────────────────────────
+
+  const audio = new window.ReelAudio();
+  const ui = {
+    play: document.getElementById('play'),
+    scrub: document.getElementById('scrub'),
+    marks: document.getElementById('marks'),
+    time: document.getElementById('time'),
+    chapter: document.getElementById('chapter'),
+    sound: document.getElementById('sound'),
+    soundLabel: document.getElementById('sound-label'),
+    soundHint: document.getElementById('sound-hint'),
+    theme: document.getElementById('theme'),
+    fullscreen: document.getElementById('fullscreen'),
+    dims: [...document.querySelectorAll('[data-dim]')]
+  };
+  ui.scrub.max = String(Math.round(DURATION * 1000));
+  for (const scene of SCENES.slice(1)) {
+    const mark = document.createElement('span');
+    mark.style.left = `${(scene.start / DURATION) * 100}%`;
+    ui.marks.append(mark);
+  }
+
+  function seek(t) {
+    state.abs = clamp(t, 0, DURATION - 0.001);
+    state.t = wrap(state.abs);
+    if (audio.active && state.playing) audio.sync(state.abs);
+    state.dirty = true;
+  }
+
+  function setPlaying(playing) {
+    state.playing = playing;
+    ui.play.setAttribute('aria-label', playing ? '暂停' : '播放');
+    if (playing && audio.active) audio.sync(state.abs);
+    if (!playing) audio.stop();
+    wake();
+  }
+
+  async function setSound(on) {
+    ui.soundHint.hidden = true;
+    if (on && !audio.supported) return;
+    await audio.setEnabled(on, state.abs);
+    if (!state.playing) audio.stop();
+    ui.sound.setAttribute('aria-pressed', String(on));
+    ui.soundLabel.textContent = on ? '声音 开' : '声音 关';
+  }
+
+  function setTheme(theme) {
+    state.theme = theme;
+    document.documentElement.dataset.theme = theme;
+    storage.set('theme', theme);
+    ui.theme.setAttribute('aria-label', theme === 'dark' ? '切换到亮色' : '切换到暗色');
+    state.dirty = true;
+  }
+
+  function setDim(dim) {
+    state.dim = dim;
+    storage.set('dim', dim);
+    for (const button of ui.dims) button.setAttribute('aria-pressed', String(button.dataset.dim === dim));
+  }
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else document.documentElement.requestFullscreen?.().catch(() => {});
+  }
+
+  function jumpScene(delta) {
+    const { index } = sceneAt(state.t);
+    const next = (index + delta + SCENES.length) % SCENES.length;
+    seek(SCENES[next].start + 0.001);
+  }
+
+  let idleTimer = 0;
+  function wake() {
+    document.body.classList.remove('idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (state.playing && !state.scrubbing) document.body.classList.add('idle');
+    }, 2600);
+  }
+
+  ui.play.addEventListener('click', () => setPlaying(!state.playing));
+  ui.sound.addEventListener('click', () => setSound(ui.sound.getAttribute('aria-pressed') !== 'true'));
+  ui.theme.addEventListener('click', () => setTheme(state.theme === 'dark' ? 'light' : 'dark'));
+  ui.fullscreen.addEventListener('click', toggleFullscreen);
+  for (const button of ui.dims) button.addEventListener('click', () => setDim(button.dataset.dim));
+
+  ui.scrub.addEventListener('input', () => {
+    state.scrubbing = true;
+    seek(Number(ui.scrub.value) / 1000);
+  });
+  ui.scrub.addEventListener('change', () => {
+    state.scrubbing = false;
+    if (audio.active && state.playing) audio.sync(state.abs);
+  });
+
+  window.addEventListener('keydown', event => {
+    if (event.target instanceof HTMLInputElement && event.key !== ' ') return;
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const key = event.key.toLowerCase();
+    const actions = {
+      ' ': () => setPlaying(!state.playing),
+      k: () => setPlaying(!state.playing),
+      m: () => setSound(ui.sound.getAttribute('aria-pressed') !== 'true'),
+      d: () => setDim(state.dim === '3d' ? '2d' : '3d'),
+      t: () => setTheme(state.theme === 'dark' ? 'light' : 'dark'),
+      f: toggleFullscreen,
+      arrowright: () => jumpScene(1),
+      arrowleft: () => jumpScene(-1),
+      home: () => seek(0)
+    };
+    if (!actions[key]) return;
+    event.preventDefault();
+    actions[key]();
+    wake();
+  });
+
+  window.addEventListener('pointermove', event => {
+    state.pointer.x = event.clientX / innerWidth - 0.5;
+    state.pointer.y = event.clientY / innerHeight - 0.5;
+    wake();
+  });
+  window.addEventListener('pointerdown', wake);
+  prefersDark.addEventListener?.('change', event => {
+    if (!storage.get('theme')) setTheme(event.matches ? 'dark' : 'light');
+  });
+  new ResizeObserver(resize).observe(stage);
+
+  let lastFrame = performance.now();
+  let lastUi = '';
+  function frame(now) {
+    const dt = Math.min(0.1, (now - lastFrame) / 1000);
+    lastFrame = now;
+    if (state.playing && !state.scrubbing) {
+      state.abs = audio.active ? audio.now() : state.abs + dt;
+      state.t = wrap(state.abs);
+      audio.update(state.abs);
+      state.dirty = true;
+    }
+    const target = state.dim === '3d' ? 1 : 0;
+    if (Math.abs(target - state.mix) > 0.0005) {
+      state.mix += (target - state.mix) * (1 - Math.exp(-dt * (reducedMotion ? 30 : 4.5)));
+      if (Math.abs(target - state.mix) < 0.0005) state.mix = target;
+      state.dirty = true;
+    }
+    applyStage(now);
+    if (state.dirty) render();
+
+    const info = sceneAt(state.t);
+    const signature = `${Math.floor(state.t * 10)}|${info.index}`;
+    if (signature !== lastUi) {
+      lastUi = signature;
+      if (!state.scrubbing) ui.scrub.value = String(Math.round(state.t * 1000));
+      ui.scrub.style.setProperty('--progress', `${(state.t / DURATION) * 100}%`);
+      ui.time.textContent = `${clock(state.t)} / ${clock(DURATION)}`;
+      ui.chapter.textContent = info.scene.label;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  setTheme(state.theme);
+  setDim(state.dim);
+  setPlaying(state.playing);
+  if (audio.supported && !params.has('t')) {
+    ui.soundHint.hidden = false;
+    setTimeout(() => { ui.soundHint.hidden = true; }, 8000);
+  }
+  resize();
+  render();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

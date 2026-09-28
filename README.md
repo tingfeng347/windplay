@@ -21,6 +21,7 @@ npm run dev
 | 作品 | 类型 | 状态 | 说明 |
 | --- | --- | --- | --- |
 | [Point Cloud Studio](works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
+| [Tingfeng Reel](works/tingfeng-reel/) | 动态片头 / 音画同步 | [直接打开成品](works/tingfeng-reel/demo/index.html) | 根据 GitHub 主页编排的 28 秒片头，支持 2D/3D、亮暗主题与合成配乐 |
 
 ## 目录
 
@@ -32,8 +33,9 @@ windplay/
 ├── scripts/                 # 启动台构建与本地服务
 ├── tests/                   # 启动台入口检查
 ├── works/                   # 可独立运行的网页作品
-│   └── point-cloud-studio/  # 点云人像生成器
-│       └── demo/index.html  # 可直接打开的完整成品
+│   ├── point-cloud-studio/  # 点云人像生成器
+│   │   └── demo/index.html  # 可直接打开的完整成品
+│   └── tingfeng-reel/       # 动态作品片头
 ├── AGENTS.md                # 自动化协作规则
 ├── CONTRIBUTING.md          # 新增作品与开发说明
 ├── index.html               # 作品启动台

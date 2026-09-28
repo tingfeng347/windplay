@@ -1,8 +1,8 @@
 {
-  "name": "@windplay/point-cloud-studio",
-  "version": "0.2.0",
+  "name": "@windplay/tingfeng-reel",
+  "version": "0.1.0",
   "private": true,
-  "description": "将照片转换为彩色交互 SVG 和三维点云的本地生成器",
+  "description": "tingfeng347 的动态作品片头：可拖动时间线、2D/3D 切换、亮暗主题与实时合成配乐",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -10,8 +10,5 @@
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "test": "npm run build && node --test tests/*.test.cjs"
-  },
-  "devDependencies": {
-    "sharp": "0.35.4"
   }
 }

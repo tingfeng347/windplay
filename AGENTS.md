@@ -19,7 +19,8 @@ Do not create a shared package until at least two works use the code and its int
 - `npm run dev --workspace <package-name>`: start one work locally.
 
 For Point Cloud Studio, use package name `@windplay/point-cloud-studio` or the root alias
-`npm run dev:point-cloud`.
+`npm run dev:point-cloud`. For Tingfeng Reel, use `@windplay/tingfeng-reel` or
+`npm run dev:reel`.
 
 ## Conventions
 

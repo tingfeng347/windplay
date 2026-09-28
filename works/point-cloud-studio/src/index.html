@@ -4,58 +4,114 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="在本地将照片转成点阵与三维点云，调节纵深并导出纯画面的交互 HTML、SVG 或 PNG。">
-  <title>点云人像 · 照片生成器</title>
+  <title>点云人像 · Point Cloud Studio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>点云人像</h1>
-    <div class="header-actions"><span class="eyebrow">POINT CLOUD / STUDY 02</span><div class="theme-toggle" role="group" aria-label="界面主题"><button id="themeLight" type="button" aria-pressed="false">亮色</button><button id="themeDark" type="button" aria-pressed="true">暗色</button></div></div>
+  <header class="topbar">
+    <a class="back-link" href="../../../index.html" aria-label="返回 WindPlay 启动台">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg><span>WindPlay</span>
+    </a>
+    <div class="title">
+      <span class="work-number" aria-hidden="true">01</span>
+      <h1>点云人像</h1>
+      <span class="eyebrow">POINT CLOUD STUDIO</span>
+    </div>
+    <div class="theme-toggle" role="group" aria-label="界面主题">
+      <button id="themeLight" type="button" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></svg><span>亮色</span>
+      </button>
+      <button id="themeDark" type="button" aria-pressed="true">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z"/></svg><span>暗色</span>
+      </button>
+    </div>
   </header>
-  <main>
-    <aside class="panel left-panel" aria-label="照片与点阵参数">
-      <section class="block">
-        <h2>选择照片</h2>
-        <input id="file" class="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/avif">
-        <button id="choose" class="button wide" type="button">＋ 打开本地照片</button>
-        <p class="source" id="source">当前：彩色示例人像</p>
-        <button id="sample" class="text-button" type="button">恢复示例照片</button>
-      </section>
-      <section class="block">
-        <div class="block-heading"><h2>圆点与明暗</h2><button class="text-button" id="reset" type="button">重置参数</button></div>
-        <div class="control"><div class="label-row"><label for="spacing">点距</label><output for="spacing" id="spacingValue">9.0</output></div><input type="range" id="spacing" min="4" max="16" step="0.5" value="9"></div>
-        <div class="control"><div class="label-row"><label for="radius">圆点大小</label><output for="radius" id="radiusValue">0.52</output></div><input type="range" id="radius" min="0.25" max="0.65" step="0.01" value="0.52"></div>
-        <div class="control"><div class="label-row"><label for="contrast">对比度</label><output for="contrast" id="contrastValue">1.00</output></div><input type="range" id="contrast" min="0.5" max="2.5" step="0.05" value="1"></div>
-        <div class="control"><div class="label-row"><label for="gamma">暗部保留</label><output for="gamma" id="gammaValue">1.00</output></div><input type="range" id="gamma" min="0.5" max="1.8" step="0.05" value="1"></div>
-        <div class="control"><div class="label-row"><label for="threshold">去除暗点</label><output for="threshold" id="thresholdValue">0.06</output></div><input type="range" id="threshold" min="0" max="0.3" step="0.01" value="0.06"></div>
-      </section>
-      <section class="block"><div class="checks"><label class="check"><input id="autoLevels" type="checkbox" checked>自动拉开明暗</label><label class="check"><input id="invert" type="checkbox">反转照片明暗</label></div></section>
-    </aside>
-    <figure>
-      <div class="stage"><div id="preview">__INITIAL_SVG__</div></div>
-      <figcaption><span id="gestureHint">拖拽旋转 · 滚轮缩放 · 双击复位</span><span id="stats">正在载入示例…</span></figcaption>
+
+  <main class="workspace">
+    <figure class="viewer">
+      <div class="stage loading" id="stage">
+        <div id="preview">__INITIAL_SVG__</div>
+        <div class="hud" aria-hidden="true">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <span class="hud-text hud-tl"><b>FIG.01</b> <span id="hudSource">彩色示例人像</span></span>
+          <span class="hud-text hud-tr" id="hudView">YAW 7° · PITCH −2° · 100%</span>
+        </div>
+        <div class="stage-tools">
+          <div class="segmented" role="group" aria-label="显示方式">
+            <button id="mode2d" type="button" aria-pressed="false">2D 点阵</button>
+            <button id="mode3d" type="button" aria-pressed="true">3D 点云</button>
+          </div>
+          <button class="tool-button" id="resetView" type="button" title="复位视角（双击画面）">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v3h3"/></svg><span>复位视角</span>
+          </button>
+        </div>
+        <p class="drop-hint" id="dropHint" hidden>松开以载入照片</p>
+      </div>
+      <figcaption>
+        <span id="gestureHint">拖拽旋转 · 滚轮缩放 · 双击复位</span>
+        <span id="stats">正在载入示例…</span>
+      </figcaption>
     </figure>
-    <aside class="panel right-panel" aria-label="三维效果、配色与导出">
+
+    <aside class="inspector" aria-label="照片、点阵、三维、配色与导出">
       <section class="block">
-        <div class="block-heading"><h2>三维效果</h2><button class="text-button" id="resetView" type="button">复位视角</button></div>
-        <div class="checks"><label class="check"><input id="threeD" type="checkbox" checked>启用三维点云</label><label class="check"><input id="motion" type="checkbox" checked>预览鼠标扰动</label></div>
-        <div class="control" style="margin-top:18px"><div class="label-row"><label for="depth">立体纵深</label><output for="depth" id="depthValue">0.38</output></div><input type="range" id="depth" min="0" max="1" step="0.01" value="0.38"></div>
-        <p class="note">照片明暗形成浮雕纵深。</p>
+        <div class="block-heading"><h2><span class="index">01</span>照片</h2><button id="sample" class="text-button" type="button">恢复示例</button></div>
+        <input autocomplete="off" id="file" class="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/avif">
+        <button id="choose" class="dropzone" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V5M7.5 9.5 12 5l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
+          <span><b>打开本地照片</b><small>或直接拖到画面上 · JPG / PNG / WebP</small></span>
+        </button>
+        <p class="source" id="source">当前：彩色示例人像</p>
       </section>
+
       <section class="block">
-        <div class="block-heading"><h2>点云配色</h2><button id="resetColors" class="text-button" type="button">跟随主题</button></div>
-        <label class="check" style="margin-bottom:16px"><input id="sourceColors" type="checkbox" checked>保留照片颜色</label>
-        <div class="colors"><label for="foreground"><input type="color" id="foreground" value="#f4f3ef" disabled>单色</label><label for="background"><input type="color" id="background" value="#100f0b">背景</label></div>
+        <div class="block-heading"><h2><span class="index">02</span>点阵</h2><button class="text-button" id="reset" type="button">重置参数</button></div>
+        <div class="control"><div class="label-row"><label for="spacing">点距</label><output for="spacing" id="spacingValue">9.0</output></div><input autocomplete="off" type="range" id="spacing" min="4" max="16" step="0.5" value="9"></div>
+        <div class="control"><div class="label-row"><label for="radius">圆点大小</label><output for="radius" id="radiusValue">0.52</output></div><input autocomplete="off" type="range" id="radius" min="0.25" max="0.65" step="0.01" value="0.52"></div>
+        <div class="control"><div class="label-row"><label for="contrast">对比度</label><output for="contrast" id="contrastValue">1.00</output></div><input autocomplete="off" type="range" id="contrast" min="0.5" max="2.5" step="0.05" value="1"></div>
+        <div class="control"><div class="label-row"><label for="gamma">暗部保留</label><output for="gamma" id="gammaValue">1.00</output></div><input autocomplete="off" type="range" id="gamma" min="0.5" max="1.8" step="0.05" value="1"></div>
+        <div class="control"><div class="label-row"><label for="threshold">去除暗点</label><output for="threshold" id="thresholdValue">0.06</output></div><input autocomplete="off" type="range" id="threshold" min="0" max="0.3" step="0.01" value="0.06"></div>
+        <div class="switches">
+          <label class="switch"><span>自动拉开明暗</span><input autocomplete="off" id="autoLevels" type="checkbox" checked></label>
+          <label class="switch"><span>反转照片明暗</span><input autocomplete="off" id="invert" type="checkbox"></label>
+        </div>
       </section>
+
       <section class="block">
-        <h2>导出</h2>
-        <div class="exports"><button id="exportHtml" class="button primary" type="button">导出点云 HTML</button><button id="exportSvg" class="button" type="button">导出 SVG</button><button id="exportPng" class="button" type="button">导出 PNG</button></div>
+        <div class="block-heading"><h2><span class="index">03</span>三维</h2></div>
+        <div class="switches">
+          <label class="switch"><span>三维点云</span><input autocomplete="off" id="threeD" type="checkbox" checked></label>
+          <label class="switch"><span>鼠标扰动</span><input autocomplete="off" id="motion" type="checkbox" checked></label>
+        </div>
+        <div class="control"><div class="label-row"><label for="depth">立体纵深</label><output for="depth" id="depthValue">0.10</output></div><input autocomplete="off" type="range" id="depth" min="0" max="1" step="0.01" value="0.1"></div>
+        <p class="note">照片明暗形成浮雕纵深，数值越大起伏越明显。</p>
+      </section>
+
+      <section class="block">
+        <div class="block-heading"><h2><span class="index">04</span>配色</h2><button id="resetColors" class="text-button" type="button">恢复默认</button></div>
+        <label class="switch"><span>保留照片颜色</span><input autocomplete="off" id="sourceColors" type="checkbox" checked></label>
+        <div class="colors">
+          <label class="swatch" for="foreground"><input autocomplete="off" type="color" id="foreground" value="#f4f3ef" disabled><span>单色</span></label>
+          <label class="swatch" for="background"><input autocomplete="off" type="color" id="background" value="#100f0b"><span>背景</span></label>
+        </div>
+        <p class="note">点阵用照片自身的亮度成像，深色背景最能还原人像；界面主题不会改动画面配色。</p>
+      </section>
+
+      <section class="block">
+        <div class="block-heading"><h2><span class="index">05</span>导出</h2></div>
+        <div class="exports">
+          <button id="exportHtml" class="button primary" type="button">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>导出点云 HTML
+          </button>
+          <button id="exportSvg" class="button" type="button">SVG</button>
+          <button id="exportPng" class="button" type="button">PNG</button>
+        </div>
         <p class="note">HTML 保留点云与交互；SVG 为二维点阵；PNG 保存当前视角。</p>
         <p id="status" role="status" aria-live="polite"></p>
       </section>
     </aside>
   </main>
-  <noscript><p style="padding:20px">当前显示静态测试图。启用 JavaScript 后可替换照片、调整参数和导出。</p></noscript>
+  <noscript><style>.stage.loading #preview{opacity:1}.stage.loading::before{display:none}</style><p class="noscript">当前显示静态测试图。启用 JavaScript 后可替换照片、调整参数和导出。</p></noscript>
   <script src="halftone.js"></script>
   <script src="point-cloud.js"></script>
   <script src="editor.js"></script>

@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "npm run build && node scripts/dev.mjs",
     "dev:point-cloud": "npm run dev --workspace @windplay/point-cloud-studio",
+    "dev:reel": "npm run dev --workspace @windplay/tingfeng-reel",
     "build": "npm run build:works && npm run build:site",
     "build:works": "npm run build --workspaces --if-present",
     "build:site": "node scripts/build-site.mjs",

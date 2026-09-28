@@ -15,7 +15,7 @@
 
   function prepare(model, input = {}) {
     const threeD = input.threeD !== false;
-    const depth = finite(input.depth, 0.38, 0, 1);
+    const depth = finite(input.depth, 0.1, 0, 1);
     const width = model.width, height = model.height;
     const longSide = Math.max(width, height);
     const view = input.view || {};

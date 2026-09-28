@@ -98,7 +98,7 @@ function environment() {
 
   // 运行生成器实际脚本：3D 开关默认开启，改变纵深后点击 HTML 导出。
   const editor=environment();
-  const defaults={spacing:9,radius:.52,contrast:1,gamma:1,threshold:.06,depth:.38,foreground:'#f4f3ef',background:'#100f0b'};
+  const defaults={spacing:9,radius:.52,contrast:1,gamma:1,threshold:.06,depth:.1,foreground:'#f4f3ef',background:'#100f0b'};
   for(const [key,value] of Object.entries(defaults))editor.element(key).value=String(value);
   for(const key of ['autoLevels','motion','threeD','sourceColors'])editor.element(key).checked=true;
   const sandbox=vm.createContext({...editor.globals,injectedModel:model});
@@ -126,18 +126,18 @@ function environment() {
   editor.element('exportSvg').emit('click');
   assert((await editor.downloads[2].blob.text()).includes('application/ecmascript'));
 
-  // 主题切换后，导出跟随配色并保留几何与视角；手动配色不被覆盖。
+  // 主题只影响界面：亮色下导出仍是深色画布，几何与视角不变；手动配色不被覆盖。
   editor.element('themeLight').emit('click');editor.settle();
   assert.equal(editor.doc.documentElement.dataset.theme,'light');
   editor.element('exportHtml').emit('click');
   const lightExport=await editor.downloads[3].blob.text();
   const lightScene=JSON.parse(lightExport.match(/document.getElementById\("cloud"\),(\{[\s\S]*?\}),function project/)[1]);
-  assert.equal(lightScene.foreground,'#252a33');assert.equal(lightScene.background,'#ffffff');
+  assert.equal(lightScene.foreground,'#f4f3ef');assert.equal(lightScene.background,'#100f0b');
   assert.deepEqual(lightScene.points,scene.points);assert.deepEqual(lightScene.view,scene.view);
   editor.element('foreground').value='#ff8844';editor.element('foreground').emit('input');editor.settle();
   editor.element('themeDark').emit('click');editor.settle();
   assert.equal(editor.doc.documentElement.dataset.theme,'dark');
-  assert.equal(editor.element('foreground').value,'#ff8844');assert.equal(editor.element('background').value,'#ffffff');
+  assert.equal(editor.element('foreground').value,'#ff8844');assert.equal(editor.element('background').value,'#100f0b');
   editor.element('resetColors').emit('click');editor.settle();
   assert.equal(editor.element('foreground').value,'#f4f3ef');assert.equal(editor.element('background').value,'#100f0b');
   assert.equal(editor.win.localStorage.getItem('point-cloud-editor-theme'),'dark');
@@ -160,5 +160,5 @@ function environment() {
   assert.equal(custom.points.length,31);assert(custom.points.every(p=>p[2]===0));
   const env=environment(), control=PointCloud.mount(env.canvas(),PointCloud.prepare(model));
   env.settle();control.destroy();assert.equal(env.frames.size,0);assert(env.observers[0].closed);
-  console.log(JSON.stringify({pass:true,checks:['standalone HTML bootstrap without module globals','hover and restore','drag rotation','wheel zoom','double click reset','resize and device pixels','actual editor export click','depth and camera persistence','only point cloud in exported HTML','3D PNG export','interactive SVG preserved','light and dark themes','export follows theme colors','theme preserves points and camera','manual colors preserved','restore theme palette','theme preference persisted','custom model and flat mode','animation cleanup']}));
+  console.log(JSON.stringify({pass:true,checks:['standalone HTML bootstrap without module globals','hover and restore','drag rotation','wheel zoom','double click reset','resize and device pixels','actual editor export click','depth and camera persistence','only point cloud in exported HTML','3D PNG export','interactive SVG preserved','light and dark themes','artwork colors independent of theme','theme preserves points and camera','manual colors preserved','restore theme palette','theme preference persisted','custom model and flat mode','animation cleanup']}));
 })().catch(error=>{console.error(error);process.exitCode=1;});

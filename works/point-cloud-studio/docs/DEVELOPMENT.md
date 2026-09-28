@@ -35,7 +35,7 @@ const svg = Halftone.toSVG(model); // 默认带独立交互脚本
 ```js
 const scene = PointCloud.prepare(model, {
   threeD: true,
-  depth: 0.38,
+  depth: 0.1,
   interactive: true,
   view: { yaw: 0.12, pitch: -0.04, zoom: 1 }
 });
