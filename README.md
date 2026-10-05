@@ -5,6 +5,10 @@ WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、�
 
 ## 启动台
 
+在线体验：[打开 WindPlay](https://tingfeng347.github.io/windplay/)，无需安装依赖。
+
+本地开发：
+
 ```bash
 npm ci
 npm run dev
@@ -13,8 +17,7 @@ npm run dev
 浏览器打开 `http://localhost:4173`，从启动台进入任一作品。不启动服务时也可以直接双击
 根目录的 `index.html`；所有链接均使用相对路径。
 
-推送到 GitHub 的 `main` 分支并在仓库设置中启用 GitHub Pages（来源选择 GitHub Actions）后，
-公开入口为 `https://tingfeng347.github.io/windplay/`。
+推送到 GitHub 的 `main` 分支会触发 GitHub Actions，构建并部署到 GitHub Pages。
 
 ## 作品
 
