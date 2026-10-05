@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#252721">
+  <title>余烬荒野 · Ember Wilds</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="world" aria-label="余烬荒野游戏场景，使用 WASD 或方向键移动，E 交互，点击物体走近采集"></canvas>
+  <header class="topbar">
+    <a class="home" href="../../../index.html" aria-label="返回 WindPlay">← WindPlay</a>
+    <div class="title"><span>余烬荒野</span><small>Ember Wilds</small></div>
+    <div class="top-actions"><button id="sound" aria-pressed="false" title="开启音效">音效关</button><button id="help" aria-label="打开玩法说明">?</button><button id="pause" title="Esc 暂停游戏">暂停</button></div>
+  </header>
+  <section class="vitals" aria-label="生存状态">
+    <div class="vital health"><span class="sigil">♥</span><div><b>健康 <output id="health">100</output></b><span class="meter"><i></i></span></div></div>
+    <div class="vital hunger"><span class="sigil">◖</span><div><b>饥饿 <output id="hunger">100</output></b><span class="meter"><i></i></span></div></div>
+    <div class="vital sanity"><span class="sigil">☾</span><div><b>精神 <output id="sanity">100</output></b><span class="meter"><i></i></span></div></div>
+  </section>
+  <aside class="clock"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" class="clock-ring"/><path d="M40 8 A32 32 0 1 1 12.3 56" class="clock-day"/><path id="clock-hand" d="M40 40 L40 14"/><circle cx="40" cy="40" r="3"/></svg><div><b id="day-label">第 1 天</b><span id="phase-label">白昼</span><small id="weather-label">晴 · 21°C</small></div></aside>
+  <aside class="journal"><button id="journal-toggle" aria-expanded="true">荒野手记 <span>−</span></button><div id="objectives"></div></aside>
+  <aside class="craft-panel" id="craft-panel"><div class="panel-head"><h2>生存制作</h2><button id="craft-close" aria-label="收起制作栏">×</button></div><p class="craft-tip">建筑会安放在身旁。采集后制作。</p><div id="recipes"></div><button id="cook" class="cook-button">♨ 营火边烹饪</button><small class="cook-hint">1 份浆果 / 生肉 → 1 份熟食</small></aside>
+  <button id="craft-open" class="craft-open" aria-label="打开制作栏">制作</button>
+  <aside class="map-wrap"><div class="map-head"><span>荒野地图</span><button id="map-toggle" aria-expanded="true">−</button></div><canvas id="map" width="156" height="156" aria-label="小地图，白点是你，橙点是营火"></canvas><small>白点：你　火光：营地</small></aside>
+  <section class="bottom-hud"><div class="action-row"><span id="context">靠近资源，按 E 采集</span><span id="light-status"></span><button id="interact" class="interact">E 采集 / 交互</button></div><div class="inventory" id="inventory" aria-label="背包物品，点击食物即可食用"></div><div class="tool-row" id="tools"></div><p class="key-hint">WASD 移动 · Shift 奔跑 · E 采集 · 空格攻击 · 点击走近 · 1 / 2 进食 · Esc 暂停</p></section>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div class="touch-pad" aria-label="触屏移动控制"><button data-dir="up" aria-label="向上移动">↑</button><button data-dir="left" aria-label="向左移动">←</button><button data-dir="down" aria-label="向下移动">↓</button><button data-dir="right" aria-label="向右移动">→</button></div><button id="touch-attack" class="touch-attack" aria-label="攻击附近敌人">攻击</button>
+  <div class="veil" id="welcome"><section class="paper intro"><div class="intro-mark" aria-hidden="true">✦</div><p class="intro-sub">风停之后，火还在。</p><h1>余烬荒野</h1><p class="english">Ember Wilds</p><p class="intro-copy">在纸墨森林里醒来，捡起树枝，点燃营火。<br>饥饿与黑夜在倒数，而每一个清晨值得等待。</p><div class="intro-steps"><span><b>拾取</b>树枝 / 燧石 / 干草</span><span><b>制作</b>斧头 / 镐子 / 营火</span><span><b>活下去</b>吃饱，天黑前找光</span></div><label class="seed-label">荒野种子 <input id="seed" value="windplay" maxlength="40" spellcheck="false"></label><div class="intro-buttons"><button id="start" class="primary">踏入荒野</button><button id="continue" hidden>继续旅程</button></div><p class="intro-foot">原创浏览器生存实验 · 自动保存 · 可离线游玩<br>电脑用 WASD / E；手机用方向键 / 交互按钮</p></section></div>
+  <div class="veil" id="pause-screen" hidden><section class="paper pause-paper"><h2>让余烬等一会儿</h2><p id="pause-description">游戏已暂停，荒野的时间也停下来了。</p><button id="resume" class="primary">继续旅程</button><button id="save">保存旅程</button><button id="restart">重新开始</button><p id="save-status" class="save-status"></p></section></div>
+  <div class="veil" id="death-screen" hidden><section class="paper pause-paper"><p class="intro-sub">火光终有熄灭时</p><h2>荒野记得你</h2><p id="death-stats"></p><button id="rebirth" class="primary">重新点燃余烬</button><button id="death-menu">返回开场</button></section></div>
+  <div class="veil" id="help-screen" hidden><section class="paper help-paper"><button id="help-close" class="dialog-close" aria-label="关闭玩法说明">×</button><h2>活过第一个夜晚</h2><ol><li>点击地上的树枝、燧石与干草，人物会走过去拾取；也可靠近后按住 E。</li><li>3 树枝 + 2 燧石做斧头，砍树拿木材；3 树枝 + 3 燧石做镐子，开采岩石。</li><li>4 木材 + 2 石块 + 3 干草建营火；靠近营火按 E 消耗 1 木材添柴。</li><li>点击背包浆果吃东西；营火边点「烹饪」，熟食恢复更多状态。</li><li>第一个黑夜从 2 分 30 秒开始。营火或火把能照亮，火也会赶走野兽。</li><li>长矛可防身，木甲减伤；陷阱捕兔，庇护所恢复精神。看看能否活到第三天。</li></ol><p>空格攻击附近生物；点击敌人会追过去攻击。按 C 切换制作栏、M 切换地图、Esc 暂停。方向键同样可以移动。游戏会每 15 秒保存，打开后可「继续旅程」。</p><button id="help-done" class="primary">知道了</button></section></div>
+  <script src="engine.js"></script>
+  <script src="render.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
