@@ -91,11 +91,11 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   margin: 28px -24px 0;
   perspective: 1200px;
 }
-.art-orbit { position: absolute; width: 58%; aspect-ratio: 1; left: 21%; top: 3%; border: 1px solid var(--line); border-radius: 50%; transform: scaleY(.58) rotate(calc(-25deg + var(--progress) * 35deg)); }
+.art-orbit { position: absolute; width: 58%; aspect-ratio: 1; left: 21%; top: 3%; border: 1px solid var(--line); border-radius: 50%; transform: scaleY(.58) rotate(calc(-25deg + var(--progress) * 35deg)); will-change: transform; }
 .art-orbit::after { content: ""; position: absolute; inset: 14%; border: 1px solid var(--line); border-radius: inherit; }
-.art-wind { position: absolute; inset: 0; width: 100%; height: 100%; stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 6; transform: translateY(calc(var(--progress) * -35px)); }
-.art-word { position: absolute; left: 1%; bottom: 7%; color: transparent; -webkit-text-stroke: 1px var(--line); font-size: clamp(120px, 18vw, 240px); font-weight: 650; line-height: 1; letter-spacing: -.08em; user-select: none; transform: translateX(calc(var(--progress) * -60px)); }
-.art-layer { position: absolute; display: block; transform-style: preserve-3d; }
+.art-wind { position: absolute; inset: 0; width: 100%; height: 100%; stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 6; transform: translateY(calc(var(--progress) * -35px)); will-change: transform; }
+.art-word { position: absolute; left: 1%; bottom: 7%; color: transparent; -webkit-text-stroke: 1px var(--line); font-size: clamp(120px, 18vw, 240px); font-weight: 650; line-height: 1; letter-spacing: -.08em; user-select: none; transform: translateX(calc(var(--progress) * -60px)); will-change: transform; }
+.art-layer { position: absolute; display: block; transform-style: preserve-3d; will-change: transform; }
 .art-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 20px 50px -25px rgb(0 0 0 / 32%); transition: box-shadow 220ms ease; }
 .art-layer:hover .art-frame { box-shadow: 0 28px 65px -25px rgb(0 0 0 / 46%); }
 .art-frame-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 34px; padding: 0 12px; color: var(--muted); font-size: 11px; text-align: left; }
@@ -104,7 +104,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .art-portrait { z-index: 2; width: 27%; left: 17%; top: 44%; transform: translate(-50%, -50%) translate3d(calc(var(--progress) * -40px + var(--pointer-x) * -18px), calc(var(--progress) * -70px + var(--pointer-y) * -16px), 0) rotate(calc(-9deg - var(--progress) * 5deg)) rotateY(calc(var(--pointer-x) * -8deg)); }
 .art-portrait .art-frame img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 36%; }
 .art-reel { z-index: 1; width: 69%; left: 59%; top: 49%; transform: translate(-50%, -50%) translate3d(calc(var(--pointer-x) * 16px), calc(var(--progress) * -35px + var(--pointer-y) * 12px), 0) scale(calc(.89 + var(--progress) * .13)) rotate(calc(5deg - var(--progress) * 5deg)) rotateY(calc(var(--pointer-x) * 6deg)); }
-.art-detail { position: absolute; z-index: 3; width: 15%; aspect-ratio: 1; left: 79%; top: 60%; transform: translate3d(calc(var(--progress) * 25px + var(--pointer-x) * 28px), calc(var(--progress) * -100px + var(--pointer-y) * 24px), 0) rotate(calc(-12deg + var(--progress) * 28deg)); }
+.art-detail { position: absolute; z-index: 3; width: 15%; aspect-ratio: 1; left: 79%; top: 60%; transform: translate3d(calc(var(--progress) * 25px + var(--pointer-x) * 28px), calc(var(--progress) * -100px + var(--pointer-y) * 24px), 0) rotate(calc(-12deg + var(--progress) * 28deg)); will-change: transform; }
 .art-detail img { width: 100%; height: 100%; border-radius: 50%; object-fit: none; object-position: 61% 65%; filter: grayscale(1); border: 5px solid var(--surface); box-shadow: 0 12px 30px -20px rgb(0 0 0 / 40%); }
 .detail-orbit { position: absolute; inset: -9%; width: 118%; height: 118%; stroke: var(--muted); stroke-width: .4; }
 .art-caption { position: absolute; bottom: 0; inset-inline: 0; color: var(--muted); font-size: 12px; }
@@ -127,7 +127,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .window-dots { display: flex; gap: 5px; }
 .window-dots i { width: 6px; height: 6px; border: 1px solid var(--line); border-radius: 50%; background: var(--wash); }
 .preview-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--preview-paper); }
-.preview-image img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translateY(var(--image-shift, 0px)) scale(1.08); }
+.preview-image img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translateY(var(--image-shift, 0px)) scale(1.08); will-change: transform; }
 .portrait-card img { object-position: 50% 34%; }
 .reel-card img { object-fit: contain; }
 .preview-caption { position: absolute; inset: auto 0 0; padding: 30px 20px 16px; color: #eeeeee; background: linear-gradient(transparent, rgb(0 0 0 / 72%)); font-size: 11px; }
