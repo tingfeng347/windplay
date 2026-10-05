@@ -1,0 +1,12 @@
+{
+  "name": "@windplay/voxel-frontier",
+  "version": "0.1.0",
+  "private": true,
+  "description": "方块旷野：离线可玩的三维方块建造与生存游戏",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test tests/*.test.cjs"
+  }
+}
