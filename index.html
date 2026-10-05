@@ -226,6 +226,7 @@
       let measureNeeded = true;
       let pointerX = 0;
       let pointerY = 0;
+      const last = { progress: null, px: null, py: null };
 
       function measure() {
         const scroll = window.scrollY;
@@ -236,7 +237,7 @@
           viewport: window.innerHeight,
           previews: previews.map(element => {
             const box = element.getBoundingClientRect();
-            return { element, top: box.top + scroll, height: box.height };
+            return { element, top: box.top + scroll, height: box.height, shift: null };
           })
         };
         measureNeeded = false;
@@ -251,15 +252,19 @@
           (scroll - Math.max(0, top - viewport * .62)) / Math.max(1, height * .9), 0, 1
         );
         const eased = progress * progress * (3 - 2 * progress);
-        hero.style.setProperty('--progress', eased.toFixed(4));
-        hero.style.setProperty('--pointer-x', motion.matches ? '0' : pointerX.toFixed(3));
-        hero.style.setProperty('--pointer-y', motion.matches ? '0' : pointerY.toFixed(3));
+        const value = eased.toFixed(4);
+        if (value !== last.progress) { hero.style.setProperty('--progress', value); last.progress = value; }
+        const px = motion.matches ? '0' : pointerX.toFixed(3);
+        if (px !== last.px) { hero.style.setProperty('--pointer-x', px); last.px = px; }
+        const py = motion.matches ? '0' : pointerY.toFixed(3);
+        if (py !== last.py) { hero.style.setProperty('--pointer-y', py); last.py = py; }
         for (const item of geometry.previews) {
           const visible = item.top < scroll + viewport && item.top + item.height > scroll;
           const offset = motion.matches || !visible ? 0 : clamp(
             (scroll + viewport * .5 - item.top - item.height * .5) / viewport, -.5, .5
           ) * (compact.matches ? 16 : 32);
-          item.element.style.setProperty('--image-shift', `${offset.toFixed(2)}px`);
+          const shift = `${offset.toFixed(2)}px`;
+          if (shift !== item.shift) { item.element.style.setProperty('--image-shift', shift); item.shift = shift; }
         }
       }
 
