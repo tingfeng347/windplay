@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#252721">
+  <title>余烬荒野 · Ember Wilds</title>
+  <style>
+:root{color-scheme:dark;--paper:#e1d5b7;--ink:#282b24;--ochre:#cfad6f;--muted:#b6ad94;--line:#a79a78;--panel:rgba(38,40,33,.94);font-family:"Songti SC","STSong","Noto Serif CJK SC",Georgia,serif}*{box-sizing:border-box}body{margin:0;overflow:hidden;background:#555b41;color:var(--paper)}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{color:var(--paper);background:var(--panel);border:1px solid #b4a17866;cursor:pointer;padding:9px 15px;border-radius:2px;transition:background .15s,transform .15s}button:hover:not(:disabled){background:#454739}button:active:not(:disabled){transform:translateY(1px)}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #ffe0a0;outline-offset:4px}button:disabled{cursor:not-allowed;opacity:.42}button[hidden],[hidden]{display:none!important}#world{position:fixed;inset:0;width:100%;height:100%;touch-action:none}.topbar{position:absolute;top:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:linear-gradient(#1d211aef,#1d211a00);z-index:5}.home{color:var(--paper);text-decoration:none;font:13px -apple-system,BlinkMacSystemFont,sans-serif}.title{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:12px;align-items:baseline}.title span{font-size:24px;letter-spacing:5px}.title small{font-style:italic;color:#c7c1ad;font-size:12px}.top-actions{display:flex;gap:6px}.top-actions button{font-size:12px;padding:6px 10px}#help{width:30px;padding:6px}.vitals{position:absolute;top:80px;left:26px;display:flex;gap:12px;z-index:3}.vital{display:flex;gap:8px;align-items:center;padding:9px 11px;background:var(--panel);border:1px solid #d6c29a50;box-shadow:3px 4px 0 #1b201c40;min-width:124px}.vital .sigil{font-size:29px;line-height:1;color:#bb746b}.hunger .sigil{color:#cfac60}.sanity .sigil{color:#c7c6af}.vital b{display:block;font-size:11px;font-weight:400;letter-spacing:1px}.vital output{float:right;font-size:12px;letter-spacing:0;margin-left:12px}.meter{display:block;width:74px;height:3px;background:#67674c;margin-top:7px}.meter i{display:block;width:100%;height:100%;background:#b87469}.hunger .meter i{background:#cfac60}.sanity .meter i{background:#c7c6af}.clock{position:absolute;right:26px;top:76px;display:flex;align-items:center;gap:10px;z-index:3}.clock svg{width:76px;height:76px;background:var(--panel);border-radius:50%;padding:4px;fill:#c4b58f}.clock-ring{fill:none;stroke:#717167;stroke-width:9}.clock-day{fill:none;stroke:#c6a566;stroke-width:9}.clock-hand{stroke:var(--paper)}#clock-hand{fill:none;stroke:#e7d7b2;stroke-width:2;transform-origin:40px 40px}.clock div{min-width:70px;text-shadow:0 2px 3px #000}.clock b,.clock span,.clock small{display:block}.clock b{font-size:18px}.clock span{font-size:13px;margin-top:4px}.clock small{font-size:11px;color:#e3d6b3;margin-top:6px}.journal{position:absolute;left:26px;top:159px;width:256px;background:var(--panel);border:1px solid #d6c29a50;z-index:3}.journal>button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #d6c29a30;font-size:13px;padding:12px}.journal>button span{float:right}.journal #objectives{padding:4px 13px 10px}.objective{font-size:11px;line-height:1.8;padding:4px 0;color:#c6c0a7}.objective.done{color:#aeaf87}.objective span{display:inline-block;width:16px}.craft-panel{position:absolute;right:26px;top:165px;width:242px;background:var(--panel);border:1px solid #d6c29a60;z-index:4;max-height:calc(100dvh - 325px);overflow:auto;scrollbar-width:thin;scrollbar-color:#94876b transparent}.panel-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid #d6c29a40}.panel-head h2{margin:0;font-size:15px;letter-spacing:2px;font-weight:500}.panel-head button{border:0;padding:1px 5px;font-size:20px;background:none}.craft-tip{font-size:10px;color:#bdb49a;margin:10px 12px}.recipe{width:100%;display:grid;grid-template-columns:33px 1fr auto;gap:6px;align-items:center;border:0;border-top:1px solid #a7977530;padding:9px 10px;text-align:left;background:transparent}.recipe:disabled{opacity:.55}.recipe .icon{font-size:24px;color:#e2c48d;line-height:1}.recipe strong{font-size:12px;font-weight:500}.recipe .desc{display:block;font-size:9px;margin-top:3px;color:#aaa992}.recipe .cost{display:block;font-size:9px;margin-top:5px;line-height:1.4;white-space:normal}.recipe .cost span{margin-right:5px}.recipe .cost .missing{color:#d49d82}.recipe .make{font-size:10px;color:#d5c08b}.cook-button{margin:9px 10px 4px;width:calc(100% - 20px);font-size:12px;background:#67563c;border-color:#bba079}.cook-hint{display:block;text-align:center;padding-bottom:10px;font-size:9px;color:#bcb298}.craft-open{position:absolute;top:170px;right:26px;display:none;z-index:3;font-size:13px}.map-wrap{position:absolute;bottom:174px;left:26px;width:166px;z-index:3;background:var(--panel);border:1px solid #d6c29a60;padding:4px}.map-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 6px;font-size:10px}.map-head button{padding:0 4px;border:0;background:none;font-size:16px}#map{display:block;width:156px;height:156px;background:#4d533b}.map-wrap small{font-size:8px;display:block;text-align:center;padding-top:4px;color:#b7b49c}.bottom-hud{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);z-index:4;max-width:calc(100% - 30px);width:max-content}.action-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px;min-height:34px}.action-row>span{font-size:12px;text-shadow:0 2px 4px #000;background:#22261baa;padding:5px 8px;border-radius:2px}#light-status{font-size:10px;color:#ecc375}.interact{padding:7px 13px;font-size:12px}.inventory{display:flex;gap:5px;padding:7px;background:var(--panel);border:1px solid #d6c29a80;box-shadow:4px 5px 0 #1d21194f}.slot{min-width:64px;width:64px;height:67px;position:relative;padding:6px 4px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #a89b7550;background:#404132}.slot .item-icon{font-size:24px;color:#cebb8d;height:30px}.slot b{position:absolute;right:4px;top:3px;font:11px -apple-system,sans-serif;color:#eee0bc}.slot small{font-size:9px}.slot.food{border-color:#bca779;cursor:pointer}.slot.food:disabled{opacity:.6}.slot .shortcut{position:absolute;left:4px;top:3px;font:9px -apple-system,sans-serif;color:#a3a28a}.tool-row{display:flex;justify-content:center;gap:12px;min-height:17px;margin:6px 0 0;font-size:10px;color:#e2d1a4;text-shadow:0 1px 3px #000}.tool-row i{font-style:normal}.key-hint{font-size:10px;color:#d6d4bb;text-shadow:0 1px 4px #000;margin:4px 0 0;text-align:center}#toast{position:absolute;left:50%;top:145px;transform:translateX(-50%);z-index:8;pointer-events:none;max-width:min(540px,calc(100% - 30px));padding:11px 18px;background:#272820ed;border:1px solid #d6bd824f;color:#e3d8bc;font-size:12px;text-align:center;box-shadow:0 4px 16px #141a1450;opacity:0;transition:opacity .2s}#toast.visible{opacity:1}.veil{position:fixed;inset:0;z-index:12;display:flex;align-items:center;justify-content:center;background:rgba(15,20,15,.64);backdrop-filter:blur(3px);padding:20px;overflow:auto}.paper{background:#ddcfad;color:#292c23;border:1px solid #938161;box-shadow:0 0 0 5px #302f23,0 0 0 6px #a38c64,14px 17px 0 #10171060;position:relative;text-align:center;max-height:calc(100dvh - 50px);overflow:auto;padding:30px;width:500px;background-image:repeating-linear-gradient(105deg,transparent 0,transparent 12px,#93846307 12px,#93846307 13px)}.paper:before,.paper:after{content:"";position:absolute;left:12px;right:12px;height:6px;border-top:1px solid #827252;border-bottom:1px solid #827252;pointer-events:none}.paper:before{top:12px}.paper:after{bottom:12px}.intro-mark{font-size:27px;color:#8a6538;margin-bottom:5px}.intro-sub{font-size:12px;letter-spacing:4px;margin:5px 0 14px}.paper h1{font-size:57px;letter-spacing:10px;margin:0 0 3px;font-weight:500}.english{font-size:17px;font-style:italic;letter-spacing:2px;margin:0;color:#6c654d}.intro-copy{font-size:13px;line-height:1.9;margin:22px 0;color:#5a5846}.intro-steps{display:flex;padding:14px 0;margin-bottom:16px;border-block:1px solid #9e8f6d;justify-content:space-around;gap:10px}.intro-steps span{font-size:10px;color:#67604b}.intro-steps b{display:block;margin-bottom:5px;font-size:14px;color:#292c23;font-weight:500}.seed-label{display:flex;align-items:center;justify-content:center;gap:9px;font-size:11px;color:#67604b}.seed-label input{width:150px;color:#3d412f;background:#cabc982f;border:1px solid #9e8f6d;padding:6px 8px;font-size:12px}.intro-buttons{display:flex;justify-content:center;gap:10px;margin:16px 0}.paper button{background:#c8b893;color:#303226;border-color:#8e7c58;font-size:13px}.paper button:hover{background:#b8a67d!important}.paper .primary{background:#31372a;color:#e8d9b4;padding:12px 28px;border:1px solid #31372a}.paper .primary:hover{background:#495038!important}.intro-foot{font-size:10px;line-height:1.7;color:#746b53;margin:0}.paper h2{font-size:28px;font-weight:400;letter-spacing:3px;margin:14px 0 20px}.pause-paper{width:380px}.pause-paper p{font-size:13px;line-height:1.8;color:#605c47}.pause-paper>button{display:block;width:100%;margin:10px 0}.save-status{min-height:20px;font-size:11px!important}.help-paper{text-align:left;width:540px;padding:30px}.help-paper h2{font-size:26px}.help-paper ol{padding-left:20px;font-size:13px;line-height:1.8}.help-paper li{margin-bottom:10px}.help-paper p{font-size:11px;line-height:1.8;color:#686149}.help-paper .primary{display:block;margin:16px auto 0}.dialog-close{position:absolute;top:20px;right:20px;padding:2px 8px!important;font-size:20px!important}.touch-pad,.touch-attack{display:none}.danger #context{color:#efb296}.dark-warning{color:#e5a382!important}
+@media(max-width:1050px){.vitals{gap:5px;left:16px}.vital{min-width:105px;padding:8px}.meter{width:60px}.journal{left:16px;width:228px}.craft-panel{right:16px;width:216px}.map-wrap{left:16px;width:128px;bottom:171px}#map{width:118px;height:118px}.slot{width:57px;min-width:57px}.clock{right:16px}.title small{display:none}.topbar{padding-inline:16px}}
+@media(max-height:700px) and (min-width:761px){.map-wrap{display:none}.craft-panel{top:150px;max-height:calc(100dvh - 300px)}.recipe{padding:6px 9px}.recipe .desc{display:none}.journal{top:150px}.vitals{top:68px}.clock{top:64px}.intro{padding:23px}.intro-copy{margin:13px 0}.intro-mark{display:none}.paper h1{font-size:46px}.intro-steps{padding:10px 0;margin-bottom:12px}.intro-foot{font-size:9px}}
+@media(max-width:760px){.topbar{height:48px;padding-inline:12px}.home{font-size:11px}.title span{font-size:18px;letter-spacing:2px}.top-actions button{padding:5px 7px;font-size:10px}#sound{display:none}.vitals{left:10px;top:58px;gap:4px}.vital{min-width:75px;padding:6px;gap:4px}.vital .sigil{font-size:21px}.vital b{font-size:9px;letter-spacing:0}.vital output{margin-left:3px;font-size:10px}.meter{width:42px;margin-top:4px}.clock{top:53px;right:9px;gap:5px}.clock svg{width:48px;height:48px}.clock div{min-width:47px}.clock b{font-size:12px}.clock span{font-size:10px;margin-top:2px}.clock small{font-size:8px;margin-top:3px}.journal{top:117px;left:10px;width:206px}.journal>button{font-size:11px;padding:8px}.objective{font-size:9px;padding:2px 0}.journal #objectives{padding:2px 9px 6px}.craft-panel{top:113px;right:10px;width:208px;max-height:calc(100dvh - 305px);display:none}.craft-panel.mobile-open{display:block}.craft-open{display:block;top:114px;right:10px;font-size:11px;padding:8px 14px}.map-wrap{display:none}.bottom-hud{bottom:10px;max-width:calc(100% - 14px)}.inventory{gap:3px;padding:4px}.slot{width:calc((100vw - 49px)/8);min-width:31px;max-width:56px;height:53px;padding:5px 2px}.slot .item-icon{font-size:21px;height:26px}.slot small{font-size:8px}.slot b{font-size:10px;right:3px;top:3px}.key-hint{display:none}.tool-row{font-size:8px;gap:7px;margin-top:4px}.action-row{margin-bottom:6px;gap:5px;flex-wrap:wrap}.action-row>span{font-size:10px;padding:4px 6px}#light-status{font-size:9px}.interact{font-size:10px;padding:6px 10px}.touch-pad{display:grid;grid-template-columns:repeat(3,36px);grid-template-rows:repeat(2,36px);gap:4px;position:absolute;bottom:154px;left:15px;z-index:4}.touch-pad button{padding:0;font-size:22px;background:#292d23c9;border-color:#decca36f;touch-action:none;user-select:none}.touch-pad [data-dir=up]{grid-column:2}.touch-pad [data-dir=left]{grid-column:1;grid-row:2}.touch-pad [data-dir=down]{grid-column:2;grid-row:2}.touch-pad [data-dir=right]{grid-column:3;grid-row:2}.touch-attack{display:block;position:absolute;bottom:159px;right:15px;border-radius:50%;width:55px;height:55px;padding:0;font-size:12px;background:#4b3928d9;border-color:#e7bc86a9;z-index:4;touch-action:none}#toast{top:217px;font-size:10px;padding:9px 13px}.paper{padding:26px 22px;width:100%;max-width:440px}.paper h1{font-size:43px;letter-spacing:6px}.intro-copy{font-size:12px;margin:16px 0}.intro-steps{gap:5px;font-size:9px;padding:10px 0}.intro-steps span{font-size:9px}.intro-sub{font-size:10px}.intro-mark{font-size:22px}.intro-foot{font-size:9px}.help-paper h2{font-size:23px}.help-paper ol{font-size:11px;line-height:1.7}.help-paper li{margin-bottom:8px}.paper h2{font-size:25px}.veil{padding:17px}}
+@media(prefers-reduced-motion:reduce){button,#toast{transition:none}}
+</style>
+</head>
+<body>
+  <canvas id="world" aria-label="余烬荒野游戏场景，使用 WASD 或方向键移动，E 交互，点击物体走近采集"></canvas>
+  <header class="topbar">
+    <a class="home" href="../../../index.html" aria-label="返回 WindPlay">← WindPlay</a>
+    <div class="title"><span>余烬荒野</span><small>Ember Wilds</small></div>
+    <div class="top-actions"><button id="sound" aria-pressed="false" title="开启音效">音效关</button><button id="help" aria-label="打开玩法说明">?</button><button id="pause" title="Esc 暂停游戏">暂停</button></div>
+  </header>
+  <section class="vitals" aria-label="生存状态">
+    <div class="vital health"><span class="sigil">♥</span><div><b>健康 <output id="health">100</output></b><span class="meter"><i></i></span></div></div>
+    <div class="vital hunger"><span class="sigil">◖</span><div><b>饥饿 <output id="hunger">100</output></b><span class="meter"><i></i></span></div></div>
+    <div class="vital sanity"><span class="sigil">☾</span><div><b>精神 <output id="sanity">100</output></b><span class="meter"><i></i></span></div></div>
+  </section>
+  <aside class="clock"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" class="clock-ring"/><path d="M40 8 A32 32 0 1 1 12.3 56" class="clock-day"/><path id="clock-hand" d="M40 40 L40 14"/><circle cx="40" cy="40" r="3"/></svg><div><b id="day-label">第 1 天</b><span id="phase-label">白昼</span><small id="weather-label">晴 · 21°C</small></div></aside>
+  <aside class="journal"><button id="journal-toggle" aria-expanded="true">荒野手记 <span>−</span></button><div id="objectives"></div></aside>
+  <aside class="craft-panel" id="craft-panel"><div class="panel-head"><h2>生存制作</h2><button id="craft-close" aria-label="收起制作栏">×</button></div><p class="craft-tip">建筑会安放在身旁。采集后制作。</p><div id="recipes"></div><button id="cook" class="cook-button">♨ 营火边烹饪</button><small class="cook-hint">1 份浆果 / 生肉 → 1 份熟食</small></aside>
+  <button id="craft-open" class="craft-open" aria-label="打开制作栏">制作</button>
+  <aside class="map-wrap"><div class="map-head"><span>荒野地图</span><button id="map-toggle" aria-expanded="true">−</button></div><canvas id="map" width="156" height="156" aria-label="小地图，白点是你，橙点是营火"></canvas><small>白点：你　火光：营地</small></aside>
+  <section class="bottom-hud"><div class="action-row"><span id="context">靠近资源，按 E 采集</span><span id="light-status"></span><button id="interact" class="interact">E 采集 / 交互</button></div><div class="inventory" id="inventory" aria-label="背包物品，点击食物即可食用"></div><div class="tool-row" id="tools"></div><p class="key-hint">WASD 移动 · Shift 奔跑 · E 采集 · 空格攻击 · 点击走近 · 1 / 2 进食 · Esc 暂停</p></section>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div class="touch-pad" aria-label="触屏移动控制"><button data-dir="up" aria-label="向上移动">↑</button><button data-dir="left" aria-label="向左移动">←</button><button data-dir="down" aria-label="向下移动">↓</button><button data-dir="right" aria-label="向右移动">→</button></div><button id="touch-attack" class="touch-attack" aria-label="攻击附近敌人">攻击</button>
+  <div class="veil" id="welcome"><section class="paper intro"><div class="intro-mark" aria-hidden="true">✦</div><p class="intro-sub">风停之后，火还在。</p><h1>余烬荒野</h1><p class="english">Ember Wilds</p><p class="intro-copy">在纸墨森林里醒来，捡起树枝，点燃营火。<br>饥饿与黑夜在倒数，而每一个清晨值得等待。</p><div class="intro-steps"><span><b>拾取</b>树枝 / 燧石 / 干草</span><span><b>制作</b>斧头 / 镐子 / 营火</span><span><b>活下去</b>吃饱，天黑前找光</span></div><label class="seed-label">荒野种子 <input id="seed" value="windplay" maxlength="40" spellcheck="false"></label><div class="intro-buttons"><button id="start" class="primary">踏入荒野</button><button id="continue" hidden>继续旅程</button></div><p class="intro-foot">原创浏览器生存实验 · 自动保存 · 可离线游玩<br>电脑用 WASD / E；手机用方向键 / 交互按钮</p></section></div>
+  <div class="veil" id="pause-screen" hidden><section class="paper pause-paper"><h2>让余烬等一会儿</h2><p id="pause-description">游戏已暂停，荒野的时间也停下来了。</p><button id="resume" class="primary">继续旅程</button><button id="save">保存旅程</button><button id="restart">重新开始</button><p id="save-status" class="save-status"></p></section></div>
+  <div class="veil" id="death-screen" hidden><section class="paper pause-paper"><p class="intro-sub">火光终有熄灭时</p><h2>荒野记得你</h2><p id="death-stats"></p><button id="rebirth" class="primary">重新点燃余烬</button><button id="death-menu">返回开场</button></section></div>
+  <div class="veil" id="help-screen" hidden><section class="paper help-paper"><button id="help-close" class="dialog-close" aria-label="关闭玩法说明">×</button><h2>活过第一个夜晚</h2><ol><li>点击地上的树枝、燧石与干草，人物会走过去拾取；也可靠近后按住 E。</li><li>3 树枝 + 2 燧石做斧头，砍树拿木材；3 树枝 + 3 燧石做镐子，开采岩石。</li><li>4 木材 + 2 石块 + 3 干草建营火；靠近营火按 E 消耗 1 木材添柴。</li><li>点击背包浆果吃东西；营火边点「烹饪」，熟食恢复更多状态。</li><li>第一个黑夜从 2 分 30 秒开始。营火或火把能照亮，火也会赶走野兽。</li><li>长矛可防身，木甲减伤；陷阱捕兔，庇护所恢复精神。看看能否活到第三天。</li></ol><p>空格攻击附近生物；点击敌人会追过去攻击。按 C 切换制作栏、M 切换地图、Esc 暂停。方向键同样可以移动。游戏会每 15 秒保存，打开后可「继续旅程」。</p><button id="help-done" class="primary">知道了</button></section></div>
+  <script>
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.EmberWilds = api;
+})(typeof globalThis === 'object' ? globalThis : this, function () {
+  'use strict';
+  const SIZE = 2600, DAY = 180, VERSION = 1;
+  const NAMES = { wood:'木材', branch:'树枝', flint:'燧石', stone:'石块', grass:'干草', berry:'浆果', meat:'生肉', cooked:'熟食', axe:'斧头', pick:'镐子', spear:'长矛', armor:'木甲', torch:'火把', campfire:'营火', shelter:'庇护所', trap:'陷阱' };
+  const RECIPES = {
+    axe:{ cost:{branch:3,flint:2}, title:'斧头', desc:'砍树获得木材', durability:36 },
+    pick:{ cost:{branch:3,flint:3}, title:'镐子', desc:'开采岩石和燧石', durability:36 },
+    campfire:{ cost:{wood:4,stone:2,grass:3}, title:'营火', desc:'照亮黑夜；靠近可烹饪' },
+    torch:{ cost:{branch:2,grass:3}, title:'火把', desc:'随身照明 70 秒；可重复制作' },
+    spear:{ cost:{branch:4,flint:3,grass:2}, title:'长矛', desc:'提高攻击力，保护自己', durability:50 },
+    armor:{ cost:{wood:5,grass:5}, title:'木甲', desc:'吸收 65% 伤害', durability:65 },
+    trap:{ cost:{branch:4,grass:4}, title:'陷阱', desc:'捕获靠近的野兔' },
+    shelter:{ cost:{wood:7,grass:6,branch:3}, title:'庇护所', desc:'靠近按 E 休息，恢复精神' }
+  };
+  const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+  const distance = (a,b) => Math.hypot(a.x-b.x,a.y-b.y);
+  function hash(seed) { let h=2166136261; for (const c of String(seed)) { h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0 || 1; }
+  function random(s) { let a = s.rng += 0x6D2B79F5; a = Math.imul(a ^ a>>>15, a|1); a ^= a + Math.imul(a ^ a>>>7, a|61); return ((a ^ a>>>14)>>>0)/4294967296; }
+  function log(s,message) { s.messages.push({text:message,time:s.time}); if(s.messages.length>7)s.messages.shift(); }
+  function entity(s,type,x,y,extra={}) { const e={id:s.nextId++,type,x,y,...extra}; s.entities.push(e); return e; }
+  function create(seed='windplay') {
+    const s = {version:VERSION,seed:String(seed),rng:hash(seed),nextId:1,size:SIZE,time:0,day:1,phase:'day',dead:false,paused:false,
+      player:{x:SIZE/2,y:SIZE/2,health:100,hunger:100,sanity:100,temperature:21,torch:0,attackCooldown:0,actionCooldown:0,darkness:0,invulnerable:0},
+      inventory:{branch:0,flint:0,grass:0,wood:0,stone:0,berry:0,meat:0,cooked:0},tools:{},entities:[],messages:[],stats:{gathered:0,crafted:0,kills:0,cooked:0,nights:0},weather:'clear',weatherTimer:80,enemyTimer:145,target:null,resting:false};
+    const placements = [['branch',-75,20],['branch',50,80],['branch',110,-30],['flint',20,-85],['flint',-100,-75],['flint',130,100],['grass',-140,70],['grass',-80,130],['grass',90,-130],['berry',-140,-130],['tree',220,-50],['tree',-230,0],['rock',180,160]];
+    for(const [type,dx,dy] of placements) entity(s,type,SIZE/2+dx,SIZE/2+dy,{hits:type==='tree'||type==='rock'?3:1,available:true,variant:random(s)});
+    for(let i=0;i<230;i++) {
+      const x=80+random(s)*(SIZE-160), y=80+random(s)*(SIZE-160); if(Math.hypot(x-SIZE/2,y-SIZE/2)<300)continue;
+      const r=random(s), type=r<.3?'tree':r<.43?'rock':r<.59?'grass':r<.7?'berry':r<.85?'branch':'flint';
+      entity(s,type,x,y,{hits:type==='tree'||type==='rock'?3:1,available:true,variant:random(s)});
+    }
+    for(let i=0;i<14;i++)entity(s,'rabbit',220+random(s)*2160,220+random(s)*2160,{health:14,angle:random(s)*Math.PI*2,moveTimer:0,variant:random(s)});
+    log(s,'醒来时，口袋是空的。先捡树枝和燧石，制作一把斧头。');
+    return s;
+  }
+  function canCraft(s,key) { const r=RECIPES[key]; return !!r&&!s.dead&&Object.entries(r.cost).every(([k,v])=>(s.inventory[k]||0)>=v)&&(key==='torch'||!r.durability||!(s.tools[key]>0)); }
+  function craft(s,key) {
+    if(!canCraft(s,key))return false;
+    const r=RECIPES[key]; for(const [k,v]of Object.entries(r.cost))s.inventory[k]-=v;
+    if(r.durability)s.tools[key]=r.durability;
+    else if(key==='torch')s.player.torch+=70;
+    else {
+      // Find a free building site around the player so stacked recipes remain interactable.
+      const offset=key==='shelter'?Math.PI:key==='trap'?Math.PI*.5:0;
+      let x,y;for(let i=0;i<12;i++){
+        const a=offset+i*Math.PI/6,r=70+Math.floor(i/6)*50;x=clamp(s.player.x+Math.cos(a)*r,30,SIZE-30);y=clamp(s.player.y+Math.sin(a)*r,30,SIZE-30);
+        if(!s.entities.some(e=>['campfire','shelter','trap'].includes(e.type)&&Math.hypot(e.x-x,e.y-y)<60))break;
+      }
+      entity(s,key,x,y,{fuel:key==='campfire'?100:0,caught:false,variant:random(s)});
+    }
+    s.stats.crafted++;log(s,`制作了${r.title}${key==='campfire'?'。用木材为营火添柴。':''}`);return true;
+  }
+  function light(s) {
+    if(s.player.torch>0)return true;
+    return s.entities.some(e=>e.type==='campfire'&&e.fuel>0&&distance(e,s.player)<180);
+  }
+  function nearest(s,radius=100) {
+    let found=null,d=radius;
+    for(const e of s.entities){if(e.available===false||e.type==='stump'||e.type==='dead')continue;const n=distance(e,s.player);if(n<d){d=n;found=e;}}
+    return found;
+  }
+  function consumeTool(s,key,cost=1) { if(s.tools[key]>0){s.tools[key]=Math.max(0,s.tools[key]-cost);if(!s.tools[key])log(s,`${NAMES[key]}损坏了，重新制作一把。`);} }
+  function damage(s,amount) {
+    if(s.dead)return;
+    if(s.tools.armor>0){const absorb=Math.min(s.tools.armor,amount*.65);s.tools.armor-=absorb;amount-=absorb;}
+    s.player.health=Math.max(0,s.player.health-amount);
+    if(s.player.health<=0){s.dead=true;s.target=null;log(s,'余烬熄灭。你留下的足迹，会成为下一次旅程的地图。');}
+  }
+  function attack(s,e) {
+    if(!e||!['wolf','spider','rabbit'].includes(e.type)||s.dead||s.player.attackCooldown>0||distance(e,s.player)>94)return false;
+    const power=s.tools.spear>0?18:s.tools.axe>0?9:4;e.health-=power;s.player.attackCooldown=.5;
+    if(s.tools.spear>0)consumeTool(s,'spear');else if(s.tools.axe>0)consumeTool(s,'axe');
+    if(e.health<=0){s.inventory.meat+=e.type==='wolf'?2:1;s.stats.kills++;e.type='dead';e.until=s.time+12;log(s,'获得生肉。营火旁烹饪后再吃。');}
+    return true;
+  }
+  function interact(s,e=nearest(s)) {
+    if(!e||s.dead||s.player.actionCooldown>0||distance(e,s.player)>108)return false;
+    s.resting=false;
+    if(['wolf','spider','rabbit'].includes(e.type))return attack(s,e);
+    if(e.type==='campfire') {
+      if(s.inventory.wood>0){s.inventory.wood--;e.fuel=Math.min(180,e.fuel+48);log(s,'为营火添了一块木材。');s.player.actionCooldown=.3;return true;}
+      log(s,'需要木材给营火添柴。');return false;
+    }
+    if(e.type==='shelter') {s.resting=true;s.target=null;log(s,'坐在庇护所里休息。移动会结束休息。');return true;}
+    if(e.type==='trap') {
+      if(e.caught){s.inventory.meat++;e.caught=false;log(s,'收获陷阱中的野兔。');return true;}
+      log(s,'陷阱已布置，等待野兔经过。');return false;
+    }
+    if(e.available===false)return false;
+    if(e.type==='tree'||e.type==='rock') {
+      const tool=e.type==='tree'?'axe':'pick';
+      if(!(s.tools[tool]>0)){log(s,`需要${NAMES[tool]}。在制作栏里制作。`);return false;}
+      consumeTool(s,tool);e.hits--;e.shake=s.time;s.player.actionCooldown=.36;
+      if(e.hits<=0){s.inventory[e.type==='tree'?'wood':'stone']+=e.type==='tree'?4:3;if(e.type==='rock')s.inventory.flint+=2;e.type=e.type==='tree'?'stump':'rubble';e.available=false;s.stats.gathered++;log(s,tool==='axe'?'获得 4 木材。':'获得 3 石块和 2 燧石。');}
+      return true;
+    }
+    if(['branch','flint','grass','berry'].includes(e.type)) {
+      s.inventory[e.type]+=e.type==='grass'?3:e.type==='berry'?3:1;s.stats.gathered++;e.available=false;e.regrow=s.time+(e.type==='berry'?DAY*2:DAY*3);s.player.actionCooldown=.25;log(s,`采集了${NAMES[e.type]}。`);return true;
+    }
+    return false;
+  }
+  function eat(s,key) {
+    if(s.dead||!['berry','meat','cooked'].includes(key)||s.inventory[key]<1)return false;
+    s.inventory[key]--; const values={berry:[13,1,0],meat:[16,-5,-8],cooked:[30,12,5]}[key];
+    s.player.hunger=clamp(s.player.hunger+values[0],0,100);if(values[1]<0)damage(s,-values[1]);else s.player.health=clamp(s.player.health+values[1],0,100);s.player.sanity=clamp(s.player.sanity+values[2],0,100);
+    log(s,`吃了${NAMES[key]}${key==='meat'?'。生肉会损伤健康与精神。':'。'}`);return true;
+  }
+  function cook(s) {
+    const fire=s.entities.find(e=>e.type==='campfire'&&e.fuel>0&&distance(e,s.player)<155);
+    if(s.dead||!fire||s.inventory.meat+s.inventory.berry===0){log(s,'靠近燃烧的营火，带上浆果或生肉再烹饪。');return false;}
+    s.inventory[s.inventory.meat>0?'meat':'berry']--;s.inventory.cooked++;s.stats.cooked++;log(s,'做好了一份热食，恢复饥饿、健康和精神。');return true;
+  }
+  function aim(s,x,y,id=null) {s.resting=false;s.target={x:clamp(x,25,SIZE-25),y:clamp(y,25,SIZE-25),id};}
+  function phaseAt(time) {const t=time%DAY;return t<120?'day':t<150?'dusk':'night';}
+  function tick(s,dt,input={}) {
+    if(s.dead||s.paused)return s;
+    dt=clamp(dt,0,.12);s.time+=dt;s.day=Math.floor(s.time/DAY)+1;const prev=s.phase;s.phase=phaseAt(s.time);
+    if(prev!==s.phase){if(s.phase==='night')log(s,'黑夜到了。没有光，荒野会吞掉你。');if(s.phase==='dusk')log(s,'天色转暗，准备营火或火把。');if(s.phase==='day'){s.stats.nights++;log(s,`第 ${s.day} 天。你见到了新的晨光。`);}}
+    const p=s.player;p.actionCooldown=Math.max(0,p.actionCooldown-dt);p.attackCooldown=Math.max(0,p.attackCooldown-dt);p.invulnerable=Math.max(0,p.invulnerable-dt);
+    let mx=Number(input.x)||0,my=Number(input.y)||0;
+    if(mx||my){s.target=null;s.resting=false;}
+    else if(s.target){const e=s.entities.find(e=>e.id===s.target.id),target=e&&e.available!==false&&e.type!=='dead'?e:s.target;const d=distance(target,p);
+      if(d<(e?77:8)){const success=e?interact(s,e):false;if(!e||e.available===false||e.type==='dead'||(!success&&p.actionCooldown===0&&p.attackCooldown===0)||!['tree','rock','wolf','spider'].includes(e.type))s.target=null;}
+      else{mx=(target.x-p.x)/d;my=(target.y-p.y)/d;}}
+    const length=Math.hypot(mx,my),speed=input.sprint?215:150;
+    if(length>0){p.x=clamp(p.x+mx/Math.max(1,length)*speed*dt,25,SIZE-25);p.y=clamp(p.y+my/Math.max(1,length)*speed*dt,25,SIZE-25);p.facing=Math.atan2(my,mx);p.walk=(p.walk||0)+dt*9;}else p.walk=0;
+    p.hunger=clamp(p.hunger-dt*(.067+(input.sprint&&length>0?.065:0)+(s.resting?.04:0)),0,100);
+    if(p.hunger===0)damage(s,dt*1.8);
+    if(p.torch>0)p.torch=Math.max(0,p.torch-dt*(s.weather==='rain'?1.5:1));
+    const lit=light(s);if(s.phase==='night'&&!lit){p.darkness+=dt;p.sanity=clamp(p.sanity-dt*.28,0,100);if(p.darkness>2)damage(s,dt*4);}else{p.darkness=0;p.sanity=clamp(p.sanity+dt*(lit?.045:.018),0,100);}
+    s.weatherTimer-=dt;if(s.weatherTimer<=0){s.weather=s.weather==='clear'&&random(s)>.45?'rain':'clear';s.weatherTimer=65+random(s)*100;log(s,s.weather==='rain'?'雨落下来了。靠近营火保持温暖。':'雨停了，云层正在散开。');}
+    const targetTemperature=s.weather==='rain'?10:s.phase==='night'?13:23;p.temperature+=(targetTemperature+(lit?10:0)-p.temperature)*dt*.04;
+    if(p.temperature<13&&!lit)p.sanity=clamp(p.sanity-dt*.08,0,100);
+    if(s.resting){const shelter=s.entities.find(e=>e.type==='shelter'&&distance(e,p)<115);if(!shelter)s.resting=false;else{p.sanity=clamp(p.sanity+dt*.7,0,100);if(p.hunger>20)p.health=clamp(p.health+dt*.2,0,100);}}
+    for(const e of s.entities){
+      if(e.type==='campfire')e.fuel=Math.max(0,e.fuel-dt*(s.weather==='rain'?1.25:.85));
+      if(e.regrow&&s.time>=e.regrow){e.available=true;delete e.regrow;}
+      if(e.type==='rabbit'){
+        e.moveTimer-=dt;const d=distance(e,p);if(d<140)e.angle=Math.atan2(e.y-p.y,e.x-p.x);else if(e.moveTimer<=0){e.angle=random(s)*Math.PI*2;e.moveTimer=1+random(s)*3;}
+        const v=d<140?115:17;e.x=clamp(e.x+Math.cos(e.angle)*dt*v,40,SIZE-40);e.y=clamp(e.y+Math.sin(e.angle)*dt*v,40,SIZE-40);
+        const trap=s.entities.find(t=>t.type==='trap'&&!t.caught&&distance(t,e)<42);if(trap){trap.caught=true;e.type='dead';e.until=s.time+2;}
+      }
+      if(e.type==='wolf'||e.type==='spider'){
+        const d=distance(e,p),fire=s.entities.find(f=>f.type==='campfire'&&f.fuel>0&&distance(f,e)<125);e.cooldown=Math.max(0,(e.cooldown||0)-dt);
+        let angle=Math.atan2(p.y-e.y,p.x-e.x),v=d<450?(e.type==='wolf'?100:75):15;
+        if(fire){angle=Math.atan2(e.y-fire.y,e.x-fire.x);v=90;}else if(d<48){v=0;if(e.cooldown===0){damage(s,e.type==='wolf'?11:7);e.cooldown=1.4;p.invulnerable=.3;log(s,'受到了攻击！长矛可以反击，营火可以驱赶野兽。');}}
+        e.x=clamp(e.x+Math.cos(angle)*v*dt,25,SIZE-25);e.y=clamp(e.y+Math.sin(angle)*v*dt,25,SIZE-25);
+        if(s.phase==='day'&&distance(e,p)>600){e.type='dead';e.until=s.time+1;}
+      }
+    }
+    s.entities=s.entities.filter(e=>!(e.type==='dead'&&s.time>e.until));
+    s.enemyTimer-=dt;if(s.enemyTimer<=0){s.enemyTimer=s.phase==='night'?18:65;const active=s.entities.filter(e=>e.type==='wolf'||e.type==='spider').length;
+      if(active<7&&s.time>120){const a=random(s)*Math.PI*2;entity(s,s.day>2&&random(s)>.5?'wolf':'spider',clamp(p.x+Math.cos(a)*430,40,SIZE-40),clamp(p.y+Math.sin(a)*430,40,SIZE-40),{health:s.day>2?40:30,variant:random(s)});}}
+    if(p.sanity<20)damage(s,dt*.12);
+    return s;
+  }
+  function serialize(s){return JSON.stringify(s);}
+  function restore(json){
+    try{
+      if(typeof json!=='string'||json.length>2000000)return null;
+      const s=JSON.parse(json),bounded=(n,a,b)=>Number.isFinite(n)&&n>=a&&n<=b;
+      if(!s||s.version!==VERSION||typeof s.seed!=='string'||s.seed.length>100||!s.player||!s.inventory||!s.tools||!s.stats||!bounded(s.time,0,1e8)||!bounded(s.rng,0,Number.MAX_SAFE_INTEGER)||!bounded(s.nextId,1,1e6)||s.size!==SIZE||!['day','dusk','night'].includes(s.phase)||!['clear','rain'].includes(s.weather)||!bounded(s.day,1,1e6)||!bounded(s.weatherTimer,-1,1000)||!bounded(s.enemyTimer,-1,1000)||typeof s.dead!=='boolean')return null;
+      const p=s.player;
+      if(!bounded(p.x,0,SIZE)||!bounded(p.y,0,SIZE)||!['health','hunger','sanity'].every(k=>bounded(p[k],0,100))||!bounded(p.temperature,-100,100)||!['torch','attackCooldown','actionCooldown','darkness','invulnerable'].every(k=>bounded(p[k],0,1e6)))return null;
+      if(!['wood','branch','flint','stone','grass','berry','meat','cooked'].every(k=>bounded(s.inventory[k],0,1e6)))return null;
+      if(!Object.entries(s.tools).every(([k,v])=>RECIPES[k]&&RECIPES[k].durability&&bounded(v,0,1000)))return null;
+      if(!['gathered','crafted','kills','cooked','nights'].every(k=>bounded(s.stats[k],0,1e6)))return null;
+      const types=['tree','rock','grass','berry','branch','flint','rabbit','wolf','spider','campfire','shelter','trap','stump','rubble','dead'];
+      if(!Array.isArray(s.entities)||s.entities.length>1000||!s.entities.every(e=>e&&types.includes(e.type)&&bounded(e.id,1,1e6)&&bounded(e.x,0,SIZE)&&bounded(e.y,0,SIZE)&&(!['rabbit','wolf','spider'].includes(e.type)||bounded(e.health,0,100))&&(e.type!=='campfire'||bounded(e.fuel,0,180))&&(e.type!=='rabbit'||bounded(e.angle,-100,100)&&bounded(e.moveTimer,-1,100))&&(!['tree','rock'].includes(e.type)||bounded(e.hits,1,3))&&(e.type!=='dead'||bounded(e.until,0,1e8))))return null;
+      if(!Array.isArray(s.messages)||s.messages.length>7||!s.messages.every(m=>m&&typeof m.text==='string'&&m.text.length<1000&&bounded(m.time,0,1e8)))return null;
+      s.paused=false;s.target=null;s.resting=false;s.dead=s.dead||p.health===0;return s;
+    }catch{return null;}
+  }
+  function objectives(s) {return [{label:'采集树枝与燧石，制作斧头',done:(s.tools.axe||0)>0||s.stats.crafted>0},{label:'采木、采石，点燃第一座营火',done:s.entities.some(e=>e.type==='campfire')},{label:'在营火边做一份熟食',done:s.stats.cooked>0},{label:'看见第三天的晨光',done:s.day>=3}];}
+  function actionLabel(s,e){if(!e)return'靠近资源，按 E 采集';if(['spider','wolf','rabbit'].includes(e.type))return`攻击${{spider:'影蛛',wolf:'荒狼',rabbit:'野兔'}[e.type]}`;if(e.type==='tree')return'用斧头砍树';if(e.type==='rock')return'用镐子采石';if(e.type==='campfire')return'木材添柴';if(e.type==='shelter')return'在庇护所休息';if(e.type==='trap')return e.caught?'收获陷阱':'查看陷阱';return`采集${NAMES[e.type]||'资源'}`;}
+  return {SIZE,DAY,VERSION,NAMES,RECIPES,create,random,tick,canCraft,craft,interact,attack,eat,cook,light,nearest,aim,phaseAt,serialize,restore,objectives,actionLabel,distance};
+});
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  const E=root.EmberWilds, C={ink:'#272d22',grass:'#6c7450',soil:'#777950',paper:'#d4c398',bark:'#77704b',leaf:'#3e4f37',rock:'#979685'};
+  const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
+  class Painter {
+    constructor(canvas,map){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.map=map;this.mctx=map.getContext('2d');this.overlay=document.createElement('canvas');this.ow=this.overlay.getContext('2d');this.width=0;this.height=0;this.pointer=null;this.scale=1;this.lastMap=-1;this.resize();}
+    resize(){this.width=innerWidth;this.height=innerHeight;this.dpr=Math.min(devicePixelRatio||1,2);this.canvas.width=Math.round(this.width*this.dpr);this.canvas.height=Math.round(this.height*this.dpr);this.overlay.width=this.canvas.width;this.overlay.height=this.canvas.height;this.scale=clamp(this.width/1250,.73,1.05);}
+    toScreen(x,y){return{x:(x-this.camera.x)*this.scale+this.width/2,y:(y-this.camera.y)*this.scale*.66+this.height*.52};}
+    toWorld(x,y){return{x:(x-this.width/2)/this.scale+this.camera.x,y:(y-this.height*.52)/(this.scale*.66)+this.camera.y};}
+    path(points,fill,stroke=C.ink,width=2){const c=this.ctx;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke();}}
+    line(points,color=C.ink,width=1.5){const c=this.ctx;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.strokeStyle=color;c.lineWidth=width;c.stroke();}
+    ellipse(x,y,rx,ry,color,stroke){const c=this.ctx;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=color;c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=1.5;c.stroke();}}
+    terrain(s){const c=this.ctx;c.fillStyle='#6d7350';c.fillRect(0,0,this.width,this.height);
+      const startX=Math.floor((s.player.x-this.width/this.scale/2)/160)-1,endX=Math.ceil((s.player.x+this.width/this.scale/2)/160)+1;
+      const startY=Math.floor((s.player.y-this.height/this.scale/.66/2)/160)-2,endY=Math.ceil((s.player.y+this.height/this.scale/.66/2)/160)+2;
+      for(let gy=startY;gy<=endY;gy++)for(let gx=startX;gx<=endX;gx++){
+        const p=this.toScreen(gx*160,gy*160),h=Math.sin(gx*72.35+gy*127.72),h2=Math.cos(gx*23.87-gy*81.39);
+        this.ellipse(p.x,p.y,110*this.scale,66*this.scale,h>0?'#747955':'#666e4a');
+        c.save();c.translate(p.x,p.y);c.scale(this.scale,this.scale);c.globalAlpha=.4;
+        for(let i=0;i<9;i++){const xx=Math.sin(i*9.3+h*34)*95,yy=Math.cos(i*7.4+h2*12)*57;this.line([[xx-3,yy+4],[xx,yy-2],[xx+1,yy+4]],i%2?'#91936a':'#4c5838',.8);}
+        c.restore();
+      }
+      // A winding pale path gives the wilderness a distinctive ink-map structure.
+      c.strokeStyle='#a59b7139';c.lineWidth=74*this.scale;c.beginPath();for(let y=0;y<=E.SIZE;y+=50){const p=this.toScreen(1300+Math.sin(y/310)*170,y);y?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y);}c.stroke();
+      c.strokeStyle='#c0b2801c';c.lineWidth=38*this.scale;c.stroke();
+      const top=this.toScreen(0,0),bottom=this.toScreen(E.SIZE,E.SIZE);c.fillStyle='#303c2b';if(top.x>0)c.fillRect(0,0,top.x,this.height);if(bottom.x<this.width)c.fillRect(bottom.x,0,this.width-bottom.x,this.height);if(top.y>0)c.fillRect(0,0,this.width,top.y);if(bottom.y<this.height)c.fillRect(0,bottom.y,this.width,this.height-bottom.y);
+    }
+    tree(e,t){const c=this.ctx,v=e.variant||.5,lean=(v-.5)*16,shake=e.shake&&t-e.shake<.18?Math.sin((t-e.shake)*50)*4:0;c.translate(shake,0);
+      this.ellipse(9,4,37,13,'#2633213d');
+      this.path([[-8,0],[-5,-63],[lean-2,-100],[lean+6,-97],[6,-40],[13,0]],'#74633e');
+      this.line([[-3,-6],[0,-54],[lean+2,-94]],'#a08c58',1.5);this.line([[1,-24],[-19,-54],[-30,-64]],C.ink,3);
+      if(v<.55){
+        this.path([[lean-1,-139],[-17,-113],[-9,-115],[-34,-91],[-23,-92],[-49,-61],[-21,-69],[-27,-50],[-4,-60],[0,-43],[16,-53],[37,-50],[27,-70],[50,-67],[32,-91],[40,-92],[16,-117],[22,-114]],'#405238',C.ink,2.1);
+        this.line([[-25,-80],[-5,-74],[2,-88],[18,-81],[29,-83]],'#86916a',1);this.line([[-6,-102],[3,-117],[16,-101]],'#7a865d',1);this.line([[-13,-57],[-1,-66],[10,-56],[24,-61]],'#879065',1);
+      }else{
+        this.line([[lean,-70],[-19,-91],[-26,-112],[-20,-132]],C.ink,4);this.line([[lean+2,-81],[27,-104],[31,-127],[24,-141]],C.ink,4);this.line([[-16,-88],[-40,-90],[-49,-101]],C.ink,3);
+        for(let i=0;i<9;i++){const x=Math.sin(i*3.7+v)*35,y=-101+Math.cos(i*1.8)*23;this.path([[x-19,y],[x-13,y-14],[x-1,y-20],[x+16,y-15],[x+23,y-2],[x+14,y+8],[x-7,y+10]],i%3===0?'#70704b':'#59623e',C.ink,1.6);this.line([[x-11,y-3],[x-2,y+1],[x+12,y-5]],'#939069',.7);}
+      }
+      this.line([[-15,3],[-5,0],[4,2],[15,0],[21,3]],'#303a25',1.3);
+    }
+    rock(e){this.ellipse(6,6,35,12,'#25332240');this.path([[-33,0],[-27,-23],[-10,-48],[15,-42],[33,-19],[27,4],[4,10]],'#898b78');this.path([[-10,-48],[2,-20],[33,-19],[15,-42]],'#a3a38d');this.line([[-27,-23],[-12,-17],[2,-20],[5,4]],'#555d4b',1.8);for(let i=0;i<5;i++)this.line([[-20+i*4,-13],[-24+i*4,-2]],'#535c46',.8);this.line([[9,-32],[18,-25],[22,-28]],'#ddd4ad',1);}
+    grass(e){const c=this.ctx;this.ellipse(0,3,20,7,'#25332230');for(let i=0;i<7;i++){const x=(i-3)*4,h=17+(i%3)*7;this.path([[0,3],[x-9,-h*.6],[x-4,-h],[x,-5],[x+7,-h*.85],[x+4,3]],i%2?'#aa9e60':'#959556',C.ink,.7);}this.line([[-15,3],[0,5],[18,2]],'#4a5131',1.1);}
+    berry(e){this.ellipse(0,3,24,8,'#25332230');for(let i=0;i<5;i++){const x=Math.sin(i*2.4)*18,y=-12+Math.cos(i*3.4)*10;this.path([[x-15,y+4],[x-12,y-11],[x,y-20],[x+15,y-9],[x+12,y+6]],'#525b38',C.ink,1.2);}for(let i=0;i<9;i++){const x=Math.sin(i*5.1)*19,y=-13+Math.cos(i*2.7)*13;this.ellipse(x,y,3.2,3.7,'#a66b55',C.ink);}this.line([[-3,2],[1,-16]],'#a3a475',1);}
+    campfire(e,t){this.ellipse(0,3,38,15,'#26332149');for(let i=0;i<7;i++){const a=i*Math.PI/3.5;this.ellipse(Math.cos(a)*26,Math.sin(a)*10,9,6,'#898c76',C.ink);}this.line([[-21,8],[20,-5]],'#453d2c',6);this.line([[-19,-3],[19,9]],'#615035',6);
+      if(e.fuel>0){const flick=Math.sin(t*9)*4;this.path([[-15,0],[-12,-14],[-18,-23],[-8,-18],[-4,-47-flick],[6,-30],[12,-39+flick],[17,-15],[12,4]],'#d6974e','#6b512f',1.3);this.path([[-8,2],[-7,-13],[-1,-28],[5,-12],[8,3]],'#f0d184',null);for(let i=0;i<3;i++){const tt=(t*.25+i*.34)%1;this.ellipse(Math.sin(tt*6+i)*9,-46-tt*42,7+tt*6,4+tt*4,`rgba(220,210,170,${(1-tt)*.22})`);}}
+      else this.ellipse(0,-1,13,5,'#43453a');
+    }
+    shelter(){this.ellipse(0,7,51,17,'#27331f44');this.path([[-46,0],[-3,-80],[45,5],[14,12]],'#aaa073');this.path([[-46,0],[-3,-80],[1,6]],'#7b7955');this.path([[1,7],[-3,-64],[21,9]],'#383e2c');this.line([[-3,-84],[-3,-22]],'#2f3725',3);for(let i=0;i<7;i++)this.line([[12+i*4,-15-i*3],[28+i*2,2-i]],'#716d49',1);this.line([[-47,2],[46,9]],'#303927',3);}
+    trap(e){this.ellipse(0,3,21,7,'#26332236');this.path([[-20,3],[-11,-22],[10,-24],[21,1],[0,8]],'#927744');for(let i=0;i<4;i++)this.line([[-12+i*8,-21],[-13+i*9,6]],'#d3bb83',2);this.line([[-18,-7],[17,-11]],'#473c2b',2);if(e.caught){this.ellipse(0,-4,7,7,'#c8bea4',C.ink);this.ellipse(-3,-15,2,9,'#c8bea4',C.ink);}}
+    animal(e,t){this.ellipse(0,3,e.type==='rabbit'?12:24,7,'#2633213d');if(e.type==='rabbit'){const hop=Math.sin(t*7+e.id)*2;this.ellipse(0,-10-hop,12,11,'#bdbba0',C.ink);this.ellipse(9,-16-hop,7,7,'#cbc5aa',C.ink);this.ellipse(7,-30-hop,2.8,12,'#ccc4a5',C.ink);this.ellipse(13,-28-hop,2.7,11,'#ccc4a5',C.ink);this.ellipse(11,-18-hop,1.5,1.5,C.ink);this.ellipse(-10,-8-hop,4,4,'#e1d6b7',C.ink);}
+      else if(e.type==='spider'){for(let i=0;i<4;i++){const y=-7-i*4;this.line([[-5,y],[-21-i*2,y-8],[-30,y+8]],'#282b24',2);this.line([[5,y],[21+i*2,y-8],[30,y+8]],'#282b24',2);}this.ellipse(0,-13,14,15,'#343e2e',C.ink);this.ellipse(0,-27,9,7,'#3d4431',C.ink);this.ellipse(-4,-29,2,2,'#daaa65');this.ellipse(4,-29,2,2,'#daaa65');}
+      else{this.path([[-23,-2],[-22,-26],[-8,-31],[2,-27],[10,-47],[16,-33],[26,-36],[21,-15],[7,-7],[1,7],[-9,7]],'#4c4c38');this.path([[10,-47],[18,-50],[18,-35]],'#353c2b');this.ellipse(20,-30,2,2,'#d99d67');this.line([[-21,-20],[-38,-34],[-28,-8]],'#343e2c',4);this.line([[-13,0],[-15,9]],C.ink,4);this.line([[0,2],[1,11]],C.ink,4);}}
+    player(p,t){const c=this.ctx,bob=p.walk?Math.sin(p.walk)*2:Math.sin(t*2)*.6;this.ellipse(0,5,18,7,'#25332261');c.translate(0,bob);const step=p.walk?Math.sin(p.walk)*4:0;this.line([[-6,-4],[-7,11+step]],'#252c25',5);this.line([[6,-4],[8,11-step]],'#252c25',5);
+      this.path([[-14,-14],[-8,-38],[9,-38],[17,-13],[7,-5],[-9,-5]],'#cbbd90');this.path([[-10,-34],[-17,-12],[-9,-16],[-4,-32]],'#a49b76');this.line([[-7,-29],[-3,-14],[8,-12]],'#625f43',1.2);this.path([[-10,-38],[-7,-55],[5,-61],[12,-52],[10,-38],[2,-31]],'#d2bd8a');this.path([[-11,-45],[-14,-57],[-4,-67],[7,-62],[15,-57],[13,-43],[8,-52],[3,-47],[-3,-55]],'#2f3227');this.ellipse(5,-43,1.2,1.5,C.ink);
+      this.path([[-10,-34],[8,-33],[11,-26],[-2,-28],[-16,-16],[-15,-27]],'#ac6650');this.line([[11,-24],[19,-9]],'#272e23',3);
+      if(p.torch>0){this.line([[20,-5],[21,-33]],'#58462d',3);this.path([[17,-32],[17,-42],[21,-48-Math.sin(t*8)*3],[25,-38],[24,-30]],'#e7af59','#6c4f30',.7);}
+      if(p.invulnerable>0){c.globalAlpha=.8;this.ellipse(0,-26,25,36,'#e7a67922');}
+    }
+    drawEntity(e,s){const p=this.toScreen(e.x,e.y);if(p.x< -100||p.x>this.width+100||p.y< -160||p.y>this.height+100)return;const c=this.ctx;c.save();c.translate(p.x,p.y);c.scale(this.scale,this.scale);
+      if(this.hover===e.id||s.target&&s.target.id===e.id){this.ellipse(0,4,33,13,'#dbc38925','#d8c38b');}
+      switch(e.type){case'tree':this.tree(e,s.time);break;case'rock':this.rock(e);break;case'grass':if(e.available)this.grass(e);else this.line([[-11,3],[-5,-3],[0,3],[6,-1],[10,2]],'#59603d');break;case'berry':if(e.available)this.berry(e);else{this.line([[-14,3],[0,-20],[13,3]],'#424c30',3);this.line([[0,-13],[-10,-20]],'#424c30',2);}break;case'branch':if(e.available){this.line([[-14,3],[16,-7]],'#3e3e29',4);this.line([[0,-2],[1,-13]],'#3e3e29',2);this.line([[-12,2],[14,-6]],'#b4a16c',1);}break;case'flint':if(e.available)this.path([[-9,3],[-7,-7],[5,-12],[11,-1],[4,6]],'#bab5a0');break;case'stump':this.path([[-11,2],[-10,-14],[8,-13],[11,3]],'#6e6645');this.ellipse(-1,-13,9,4,'#a99562',C.ink);break;case'rubble':this.path([[-20,0],[-12,-8],[-2,-3],[7,-10],[19,-1],[10,5]],'#898b75',C.ink,1);break;case'campfire':this.campfire(e,s.time);break;case'shelter':this.shelter();break;case'trap':this.trap(e);break;case'rabbit':case'wolf':case'spider':this.animal(e,s.time);break;case'player':this.player(s.player,s.time);break;case'dead':this.ellipse(0,1,13,4,'#534633');break;}
+      if(['spider','wolf'].includes(e.type)&&E.distance(e,s.player)<240){c.fillStyle='#353a28';c.fillRect(-18,-58,36,3);c.fillStyle='#ba8c67';c.fillRect(-18,-58,36*clamp(e.health/40,0,1),3);}
+      c.restore();}
+    night(s){const c=this.ow;c.setTransform(this.dpr,0,0,this.dpr,0,0);c.clearRect(0,0,this.width,this.height);const f=s.time%E.DAY,opacity=s.phase==='day'?0:s.phase==='dusk'?(f-120)/30*.76:.88;if(opacity<=0)return;c.fillStyle=`rgba(13,19,14,${opacity})`;c.fillRect(0,0,this.width,this.height);c.globalCompositeOperation='destination-out';
+      const hole=(x,y,r)=>{const p=this.toScreen(x,y),radius=r*this.scale;const g=c.createRadialGradient(p.x,p.y-15,0,p.x,p.y-15,radius);g.addColorStop(0,'rgba(0,0,0,.99)');g.addColorStop(.45,'rgba(0,0,0,.96)');g.addColorStop(.8,'rgba(0,0,0,.6)');g.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g;c.beginPath();c.ellipse(p.x,p.y-15,radius,radius*.82,0,0,Math.PI*2);c.fill();};
+      s.entities.filter(e=>e.type==='campfire'&&e.fuel>0).forEach(e=>hole(e.x,e.y,220));if(s.player.torch>0)hole(s.player.x,s.player.y,140);else hole(s.player.x,s.player.y,36);c.globalCompositeOperation='source-over';this.ctx.drawImage(this.overlay,0,0,this.width,this.height);
+      if(s.player.darkness>1){this.ctx.fillStyle=`rgba(113,53,30,${Math.min(.15,s.player.darkness*.008)})`;this.ctx.fillRect(0,0,this.width,this.height);}
+    }
+    minimap(s){if(s.time-this.lastMap<.2)return;this.lastMap=s.time;const c=this.mctx,size=156,k=size/E.SIZE;c.fillStyle='#515b3d';c.fillRect(0,0,size,size);for(const e of s.entities){if(e.available===false)continue;c.fillStyle=e.type==='tree'?'#303f2a':e.type==='rock'?'#9a9b80':e.type==='berry'?'#a06c54':e.type==='campfire'?'#e6b773':e.type==='shelter'?'#d6c195':null;if(!c.fillStyle||!['tree','rock','berry','campfire','shelter'].includes(e.type))continue;c.fillRect(e.x*k-1,e.y*k-1,e.type==='campfire'?4:2,e.type==='campfire'?4:2);}c.strokeStyle='#c0c0a755';c.lineWidth=1;c.strokeRect((s.player.x-this.width/2/this.scale)*k,(s.player.y-this.height/2/this.scale/.66)*k,this.width/this.scale*k,this.height/this.scale/.66*k);c.fillStyle='#eee1bc';c.beginPath();c.arc(s.player.x*k,s.player.y*k,3,0,Math.PI*2);c.fill();c.strokeStyle='#272d22';c.stroke();}
+    render(s){this.camera={x:s.player.x,y:s.player.y};const c=this.ctx;c.setTransform(this.dpr,0,0,this.dpr,0,0);c.lineJoin='round';c.lineCap='round';this.terrain(s);
+      this.hover=null;if(this.pointer){const world=this.toWorld(this.pointer.x,this.pointer.y);let d=60;for(const e of s.entities){if(e.available===false||['stump','rubble','dead'].includes(e.type))continue;const dd=Math.hypot(world.x-e.x,world.y-e.y+35);if(dd<d){d=dd;this.hover=e.id;}}}
+      const objects=[...s.entities,{id:0,type:'player',x:s.player.x,y:s.player.y}];objects.sort((a,b)=>a.y-b.y).forEach(e=>this.drawEntity(e,s));
+      if(s.target&&!s.target.id){const p=this.toScreen(s.target.x,s.target.y);this.ellipse(p.x,p.y,8*this.scale,4*this.scale,'#dcc08a22','#dac28b');}
+      this.night(s);
+      if(s.weather==='rain'){c.strokeStyle='#b5c0aa50';c.lineWidth=.8;for(let i=0;i<75;i++){const x=(i*113.77+s.time*71)%this.width,y=(i*57.36+s.time*480)%this.height;c.beginPath();c.moveTo(x,y);c.lineTo(x-8,y+17);c.stroke();}}
+      const vignette=c.createRadialGradient(this.width/2,this.height*.5,this.height*.25,this.width/2,this.height*.5,Math.max(this.width,this.height)*.65);vignette.addColorStop(0,'#1b271100');vignette.addColorStop(1,'#15211066');c.fillStyle=vignette;c.fillRect(0,0,this.width,this.height);this.minimap(s);this.canvas.style.cursor=this.hover?'pointer':'crosshair';}
+  }
+  root.EmberPainter=Painter;
+})(globalThis);
+</script>
+  <script>
+(function () {
+  'use strict';
+  const E=window.EmberWilds,$=id=>document.getElementById(id),KEY='windplay.ember-wilds.v1';
+  let s=E.create(),started=false,saved=null,last=0,lastUI=0,lastSave=0,lastMessage='',toastUntil=0,audio=null,sound=false,helpPaused=false,deathShown=false;
+  const keys=new Set(),touch=new Set(),painter=new window.EmberPainter($('world'),$('map'));
+  const ICONS={wood:'▰',branch:'⑂',flint:'◈',stone:'⬟',grass:'〃',berry:'●',meat:'◒',cooked:'♨',axe:'⚒',pick:'⛏',campfire:'♨',torch:'♧',spear:'↟',armor:'⛨',trap:'⌗',shelter:'⌂'};
+  const escape=str=>String(str).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+  try{saved=E.restore(localStorage.getItem(KEY));}catch{}
+  if(saved&&!saved.dead){$('continue').hidden=false;$('continue').textContent=`继续第 ${saved.day} 天`;}
+  Object.defineProperty(E,'game',{get:()=>JSON.parse(E.serialize(s))});
+  function beep(frequency=350,duration=.08){if(!sound)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.type='triangle';o.frequency.value=frequency;g.gain.setValueAtTime(.08,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+duration);}catch{}}
+  function toast(text){$('toast').textContent=text;$('toast').classList.add('visible');toastUntil=performance.now()+3200;}
+  function save(){if(!started)return false;try{localStorage.setItem(KEY,E.serialize(s));lastSave=s.time;return true;}catch{toast('当前浏览器无法保存存档。旅程仍可继续。');return false;}}
+  function begin(continueSave=false){s=continueSave&&saved?saved:E.create($('seed').value.trim()||'windplay');started=true;keys.clear();touch.clear();s.paused=false;s.dead=false;deathShown=false;painter.lastMap=-1;$('welcome').hidden=true;$('death-screen').hidden=true;$('pause-screen').hidden=true;lastSave=s.time;lastMessage='';update(true);save();beep(280,.18);}
+  $('start').onclick=()=>begin();$('continue').onclick=()=>begin(true);
+  function setPaused(value){if(!started||s.dead)return;keys.clear();touch.clear();s.paused=value;$('pause-screen').hidden=!value;$('pause').textContent=value?'继续':'暂停';if(value){save();$('save-status').textContent='旅程已自动保存。';}}
+  $('pause').onclick=()=>setPaused(!s.paused);$('resume').onclick=()=>setPaused(false);
+  $('save').onclick=()=>{$('save-status').textContent=save()?'旅程已保存，可关闭网页后继续。':'当前浏览器无法保存。';};
+  function reset(){if(!started)return;s=E.create($('seed').value.trim()||'windplay');s.paused=false;deathShown=false;painter.lastMap=-1;keys.clear();touch.clear();$('pause-screen').hidden=true;$('death-screen').hidden=true;$('pause').textContent='暂停';lastMessage='';lastSave=0;save();update(true);}
+  let restartArmed=false;$('restart').onclick=()=>{if(!restartArmed){restartArmed=true;$('restart').textContent='再次点击，重新开始';return;}restartArmed=false;$('restart').textContent='重新开始';reset();};
+  $('rebirth').onclick=reset;$('death-menu').onclick=()=>{started=false;s.paused=true;$('death-screen').hidden=true;$('welcome').hidden=false;$('continue').hidden=true;};
+  function showHelp(){helpPaused=s.paused;s.paused=true;keys.clear();touch.clear();$('help-screen').hidden=false;}
+  function closeHelp(){$('help-screen').hidden=true;s.paused=helpPaused;}
+  $('help').onclick=showHelp;$('help-close').onclick=closeHelp;$('help-done').onclick=closeHelp;
+  $('sound').onclick=()=>{sound=!sound;$('sound').textContent=sound?'音效开':'音效关';$('sound').setAttribute('aria-pressed',sound);if(sound)beep();};
+  let journal=true;$('journal-toggle').onclick=()=>{journal=!journal;$('objectives').hidden=!journal;$('journal-toggle').setAttribute('aria-expanded',journal);$('journal-toggle').querySelector('span').textContent=journal?'−':'+';};
+  let mapOpen=true;$('map-toggle').onclick=()=>{mapOpen=!mapOpen;$('map').hidden=!mapOpen;$('map-toggle').textContent=mapOpen?'−':'+';$('map-toggle').setAttribute('aria-expanded',mapOpen);};
+  function craftToggle(value){const panel=$('craft-panel');if(innerWidth<=760){panel.classList.toggle('mobile-open',value===undefined?!panel.classList.contains('mobile-open'):value);$('craft-open').style.display=panel.classList.contains('mobile-open')?'none':'block';}else{panel.style.display=value===undefined?(panel.style.display==='none'?'block':'none'):value?'block':'none';$('craft-open').style.display=panel.style.display==='none'?'block':'none';}}
+  $('craft-close').onclick=()=>craftToggle(false);$('craft-open').onclick=()=>craftToggle(true);
+  for(const [key,r]of Object.entries(E.RECIPES)){
+    const b=document.createElement('button');b.className='recipe';b.dataset.recipe=key;b.title=r.desc;b.innerHTML=`<span class="icon" aria-hidden="true">${ICONS[key]}</span><span><strong>${r.title}</strong><span class="desc">${r.desc}</span><span class="cost">${Object.entries(r.cost).map(([k,v])=>`<span data-cost="${k}">${E.NAMES[k]} ${v}</span>`).join('')}</span></span><span class="make">制作</span>`;
+    b.onclick=()=>{if(!started||s.paused||s.dead)return;if(E.craft(s,key)){beep(500,.1);save();update(true);}};$('recipes').appendChild(b);
+  }
+  for(const key of Object.keys(s.inventory)){
+    const food=['berry','meat','cooked'].includes(key),b=document.createElement(food?'button':'div');b.className=`slot${food?' food':''}`;b.dataset.item=key;b.innerHTML=`<span class="item-icon" aria-hidden="true">${ICONS[key]}</span><b>0</b><small>${E.NAMES[key]}</small>${key==='berry'?'<i class="shortcut">1</i>':key==='cooked'?'<i class="shortcut">2</i>':''}`;if(food){b.title=`点击吃${E.NAMES[key]}${key==='meat'?'（会损伤健康与精神）':''}`;b.onclick=()=>{if(started&&!s.paused&&E.eat(s,key)){beep(420);save();update(true);}};}$('inventory').appendChild(b);
+  }
+  $('cook').onclick=()=>{if(started&&!s.paused&&E.cook(s)){beep(610,.13);save();update(true);}};
+  function interact(){if(started&&!s.paused&&!s.dead){if(E.interact(s))beep(240);update(true);}}
+  function attackEnemy(){const enemy=s.entities.filter(e=>['rabbit','spider','wolf'].includes(e.type)&&E.distance(e,s.player)<95).sort((a,b)=>E.distance(a,s.player)-E.distance(b,s.player))[0];return E.attack(s,enemy);}
+  $('interact').onclick=interact;$('touch-attack').onclick=()=>{if(started&&!s.paused){attackEnemy();update(true);}};
+  window.addEventListener('keydown',event=>{
+    if(event.target instanceof HTMLInputElement)return;
+    const k=event.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' ','e','tab'].includes(k)&&started)event.preventDefault();
+    if(k==='escape'){if(!$('help-screen').hidden)closeHelp();else setPaused(!s.paused);return;}
+    if(!started||s.paused||s.dead)return;keys.add(k);if(event.repeat)return;
+    if(k==='1'){E.eat(s,'berry');update(true);}if(k==='2'){E.eat(s,'cooked');update(true);}if(k==='3'){E.eat(s,'meat');update(true);}
+    if(k==='c')craftToggle();if(k==='m')$('map-toggle').click();if(k==='q'&&E.craft(s,'torch'))update(true);
+  });
+  window.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
+  window.addEventListener('blur',()=>{keys.clear();touch.clear();if(started&&!s.dead)setPaused(true);});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&started&&!s.dead)setPaused(true);});
+  $('world').addEventListener('pointermove',event=>{painter.pointer={x:event.clientX,y:event.clientY};});$('world').addEventListener('pointerleave',()=>painter.pointer=null);
+  $('world').addEventListener('pointerdown',event=>{
+    if(!started||s.paused||s.dead)return;painter.pointer={x:event.clientX,y:event.clientY};const point=painter.toWorld(event.clientX,event.clientY);let e=null,d=75;
+    for(const item of s.entities){if(item.available===false||['dead','stump','rubble'].includes(item.type))continue;const pos=painter.toScreen(item.x,item.y);const n=Math.hypot(pos.x-event.clientX,pos.y-25*painter.scale-event.clientY);if(n<d){d=n;e=item;}}
+    if(e)E.aim(s,e.x,e.y,e.id);else E.aim(s,point.x,point.y);event.preventDefault();
+  });
+  for(const b of document.querySelectorAll('[data-dir]')){b.addEventListener('pointerdown',event=>{b.setPointerCapture(event.pointerId);touch.add(b.dataset.dir);event.preventDefault();});const stop=()=>touch.delete(b.dataset.dir);b.addEventListener('pointerup',stop);b.addEventListener('pointercancel',stop);b.addEventListener('lostpointercapture',stop);}
+  addEventListener('resize',()=>{painter.resize();if(innerWidth>760){$('craft-panel').classList.remove('mobile-open');$('craft-panel').style.display='';$('craft-open').style.display='';}update(true);});
+  function update(force=false){
+    if(!force&&performance.now()-lastUI<130)return;lastUI=performance.now();
+    for(const key of ['health','hunger','sanity']){$(key).value=Math.ceil(s.player[key]);$(key).textContent=Math.ceil(s.player[key]);document.querySelector(`.vital.${key} .meter i`).style.width=`${s.player[key]}%`;}
+    $('day-label').textContent=`第 ${s.day} 天`;$('phase-label').textContent={day:'白昼',dusk:'黄昏',night:'黑夜'}[s.phase];$('weather-label').textContent=`${s.weather==='rain'?'雨':'晴'} · ${Math.round(s.player.temperature)}°C`;$('clock-hand').style.transform=`rotate(${s.time%E.DAY/E.DAY*360}deg)`;
+    for(const slot of document.querySelectorAll('[data-item]')){const key=slot.dataset.item;slot.querySelector('b').textContent=s.inventory[key];if(slot.tagName==='BUTTON')slot.disabled=s.inventory[key]===0;}
+    for(const b of document.querySelectorAll('[data-recipe]')){const key=b.dataset.recipe;b.disabled=!E.canCraft(s,key)||!started||s.paused;for(const cost of b.querySelectorAll('[data-cost]'))cost.classList.toggle('missing',s.inventory[cost.dataset.cost]<E.RECIPES[key].cost[cost.dataset.cost]);b.querySelector('.make').textContent=E.RECIPES[key].durability&&s.tools[key]>0?'已有':'制作';}
+    $('tools').innerHTML=Object.entries(s.tools).filter(([,v])=>v>0).map(([k,v])=>`<i>${ICONS[k]} ${E.NAMES[k]} ${Math.ceil(v)}</i>`).join('')+(s.player.torch>0?`<i>火把 ${Math.ceil(s.player.torch)} 秒</i>`:'');
+    const near=E.nearest(s);$('context').textContent=E.actionLabel(s,near);$('interact').textContent=near?'E '+E.actionLabel(s,near):'E 采集 / 交互';
+    $('light-status').textContent=s.resting?'休息中，移动结束':s.phase==='night'?(E.light(s)?'光照安全':'黑暗危险！制作火把 / 返回营火'):s.phase==='dusk'?'准备过夜的光':'';document.body.classList.toggle('danger',s.player.darkness>1);$('light-status').classList.toggle('dark-warning',s.phase==='night'&&!E.light(s));
+    const fire=s.entities.find(e=>e.type==='campfire'&&E.distance(e,s.player)<155);$('cook').disabled=!started||s.paused||!fire||fire.fuel<=0||s.inventory.berry+s.inventory.meat===0;if(near&&near.type==='campfire')$('context').textContent=`营火剩余燃料 ${Math.ceil(near.fuel)} · E 添木材`;
+    $('objectives').innerHTML=E.objectives(s).map(o=>`<div class="objective${o.done?' done':''}"><span>${o.done?'✓':'□'}</span>${escape(o.label)}</div>`).join('');
+    const message=s.messages.at(-1);if(started&&message&&message.text!==lastMessage){lastMessage=message.text;toast(message.text);}
+    if(s.dead&&started&&!deathShown){deathShown=true;$('death-screen').hidden=false;$('death-stats').textContent=`你在荒野停留了 ${s.day} 天，采集 ${s.stats.gathered} 次，制作 ${s.stats.crafted} 件物品。再出发时，记得在黄昏前点火。`;save();}
+  }
+  function frame(now){const dt=last?Math.min(.1,(now-last)/1000):0;last=now;
+    if(started&&!s.paused&&!s.dead){const x=(keys.has('d')||keys.has('arrowright')||touch.has('right')?1:0)-(keys.has('a')||keys.has('arrowleft')||touch.has('left')?1:0),y=(keys.has('s')||keys.has('arrowdown')||touch.has('down')?1:0)-(keys.has('w')||keys.has('arrowup')||touch.has('up')?1:0);E.tick(s,dt,{x,y,sprint:keys.has('shift')});if(keys.has('e'))interact();if(keys.has(' '))attackEnemy();if(s.time-lastSave>=15)save();}
+    painter.render(s);update();if(now>toastUntil)$('toast').classList.remove('visible');requestAnimationFrame(frame);
+  }
+  update(true);requestAnimationFrame(frame);window.addEventListener('pagehide',save);
+})();
+</script>
+</body>
+</html>
