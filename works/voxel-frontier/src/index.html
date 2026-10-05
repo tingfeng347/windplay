@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#131a19">
+  <title>方块旷野 · Voxel Frontier</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="world" aria-label="方块旷野三维游戏画面"></canvas>
+  <div id="damage-flash" aria-hidden="true"></div>
+  <div id="hud" hidden>
+    <header class="game-header">
+      <a class="wordmark" href="../../../index.html" aria-label="返回 WindPlay">▧ <span>方块旷野</span></a>
+      <div class="world-readout"><span id="day-text">第 1 天</span><span id="mode-text">创造模式</span></div>
+      <nav class="hud-actions" aria-label="游戏操作">
+        <button id="inventory-button" title="背包与合成（E）"><span>背包</span><kbd>E</kbd></button>
+        <button id="help-button" title="操作说明（H）">?</button>
+        <button id="pause-button" title="暂停游戏（Esc）">Ⅱ</button>
+      </nav>
+    </header>
+    <div class="world-info"><span id="coordinates"></span><span id="direction-text"></span></div>
+    <div class="map-wrap"><canvas id="map" width="120" height="120" aria-label="世界俯视地图"></canvas><span>北 ↑</span></div>
+    <div id="crosshair" aria-hidden="true"></div>
+    <div class="target-info"><span id="target-name"></span><div id="mine-track" hidden><i id="mine-progress"></i></div></div>
+    <div class="bottom-hud">
+      <div id="survival-stats"><div><span class="stat-label">生命</span><span id="hearts"></span></div><div><span class="stat-label">饱食</span><span id="hunger"></span></div></div>
+      <div id="active-name">泥土</div>
+      <div id="hotbar" aria-label="物品快捷栏"></div>
+      <div class="play-hint"><span>左键 挖掘</span><span>右键 放置</span><span>WASD 移动</span><span>空格 跳跃</span><span id="flight-hint">F 飞行</span></div>
+    </div>
+    <div id="quest">造一间只属于你的房子。</div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <div id="touch-controls">
+      <div class="dpad"><button data-touch="forward" aria-label="向前移动">▲</button><button data-touch="left" aria-label="向左移动">◀</button><button data-touch="back" aria-label="向后移动">▼</button><button data-touch="right" aria-label="向右移动">▶</button></div>
+      <div class="touch-actions"><button id="touch-mine">挖掘</button><button id="touch-place">放置</button><button data-touch="jump">跳跃</button><button data-touch="down" id="touch-down">下降</button><button id="touch-fly">飞行</button></div>
+    </div>
+  </div>
+  <section id="welcome" class="welcome screen">
+    <a class="back-link" href="../../../index.html">‹ 返回 WindPlay</a>
+    <div class="welcome-content">
+      <p class="edition">Voxel Frontier / 浏览器方块游戏</p>
+      <h1>方块<br>旷野<span>▧</span></h1>
+      <p class="intro">从第一块泥土开始。<br>走进森林、挖掘矿石，搭建你的世界。</p>
+      <div class="mode-choice" role="group" aria-label="游戏模式">
+        <button data-mode="creative" aria-pressed="true"><strong>创造</strong><small>无限方块 · 自由飞行</small></button>
+        <button data-mode="survival" aria-pressed="false"><strong>生存</strong><small>采集合成 · 迎接黑夜</small></button>
+      </div>
+      <label class="seed-label" for="seed">世界种子 <span>相同种子，相同旷野</span></label>
+      <div class="seed-row"><input id="seed" value="windplay" maxlength="64" autocomplete="off"><button id="random-seed" title="随机种子" aria-label="生成随机世界种子">⟳</button></div>
+      <div class="start-actions"><button id="start" class="primary">进入世界 <span>↗</span></button><button id="continue" hidden>继续存档</button></div>
+      <p class="welcome-help">WASD 移动 / 鼠标观察 / 左键挖掘 / 右键放置<br><span>原创画面与玩法实现 · 可离线运行</span></p>
+    </div>
+    <div class="world-caption"><span>一片森林。无数种可能。</span><small>80 × 80 × 48 / 随机地形 / 昼夜循环</small></div>
+  </section>
+  <section id="pause" class="screen modal-screen" hidden aria-label="暂停菜单">
+    <div class="dialog pause-dialog"><p class="dialog-overline">世界已暂停</p><h2>喘口气，<br>再出发。</h2><p id="pause-summary"></p>
+      <div class="menu-actions"><button id="resume" class="primary">继续游戏</button><button id="save">保存世界</button><button id="export">导出存档</button><button id="import">导入存档</button><button id="sound" aria-pressed="false">声音：关闭</button><button id="change-mode">切换至生存模式</button></div>
+      <div class="new-world"><label for="new-seed">新的世界种子</label><div class="seed-row"><input id="new-seed" maxlength="64"><button id="new-world">创建</button></div><small>会保留当前存档，进入新世界后可主动保存覆盖。</small></div>
+      <p id="storage-status" class="muted"></p><a class="dialog-back" href="../../../index.html">‹ 返回 WindPlay</a>
+    </div>
+  </section>
+  <section id="inventory" class="screen modal-screen" hidden aria-label="背包与合成">
+    <div class="dialog inventory-dialog"><div class="dialog-heading"><div><p class="dialog-overline">整理材料，开始创造</p><h2>背包与合成</h2></div><button class="close" data-close aria-label="关闭背包">×</button></div>
+      <div class="inventory-layout"><div><p class="section-label">点选物品，装入当前快捷栏</p><div id="inventory-grid"></div><p id="item-description" class="item-description">选择一件物品，查看用途。</p><div id="inventory-hotbar" class="inventory-hotbar"></div></div>
+      <div class="crafting"><h3>合成台</h3><p class="muted">采集原木 → 木板 → 木棍 → 木镐。<br>有镐后再挖石头与矿石。</p><div id="recipes"></div></div></div>
+    </div>
+  </section>
+  <section id="help" class="screen modal-screen" hidden aria-label="操作指南"><div class="dialog help-dialog"><div class="dialog-heading"><div><p class="dialog-overline">第一次来到这里？</p><h2>旷野手册</h2></div><button class="close" data-close aria-label="关闭手册">×</button></div>
+    <div class="help-grid"><div><h3>移动与建造</h3><dl><dt>W A S D / 方向键</dt><dd>移动</dd><dt>鼠标 / 手机拖动画面</dt><dd>环顾四周</dd><dt>空格 / Shift</dt><dd>跳跃 / 冲刺</dd><dt>F / 空格 / C</dt><dd>创造模式切换飞行 / 上升 / 下降</dd><dt>按住左键 / 右键</dt><dd>挖掘或攻击 / 放置方块</dd><dt>1–9 / 滚轮</dt><dd>切换快捷栏</dd><dt>E / R / H / Esc</dt><dd>背包合成 / 吃东西 / 手册 / 暂停</dd></dl></div><div><h3>活过第一夜</h3><ol><li>按住左键砍树，按 E 把原木做成木板、木棍和木镐。</li><li>用镐挖石头，做一把石剑。挖煤矿可以制作灯石。</li><li>右键搭建庇护所。收集野花与树叶里的浆果，选中后按 R 食用。</li><li>夜里的暗影会追逐你。灯石附近更安全，持剑左键攻击。</li></ol><p class="muted">每个昼夜约 8 分钟。生存会消耗饱食度，高处坠落和暗影攻击会受伤。创造模式不会受伤，所有方块无限使用。</p><p class="muted">80 × 80 的独立小世界，可挖至基岩。每 30 秒自动存档；新世界首次手动保存后才启用自动保存。声音可在暂停菜单打开。</p></div></div><button data-close class="primary help-resume">回到世界</button>
+  </div></section>
+  <section id="death" class="screen modal-screen" hidden><div class="dialog death-dialog"><p class="dialog-overline">旷野仍然在这里</p><h2>重新出发。</h2><p>回到出生地，保留背包与建造的世界。</p><button id="respawn" class="primary">回到出生地</button></div></section>
+  <section id="unavailable" class="screen modal-screen" hidden><div class="dialog"><h2>暂时无法进入世界</h2><p id="error-text"></p><a href="../../../index.html">返回 WindPlay</a></div></section>
+  <input id="save-file" type="file" accept="application/json,.json" hidden>
+  <script src="core.js"></script>
+  <script src="renderer.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
