@@ -26,4 +26,7 @@ test('启动台可以通过文件协议完整加载', async () => {
   assert.doesNotMatch(homepage, /__[A-Z0-9_]+__/, '启动台不能含有构建占位符');
   assert.match(homepage, new RegExp(`src=["']${preview}["']`));
   await access(path.join(root, preview));
+  const assets = [...homepage.matchAll(/(?:src|href)=["']((?:assets\/[^"']+|styles\.css))["']/g)]
+    .map(match => match[1]);
+  for (const asset of new Set(assets)) await access(path.join(root, asset));
 });
