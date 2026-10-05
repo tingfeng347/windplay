@@ -69,6 +69,9 @@ npm run dev --workspace @windplay/point-cloud-studio
 开发服务启动后，访问终端显示的本机地址。也可以进入作品目录，按该作品 README
 中的方式单独开发。
 
+两个游戏也可以用根级快捷命令开发：`npm run dev:voxel` 和 `npm run dev:survival`。
+它们的单文件成品支持离线体验，存档保存在当前浏览器中。
+
 ## 统一检查
 
 ```bash
