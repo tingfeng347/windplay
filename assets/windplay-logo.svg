@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"
+     role="img" aria-labelledby="title desc">
+  <title id="title">WindPlay</title>
+  <desc id="desc">青蓝紫粉渐变圆角徽标，中间是白色的风字形笔画。</desc>
+  <defs>
+    <linearGradient id="wp-surface" x1="40" y1="40" x2="472" y2="472" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset=".35" stop-color="#3b82f6"/>
+      <stop offset=".67" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="wp-glyph" x1="120" y1="120" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6f0ff"/>
+    </linearGradient>
+    <filter id="wp-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="122" fill="url(#wp-surface)"/>
+  <rect x="24" y="24" width="464" height="464" rx="122" fill="none"
+        stroke="#ffffff" stroke-opacity=".22" stroke-width="6"/>
+  <g transform="translate(96 96) scale(10)" fill="none" stroke="url(#wp-glyph)"
+     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#wp-glow)">
+    <path d="M4 10h17a4 4 0 1 0-4-4M4 16h24M4 22h12a4 4 0 1 1-4 4"/>
+  </g>
+</svg>
