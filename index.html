@@ -6,6 +6,7 @@
   <meta name="description" content="WindPlay 浏览器实验室：探索点云、动态影像与交互艺术，打开一个作品，动手玩一会儿。">
   <meta name="color-scheme" content="light dark">
   <title>WindPlay — 浏览器实验室</title>
+  <link rel="icon" type="image/svg+xml" href="assets/windplay-icon.svg">
   <script>
     try {
       const theme = localStorage.getItem('windplay:theme');
@@ -20,9 +21,7 @@
   <header class="topbar">
     <div class="topbar-inner container">
       <a class="brand" href="index.html" aria-label="WindPlay 首页">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M4 10h17a4 4 0 1 0-4-4M4 16h24M4 22h12a4 4 0 1 1-4 4"/>
-        </svg>
+        <img class="brand-mark" src="assets/windplay-icon.svg" alt="" width="32" height="32">
         <span>WindPlay</span>
       </a>
       <nav class="topbar-actions" aria-label="主导航">

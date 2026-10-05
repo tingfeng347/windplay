@@ -5,6 +5,8 @@ WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、�
 
 ## 启动台
 
+![WindPlay 作品启动台](assets/screenshots/launcher.jpg)
+
 在线体验：[打开 WindPlay](https://tingfeng347.github.io/windplay/)，无需安装依赖。
 
 本地开发：
@@ -28,12 +30,30 @@ npm run dev
 | [Point Cloud Studio](works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
 | [Tingfeng Reel](works/tingfeng-reel/) | 动态片头 / 音画同步 | [直接打开成品](https://tingfeng347.github.io/windplay/works/tingfeng-reel/demo/index.html) | 根据 GitHub 主页编排的 28 秒片头，支持 2D/3D、亮暗主题与合成配乐 |
 
+## 作品预览
+
+### [方块旷野 · Voxel Frontier](works/voxel-frontier/)
+
+[![方块旷野：可采集、建造、制作的第一人称方块世界](assets/screenshots/voxel-frontier.png)](works/voxel-frontier/demo/index.html)
+
+### [余烬荒野 · Ember Wilds](works/ember-wilds/)
+
+[![余烬荒野：手绘荒野生存，包含营火、昼夜与战斗](assets/screenshots/ember-wilds.png)](works/ember-wilds/demo/index.html)
+
+### [Point Cloud Studio](works/point-cloud-studio/)
+
+[![Point Cloud Studio：把照片转成彩色点阵与三维点云](assets/screenshots/point-cloud-studio.png)](works/point-cloud-studio/demo/index.html)
+
+### [Tingfeng Reel](works/tingfeng-reel/)
+
+[![Tingfeng Reel：28 秒动态片头与合成配乐](assets/screenshots/tingfeng-reel.png)](works/tingfeng-reel/demo/index.html)
+
 ## 目录
 
 ```text
 windplay/
 ├── .github/workflows/       # 持续集成
-├── assets/                  # 启动台预览素材
+├── assets/                  # 启动台素材与作品截图
 ├── docs/                    # 仓库级设计与约定
 ├── scripts/                 # 启动台构建与本地服务
 ├── tests/                   # 启动台入口检查
