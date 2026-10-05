@@ -2,7 +2,7 @@
 
 一款独立、离线可玩的三维方块建造与生存游戏。原生 WebGL 绘制有像素纹理的地形、森林、矿脉、湖泊与方块动物；相同种子生成相同的世界。画面、程序与规则均为原创实现，受到经典方块沙盒游戏启发。
 
-[在线游玩](https://windagents.github.io/windplay/works/voxel-frontier/demo/index.html) · [单文件成品](demo/index.html)
+[在线游玩](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) · [单文件成品](demo/index.html)
 
 ## 开始
 
