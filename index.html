@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="WindPlay 网页创意作品启动台">
+  <meta name="description" content="WindPlay 浏览器实验室：探索点云、动态影像与交互艺术，打开一个作品，动手玩一会儿。">
   <meta name="color-scheme" content="light dark">
-  <title>WindPlay</title>
+  <title>WindPlay — 浏览器实验室</title>
   <script>
-    document.documentElement.classList.add('js');
     try {
       const theme = localStorage.getItem('windplay:theme');
       if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
@@ -16,329 +15,203 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas class="field" id="field" aria-hidden="true"></canvas>
-  <div class="ghost-number" id="ghost" aria-hidden="true">01</div>
+  <a class="skip-link" href="#works">跳到作品</a>
 
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="WindPlay 首页">
-      <span class="brand-mark" aria-hidden="true">W</span>
-      <span>WindPlay</span>
-    </a>
-    <div class="topbar-actions">
-      <div class="edition">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>02 WORKS</span>
-      </div>
-      <button class="theme-button" id="theme" type="button" aria-label="切换亮色 / 暗色">
-        <svg class="icon-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></svg>
-        <svg class="icon-moon" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z"/></svg>
-      </button>
+    <div class="topbar-inner container">
+      <a class="brand" href="index.html" aria-label="WindPlay 首页">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 10h17a4 4 0 1 0-4-4M4 16h24M4 22h12a4 4 0 1 1-4 4"/>
+        </svg>
+        <span>WindPlay</span>
+      </a>
+      <nav class="topbar-actions" aria-label="主导航">
+        <a class="nav-link" href="#works">作品</a>
+        <a class="nav-link" href="#about">关于</a>
+        <a class="repo-link" href="https://github.com/tingfeng347/windplay" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2-6-2.5M15 22v-3.8a3.3 3.3 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.9a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8S17.5.8 15 2.5a13 13 0 0 0-6 0C6.5.8 5.3 1.1 5.3 1.1a5 5 0 0 0-.1 3.8 5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.2 6.6 6.2 6.9a3.3 3.3 0 0 0-.9 2.6V22"/></svg>
+          <span>GitHub</span>
+        </a>
+        <button class="theme-button" id="theme" type="button" aria-label="切换到暗色主题" hidden>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13A9 9 0 0 1 11 3a9 9 0 1 0 10 10z"/></svg>
+        </button>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section class="catalog" aria-labelledby="catalog-title">
-      <div class="catalog-heading">
-        <p class="kicker reveal" style="--d:0">WEB EXPERIMENTS / 2026</p>
-        <h1 id="catalog-title" class="reveal" style="--d:1">选择一个作品</h1>
-        <p class="catalog-note reveal" style="--d:2">点云、粒子、交互艺术与小游戏 — 左右滑动浏览，点击进入。</p>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+      <h1 id="hero-title">把好奇心，<br>放进浏览器。</h1>
+      <p class="hero-note">点云、动态影像、方块世界，还有荒野生存。<br>打开一个作品，动手玩一会儿。</p>
+      <a class="button primary-button" href="#works">
+        探索作品
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
       </div>
 
-      <div class="carousel" id="carousel" role="region" aria-roledescription="轮播" aria-label="作品">
-        <button class="nav-button prev" id="prev" type="button" aria-label="上一个作品">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
-        </button>
+      <div class="hero-art" id="hero-art" role="group" aria-label="作品画廊">
+        <div class="art-orbit" aria-hidden="true"></div>
+        <svg class="art-wind" viewBox="0 0 1200 500" aria-hidden="true"><path d="M-60 365C140 365 115 80 325 80s165 325 420 325 125-275 300-275 110 170 240 170"/></svg>
+        <span class="art-word" aria-hidden="true">Play.</span>
 
-        <div class="work-grid" id="track">
-          <a class="work-card" href="works/point-cloud-studio/demo/index.html" target="_blank" rel="noopener" style="--tint:#16a394">
-            <figure class="work-preview">
-              <img src="assets/point-cloud-studio-preview.png" alt="彩色点阵人像预览" width="1600" height="1600" draggable="false">
-              <span class="work-number" aria-hidden="true">01</span>
-            </figure>
-            <div class="work-content">
-              <div class="work-meta">
-                <span>INTERACTIVE PORTRAIT</span>
-                <span>CANVAS / SVG</span>
-              </div>
-              <h2>Point Cloud Studio</h2>
-              <p>把照片转换成彩色点阵与可旋转、缩放、扰动的三维点云。</p>
-              <span class="launch">打开作品 <span aria-hidden="true">→</span></span>
-            </div>
-            <span class="glare" aria-hidden="true"></span>
-          </a>
-
-          <a class="work-card" href="works/tingfeng-reel/demo/index.html" target="_blank" rel="noopener" style="--tint:#ff3b2e">
-            <figure class="work-preview">
-              <img src="assets/tingfeng-reel-preview.png" alt="tingfeng347 动态片头：发光标题与三维“风”字点云" width="1600" height="900" draggable="false">
-              <span class="work-number" aria-hidden="true">02</span>
-            </figure>
-            <div class="work-content">
-              <div class="work-meta">
-                <span>MOTION REEL</span>
-                <span>CANVAS / WEB AUDIO</span>
-              </div>
-              <h2>Tingfeng Reel</h2>
-              <p>28 秒动态作品片头：可拖动时间线、2D/3D 切换、亮暗主题与实时合成配乐。</p>
-              <span class="launch">打开作品 <span aria-hidden="true">→</span></span>
-            </div>
-            <span class="glare" aria-hidden="true"></span>
-          </a>
-
-          <div class="work-card upcoming" style="--tint:#8a877d" aria-label="下一个作品制作中">
-            <figure class="work-preview">
-              <div class="upcoming-art" aria-hidden="true"><span></span><span></span><span></span></div>
-              <span class="work-number" aria-hidden="true">03</span>
-            </figure>
-            <div class="work-content">
-              <div class="work-meta">
-                <span>IN THE LAB</span>
-                <span>SOON</span>
-              </div>
-              <h2>下一个实验</h2>
-              <p>粒子、交互艺术或一个小游戏——正在风里成形。</p>
-              <span class="launch">敬请期待 <span aria-hidden="true">···</span></span>
-            </div>
+        <a class="art-layer art-portrait" href="works/point-cloud-studio/demo/index.html" target="_blank" rel="noopener" aria-label="打开 Point Cloud Studio">
+          <div class="art-frame">
+            <div class="art-frame-bar"><span>Point Cloud Studio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+            <img src="assets/point-cloud-studio-preview.png" alt="" width="1600" height="1600" decoding="async">
           </div>
+        </a>
+
+        <a class="art-layer art-reel" href="works/voxel-frontier/demo/index.html" target="_blank" rel="noopener" aria-label="打开方块旷野">
+          <div class="art-frame">
+            <div class="art-frame-bar"><span>方块旷野</span><span class="art-duration">可以走进去的方块世界</span></div>
+            <img src="assets/voxel-frontier-preview.svg" alt="" width="1600" height="900" decoding="async">
+          </div>
+        </a>
+
+        <div class="art-detail" aria-hidden="true">
+          <img src="assets/point-cloud-studio-preview.png" alt="" width="1600" height="1600" decoding="async">
+          <svg class="detail-orbit" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/><path d="M50 0v9M50 91v9M0 50h9M91 50h9"/></svg>
         </div>
+        <span class="art-caption">图像、声音与可以走进去的世界。</span>
+      </div>
+    </section>
 
-        <button class="nav-button next" id="next" type="button" aria-label="下一个作品">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
-        </button>
+    <section class="catalog" id="works" aria-labelledby="catalog-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="catalog-title">可以玩的作品</h2>
+        <p>一张照片、一段影像，或一个可以探索的世界。</p>
+        </div>
+        <span class="work-count" id="work-count">4 个作品</span>
       </div>
 
-      <div class="pager" id="pager" aria-hidden="true">
-        <span class="pager-count"><b id="current">01</b> / <span id="total">03</span></span>
-        <div class="pager-dots" id="dots"></div>
-        <span class="pager-hint">← → · 滚轮 · 拖动</span>
+      <div class="work-grid">
+        <a class="work-card voxel-card" href="works/voxel-frontier/demo/index.html" target="_blank" rel="noopener" aria-labelledby="voxel-title" aria-describedby="voxel-note">
+          <figure class="work-preview">
+            <div class="preview-bar" aria-hidden="true">
+              <span class="window-dots"><i></i><i></i><i></i></span>
+              <span>Voxel Frontier</span>
+              <svg viewBox="0 0 24 24"><path d="M8 16 16 8M8 8h8v8"/></svg>
+            </div>
+            <div class="preview-image">
+              <img src="assets/voxel-frontier-preview.svg" alt="方块旷野的草地、山丘与树木组成的三维世界" width="1600" height="900">
+              <span class="preview-caption" aria-hidden="true">采集、建造，留下自己的世界</span>
+            </div>
+          </figure>
+          <div class="work-content">
+            <div class="work-title-row">
+              <h3 id="voxel-title">方块旷野</h3>
+              <span class="work-category">方块沙盒</span>
+            </div>
+            <p id="voxel-note">走进第一人称方块世界，采集资源、制作工具、自由建造，体验创造与生存两种玩法。</p>
+            <span class="launch">进入世界 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+
+        <a class="work-card survival-card" href="works/ember-wilds/demo/index.html" target="_blank" rel="noopener" aria-labelledby="survival-title" aria-describedby="survival-note">
+          <figure class="work-preview">
+            <div class="preview-bar" aria-hidden="true">
+              <span class="window-dots"><i></i><i></i><i></i></span>
+              <span>Ember Wilds</span>
+              <svg viewBox="0 0 24 24"><path d="M8 16 16 8M8 8h8v8"/></svg>
+            </div>
+            <div class="preview-image">
+              <img src="assets/ember-wilds-preview.svg" alt="余烬荒野的手绘树林、角色与营火" width="1600" height="900">
+              <span class="preview-caption" aria-hidden="true">天黑之前，先点起一团火</span>
+            </div>
+          </figure>
+          <div class="work-content">
+            <div class="work-title-row">
+              <h3 id="survival-title">余烬荒野</h3>
+              <span class="work-category">荒野生存</span>
+            </div>
+            <p id="survival-note">采集、制作、烹饪与战斗。照顾生命、饥饿和精神，在昼夜交替的荒野里守住营火。</p>
+            <span class="launch">开始生存 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+
+        <a class="work-card portrait-card" href="works/point-cloud-studio/demo/index.html" target="_blank" rel="noopener" aria-labelledby="point-cloud-title" aria-describedby="point-cloud-note">
+          <figure class="work-preview">
+            <div class="preview-bar" aria-hidden="true">
+              <span class="window-dots"><i></i><i></i><i></i></span>
+              <span>Point Cloud Studio</span>
+              <svg viewBox="0 0 24 24"><path d="M8 16 16 8M8 8h8v8"/></svg>
+            </div>
+            <div class="preview-image">
+              <img src="assets/point-cloud-studio-preview.png" alt="由彩色圆点组成的人像" width="1600" height="1600">
+              <span class="preview-caption" aria-hidden="true">一张照片，无数种可能</span>
+            </div>
+          </figure>
+          <div class="work-content">
+            <div class="work-title-row">
+              <h3 id="point-cloud-title">Point Cloud Studio</h3>
+              <span class="work-category">影像实验</span>
+            </div>
+            <p id="point-cloud-note">把照片变成彩色点阵，或可以旋转、缩放与扰动的三维点云。</p>
+            <span class="launch">打开作品 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+
+        <a class="work-card reel-card" href="works/tingfeng-reel/demo/index.html" target="_blank" rel="noopener" aria-labelledby="reel-title" aria-describedby="reel-note">
+          <figure class="work-preview">
+            <div class="preview-bar" aria-hidden="true">
+              <span class="window-dots"><i></i><i></i><i></i></span>
+              <span>Tingfeng Reel</span>
+              <svg viewBox="0 0 24 24"><path d="M8 16 16 8M8 8h8v8"/></svg>
+            </div>
+            <div class="preview-image">
+              <img src="assets/tingfeng-reel-preview.png" alt="Tingfeng 动态片头，包含发光标题和三维“风”字点云" width="1600" height="900">
+              <span class="preview-caption" aria-hidden="true">28 秒，让文字与声音一起流动</span>
+            </div>
+          </figure>
+          <div class="work-content">
+            <div class="work-title-row">
+              <h3 id="reel-title">Tingfeng Reel</h3>
+              <span class="work-category">动态影像</span>
+            </div>
+            <p id="reel-note">一段可以亲手控制的动态片头。拖动时间线，切换视角，听实时合成的配乐。</p>
+            <span class="launch">打开作品 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
       </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <svg class="about-mark" viewBox="0 0 80 80" aria-hidden="true"><path d="M9 27h44a10 10 0 1 0-10-10M9 40h61M9 53h29a10 10 0 1 1-10 10"/></svg>
+      <div class="about-copy">
+        <h2 id="about-title">小实验，慢慢长大。</h2>
+        <p>WindPlay 是听风的浏览器实验室，收集关于图像、声音与交互的想法。<br>新作品还在酝酿，每一个都值得停下来玩一会儿。</p>
+      </div>
+      <a class="button secondary-button" href="https://github.com/tingfeng347/windplay" target="_blank" rel="noopener">在 GitHub 看源码 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
     </section>
   </main>
 
-  <footer>
-    <span>WINDPLAY</span>
-    <span>EXPLORE THROUGH PLAY</span>
+  <footer class="container">
+    <span class="footer-brand">WindPlay</span>
+    <span>听风的创意游乐场</span>
+    <a href="https://github.com/tingfeng347" target="_blank" rel="noopener">由 tingfeng347 创作</a>
   </footer>
 
   <script>
-    (function () {
-      'use strict';
+    (() => {
       const root = document.documentElement;
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const track = document.getElementById('track');
-      const cards = Array.from(track.children);
-      const ghost = document.getElementById('ghost');
-      const dotsBox = document.getElementById('dots');
-      const current = document.getElementById('current');
-      const count = cards.length;
-      const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-
-      // ── 主题 ────────────────────────────────────────────
+      document.getElementById('work-count').textContent = `${document.querySelectorAll('.work-grid .work-card').length} 个作品`;
       const system = matchMedia('(prefers-color-scheme: dark)');
+      const button = document.getElementById('theme');
       const theme = () => root.dataset.theme || (system.matches ? 'dark' : 'light');
-      document.getElementById('theme').addEventListener('click', () => {
+      const update = () => {
+        button.setAttribute('aria-label', theme() === 'dark' ? '切换到亮色主题' : '切换到暗色主题');
+      };
+      button.hidden = false;
+      button.addEventListener('click', () => {
         root.dataset.theme = theme() === 'dark' ? 'light' : 'dark';
         try { localStorage.setItem('windplay:theme', root.dataset.theme); } catch (_) {}
-        field.recolor();
+        update();
       });
-      system.addEventListener?.('change', () => field.recolor());
-
-      // ── 轮播：连续位置 pos 由弹簧逼近 target，拖动与滚轮直接推动 pos ──
-      let pos = 0;
-      let target = 0;
-      let velocity = 0;
-      let active = -1;
-      let frame = 0;
-      let drag = null;
-      let wheelTimer = 0;
-      let tilt = { card:null, x:0, y:0 };
-
-      document.getElementById('total').textContent = String(count).padStart(2, '0');
-      const dots = cards.map((_, i) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.tabIndex = -1;
-        dot.addEventListener('click', () => go(i));
-        dotsBox.append(dot);
-        return dot;
-      });
-
-      function layout() {
-        const width = cards[0].offsetWidth;
-        const spread = Math.min(window.innerWidth * 0.34, width * 0.78);
-        cards.forEach((card, i) => {
-          const o = i - pos;
-          const a = Math.abs(o);
-          const side = Math.sign(o);
-          const x = side * (a < 1 ? a * spread : spread + (a - 1) * spread * 0.42);
-          const z = -Math.min(a, 2.4) * 240;
-          const ry = -side * Math.min(a, 1.2) * 34;
-          const scale = 1 - Math.min(a, 2) * 0.06;
-          let extra = '';
-          if (tilt.card === card && a < 0.5) extra = ` rotateX(${(-tilt.y * 7).toFixed(2)}deg) rotateY(${(tilt.x * 9).toFixed(2)}deg)`;
-          card.style.transform = `translate(-50%, -50%) translateX(${x.toFixed(1)}px) translateZ(${z.toFixed(1)}px) rotateY(${ry.toFixed(2)}deg) scale(${scale.toFixed(4)})${extra}`;
-          card.style.opacity = String(clamp(1.9 - a * 0.62, 0, 1));
-          card.style.zIndex = String(100 - Math.round(a * 10));
-          card.style.setProperty('--dim', clamp(a * 0.55, 0, 0.6).toFixed(3));
-          card.classList.toggle('is-active', a < 0.5);
-          card.tabIndex = a < 0.5 ? 0 : -1;
-          card.setAttribute('aria-hidden', String(a >= 0.5));
-        });
-        const now = clamp(Math.round(pos), 0, count - 1);
-        if (now !== active) {
-          active = now;
-          current.textContent = String(active + 1).padStart(2, '0');
-          dots.forEach((dot, i) => dot.classList.toggle('on', i === active));
-          ghost.textContent = String(active + 1).padStart(2, '0');
-          ghost.classList.remove('swap');
-          void ghost.offsetWidth;
-          ghost.classList.add('swap');
-          const tint = cards[active].style.getPropertyValue('--tint');
-          root.style.setProperty('--tint', tint);
-          field.tint(tint);
-        }
-      }
-
-      function tick() {
-        frame = 0;
-        if (!drag) {
-          if (reduced) { pos = target; velocity = 0; }
-          else {
-            velocity = (velocity + (target - pos) * 0.085) * 0.76;
-            pos += velocity;
-            if (Math.abs(target - pos) < 0.0005 && Math.abs(velocity) < 0.0005) { pos = target; velocity = 0; }
-          }
-        }
-        layout();
-        if (drag || pos !== target) frame = requestAnimationFrame(tick);
-      }
-      const wake = () => { if (!frame) frame = requestAnimationFrame(tick); };
-      function go(i) { target = clamp(Math.round(i), 0, count - 1); wake(); }
-
-      document.getElementById('prev').addEventListener('click', () => go(target - 1));
-      document.getElementById('next').addEventListener('click', () => go(target + 1));
-      window.addEventListener('keydown', event => {
-        if (event.key === 'ArrowRight') { go(target + 1); event.preventDefault(); }
-        if (event.key === 'ArrowLeft') { go(target - 1); event.preventDefault(); }
-      });
-
-      const carousel = document.getElementById('carousel');
-      carousel.addEventListener('wheel', event => {
-        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-        if (!delta) return;
-        event.preventDefault();
-        target = clamp(target + delta / 520, -0.25, count - 0.75);
-        wake();
-        clearTimeout(wheelTimer);
-        wheelTimer = setTimeout(() => go(target), 140);
-      }, { passive:false });
-
-      carousel.addEventListener('pointerdown', event => {
-        if (event.button !== 0 || event.target.closest('.nav-button')) return;
-        drag = { id:event.pointerId, x:event.clientX, start:pos, moved:0, last:event.clientX, t:performance.now(), v:0 };
-        wake();
-      });
-      window.addEventListener('pointermove', event => {
-        if (drag && event.pointerId === drag.id) {
-          const width = cards[0].offsetWidth * 0.8;
-          const dx = event.clientX - drag.x;
-          drag.moved = Math.max(drag.moved, Math.abs(dx));
-          const now = performance.now();
-          drag.v = (event.clientX - drag.last) / Math.max(1, now - drag.t);
-          drag.last = event.clientX;
-          drag.t = now;
-          let p = drag.start - dx / width;
-          if (p < 0) p *= 0.35;
-          if (p > count - 1) p = count - 1 + (p - count + 1) * 0.35;
-          pos = target = p;
-          if (drag.moved > 6) carousel.classList.add('dragging');
-        }
-        const card = event.target.closest?.('.work-card.is-active');
-        if (card && !drag && !reduced) {
-          const box = card.getBoundingClientRect();
-          tilt = { card, x:(event.clientX - box.left) / box.width - 0.5, y:(event.clientY - box.top) / box.height - 0.5 };
-          card.style.setProperty('--gx', `${((tilt.x + 0.5) * 100).toFixed(1)}%`);
-          card.style.setProperty('--gy', `${((tilt.y + 0.5) * 100).toFixed(1)}%`);
-          layout();
-        } else if (tilt.card && !card) { tilt = { card:null, x:0, y:0 }; layout(); }
-      });
-      const end = event => {
-        if (!drag || event.pointerId !== drag.id) return;
-        const flick = -drag.v * 0.9;
-        const moved = drag.moved;
-        const drag0 = drag.start;
-        drag = null;
-        carousel.classList.remove('dragging');
-        // 一次拖动或轻扫最多移动一张。
-        const from = Math.round(drag0);
-        go(clamp(Math.round(pos + clamp(flick, -0.6, 0.6)), from - 1, from + 1));
-        // 拖动过就不当作点击。
-        if (moved > 6) carousel.addEventListener('click', stop, { capture:true, once:true });
-      };
-      const stop = event => { event.preventDefault(); event.stopPropagation(); };
-      window.addEventListener('pointerup', end);
-      window.addEventListener('pointercancel', end);
-
-      // 点侧面的卡片先把它转到正面，再点才打开。
-      cards.forEach((card, i) => card.addEventListener('click', event => {
-        if (Math.abs(i - pos) >= 0.5 || card.classList.contains('upcoming')) { event.preventDefault(); go(i); }
-      }));
-      cards.forEach(card => card.addEventListener('focus', () => go(cards.indexOf(card))));
-      window.addEventListener('resize', layout);
-
-      // ── 背景点阵：随指针起伏，颜色跟随当前作品 ──────────
-      const field = (() => {
-        const canvas = document.getElementById('field');
-        const ctx = canvas.getContext('2d');
-        const pointer = { x:-9999, y:-9999, sx:-9999, sy:-9999 };
-        let w = 0, h = 0, dpr = 1, ink = '0,0,0', tintRgb = [22, 163, 148], raf = 0;
-        const hex = value => { const n = parseInt(String(value).trim().slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
-        function resize() {
-          dpr = Math.min(2, devicePixelRatio || 1);
-          w = innerWidth; h = innerHeight;
-          canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-          draw(performance.now());
-        }
-        function draw(time) {
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          ctx.clearRect(0, 0, w, h);
-          pointer.sx += (pointer.x - pointer.sx) * 0.08;
-          pointer.sy += (pointer.y - pointer.sy) * 0.08;
-          const gap = 30, t = reduced ? 0 : time * 0.00045;
-          for (let y = gap / 2; y < h; y += gap) {
-            for (let x = gap / 2; x < w; x += gap) {
-              const d = Math.hypot(x - pointer.sx, y - pointer.sy);
-              const near = Math.max(0, 1 - d / 220);
-              const wave = Math.sin(x * 0.011 + t * 2.2) * Math.cos(y * 0.013 - t * 1.6) * 0.5 + 0.5;
-              const r = 0.7 + wave * 0.7 + near * 2.2;
-              const lift = near * near * 10;
-              const dx = d > 0 ? (x - pointer.sx) / d * lift : 0;
-              const dy = d > 0 ? (y - pointer.sy) / d * lift : 0;
-              ctx.fillStyle = near > 0.05
-                ? `rgba(${tintRgb[0]},${tintRgb[1]},${tintRgb[2]},${(0.25 + near * 0.6).toFixed(3)})`
-                : `rgba(${ink},${(0.07 + wave * 0.08).toFixed(3)})`;
-              ctx.beginPath();
-              ctx.arc(x + dx, y + dy, r, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-          const moving = Math.abs(pointer.x - pointer.sx) + Math.abs(pointer.y - pointer.sy) > 0.5;
-          raf = (!reduced || moving) && !document.hidden ? requestAnimationFrame(draw) : 0;
-        }
-        const recolor = () => {
-          ink = theme() === 'dark' ? '243,241,236' : '23,23,21';
-          if (!raf) raf = requestAnimationFrame(draw);
-        };
-        window.addEventListener('resize', resize);
-        window.addEventListener('pointermove', event => { pointer.x = event.clientX; pointer.y = event.clientY; if (!raf) raf = requestAnimationFrame(draw); });
-        document.addEventListener('pointerleave', () => { pointer.x = pointer.y = -9999; });
-        document.addEventListener('visibilitychange', () => { if (!document.hidden && !raf) raf = requestAnimationFrame(draw); });
-        recolor();
-        resize();
-        return { recolor, tint:value => { tintRgb = hex(value); } };
-      })();
-
-      root.classList.add('ready');
-      layout();
+      system.addEventListener?.('change', update);
+      update();
     })();
   </script>
 </body>
