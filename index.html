@@ -213,6 +213,81 @@
       system.addEventListener?.('change', update);
       update();
     })();
+
+    (() => {
+      const hero = document.getElementById('hero-art');
+      const motion = matchMedia('(prefers-reduced-motion: reduce)');
+      const compact = matchMedia('(max-width: 640px)');
+      const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+      const previews = Array.from(document.querySelectorAll('.preview-image'));
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+      let frame = 0;
+      let geometry = null;
+      let measureNeeded = true;
+      let pointerX = 0;
+      let pointerY = 0;
+
+      function measure() {
+        const scroll = window.scrollY;
+        const bounds = hero.getBoundingClientRect();
+        geometry = {
+          top: bounds.top + scroll,
+          height: bounds.height,
+          viewport: window.innerHeight,
+          previews: previews.map(element => {
+            const box = element.getBoundingClientRect();
+            return { element, top: box.top + scroll, height: box.height };
+          })
+        };
+        measureNeeded = false;
+      }
+
+      function draw() {
+        frame = 0;
+        if (measureNeeded || !geometry) measure();
+        const { top, height, viewport } = geometry;
+        const scroll = window.scrollY;
+        const progress = motion.matches ? 0 : clamp(
+          (scroll - Math.max(0, top - viewport * .62)) / Math.max(1, height * .9), 0, 1
+        );
+        const eased = progress * progress * (3 - 2 * progress);
+        hero.style.setProperty('--progress', eased.toFixed(4));
+        hero.style.setProperty('--pointer-x', motion.matches ? '0' : pointerX.toFixed(3));
+        hero.style.setProperty('--pointer-y', motion.matches ? '0' : pointerY.toFixed(3));
+        for (const item of geometry.previews) {
+          const visible = item.top < scroll + viewport && item.top + item.height > scroll;
+          const offset = motion.matches || !visible ? 0 : clamp(
+            (scroll + viewport * .5 - item.top - item.height * .5) / viewport, -.5, .5
+          ) * (compact.matches ? 16 : 32);
+          item.element.style.setProperty('--image-shift', `${offset.toFixed(2)}px`);
+        }
+      }
+
+      function schedule() {
+        if (!frame && !document.hidden) frame = requestAnimationFrame(draw);
+      }
+      function refresh() { measureNeeded = true; schedule(); }
+
+      window.addEventListener('scroll', () => { if (!motion.matches) schedule(); }, { passive: true });
+      window.addEventListener('resize', refresh, { passive: true });
+      window.addEventListener('load', refresh, { once: true });
+      motion.addEventListener?.('change', refresh);
+      compact.addEventListener?.('change', refresh);
+      document.fonts?.ready.then(refresh);
+      hero.addEventListener('pointermove', event => {
+        if (motion.matches || compact.matches || !finePointer.matches || event.pointerType === 'touch') return;
+        const bounds = hero.getBoundingClientRect();
+        pointerX = clamp((event.clientX - bounds.left) / bounds.width - .5, -.5, .5);
+        pointerY = clamp((event.clientY - bounds.top) / bounds.height - .5, -.5, .5);
+        schedule();
+      }, { passive: true });
+      hero.addEventListener('pointerleave', () => { pointerX = pointerY = 0; schedule(); });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { cancelAnimationFrame(frame); frame = 0; }
+        else refresh();
+      });
+      refresh();
+    })();
   </script>
 </body>
 </html>
