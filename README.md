@@ -1,6 +1,6 @@
 # WindPlay
 
-<a href="assets/windplay-logo.svg"><img src="assets/windplay-logo.svg" alt="WindPlay 徽标" width="132"></a>
+<a href="assets/windplay-logo.svg"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/windplay-logo-dark.svg"><img src="assets/windplay-logo.svg" alt="WindPlay" width="160"></picture></a>
 
 WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、交互艺术和小游戏。
 这里的每个作品都可以独立开发与构建，也可以随着想法成熟继续扩展。

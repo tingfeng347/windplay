@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32"
      role="img" aria-label="WindPlay">
   <path d="M4 10h17a4 4 0 1 0-4-4M4 16h24M4 22h12a4 4 0 1 1-4 4"
-        fill="none" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        fill="none" stroke="#f5f5f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
