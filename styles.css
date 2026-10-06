@@ -103,7 +103,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .art-layer { position: absolute; display: block; transform-style: preserve-3d; will-change: transform; }
 .art-frame { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 20px 50px -25px rgb(0 0 0 / 32%); transition: box-shadow 220ms ease; }
 .art-layer:hover .art-frame { box-shadow: 0 28px 65px -25px rgb(0 0 0 / 46%); }
-.art-frame-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; padding: 0 12px; color: var(--muted); font-size: 12px; text-align: left; }
+.art-frame-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; padding: 8px 12px; color: var(--muted); font-size: 12px; text-align: left; }
 .art-frame-bar svg { width: 14px; height: 14px; }
 .art-frame img { display: block; width: 100%; height: auto; }
 .art-portrait { z-index: 2; width: 27%; left: 17%; top: 44%; transform: translate(-50%, -50%) translate3d(calc(var(--progress) * -40px + var(--pointer-x) * -18px), calc(var(--progress) * -70px + var(--pointer-y) * -16px), 0) rotate(calc(-9deg - var(--progress) * 5deg)) rotateY(calc(var(--pointer-x) * -8deg)); }
@@ -184,7 +184,7 @@ footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
   .art-reel { width: 73%; left: 61%; top: 47%; transform: translate(-50%, -50%) translateY(calc(var(--progress) * -14px)) scale(calc(.92 + var(--progress) * .05)) rotate(calc(5deg - var(--progress) * 5deg)); }
   .art-detail { width: 19%; left: 76%; top: 59%; transform: translateY(calc(var(--progress) * -40px)) rotate(calc(-12deg + var(--progress) * 14deg)); }
   .art-frame { border-radius: 8px; }
-  .art-frame-bar { padding-inline: 7px; min-height: 26px; font-size: 10px; }
+  .art-frame-bar { padding-inline: 8px; min-height: 34px; font-size: 11px; }
   .art-portrait .art-frame-bar span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .art-frame-bar svg { width: 10px; height: 10px; }
   .art-orbit { width: 70%; left: 15%; top: 2%; }
