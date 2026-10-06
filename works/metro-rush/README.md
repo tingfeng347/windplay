@@ -40,7 +40,7 @@ npm test --workspace @windplay/metro-rush
 - `src/renderer.js`：原创几何、WebGL 光照/雾效、相机、分区网格缓存和动态角色。
 - `src/game.js`：键盘与触屏、倒数/暂停/结算流程、音效、服装与设置。
 - `src/styles.css`：响应式游戏界面。
-- `assets/preview.svg`：原版 1600 × 900 低多边形城市轨道封面，保留场景与角色，调整列车接缝并清除重复文字；[封面维护说明](../../docs/GAME_COVERS.md)。
+- `assets/preview.svg`：1600 × 900 低多边形 SVG 封面，保留原城市与跑者，以统一透视重画轨道、列车和车窗；[封面维护说明](../../docs/GAME_COVERS.md)。
 - `scripts/build.mjs`：内联源码生成 `dist/index.html` 和受版本控制的 `demo/index.html`。
 - `tests/`：确定性、通路、碰撞、坡道车顶、护盾、得分、流式清理、解锁与成品一致性测试。
 
