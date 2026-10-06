@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#E5F1ED">
+  <meta name="description" content="种下音符，让风经过花园。一个可以编辑、演奏、保存的音乐小玩具。">
+  <title>听风花园 · WindPlay</title>
+  <style>
+:root{color-scheme:light;--mist:#E5F1ED;--leaf:#194C45;--muted:#466759;--line:#C7DAD0;--paper:#FAFCF6;--yellow:#F2CE71;--coral:#D97A70;--blue:#719FC2;font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--leaf);background:var(--mist);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 82% 8%,#EDF3D9 0,transparent 44%),var(--mist)}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.4}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,canvas:focus-visible{outline:3px solid var(--leaf);outline-offset:4px}button{border:0}a{color:inherit;text-decoration:none}button{transition:background-color .15s,color .15s}button:active:not(:disabled){transform:translateY(1px)}.page{max-width:1456px;margin:0 auto;padding:0 44px 26px}.site-header{height:66px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}.back-link{display:flex;align-items:center;gap:8px;min-height:44px}.back-link span{font-size:25px;font-family:serif;line-height:1}.back-link:hover{color:var(--leaf)}.audio-state{display:flex;align-items:center;gap:8px}.status-dot{width:6px;height:6px;background:#95AC9C;border-radius:50%}.audio-state.playing .status-dot{background:var(--leaf);box-shadow:0 0 0 3px #CDDCCC}.audio-state.visual .status-dot{background:#A8794F}.garden-heading{display:flex;justify-content:space-between;align-items:center;padding:8px 0 26px;gap:22px}h1{font-family:"Songti SC","STSong","Noto Serif CJK SC",serif;font-size:46px;font-weight:500;line-height:1.2;letter-spacing:.08em;margin:0 0 10px}.title-mark{display:inline-block;font-size:35px;margin-left:16px;letter-spacing:0;color:#769C83;font-weight:400;vertical-align:middle}.garden-heading p{font-size:14px;color:var(--muted);margin:0}.play-button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:49px;border-radius:28px;padding:0 24px;background:var(--leaf);color:var(--paper);font-size:14px;white-space:nowrap;box-shadow:0 3px 0 rgba(20,65,54,.1)}.play-button:hover{background:#2F6658}.play-button[aria-pressed=true]{background:#365F53}.garden-scene{position:relative;overflow:hidden;border-radius:9px;border:1px solid #BAD0BD;background:#E7F0DE;box-shadow:0 12px 32px -25px rgba(21,69,46,.35)}#garden-canvas{display:block;width:100%;height:520px;touch-action:none;cursor:crosshair}#garden-canvas:focus-visible{outline-offset:-5px}.scene-caption{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 25px;font-size:12px;letter-spacing:.025em;color:#3F5F47;background:#D1DEBC;border-top:1px solid #C6D7AC}.garden-instruction{display:flex;align-items:center;gap:10px;min-height:45px;color:var(--muted)}.garden-instruction p{margin:0;font-size:14px;line-height:1.7}.instruction-line{width:23px;height:1px;background:#739B84;flex-shrink:0}.garden-tools{display:flex;align-items:center;justify-content:space-between;gap:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0 20px}.seed-tray{border:0;padding:0;margin:0;min-width:0}.seed-tray legend{font-size:12px;color:var(--muted);margin:0 0 11px;padding:0}.seed-options{display:flex;gap:10px}.seed{display:flex;align-items:center;gap:7px;padding:6px 13px 6px 8px;color:var(--leaf);background:transparent;border:1px solid transparent;border-radius:7px;min-height:53px}.seed:hover{background:#DAE8DD}.seed.active{background:var(--paper);border-color:#BAD0BD}.seed span{display:block;font-size:14px;text-align:left}.seed small{display:block;margin-top:3px;font-size:12px;color:var(--muted)}.range-controls{display:flex;gap:28px;align-items:center;padding-top:6px}.range-control{display:flex;flex-direction:column;gap:3px;min-width:180px;color:var(--muted);font-size:12px}.range-control output{color:var(--leaf);font-variant-numeric:tabular-nums;font-size:13px;margin-left:12px}.range-control small{font-size:12px}.volume-control{min-width:126px;max-width:170px}.range-control input{width:100%;height:44px;appearance:none;-webkit-appearance:none;border-radius:8px;background:transparent;outline-offset:8px;cursor:pointer;margin:0}.range-control input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:14px;height:14px;margin-top:-5px;background:var(--leaf);border:3px solid #F8FCED;border-radius:50%;box-shadow:0 0 0 1px var(--leaf)}.range-control input::-moz-range-thumb{width:9px;height:9px;background:var(--leaf);border:3px solid #F8FCED;border-radius:50%;box-shadow:0 0 0 1px var(--leaf)}.edit-bar{display:flex;align-items:center;gap:15px;min-height:65px;font-size:12px;border-bottom:1px solid var(--line)}.plant-picker{display:flex;align-items:center;gap:12px;color:var(--muted);white-space:nowrap}.plant-picker select{font-size:12px;border:1px solid #BED1C6;border-radius:5px;max-width:205px;background:#F1F6EE;color:var(--leaf);padding:8px 26px 8px 9px;min-height:44px}.quiet-button{min-height:44px;padding:0 8px;background:transparent;color:var(--leaf);white-space:nowrap}.quiet-button:hover:not(:disabled){background:#D5E4D8;border-radius:5px}.selection-info{margin-left:auto;font-size:12px;color:var(--muted);text-align:right}.garden-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px}.save-actions,.garden-actions{display:flex;align-items:center;gap:16px}.save-button{min-height:44px;background:#D0E0D3;border:1px solid #B6CDBB;border-radius:6px;color:var(--leaf);font-size:12px;padding:0 14px}.save-button:hover{background:#BDD5C3}.text-button{font-size:12px;background:transparent;color:var(--muted);min-height:44px;padding:0}.text-button:hover{color:var(--leaf);text-decoration:underline;text-underline-offset:4px}.message{font-size:14px;line-height:1.8;color:#4E7162;margin:13px 0 0;min-height:22px}.message.error{color:#944C41}.keyboard-help{font-size:12px;line-height:1.85;color:var(--muted);margin-top:13px;max-width:770px}.keyboard-help summary{cursor:pointer;display:list-item;min-height:44px;padding:12px 0;list-style-position:inside}.keyboard-help p{margin:8px 0 0}noscript p{font-size:14px}
+@media(min-width:1500px){#garden-canvas{height:560px}}
+@media(max-width:980px){.page{padding:0 27px 22px}.garden-tools{gap:20px}.range-controls{gap:20px}.range-control{min-width:140px}.volume-control{min-width:90px}.seed-options{gap:2px}.seed{padding-right:10px}.selection-info{display:none}.plant-picker{gap:8px}.edit-bar{gap:12px}#garden-canvas{height:490px}}
+@media(max-width:680px){.page{padding:0 15px 22px}.site-header{height:49px;font-size:12px}.garden-heading{padding:9px 0 20px;align-items:flex-end;gap:10px}h1{font-size:34px;letter-spacing:.045em;margin-bottom:8px}.title-mark{display:none}.garden-heading p{font-size:12px;max-width:185px;line-height:1.6}.play-button{font-size:12px;min-height:44px;padding:0 16px;gap:7px;margin-bottom:2px}.play-button svg{width:12px;height:12px}#garden-canvas{height:410px}.scene-caption{height:32px;padding:0 13px;font-size:12px}.garden-instruction{min-height:45px;gap:8px}.desktop-help{display:none}.garden-instruction p{font-size:12px}.garden-tools{display:block;padding:15px 0 19px}.seed-tray legend{font-size:12px;margin-bottom:8px}.seed-options{gap:7px}.seed{flex:1;justify-content:center;gap:6px;min-height:51px;padding:5px 10px}.seed span{font-size:13px}.seed small{font-size:12px}.range-controls{margin-top:23px;gap:28px;padding-top:0}.range-control{min-width:0;flex:1;gap:3px;font-size:12px}.volume-control{max-width:40%}.range-control output{font-size:12px;margin-left:8px}.edit-bar{gap:10px;flex-wrap:wrap;padding:12px 0;min-height:0}.plant-picker{font-size:0;flex:1}.plant-picker select{width:100%;max-width:none;font-size:12px;min-height:44px}.quiet-button{font-size:12px;padding:0 4px}.garden-footer{align-items:flex-start;gap:12px;padding-top:12px}.save-actions,.garden-actions{gap:12px}.save-button,.text-button{font-size:12px}.save-button{padding:0 10px}.message{font-size:14px}.keyboard-help{font-size:12px}.audio-state{gap:6px}.status-dot{width:5px;height:5px}}
+@media(max-width:360px){.page{padding-left:11px;padding-right:11px}h1{font-size:31px}.play-button{padding:0 13px}.save-actions,.garden-actions{gap:8px}.garden-footer{gap:8px}.seed{padding-left:5px;padding-right:5px}.scene-caption{font-size:12px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}button:active:not(:disabled){transform:none}}
+
+.position-picker{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;white-space:nowrap}.position-picker select{min-height:44px;border:1px solid #BED1C6;border-radius:5px;background:#F1F6EE;color:var(--leaf);font-size:12px;padding:6px 4px;max-width:93px}.edit-bar{flex-wrap:wrap;padding-top:10px;padding-bottom:10px}.selection-info{flex-basis:25%}@media(max-width:680px){.edit-bar{gap:8px}.plant-picker{flex-basis:calc(100% - 142px)}.position-picker{order:2}.position-picker select{min-width:55px}.selection-info{display:none}.garden-footer{flex-wrap:wrap}.garden-actions{margin-left:auto}.scene-caption{font-size:12px}.garden-instruction p{font-size:12px}.message{font-size:12px}}
+
+.range-control input::-webkit-slider-runnable-track{height:4px;border-radius:8px;background:#C0D4C8}.range-control input::-moz-range-track{height:4px;border-radius:8px;background:#C0D4C8}
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <a class="back-link" href="../../../index.html"><svg width="12" height="16" viewBox="0 0 12 16" aria-hidden="true"><path d="m8 3-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> 风的游乐场</a>
+      <span id="audio-state" class="audio-state"><span class="status-dot" aria-hidden="true"></span><span id="audio-label">点击播放，开启声音</span></span>
+    </header>
+    <main>
+      <div class="garden-heading">
+        <div><h1>听风花园<svg class="title-mark" width="42" height="21" viewBox="0 0 42 21" aria-hidden="true"><path d="M2 12c6-7 11 7 18 0s11 7 19 0M7 4c6-5 11 5 18 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></h1><p>种一朵花，风就多唱一个音。</p></div>
+        <button id="play" class="play-button" type="button" aria-pressed="false"><svg id="play-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11L13 8Z" fill="currentColor"/></svg><span id="play-label">让风吹起来</span></button>
+      </div>
+      <section class="garden-scene" aria-label="音乐花园">
+        <canvas id="garden-canvas" tabindex="0" role="application" aria-label="可编辑的音乐花园，十六个半拍，九个音高" aria-describedby="canvas-help garden-description">请使用下方植物选择菜单编辑花园。</canvas>
+        <div class="scene-caption"><span id="garden-description">20 株植物，等待一阵风</span><span id="beat-label" aria-live="off">16 个半拍，一圈旋律</span></div>
+      </section>
+      <div class="garden-instruction" id="canvas-help"><span class="instruction-line" aria-hidden="true"></span><p>点击空地种植，拖动花朵改变旋律。<span class="desktop-help">选中后也可用方向键移动，Delete 移除。</span></p></div>
+      <section class="garden-tools" aria-label="种植与演奏设置">
+        <fieldset class="seed-tray"><legend>选一颗种子</legend><div class="seed-options">
+          <button id="timbre-bell" class="seed active" type="button" aria-pressed="true" data-timbre="bell"><svg viewBox="0 0 36 36" width="30" height="30" aria-hidden="true"><path d="M18 32V17m0 10c-6 0-7-5-7-5 5-1 7 1 7 5" stroke="#497F60" stroke-width="2" fill="#739C77"/><g fill="#F2CE71"><ellipse cx="18" cy="9" rx="4.5" ry="7"/><ellipse cx="18" cy="9" rx="4.5" ry="7" transform="rotate(72 18 14)"/><ellipse cx="18" cy="9" rx="4.5" ry="7" transform="rotate(144 18 14)"/><ellipse cx="18" cy="9" rx="4.5" ry="7" transform="rotate(216 18 14)"/><ellipse cx="18" cy="9" rx="4.5" ry="7" transform="rotate(288 18 14)"/></g><circle cx="18" cy="14" r="3" fill="#A87638"/></svg><span>风铃<small>清亮</small></span></button>
+          <button id="timbre-reed" class="seed" type="button" aria-pressed="false" data-timbre="reed"><svg viewBox="0 0 36 36" width="30" height="30" aria-hidden="true"><path d="M18 32V9m0 19 8-9M18 21l-6-8" stroke="#5D8170" stroke-width="2" fill="none"/><g fill="#D97A70"><ellipse cx="18" cy="8" rx="3" ry="5"/><ellipse cx="12" cy="13" rx="3" ry="5" transform="rotate(-25 12 13)"/><ellipse cx="24" cy="15" rx="3" ry="5" transform="rotate(25 24 15)"/><ellipse cx="18" cy="16" rx="3" ry="5"/></g></svg><span>芦笛<small>柔和</small></span></button>
+          <button id="timbre-pluck" class="seed" type="button" aria-pressed="false" data-timbre="pluck"><svg viewBox="0 0 36 36" width="30" height="30" aria-hidden="true"><path d="M18 32V14m0 14c6 0 7-5 7-5-5-1-7 1-7 5" stroke="#497F60" stroke-width="2" fill="#739C77"/><g fill="#719FC2"><circle cx="18" cy="7" r="5"/><circle cx="24" cy="12" r="5"/><circle cx="22" cy="18" r="5"/><circle cx="14" cy="18" r="5"/><circle cx="12" cy="11" r="5"/></g><circle cx="18" cy="13" r="4" fill="#CAE1E9"/><path d="M17 10v6m2-6v6" stroke="#4B809D"/></svg><span>拨弦<small>轻快</small></span></button>
+        </div></fieldset>
+        <div class="range-controls">
+          <label class="range-control" for="tempo"><span>风的速度 <output id="tempo-value" for="tempo">88</output><small> 拍 / 分</small></span><input id="tempo" type="range" min="48" max="144" step="1" value="88" aria-label="风的速度，每分钟拍数"></label>
+          <label class="range-control volume-control" for="volume"><span>音量 <output id="volume-value" for="volume">65%</output></span><input id="volume" type="range" min="0" max="100" step="1" value="65" aria-label="音量百分比"></label>
+        </div>
+      </section>
+      <section class="edit-bar" aria-label="编辑选中的植物">
+        <label class="plant-picker" for="selected-plant">花园里的植物<select id="selected-plant"><option value="">选择一株植物</option></select></label>
+        <label class="position-picker" for="plant-step">拍点<select id="plant-step" aria-label="选中植物的半拍位置" disabled></select></label>
+        <label class="position-picker" for="plant-row">音高<select id="plant-row" aria-label="选中植物的音高" disabled></select></label>
+        <button id="delete-plant" class="quiet-button" type="button" disabled>移除这株</button>
+        <button id="undo" class="quiet-button" type="button" disabled>撤销</button>
+        <span id="selection-info" class="selection-info">花朵越高，音越高；越靠右，越晚响。</span>
+      </section>
+      <footer class="garden-footer">
+        <div class="save-actions"><button id="save" class="save-button" type="button">保存花园</button><button id="export" class="text-button" type="button">导出 JSON</button><button id="import" class="text-button" type="button">导入</button><input id="import-file" type="file" accept="application/json,.json" hidden></div>
+        <div class="garden-actions"><button id="example" class="text-button" type="button">示例旋律</button><button id="clear" class="text-button" type="button">清空花园</button></div>
+      </footer>
+      <p id="message" class="message" role="status" aria-live="polite" aria-atomic="true">花园准备好了。让风吹起来，听听它的第一首歌。</p>
+      <details class="keyboard-help"><summary>键盘与保存说明</summary><p>在花园中按空格播放或暂停，方向键移动选中的植物；未选中时移动种植光标，Enter 种植或试听，Delete 移除，Escape 取消选中。Ctrl / Cmd + Z 撤销。离开页面或切换后台会暂停声音。</p><p>“保存花园”保存在当前浏览器。要在其他设备打开，请导出 JSON。隐私模式、文件协议或浏览器限制可能阻止本地保存，此时请使用导出。</p></details>
+      <noscript><p>这个花园需要启用 JavaScript。启用后即可在本地播放与编辑，无需网络。</p></noscript>
+    </main>
+  </div>
+  <script>
+(function (global) {
+  'use strict';
+  const VERSION = 1, STEPS = 16, ROWS = 9, MAX_PLANTS = 48;
+  const TIMBRES = Object.freeze(['bell', 'reed', 'pluck']);
+  const PITCHES = Object.freeze([
+    { name: '高音咪', label: 'E5', midi: 76 }, { name: '高音哆', label: 'C5', midi: 72 },
+    { name: '啦', label: 'A4', midi: 69 }, { name: '嗦', label: 'G4', midi: 67 },
+    { name: '咪', label: 'E4', midi: 64 }, { name: '哆', label: 'C4', midi: 60 },
+    { name: '低音啦', label: 'A3', midi: 57 }, { name: '低音嗦', label: 'G3', midi: 55 },
+    { name: '低音咪', label: 'E3', midi: 52 }
+  ].map(Object.freeze));
+  const finite = value => typeof value === 'number' && Number.isFinite(value);
+  const integer = (value, min, max) => Number.isInteger(value) && value >= min && value <= max;
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  function cell(value) {
+    if (!value || !integer(value.step, 0, STEPS - 1) || !integer(value.row, 0, ROWS - 1)) throw new Error('音符位置超出了花园。');
+    return { step: value.step, row: value.row };
+  }
+  function validateGarden(value) {
+    if (!value || typeof value !== 'object' || Array.isArray(value) || value.version !== VERSION) throw new Error('这不是听风花园的存档，或存档版本不受支持。');
+    if (!finite(value.tempo) || value.tempo < 48 || value.tempo > 144) throw new Error('速度应为每分钟 48～144 拍。');
+    if (!finite(value.volume) || value.volume < 0 || value.volume > 1) throw new Error('音量应为 0～1。');
+    if (!Array.isArray(value.plants) || value.plants.length > MAX_PLANTS) throw new Error('花园最多容纳 48 株植物。');
+    const ids = new Set(), positions = new Set();
+    const plants = value.plants.map(plant => {
+      const position = cell(plant);
+      if (!integer(plant.id, 1, 1000000) || ids.has(plant.id)) throw new Error('植物编号无效或重复。');
+      if (!TIMBRES.includes(plant.timbre)) throw new Error('存档包含未知音色。');
+      const key = `${plant.step}:${plant.row}:${plant.timbre}`;
+      if (positions.has(key)) throw new Error('存档包含重复植物。');
+      ids.add(plant.id); positions.add(key);
+      return { id: plant.id, ...position, timbre: plant.timbre };
+    });
+    const minimumId = Math.max(0, ...ids) + 1;
+    if (minimumId > 1000000) throw new Error('植物编号已超出可用范围。');
+    return { version: VERSION, tempo: value.tempo, volume: value.volume, plants,
+      nextId: integer(value.nextId, minimumId, 1000000) ? value.nextId : minimumId };
+  }
+  function createGarden() {
+    const melody = [5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 1, 2, 3, 4, 5];
+    const plants = melody.map((row, step) => ({ id: step + 1, step, row, timbre: step % 4 === 3 ? 'pluck' : 'bell' }));
+    [0, 4, 8, 12].forEach((step, i) => plants.push({ id: 17 + i, step, row: i % 2 ? 8 : 7, timbre: 'reed' }));
+    return { version: VERSION, tempo: 88, volume: .65, plants, nextId: 21 };
+  }
+  function addPlant(garden, value) {
+    const position = cell(value);
+    if (!TIMBRES.includes(value.timbre)) throw new Error('请选择风铃、芦笛或拨弦。');
+    if (garden.plants.some(p => p.step === position.step && p.row === position.row && p.timbre === value.timbre)) return garden;
+    if (garden.plants.length >= MAX_PLANTS) throw new Error('花园满了。先移除一株，再种植。');
+    if (!integer(garden.nextId, 1, 999999)) throw new Error('植物编号已用完。请重新建立花园。');
+    return { ...garden, plants: [...garden.plants, { id: garden.nextId, ...position, timbre: value.timbre }], nextId: garden.nextId + 1 };
+  }
+  function movePlant(garden, id, value) {
+    const position = cell(value), current = garden.plants.find(p => p.id === id);
+    if (!current) return garden;
+    if (current.step === position.step && current.row === position.row) return garden;
+    if (garden.plants.some(p => p.id !== id && p.step === position.step && p.row === position.row && p.timbre === current.timbre)) return garden;
+    return { ...garden, plants: garden.plants.map(p => p.id === id ? { ...p, ...position } : p) };
+  }
+  function removePlant(garden, id) {
+    if (!garden.plants.some(p => p.id === id)) return garden;
+    return { ...garden, plants: garden.plants.filter(p => p.id !== id) };
+  }
+  function eventsAtStep(garden, step) {
+    if (!integer(step, 0, STEPS - 1)) throw new Error('节拍位置无效。');
+    return garden.plants.filter(p => p.step === step).sort((a, b) => a.id - b.id);
+  }
+  function stepDuration(tempo) {
+    if (!finite(tempo) || tempo < 48 || tempo > 144) throw new Error('速度应为每分钟 48～144 拍。');
+    return 60 / tempo / 2;
+  }
+  function coordinateToCell({ x, y, width, height }) {
+    if (![x, y, width, height].every(finite) || width <= 0 || height <= 0) throw new Error('花园坐标无效。');
+    return { step: clamp(Math.floor(x / width * STEPS), 0, STEPS - 1), row: clamp(Math.floor(y / height * ROWS), 0, ROWS - 1) };
+  }
+  function frequencyForRow(row) {
+    if (!integer(row, 0, ROWS - 1)) throw new Error('音高无效。');
+    return 440 * 2 ** ((PITCHES[row].midi - 69) / 12);
+  }
+  function serializeGarden(garden) { return JSON.stringify(validateGarden(garden), null, 2); }
+  function parseGarden(text) {
+    if (typeof text !== 'string' || text.length > 50000) throw new Error('存档文件过大或不是文字。');
+    let value;
+    try { value = JSON.parse(text); } catch { throw new Error('存档不是有效的 JSON 文件。'); }
+    return validateGarden(value);
+  }
+  global.WindGardenCore = Object.freeze({ VERSION, STEPS, ROWS, MAX_PLANTS, TIMBRES, PITCHES, clamp,
+    createGarden, validateGarden, addPlant, movePlant, removePlant, eventsAtStep, stepDuration,
+    coordinateToCell, frequencyForRow, serializeGarden, parseGarden });
+})(globalThis);
+</script>
+  <script>
+(function (global) {
+  'use strict';
+  const Core = global.WindGardenCore;
+  class GardenAudio {
+    constructor({ getGarden, onStep, onError, onInterrupted = () => {} }) {
+      this.getGarden = getGarden; this.onStep = onStep; this.onError = onError; this.onInterrupted = onInterrupted;
+      this.context = null; this.master = null; this.timer = null; this.running = false;
+      this.step = 0; this.nextTime = 0; this.voices = new Set(); this.visualEvents = [];
+      this.unavailable = false; this.generation = 0;
+    }
+    async enable() {
+      if (this.unavailable) return false;
+      try {
+        if (!this.context) {
+          const Audio = global.AudioContext || global.webkitAudioContext;
+          if (!Audio) throw new Error('此浏览器没有 Web Audio。');
+          this.context = new Audio();
+          this.context.addEventListener('statechange', () => {
+            if (this.running && this.context.state !== 'running') { this.stop(); this.onInterrupted(); }
+          });
+          this.master = this.context.createGain();
+          this.master.gain.value = this.getGarden().volume * .52;
+          const compressor = this.context.createDynamicsCompressor();
+          compressor.threshold.value = -16; compressor.ratio.value = 4;
+          this.master.connect(compressor); compressor.connect(this.context.destination);
+        }
+        if (this.context.state !== 'running') await this.context.resume();
+        if (this.context.state !== 'running') throw new Error('浏览器未能启用声音。');
+        return true;
+      } catch (error) {
+        this.unavailable = true; this.onError(error); return false;
+      }
+    }
+    setVolume(value) {
+      if (this.master) this.master.gain.setTargetAtTime(value * .52, this.context.currentTime, .025);
+    }
+    playNote(plant, when) {
+      if (!this.context || this.context.state !== 'running') return;
+      const ctx = this.context, base = Core.frequencyForRow(plant.row), timbre = plant.timbre;
+      const envelope = ctx.createGain(), duration = timbre === 'bell' ? 1.55 : timbre === 'reed' ? .65 : .72;
+      envelope.gain.setValueAtTime(0, when);
+      const amplitude = timbre === 'bell' ? .22 : timbre === 'reed' ? .16 : .24;
+      envelope.gain.linearRampToValueAtTime(amplitude, when + (timbre === 'reed' ? .065 : .009));
+      envelope.gain.exponentialRampToValueAtTime(.0001, when + duration);
+      envelope.connect(this.master);
+      const voice = { envelope, oscillators: [] };
+      const partials = timbre === 'bell' ? [[1, 1, 'sine'], [2.01, .23, 'sine'], [3.99, .07, 'sine']]
+        : timbre === 'reed' ? [[1, .72, 'triangle'], [2, .13, 'sine']]
+          : [[1, .83, 'triangle'], [2, .15, 'sine']];
+      partials.forEach(([ratio, gain, type]) => {
+        const osc = ctx.createOscillator(), level = ctx.createGain();
+        osc.type = type; osc.frequency.setValueAtTime(base * ratio, when); level.gain.value = gain;
+        if (timbre === 'pluck') osc.frequency.exponentialRampToValueAtTime(base * ratio * .996, when + .16);
+        osc.connect(level); level.connect(envelope); osc.start(when); osc.stop(when + duration + .04);
+        voice.oscillators.push(osc);
+        osc.onended = () => { osc.disconnect(); level.disconnect(); };
+      });
+      this.voices.add(voice);
+      voice.oscillators[0].addEventListener('ended', () => { envelope.disconnect(); this.voices.delete(voice); });
+    }
+    async preview(plant) {
+      const generation = this.generation;
+      if (await this.enable() && generation === this.generation && !global.document?.hidden) this.playNote(plant, this.context.currentTime + .01);
+    }
+    async start() {
+      if (this.running) return true;
+      const generation = ++this.generation;
+      const audible = await this.enable();
+      if (generation !== this.generation) return false;
+      this.running = true; this.step = 0; this.visualEvents.length = 0;
+      this.nextTime = this.now() + .055;
+      this.tick(); this.timer = global.setInterval(() => this.tick(), 25);
+      return audible;
+    }
+    now() { return this.context && !this.unavailable ? this.context.currentTime : performance.now() / 1000; }
+    tick() {
+      if (!this.running) return;
+      const now = this.now();
+      if (this.nextTime < now - .15) {
+        const duration = Core.stepDuration(this.getGarden().tempo), skipped = Math.ceil((now - this.nextTime) / duration);
+        this.step = (this.step + skipped) % Core.STEPS; this.nextTime += skipped * duration; this.visualEvents.length = 0;
+      }
+      while (this.nextTime < now + .09) {
+        const garden = this.getGarden(), step = this.step, plants = Core.eventsAtStep(garden, step);
+        if (!this.unavailable) plants.forEach(plant => this.playNote(plant, this.nextTime));
+        this.visualEvents.push({ time: this.nextTime, step, duration: Core.stepDuration(garden.tempo), ids: plants.map(p => p.id) });
+        this.nextTime += Core.stepDuration(garden.tempo); this.step = (step + 1) % Core.STEPS;
+      }
+      while (this.visualEvents.length && this.visualEvents[0].time <= now) this.onStep(this.visualEvents.shift());
+    }
+    stop() {
+      this.generation++; this.running = false; global.clearInterval(this.timer); this.timer = null; this.visualEvents.length = 0;
+      if (!this.context) return;
+      const now = this.context.currentTime;
+      this.voices.forEach(voice => {
+        try { voice.envelope.gain.cancelScheduledValues(now); voice.envelope.gain.setTargetAtTime(.0001, now, .012);
+          voice.oscillators.forEach(osc => { try { osc.stop(now + .06); } catch {} }); } catch {}
+      });
+    }
+  }
+  global.WindGardenAudio = GardenAudio;
+})(globalThis);
+</script>
+  <script>
+(function (global) {
+  'use strict';
+  const Core = global.WindGardenCore;
+  const COLORS = { bell: '#F2CE71', reed: '#D97A70', pluck: '#719FC2' };
+  class GardenRenderer {
+    constructor(canvas, getState) {
+      this.canvas = canvas; this.ctx = canvas.getContext('2d'); this.getState = getState;
+      this.width = 0; this.height = 0; this.flashes = new Map(); this.lastPaint = 0;
+      this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(canvas);
+      this.resize(); this.frame = this.frame.bind(this); this.frameId = requestAnimationFrame(this.frame);
+    }
+    resize() {
+      const bounds = this.canvas.getBoundingClientRect(), ratio = Math.min(global.devicePixelRatio || 1, 2);
+      this.width = bounds.width; this.height = bounds.height;
+      this.canvas.width = Math.round(this.width * ratio); this.canvas.height = Math.round(this.height * ratio);
+      this.ctx.setTransform(ratio, 0, 0, ratio, 0, 0); this.paint(performance.now() / 1000);
+    }
+    layout() {
+      const mobile = this.width < 600;
+      return { x: mobile ? 34 : 64, y: mobile ? 57 : 66,
+        width: this.width - (mobile ? 54 : 97), height: this.height - (mobile ? 141 : 154), ground: this.height - 58 };
+    }
+    pointFor(plant, time, swaying = true) {
+      const grid = this.layout(), cw = grid.width / Core.STEPS, ch = grid.height / Core.ROWS;
+      const shift = plant.timbre === 'bell' ? -Math.min(3, cw * .12) : plant.timbre === 'reed' ? Math.min(4, cw * .15) : 0;
+      const phase = plant.id * 1.713, state = this.getState();
+      const sway = state.reducedMotion || !swaying ? 0 : Math.sin(time * 1.3 + phase) * (state.playing ? 3.6 : 1.3);
+      return { x: grid.x + (plant.step + .5) * cw + shift + sway, y: grid.y + (plant.row + .5) * ch,
+        baseX: grid.x + (plant.step + .5) * cw + shift, radius: Math.min(13.8, Math.max(7.8, cw * .25)) };
+    }
+    cellAt(x, y) {
+      const grid = this.layout();
+      if (x < grid.x || x > grid.x + grid.width || y < grid.y || y > grid.y + grid.height) return null;
+      return Core.coordinateToCell({ x: x - grid.x, y: y - grid.y, width: grid.width, height: grid.height });
+    }
+    hitAt(x, y) {
+      let best = null, distance = Infinity;
+      const time = performance.now() / 1000;
+      for (const plant of this.getState().garden.plants) {
+        const point = this.pointFor(plant, time), d = Math.hypot(point.x - x, point.y - y);
+        if (d < Math.max(18, point.radius + 7) && d < distance) { best = plant; distance = d; }
+      }
+      return best;
+    }
+    trigger(ids) { const time = performance.now() / 1000; ids.forEach(id => this.flashes.set(id, time)); }
+    frame(timestamp) {
+      if (timestamp - this.lastPaint >= 1000 / 30) { this.lastPaint = timestamp; this.paint(timestamp / 1000); }
+      this.frameId = requestAnimationFrame(this.frame);
+    }
+    leaf(x, y, angle, size, color) {
+      const ctx = this.ctx; ctx.save(); ctx.translate(x, y); ctx.rotate(angle); ctx.fillStyle = color;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.bezierCurveTo(size * .1, -size * .7, size, -size * .5, size, 0);
+      ctx.bezierCurveTo(size * .4, size * .24, size * .12, size * .18, 0, 0); ctx.fill(); ctx.restore();
+    }
+    flower(plant, point, pulse, selected, time) {
+      const ctx = this.ctx, r = point.radius, grid = this.layout();
+      const x = point.x, y = point.y, baseY = grid.ground + Math.sin(plant.id * 2.4) * 6;
+      const stemColor = plant.timbre === 'reed' ? '#5D8170' : '#497F60';
+      ctx.strokeStyle = stemColor; ctx.lineWidth = this.width < 600 ? 1.3 : 1.8;
+      ctx.beginPath(); ctx.moveTo(point.baseX, baseY); ctx.bezierCurveTo(point.baseX - 10, baseY - (baseY - y) * .4, x + 12, y + 35, x, y); ctx.stroke();
+      const length = baseY - y;
+      this.leaf(point.baseX - 1, y + length * .58, -.56, r * 1.7, '#598E6D');
+      this.leaf(point.baseX + 1, y + length * .75, Math.PI + .55, r * 1.45, '#6D9A72');
+      if (plant.timbre === 'reed') this.leaf(point.baseX, y + length * .36, -.73, r * 1.85, '#739B75');
+      if (pulse > 0 && !this.getState().reducedMotion) {
+        ctx.strokeStyle = COLORS[plant.timbre]; ctx.globalAlpha = pulse * .45; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(x, y, r + (1 - pulse) * 22, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+      }
+      ctx.save(); ctx.translate(x, y); ctx.rotate(this.getState().reducedMotion ? 0 : Math.sin(time * 1.3 + plant.id) * .09);
+      const scale = 1 + pulse * .13; ctx.scale(scale, scale);
+      ctx.fillStyle = COLORS[plant.timbre];
+      if (plant.timbre === 'bell') {
+        for (let petal = 0; petal < 5; petal++) {
+          ctx.save(); ctx.rotate(petal * Math.PI * 2 / 5 - Math.PI / 2);
+          ctx.beginPath(); ctx.ellipse(r * .49, 0, r * .62, r * .38, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        }
+        ctx.fillStyle = '#A87638'; ctx.beginPath(); ctx.arc(0, 0, r * .28, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#FFF0B8'; ctx.beginPath(); ctx.arc(-r * .09, -r * .12, r * .11, 0, Math.PI * 2); ctx.fill();
+      } else if (plant.timbre === 'reed') {
+        ctx.strokeStyle = '#7B7762'; ctx.lineWidth = 1.1;
+        for (let i = -1; i <= 1; i++) {
+          ctx.beginPath(); ctx.moveTo(0, r * .55); ctx.quadraticCurveTo(i * r * .7, 0, i * r * .57, -r * .92); ctx.stroke();
+          for (let seed = 0; seed < 3; seed++) {
+            ctx.save(); ctx.translate(i * r * .45, -r * .28 - seed * r * .27); ctx.rotate(i * .32);
+            ctx.fillStyle = seed % 2 ? '#E69A85' : COLORS.reed;
+            ctx.beginPath(); ctx.ellipse(0, 0, r * .26, r * .37, -.22, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+          }
+        }
+      } else {
+        for (let petal = 0; petal < 7; petal++) {
+          const a = petal * Math.PI * 2 / 7;
+          ctx.beginPath(); ctx.arc(Math.cos(a) * r * .49, Math.sin(a) * r * .49, r * .48, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.fillStyle = '#CAE1E9'; ctx.beginPath(); ctx.arc(0, 0, r * .39, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#4B809D'; ctx.lineWidth = 1;
+        for (let i = -1; i <= 1; i++) { ctx.beginPath(); ctx.moveTo(i * r * .15, -r * .22); ctx.lineTo(i * r * .15, r * .22); ctx.stroke(); }
+      }
+      ctx.restore();
+      if (selected) {
+        ctx.strokeStyle = '#194C45'; ctx.lineWidth = 1.8; ctx.setLineDash([3, 3]);
+        ctx.beginPath(); ctx.arc(x, y, r + 8, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+      }
+    }
+    paint(time) {
+      const ctx = this.ctx, w = this.width, h = this.height;
+      if (!w || !h || !ctx) return;
+      const state = this.getState(), grid = this.layout();
+      const sky = ctx.createLinearGradient(0, 0, 0, h);
+      sky.addColorStop(0, '#DDECE8'); sky.addColorStop(.65, '#EDF4DF'); sky.addColorStop(1, '#BDCEA0');
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+      const sunlight = ctx.createRadialGradient(w * .78, h * .2, 4, w * .78, h * .2, w * .33);
+      sunlight.addColorStop(0, 'rgba(255,245,198,.65)'); sunlight.addColorStop(1, 'rgba(255,245,198,0)');
+      ctx.fillStyle = sunlight; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#C3D3B8'; ctx.beginPath(); ctx.moveTo(0, h - 102);
+      ctx.bezierCurveTo(w * .2, h - 141, w * .32, h - 74, w * .52, h - 112);
+      ctx.bezierCurveTo(w * .76, h - 148, w * .91, h - 91, w, h - 117); ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.fill();
+      ctx.fillStyle = '#AAC09A'; ctx.beginPath(); ctx.moveTo(0, h - 84);
+      ctx.bezierCurveTo(w * .25, h - 102, w * .55, h - 76, w * .72, h - 95);
+      ctx.quadraticCurveTo(w * .91, h - 113, w, h - 74); ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.fill();
+      ctx.strokeStyle = 'rgba(64,104,78,.12)'; ctx.lineWidth = 1;
+      for (let row = 0; row < Core.ROWS; row++) {
+        const y = grid.y + (row + .5) * grid.height / Core.ROWS;
+        ctx.beginPath(); ctx.moveTo(grid.x, y); ctx.lineTo(grid.x + grid.width, y); ctx.stroke();
+        ctx.fillStyle = '#426354'; ctx.font = `${w < 600 ? 10 : 12}px "PingFang SC", sans-serif`; ctx.textAlign = 'right';
+        ctx.fillText(Core.PITCHES[row].label, grid.x - 13, y + 4);
+      }
+      for (let step = 0; step < Core.STEPS; step++) {
+        const x = grid.x + (step + .5) * grid.width / Core.STEPS;
+        ctx.strokeStyle = step % 4 === 0 ? 'rgba(64,104,78,.14)' : 'rgba(64,104,78,.055)';
+        ctx.beginPath(); ctx.moveTo(x, grid.y - 12); ctx.lineTo(x, h - 51); ctx.stroke();
+      }
+      let head = -1;
+      if (state.playing && state.playhead) {
+        const progress = state.reducedMotion ? .5 : Core.clamp((time - state.playhead.startedAt) / state.playhead.duration, 0, 1);
+        head = state.playhead.step + progress;
+        const x = grid.x + head / Core.STEPS * grid.width;
+        const wind = ctx.createLinearGradient(x - 35, 0, x + 16, 0);
+        wind.addColorStop(0, 'rgba(255,255,238,0)'); wind.addColorStop(.72, 'rgba(255,255,238,.58)'); wind.addColorStop(1, 'rgba(255,255,238,0)');
+        ctx.fillStyle = wind; ctx.fillRect(x - 35, grid.y - 25, 51, grid.ground - grid.y + 28);
+        ctx.strokeStyle = 'rgba(255,255,250,.82)'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x, grid.y - 16); ctx.bezierCurveTo(x - 11, h * .38, x + 8, h * .7, x, grid.ground); ctx.stroke();
+      }
+      if (state.cursor && !state.selectedId) {
+        const x = grid.x + (state.cursor.step + .5) * grid.width / Core.STEPS, y = grid.y + (state.cursor.row + .5) * grid.height / Core.ROWS;
+        ctx.strokeStyle = '#467D6C'; ctx.lineWidth = 1.3; ctx.setLineDash([3, 4]);
+        ctx.beginPath(); ctx.arc(x, y, w < 600 ? 10 : 18, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+        ctx.strokeStyle = 'rgba(70,125,108,.4)'; ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.lineTo(x + 4, y); ctx.moveTo(x, y - 4); ctx.lineTo(x, y + 4); ctx.stroke();
+      }
+      const plants = [...state.garden.plants].sort((a, b) => a.row - b.row || a.id - b.id);
+      plants.forEach(plant => {
+        const flash = this.flashes.get(plant.id), elapsed = flash === undefined ? 99 : time - flash;
+        const pulse = Core.clamp(1 - elapsed / .65, 0, 1);
+        if (elapsed > 1) this.flashes.delete(plant.id);
+        this.flower(plant, this.pointFor(plant, time), pulse, state.selectedId === plant.id, time);
+      });
+      // Deterministic low meadow blades give the flowers a shared ground.
+      for (let i = 0; i < Math.ceil(w / 9); i++) {
+        const x = i * 9 + Math.sin(i * 9.2) * 3, y = h - 51 + Math.sin(i * 2.31) * 8;
+        const bend = state.reducedMotion ? 2 : Math.sin(time * 1.3 + i * .61) * 2 + 2;
+        ctx.strokeStyle = i % 3 ? '#88A676' : '#709465'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, y + 10); ctx.quadraticCurveTo(x + bend, y - 2, x + bend + 3, y - 11 - (i % 4) * 3); ctx.stroke();
+      }
+      const ground = ctx.createLinearGradient(0, h - 54, 0, h);
+      ground.addColorStop(0, 'rgba(177,199,145,0)'); ground.addColorStop(.65, '#C8D6AE'); ground.addColorStop(1, '#CFDCB9');
+      ctx.fillStyle = ground; ctx.fillRect(0, h - 54, w, 54);
+      ctx.textAlign = 'center'; ctx.font = `${w < 600 ? 9 : 11}px "PingFang SC", sans-serif`;
+      for (let step = 0; step < Core.STEPS; step++) {
+        const x = grid.x + (step + .5) * grid.width / Core.STEPS, active = head >= step && head < step + 1;
+        if (active) { ctx.fillStyle = '#194C45'; ctx.beginPath(); ctx.arc(x, h - 28, w < 600 ? 8 : 11, 0, Math.PI * 2); ctx.fill(); }
+        ctx.fillStyle = active ? '#F8FCED' : step % 4 === 0 ? '#365D48' : '#667E59'; ctx.fillText(String(step + 1), x, h - 24.5);
+      }
+      ctx.textAlign = 'left'; ctx.fillStyle = '#44675A'; ctx.font = `${12}px "PingFang SC", sans-serif`;
+      ctx.fillText(state.playing ? '风正在经过' : state.garden.plants.length ? '花园等风来' : '点一下空地，种下第一个音', grid.x, 30);
+      ctx.textAlign = 'right'; ctx.fillText('越高，音越高', w - (w < 600 ? 20 : 32), 30);
+    }
+  }
+  global.WindGardenRenderer = GardenRenderer;
+})(globalThis);
+</script>
+  <script>
+(function (global) {
+  'use strict';
+  const Core = global.WindGardenCore, $ = id => document.getElementById(id);
+  const NAMES = { bell: '风铃', reed: '芦笛', pluck: '拨弦' }, STORAGE_KEY = 'windplay.wind-garden.v1';
+  const canvas = $('garden-canvas'), media = global.matchMedia('(prefers-reduced-motion: reduce)');
+  let garden = Core.createGarden(), selectedId = null, timbre = 'bell', cursor = null, playing = false;
+  let playhead = null, reducedMotion = media.matches, drag = null, pendingPlay = false;
+  let storageAvailable = true, savedJSON = '', rangeStart = null, startupMessage = '';
+  const history = [];
+  function announce(message, error = false) { $('message').textContent = message; $('message').classList.toggle('error', error); }
+  try {
+    const stored = global.localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try { garden = Core.parseGarden(stored); savedJSON = Core.serializeGarden(garden); startupMessage = '已打开上次保存的花园。让风吹起来，继续这段旋律。'; }
+      catch (error) { startupMessage = `上次的存档无法读取：${error.message} 已打开示例旋律，可重新保存或导入 JSON。`; }
+    }
+    const probe = `${STORAGE_KEY}.probe`; global.localStorage.setItem(probe, '1'); global.localStorage.removeItem(probe);
+  } catch (error) {
+    storageAvailable = false; startupMessage = `本地保存暂不可用（${error.message}）。编辑仍可继续，请用“导出 JSON”保留花园。`;
+  }
+  const renderer = new global.WindGardenRenderer(canvas, () => ({ garden, selectedId, timbre, cursor, playing, playhead, reducedMotion }));
+  const audio = new global.WindGardenAudio({ getGarden: () => garden,
+    onStep(event) {
+      playhead = { step: event.step, duration: event.duration, startedAt: performance.now() / 1000 - Math.max(0, audio.now() - event.time) };
+      renderer.trigger(event.ids); $('beat-label').textContent = `第 ${event.step + 1} / 16 个半拍`;
+    },
+    onError(error) { announce(`声音暂不可用：${error.message} 你仍可种植，并让风在画面中经过。`, true); updatePlayback(); },
+    onInterrupted() { pause('声音被浏览器中断。点“让风吹起来”可重新开启。'); }
+  });
+  function selectedPlant() { return garden.plants.find(p => p.id === selectedId) || null; }
+  function describe(plant) { return plant ? `${NAMES[plant.timbre]} · ${Core.PITCHES[plant.row].name} · 第 ${plant.step + 1} 个半拍` : '未选择植物'; }
+  function updatePlayback() {
+    $('play').setAttribute('aria-pressed', String(playing)); $('play').disabled = pendingPlay;
+    $('play-label').textContent = playing ? '让风歇一会' : '让风吹起来';
+    $('play-icon').innerHTML = playing ? '<path d="M4 3h3v10H4zm5 0h3v10H9z" fill="currentColor"/>' : '<path d="M4 2.5v11L13 8Z" fill="currentColor"/>';
+    $('audio-state').classList.toggle('playing', playing); $('audio-state').classList.toggle('visual', audio.unavailable);
+    $('audio-label').textContent = audio.unavailable ? '声音不可用，画面可玩' : playing ? '风在唱歌' : audio.context ? '风已暂停' : '点击播放，开启声音';
+  }
+  function refresh() {
+    const selected = selectedPlant();
+    if (!selected) selectedId = null;
+    $('tempo').value = garden.tempo; $('tempo-value').value = garden.tempo;
+    $('volume').value = Math.round(garden.volume * 100); $('volume-value').value = `${Math.round(garden.volume * 100)}%`;
+    $('garden-description').textContent = `${garden.plants.length} 株植物${playing ? '，正在随风唱歌' : '，等待一阵风'}`;
+    const picker = $('selected-plant'), oldValue = String(selectedId || '');
+    picker.replaceChildren(new Option('选择一株植物', ''));
+    [...garden.plants].sort((a, b) => a.step - b.step || a.row - b.row || a.id - b.id).forEach(p => picker.add(new Option(describe(p), String(p.id))));
+    picker.value = oldValue;
+    $('delete-plant').disabled = !selected; $('plant-step').disabled = !selected; $('plant-row').disabled = !selected;
+    $('plant-step').value = selected ? selected.step : 0; $('plant-row').value = selected ? selected.row : 5;
+    $('undo').disabled = history.length === 0; $('clear').disabled = garden.plants.length === 0;
+    $('selection-info').textContent = selected ? describe(selected) : '花朵越高，音越高；越靠右，越晚响。';
+    const dirty = savedJSON !== Core.serializeGarden(garden);
+    $('save').textContent = dirty ? '保存花园' : '已保存';
+    updatePlayback();
+  }
+  for (let step = 0; step < Core.STEPS; step++) $('plant-step').add(new Option(String(step + 1), String(step)));
+  Core.PITCHES.forEach((pitch, row) => $('plant-row').add(new Option(pitch.name, String(row))));
+  function remember(previous) { history.push(previous); if (history.length > 30) history.shift(); }
+  function commit(next, message, options = {}) {
+    if (next === garden) return false;
+    if (options.history !== false) remember(garden);
+    garden = next; audio.setVolume(garden.volume); refresh(); if (message) announce(message);
+    return true;
+  }
+  function pause(message) {
+    audio.stop(); playing = false; pendingPlay = false; playhead = null;
+    $('beat-label').textContent = '16 个半拍，一圈旋律'; refresh();
+    if (message) announce(message);
+  }
+  async function togglePlay() {
+    if (pendingPlay) return;
+    if (playing) { pause('风歇下来了。可以继续种植、移动植物。'); return; }
+    pendingPlay = true; updatePlayback();
+    const audible = await audio.start();
+    pendingPlay = false; playing = audio.running;
+    if (document.hidden) { pause(); return; }
+    refresh();
+    if (playing && audible) announce(garden.plants.length ? '风吹起来了。拖动花朵，下一圈就能听到新的旋律。' : '风吹起来了。点一下空地，种下第一个音。');
+  }
+  async function audition(plant) {
+    if (!plant) return;
+    renderer.trigger([plant.id]);
+    if (!playing) { await audio.preview(plant); updatePlayback(); }
+  }
+  function plantAt(cell) {
+    cancelDrag();
+    try {
+      const next = Core.addPlant(garden, { ...cell, timbre });
+      if (next === garden) {
+        selectedId = garden.plants.find(p => p.step === cell.step && p.row === cell.row && p.timbre === timbre).id;
+        refresh(); announce('这里已有一株同样的植物，已选中它。'); return;
+      }
+      selectedId = next.nextId - 1; commit(next, `种下了${describe(next.plants.find(p => p.id === selectedId))}。`);
+      audition(selectedPlant());
+    } catch (error) { announce(error.message, true); }
+  }
+  function moveSelected(cell) {
+    cancelDrag();
+    const selected = selectedPlant(); if (!selected) return;
+    const next = Core.movePlant(garden, selected.id, cell);
+    if (next === garden) { announce('这里已经有同样的植物，请换一个位置。'); return; }
+    commit(next, `已移动：${describe(next.plants.find(p => p.id === selectedId))}。`); audition(selectedPlant());
+  }
+  function deleteSelected() {
+    cancelDrag();
+    const plant = selectedPlant(); if (!plant) return;
+    selectedId = null; commit(Core.removePlant(garden, plant.id), `已移除${NAMES[plant.timbre]}。可以撤销。`);
+  }
+  function undo() {
+    cancelDrag();
+    if (!history.length) return;
+    garden = history.pop(); selectedId = null; cursor = null; audio.setVolume(garden.volume); refresh(); announce('已撤销上一步。');
+  }
+  function position(event) { const bounds = canvas.getBoundingClientRect(); return { x: event.clientX - bounds.left, y: event.clientY - bounds.top }; }
+  canvas.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || drag) return;
+    const point = position(event), plant = renderer.hitAt(point.x, point.y), cell = renderer.cellAt(point.x, point.y);
+    if (!plant && !cell) return;
+    event.preventDefault(); canvas.focus({ preventScroll: true });
+    selectedId = plant ? plant.id : null; cursor = cell;
+    drag = { pointerId: event.pointerId, plantId: plant ? plant.id : null, origin: garden, start: point, moved: false, cell };
+    canvas.setPointerCapture(event.pointerId); refresh();
+  });
+  canvas.addEventListener('pointermove', event => {
+    const point = position(event), cell = renderer.cellAt(point.x, point.y);
+    if (!drag) { if (event.pointerType === 'mouse') cursor = cell; return; }
+    if (event.pointerId !== drag.pointerId) return;
+    if (Math.hypot(point.x - drag.start.x, point.y - drag.start.y) > 5) drag.moved = true;
+    if (drag.plantId && drag.moved && cell) {
+      garden = Core.movePlant(garden, drag.plantId, cell); cursor = cell;
+      $('selection-info').textContent = describe(garden.plants.find(plant => plant.id === drag.plantId));
+    }
+  });
+  function finishPointer(event, canceled) {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    const current = drag; drag = null;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    if (canceled) { garden = current.origin; refresh(); return; }
+    if (current.plantId) {
+      if (garden !== current.origin) { remember(current.origin); refresh(); announce(`已移动：${describe(selectedPlant())}。`); audition(selectedPlant()); }
+      else { refresh(); announce(`已选中：${describe(selectedPlant())}。`); audition(selectedPlant()); }
+    } else if (!current.moved && current.cell) plantAt(current.cell);
+    else refresh();
+  }
+  function cancelDrag() {
+    if (!drag) return;
+    const current = drag; drag = null; garden = current.origin;
+    if (canvas.hasPointerCapture(current.pointerId)) canvas.releasePointerCapture(current.pointerId);
+    refresh();
+  }
+  canvas.addEventListener('pointerup', event => finishPointer(event, false));
+  canvas.addEventListener('pointercancel', event => finishPointer(event, true));
+  canvas.addEventListener('lostpointercapture', event => { if (drag) finishPointer(event, true); });
+  canvas.addEventListener('pointerleave', () => { if (!drag) cursor = null; });
+  canvas.addEventListener('blur', cancelDrag);
+  canvas.addEventListener('keydown', event => {
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if (['Escape', 'Delete', 'Backspace', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) cancelDrag();
+    if (event.key === ' ') { event.preventDefault(); togglePlay(); return; }
+    if (event.key === 'Escape') { selectedId = null; cursor = null; refresh(); announce('已取消选择。'); return; }
+    if (event.key === 'Delete' || event.key === 'Backspace') { event.preventDefault(); deleteSelected(); return; }
+    if (event.key === 'Enter') { event.preventDefault(); const selected = selectedPlant(); if (selected) audition(selected); else plantAt(cursor || { step: 0, row: 5 }); return; }
+    const directions = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    if (!directions[event.key]) return;
+    event.preventDefault(); const selected = selectedPlant(), cell = selected || cursor || { step: 0, row: 5 }, delta = directions[event.key];
+    const next = { step: Core.clamp(cell.step + delta[0], 0, Core.STEPS - 1), row: Core.clamp(cell.row + delta[1], 0, Core.ROWS - 1) };
+    if (selected) {
+      if (next.step !== selected.step || next.row !== selected.row) moveSelected(next);
+    } else { cursor = next; announce(`种植位置：${Core.PITCHES[next.row].name}，第 ${next.step + 1} 个半拍。按 Enter 种植。`); }
+  });
+  document.addEventListener('keydown', event => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'z' && !event.shiftKey && !event.target.matches('input,select,textarea')) { event.preventDefault(); undo(); }
+  });
+  $('play').addEventListener('click', togglePlay);
+  document.querySelectorAll('[data-timbre]').forEach(button => button.addEventListener('click', () => {
+    timbre = button.dataset.timbre;
+    document.querySelectorAll('[data-timbre]').forEach(other => { const active = other === button; other.classList.toggle('active', active); other.setAttribute('aria-pressed', String(active)); });
+    announce(`已选择${NAMES[timbre]}种子。点击花园空地种植。`);
+  }));
+  $('selected-plant').addEventListener('change', event => {
+    const nextId = event.target.value ? Number(event.target.value) : null;
+    cancelDrag(); selectedId = nextId; cursor = null; refresh();
+    if (selectedPlant()) { announce(`已选中：${describe(selectedPlant())}。可以调整拍点与音高，或用方向键移动。`); audition(selectedPlant()); }
+  });
+  $('plant-step').addEventListener('change', event => { const plant = selectedPlant(); if (plant) moveSelected({ step: Number(event.target.value), row: plant.row }); refresh(); });
+  $('plant-row').addEventListener('change', event => { const plant = selectedPlant(); if (plant) moveSelected({ step: plant.step, row: Number(event.target.value) }); refresh(); });
+  $('delete-plant').addEventListener('click', deleteSelected); $('undo').addEventListener('click', undo);
+  ['tempo', 'volume'].forEach(id => {
+    const input = $(id);
+    input.addEventListener('input', () => {
+      const value = Number(input.value);
+      cancelDrag();
+      if (!rangeStart) rangeStart = garden;
+      garden = { ...garden, [id]: value / (id === 'volume' ? 100 : 1) };
+      audio.setVolume(garden.volume); refresh();
+    });
+    input.addEventListener('change', () => {
+      if (rangeStart) { if (Core.serializeGarden(rangeStart) !== Core.serializeGarden(garden)) remember(rangeStart); rangeStart = null; refresh(); }
+    });
+  });
+  $('save').addEventListener('click', () => {
+    cancelDrag();
+    if (!storageAvailable) { announce('本地保存暂不可用。请点击“导出 JSON”，把花园保存在文件中。', true); return; }
+    try {
+      const text = Core.serializeGarden(garden); global.localStorage.setItem(STORAGE_KEY, text); savedJSON = text; refresh(); announce('花园已保存在当前浏览器，下次打开会恢复。');
+    } catch (error) { storageAvailable = false; announce(`保存失败：${error.message} 请导出 JSON 保留花园。`, true); }
+  });
+  $('export').addEventListener('click', () => {
+    cancelDrag();
+    try {
+      const blob = new Blob([Core.serializeGarden(garden)], { type: 'application/json' }), url = URL.createObjectURL(blob);
+      const link = document.createElement('a'); link.href = url; link.download = '听风花园.json'; document.body.appendChild(link); link.click(); link.remove();
+      global.setTimeout(() => URL.revokeObjectURL(url), 10000); announce('已导出“听风花园.json”。可以在其他设备导入它。');
+    } catch (error) { announce(`导出失败：${error.message}`, true); }
+  });
+  $('import').addEventListener('click', () => $('import-file').click());
+  $('import-file').addEventListener('change', async event => {
+    const file = event.target.files[0]; if (!file) return;
+    try {
+      if (file.size > 50000) throw new Error('存档文件超过 50 KB，请选择听风花园导出的 JSON。');
+      const next = Core.parseGarden(await file.text());
+      cancelDrag(); pause(); selectedId = null; cursor = null; commit(next, `已导入 ${next.plants.length} 株植物。可以撤销恢复之前的花园。`);
+    } catch (error) { announce(`导入失败：${error.message} 当前花园已保留。`, true); }
+    finally { event.target.value = ''; }
+  });
+  $('example').addEventListener('click', () => { cancelDrag(); selectedId = null; cursor = null; commit(Core.createGarden(), '已种下示例旋律。可以撤销恢复之前的花园。'); });
+  $('clear').addEventListener('click', () => {
+    cancelDrag();
+    if (!garden.plants.length || !global.confirm('清空所有植物？这一步可以撤销。')) return;
+    selectedId = null; cursor = null; commit({ ...garden, plants: [] }, '花园已清空。点击空地种植，或撤销恢复。');
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelDrag();
+      if (playing || pendingPlay) pause('页面进入后台，风已暂停。回来后点“让风吹起来”继续。');
+      else audio.stop();
+    }
+  });
+  global.addEventListener('pagehide', () => audio.stop());
+  media.addEventListener('change', event => { reducedMotion = event.matches; });
+  Object.defineProperty(global, 'WindGarden', { value: Object.freeze({
+    inspect: () => Object.freeze({ playing, audioState: audio.unavailable ? 'unavailable' : audio.context ? audio.context.state : 'idle',
+      plants: garden.plants.length, selected: selectedId, tempo: garden.tempo, volume: garden.volume,
+      currentStep: playhead ? playhead.step : null, storageAvailable, undoCount: history.length })
+  }), writable: false, configurable: false });
+  refresh(); if (startupMessage) announce(startupMessage, !storageAvailable);
+})(globalThis);
+</script>
+</body>
+</html>

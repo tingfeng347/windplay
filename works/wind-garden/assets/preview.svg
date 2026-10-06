@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-labelledby="title description">
+  <title id="title">听风花园 / Wind Garden — 一座由风奏响的花园</title>
+  <desc id="description">清晨的蓝绿色花园里，浅黄风铃、珊瑚色芦笛与蓝色拨弦花沿九行音阶、十六步节拍生长。柔软的风带从左向右穿过花丛。</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#cce6e3"/><stop offset=".58" stop-color="#deece2"/><stop offset="1" stop-color="#edf0de"/></linearGradient>
+    <radialGradient id="morning"><stop stop-color="#fff8dc" stop-opacity=".94"/><stop offset="1" stop-color="#fff8dc" stop-opacity="0"/></radialGradient>
+    <linearGradient id="garden" x2="0" y2="1"><stop stop-color="#234c49"/><stop offset="1" stop-color="#163b39"/></linearGradient>
+    <linearGradient id="breeze"><stop stop-color="#d5f4e9" stop-opacity="0"/><stop offset=".38" stop-color="#d5f4e9" stop-opacity=".04"/><stop offset=".88" stop-color="#d5f4e9" stop-opacity=".16"/><stop offset="1" stop-color="#d5f4e9" stop-opacity="0"/></linearGradient>
+    <linearGradient id="ribbon" x2="1" y2="0"><stop stop-color="#e5faea" stop-opacity="0"/><stop offset=".5" stop-color="#e5faea" stop-opacity=".8"/><stop offset="1" stop-color="#e5faea" stop-opacity="0"/></linearGradient>
+    <clipPath id="plot"><rect x="126" y="271" width="1032" height="351" rx="20"/></clipPath>
+    <g id="stem" fill="none" stroke-linecap="round">
+      <path d="M0 14C-7 4 4-7 0-20" stroke="#8eb59a" stroke-width="2"/>
+      <path d="M-2 7C-14 7-16-1-16-1C-8-4-3 0-2 7Z" fill="#7eac8d" stroke="none"/>
+      <path d="M1 2C12 3 17-4 17-4C7-8 2-4 1 2Z" fill="#9abd93" stroke="none"/>
+    </g>
+    <g id="bell">
+      <ellipse cy="15" rx="14" ry="4" fill="#0c2926" opacity=".25"/>
+      <use href="#stem"/>
+      <path d="M-13-17C-13-30-8-39 0-39S13-30 13-17C5-12-5-12-13-17Z" fill="#f3dfa0"/>
+      <path d="M-13-17Q0-11 13-17" fill="none" stroke="#c5ae69" stroke-width="1.4"/>
+      <path d="M0-16V-9" stroke="#d1ba76" stroke-width="2" stroke-linecap="round"/>
+      <circle cy="-8" r="2.4" fill="#f7e9bc"/>
+      <path d="M-5-31Q-9-26-9-20" fill="none" stroke="#fff2cb" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="reed">
+      <ellipse cy="15" rx="13" ry="4" fill="#0c2926" opacity=".25"/>
+      <use href="#stem"/>
+      <path d="M0-19C-13-20-16-35-9-45C-4-38-2-29 0-19Z" fill="#ee9a84"/>
+      <path d="M0-19C-4-36 3-46 9-45C17-35 10-24 0-19Z" fill="#f4b09a"/>
+      <path d="M0-20C-4-31-2-42 2-49C9-43 8-30 0-20Z" fill="#ffd0aa"/>
+      <path d="M0-23L2-40" fill="none" stroke="#d78371" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g id="pluck">
+      <ellipse cy="15" rx="15" ry="4" fill="#0c2926" opacity=".25"/>
+      <use href="#stem"/>
+      <g fill="#93c8df" transform="translate(0 -28)">
+        <ellipse cy="-8" rx="6" ry="10"/>
+        <ellipse cy="-8" rx="6" ry="10" transform="rotate(72)"/>
+        <ellipse cy="-8" rx="6" ry="10" transform="rotate(144)"/>
+        <ellipse cy="-8" rx="6" ry="10" transform="rotate(216)"/>
+        <ellipse cy="-8" rx="6" ry="10" transform="rotate(288)"/>
+      </g>
+      <circle cy="-28" r="5.2" fill="#e0edcc"/>
+      <circle cy="-28" r="2" fill="#7cafa5"/>
+    </g>
+  </defs>
+  <rect width="1280" height="800" fill="url(#sky)"/>
+  <ellipse cx="1050" cy="100" rx="440" ry="340" fill="url(#morning)"/>
+  <g fill="none" stroke="#b1cfc1" opacity=".5">
+    <path d="M-20 232C220 155 288 295 534 209S944 148 1300 202"/>
+    <path d="M-20 242C212 166 296 303 540 219S953 157 1300 212"/>
+  </g>
+  <g font-family="Georgia, 'Songti SC', serif" fill="#204b47">
+    <text x="88" y="113" font-size="54" letter-spacing="-1.6">Wind Garden</text>
+    <text x="92" y="153" font-size="22" letter-spacing="4">让风，奏响你的花园。</text>
+  </g>
+  <g font-family="Arial, 'PingFang SC', sans-serif" fill="#477069">
+    <text x="92" y="204" font-size="13" letter-spacing="2.1">PLANT A NOTE · FOLLOW THE BREEZE</text>
+    <text x="1159" y="109" font-size="12" text-anchor="end" letter-spacing="2">WINDPLAY / SOUND</text>
+    <text x="1159" y="153" font-family="Georgia, serif" font-size="33" text-anchor="end">88</text>
+    <text x="1159" y="175" font-size="11" text-anchor="end" letter-spacing="2">BPM</text>
+  </g>
+  <rect x="126" y="278" width="1032" height="358" rx="20" fill="#b1c8b5" opacity=".42"/>
+  <rect x="126" y="271" width="1032" height="351" rx="20" fill="url(#garden)"/>
+  <g clip-path="url(#plot)">
+    <g fill="#9ac6ad" opacity=".045">
+      <rect x="126" y="271" width="258" height="351"/><rect x="642" y="271" width="258" height="351"/>
+    </g>
+    <g stroke="#c7e0c9" stroke-opacity=".12">
+      <path d="M190.5 271V622M255 271V622M319.5 271V622M384 271V622M448.5 271V622M513 271V622M577.5 271V622M642 271V622M706.5 271V622M771 271V622M835.5 271V622M900 271V622M964.5 271V622M1029 271V622M1093.5 271V622"/>
+      <path d="M126 310H1158M126 349H1158M126 388H1158M126 427H1158M126 466H1158M126 505H1158M126 544H1158M126 583H1158"/>
+    </g>
+    <rect x="474" y="271" width="89" height="351" fill="url(#breeze)"/>
+    <path d="M528 271V622" stroke="#d6f2d9" stroke-width="1.5" stroke-opacity=".46"/>
+    <g opacity=".95">
+      <use href="#bell" transform="translate(158 553)"/><use href="#bell" transform="translate(287 475)"/>
+      <use href="#bell" transform="translate(416 397)"/><use href="#bell" transform="translate(545 436)"/>
+      <use href="#bell" transform="translate(674 358)"/><use href="#bell" transform="translate(803 397)"/>
+      <use href="#bell" transform="translate(932 475)"/><use href="#bell" transform="translate(1061 436)"/>
+      <use href="#reed" transform="translate(223 592)"/><use href="#reed" transform="translate(416 553)"/>
+      <use href="#reed" transform="translate(610 514)"/><use href="#reed" transform="translate(803 553)"/>
+      <use href="#reed" transform="translate(996 514)"/><use href="#reed" transform="translate(1125 592)"/>
+      <use href="#pluck" transform="translate(158 436)"/><use href="#pluck" transform="translate(352 358)"/>
+      <use href="#pluck" transform="translate(545 319)"/><use href="#pluck" transform="translate(739 436)"/>
+      <use href="#pluck" transform="translate(932 358)"/><use href="#pluck" transform="translate(1125 397)"/>
+    </g>
+    <g fill="none" stroke="url(#ribbon)" stroke-linecap="round">
+      <path d="M126 373C263 331 309 407 459 373S749 344 929 378S1081 389 1199 354" stroke-width="1.8" opacity=".55"/>
+      <path d="M116 466C242 449 373 496 514 462S759 439 976 469S1101 463 1211 445" stroke-width="1.2" opacity=".38"/>
+      <path d="M265 539C403 510 495 552 630 530S840 509 1036 543" stroke-width="1.2" opacity=".45"/>
+    </g>
+    <g fill="#def1d4" opacity=".7">
+      <circle cx="515" cy="353" r="2"/><circle cx="524" cy="415" r="1.8"/><circle cx="543" cy="481" r="1.8"/>
+      <circle cx="512" cy="535" r="1.3"/><circle cx="542" cy="576" r="1.3"/>
+    </g>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="10" fill="#63877a" text-anchor="end" letter-spacing=".8">
+    <text x="109" y="296">HIGH</text><text x="109" y="608">LOW</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="11" fill="#63877a" text-anchor="middle">
+    <text x="158" y="649">01</text><text x="223" y="649">02</text><text x="287" y="649">03</text><text x="352" y="649">04</text>
+    <text x="416" y="649">05</text><text x="481" y="649">06</text><text x="545" y="649">07</text><text x="610" y="649">08</text>
+    <text x="674" y="649">09</text><text x="739" y="649">10</text><text x="803" y="649">11</text><text x="868" y="649">12</text>
+    <text x="932" y="649">13</text><text x="997" y="649">14</text><text x="1061" y="649">15</text><text x="1125" y="649">16</text>
+  </g>
+  <g transform="translate(126 710)" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#38635b">
+    <circle cy="-5" r="5" fill="#ddc57f"/><text x="16">风铃</text>
+    <circle cx="104" cy="-5" r="5" fill="#e99982"/><text x="120">芦笛</text>
+    <circle cx="208" cy="-5" r="5" fill="#81b9ce"/><text x="224">拨弦花</text>
+    <text x="1032" text-anchor="end" font-size="12" letter-spacing="1">16 STEPS · 9 NOTES · YOUR OWN MELODY</text>
+  </g>
+  <path d="M0 786C220 741 365 824 616 781S1032 768 1280 797V800H0Z" fill="#a8c7ac" opacity=".22"/>
+</svg>

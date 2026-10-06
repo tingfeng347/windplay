@@ -17,6 +17,8 @@
     "dev:survival": "npm run dev --workspace @windplay/ember-wilds",
     "dev:runner": "npm run dev --workspace @windplay/metro-rush",
     "dev:shooter": "npm run dev --workspace @windplay/strike-arena",
+    "dev:garden": "npm run dev --workspace @windplay/wind-garden",
+    "dev:shadow": "npm run dev --workspace @windplay/shadow-atelier",
     "build": "npm run build:works && npm run build:site",
     "build:works": "npm run build --workspaces --if-present",
     "build:site": "node scripts/build-site.mjs",

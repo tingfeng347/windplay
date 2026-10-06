@@ -1,0 +1,12 @@
+{
+  "name": "@windplay/wind-garden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "听风花园：种植音符，让风经过花园循环演奏的 Canvas 音乐玩具",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.cjs"
+  }
+}

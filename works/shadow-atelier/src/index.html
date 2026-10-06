@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e0d8ca">
+  <title>影子工坊 · Shadow Atelier</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="home" href="../../../index.html">返回 WindPlay</a>
+    <div class="wordmark"><h1>影子工坊</h1><p>转动雕塑，找到光里的形状。</p></div>
+    <span class="collection"><output id="collection-count">0 / 6</output> 已收藏</span>
+  </header>
+  <main>
+    <section class="gallery" aria-label="影子解谜展厅">
+      <div class="scene-wrap">
+        <canvas id="scene" tabindex="0" aria-label="立体雕塑与墙面投影。拖动转动雕塑；方向键调整，Q 和 E 调整侧倾，Shift 微调。"></canvas>
+        <p class="scene-instruction" id="scene-instruction">拖动雕塑，留意墙上的影子</p>
+        <div class="freeze-stamp" id="freeze-stamp" hidden><span>形状找到了</span><strong id="freeze-name"></strong><small>这束光已收入你的收藏</small></div>
+      </div>
+      <aside class="workbench">
+        <div class="exhibit-heading"><span id="level-number">第一束光</span><select id="level-select" aria-label="选择谜题"></select></div>
+        <h2 id="level-name">窗边的猫</h2>
+        <div class="reference"><canvas id="reference" width="192" height="192" role="img" aria-label="本关需要拼出的目标剪影"></canvas><div><span>要寻找的影子</span><p id="level-description"></p></div></div>
+        <div class="match-heading"><span>影子吻合度</span><output id="score">0%</output></div>
+        <div class="match-track" aria-hidden="true"><i id="match-fill"></i><span></span></div>
+        <p id="play-status" class="play-status" role="status" aria-live="polite">达到 90%，停留片刻便能定格。</p>
+        <fieldset class="angles"><legend>转动方向</legend>
+          <label for="angle-x"><span>俯仰</span><output id="value-x">0°</output></label><input id="angle-x" data-axis="0" type="range" min="-180" max="180" step="1" value="0" aria-label="俯仰角度">
+          <label for="angle-y"><span>左右</span><output id="value-y">0°</output></label><input id="angle-y" data-axis="1" type="range" min="-180" max="180" step="1" value="0" aria-label="左右角度">
+          <label for="angle-z" id="roll-label"><span>侧倾</span><output id="value-z">0°</output></label><input id="angle-z" data-axis="2" type="range" min="-180" max="180" step="1" value="0" aria-label="侧倾角度">
+        </fieldset>
+        <div class="tool-actions"><button id="shuffle">重新摆放</button><button id="hint">给我一点提示</button></div>
+        <p class="hint-copy" id="hint-copy">先大幅转动，再轻轻微调。</p>
+        <nav class="exhibit-nav" aria-label="切换谜题"><button id="previous">上一束光</button><span id="level-position">1 / 6</span><button id="next">下一束光</button></nav>
+      </aside>
+    </section>
+    <footer class="gallery-footer"><p>一盏灯，一面墙，一些看似凌乱的块。</p><p>拖动转动 · 方向键俯仰 / 左右 · Q / E 侧倾 · Shift 微调</p><span id="storage-status"></span></footer>
+  </main>
+  <script src="core.js"></script>
+  <script src="render.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

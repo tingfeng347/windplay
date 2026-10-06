@@ -29,6 +29,8 @@ npm run dev
 
 | 作品 | 类型 | 状态 | 说明 |
 | --- | --- | --- | --- |
+| [听风花园 · Wind Garden](works/wind-garden/) | 音乐玩具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/wind-garden/demo/index.html) | 种植与拖动音符植物，编排三种音色，调整节奏，保存音乐花园 |
+| [影子工坊 · Shadow Atelier](works/shadow-atelier/) | 空间解谜 | [直接打开成品](https://tingfeng347.github.io/windplay/works/shadow-atelier/demo/index.html) | 旋转立体雕塑，让真实投影与目标剪影重合，挑战六个光影谜题 |
 | [城市疾跑 · Metro Rush](works/metro-rush/) | 3D 城市跑酷 | [直接打开成品](https://tingfeng347.github.io/windplay/works/metro-rush/demo/index.html) | 第三人称三道跑酷，包含跳跃、滑铲、列车车顶、金币、道具、任务和角色解锁 |
 | [临界行动 · Strike Arena](works/strike-arena/) | 3D 第一人称枪战 | [直接打开成品](https://tingfeng347.github.io/windplay/works/strike-arena/demo/index.html) | 原创工业园战场，包含步枪/手枪、瞄准换弹、手雷、战术敌人、击杀目标与结算 |
 | [方块旷野 · Voxel Frontier](works/voxel-frontier/) | 第一人称方块沙盒 | [直接打开成品](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) | 我的世界玩法启发的原创方块世界，支持采集、建造、制作、创造/生存模式与本地存档 |
@@ -37,6 +39,14 @@ npm run dev
 | [Tingfeng Reel](works/tingfeng-reel/) | 动态片头 / 音画同步 | [直接打开成品](https://tingfeng347.github.io/windplay/works/tingfeng-reel/demo/index.html) | 根据 GitHub 主页编排的 28 秒片头，支持 2D/3D、亮暗主题与合成配乐 |
 
 ## 作品预览
+
+### [听风花园 · Wind Garden](works/wind-garden/)
+
+[![听风花园：种植音符，让旋律随风经过](assets/wind-garden-preview.jpg)](works/wind-garden/demo/index.html)
+
+### [影子工坊 · Shadow Atelier](works/shadow-atelier/)
+
+[![影子工坊：转动立体雕塑，拼出墙上的剪影](assets/shadow-atelier-preview.jpg)](works/shadow-atelier/demo/index.html)
 
 ### [城市疾跑 · Metro Rush](works/metro-rush/)
 
@@ -78,7 +88,9 @@ windplay/
 │   ├── voxel-frontier/      # 第一人称方块沙盒
 │   ├── ember-wilds/         # 手绘荒野生存
 │   ├── metro-rush/          # 3D 城市跑酷
-│   └── strike-arena/        # 3D 第一人称枪战
+│   ├── strike-arena/        # 3D 第一人称枪战
+│   ├── wind-garden/         # 植物音符与循环音乐
+│   └── shadow-atelier/      # 立体雕塑与剪影解谜
 ├── AGENTS.md                # 自动化协作规则
 ├── CONTRIBUTING.md          # 新增作品与开发说明
 ├── index.html               # 作品启动台
@@ -107,6 +119,7 @@ npm run dev --workspace @windplay/point-cloud-studio
 
 游戏也可以用根级快捷命令开发：`npm run dev:voxel`、`npm run dev:survival`、
 `npm run dev:runner` 和 `npm run dev:shooter`。
+听风花园和影子工坊分别使用 `npm run dev:garden` 和 `npm run dev:shadow`。
 它们的单文件成品支持离线体验，存档或个人纪录保存在当前浏览器中。
 
 ## 统一检查

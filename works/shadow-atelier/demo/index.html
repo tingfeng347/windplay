@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e0d8ca">
+  <title>影子工坊 · Shadow Atelier</title>
+  <style>
+:root{--plaster:#e0d8ca;--ink:#3d3c42;--quiet:#59554f;--indigo:#565874;--light:#fbf4df;--wood:#b89572;--line:#bcb3a5;--focus:#565c91;font-family:"Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--plaster);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select{color:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.48}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button{min-height:44px;background:none;border:1px solid var(--line);border-radius:4px;padding:8px 13px;font-size:13px}button:hover:not(:disabled){background:#d4cbba}a{color:inherit;text-underline-offset:5px}[hidden]{display:none!important}.masthead{max-width:1440px;margin:auto;padding:27px 42px 20px;display:flex;align-items:center;gap:30px;border-bottom:1px solid #c6beaf}.home{font-size:12px;white-space:nowrap;text-decoration:none}.wordmark{display:flex;align-items:baseline;gap:24px}.wordmark h1{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:600;font-size:30px;letter-spacing:5px;margin:0}.wordmark p{font-size:13px;color:var(--quiet);margin:0}.collection{margin-left:auto;font-size:12px;white-space:nowrap;color:var(--quiet)}.collection output{font-variant-numeric:tabular-nums;font-size:16px;margin-right:8px;color:var(--ink)}main{max-width:1440px;margin:auto}.gallery{display:grid;grid-template-columns:minmax(0,1fr) 320px;min-height:650px}.scene-wrap{position:relative;min-width:0;overflow:hidden;background:#e0d8ca;min-height:650px}#scene{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:0;touch-action:none;cursor:grab}#scene.dragging{cursor:grabbing}#scene.solved{cursor:default}.scene-instruction{position:absolute;bottom:29px;left:34px;right:20px;font-size:12px;color:#47443d;pointer-events:none;margin:0}.freeze-stamp{position:absolute;left:32px;bottom:70px;background:#eee6d5ed;border:1px solid #bcb3a5;padding:12px 18px;display:flex;flex-direction:column;gap:5px;pointer-events:none}.freeze-stamp span,.freeze-stamp small{font-size:12px;color:var(--quiet)}.freeze-stamp strong{font-family:"Songti SC",serif;font-size:25px;font-weight:500}.workbench{border-left:1px solid #c6beaf;padding:31px 27px 22px;align-self:stretch;background:#e6dfd4}.exhibit-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--quiet);font-size:12px}.exhibit-heading select{max-width:148px;border:0;border-bottom:1px solid var(--line);background:none;padding:8px 2px;font-size:12px;min-height:44px}.workbench h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:29px;font-weight:500;letter-spacing:2px;margin:19px 0 17px}.reference{display:flex;gap:14px;align-items:center;padding-bottom:23px;border-bottom:1px solid var(--line)}#reference{width:105px;height:105px;flex:0 0 105px;background:#f1eadb;border-radius:50%}.reference div{min-width:0}.reference span{font-size:12px;color:var(--quiet)}.reference p{font-size:13px;line-height:1.8;margin:6px 0 0}.match-heading{display:flex;align-items:baseline;justify-content:space-between;font-size:12px;margin-top:24px}.match-heading output{font-size:28px;font-variant-numeric:tabular-nums;font-weight:500;color:var(--indigo)}.match-track{height:5px;background:#c7c1b5;position:relative;margin-top:8px}.match-track i{position:absolute;inset:0 auto 0 0;background:var(--indigo);width:0}.match-track>span{position:absolute;left:90%;top:-3px;height:11px;width:1px;background:#585662}.play-status{font-size:13px;color:var(--quiet);line-height:1.7;min-height:38px;margin:10px 0 14px}.angles{border:0;padding:0;margin:0;min-width:0}.angles legend{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.angles label{display:flex;justify-content:space-between;font-size:12px}.angles output{font-variant-numeric:tabular-nums;color:var(--quiet)}input[type=range]{width:100%;display:block;height:32px;accent-color:var(--indigo);cursor:ew-resize;margin:2px 0 9px;background:transparent}input:disabled{opacity:.35;cursor:default}.angles label.locked{opacity:.45}.tool-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:8px;margin-top:8px}.hint-copy{font-size:13px;color:var(--quiet);line-height:1.7;min-height:44px;margin:11px 0 18px}.exhibit-nav{border-top:1px solid var(--line);padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:5px}.exhibit-nav button{border:0;padding:8px 0;font-size:12px}.exhibit-nav span{font-size:12px;color:var(--quiet)}.gallery-footer{border-top:1px solid #c6beaf;padding:18px 40px 25px;display:flex;align-items:center;justify-content:space-between;gap:15px;color:var(--quiet);font-size:12px}.gallery-footer p{margin:0;line-height:1.7}.gallery-footer #storage-status{font-size:12px;max-width:180px}.gallery-footer #storage-status:empty{display:none}
+@media(min-width:1441px){.masthead,main{border-left:1px solid #c6beaf;border-right:1px solid #c6beaf}}@media(max-width:1000px){.masthead{padding:23px 25px;gap:23px}.wordmark{display:block}.wordmark p{margin-top:7px}.gallery{grid-template-columns:minmax(0,1fr) 290px;min-height:630px}.scene-wrap{min-height:630px}.workbench{padding:27px 21px 20px}.gallery-footer{padding:17px 25px;align-items:flex-start}.gallery-footer p:nth-child(2){max-width:250px}}@media(max-width:760px){.masthead{padding:18px 20px;gap:15px;flex-wrap:wrap}.wordmark{order:-1;flex:1}.wordmark h1{font-size:27px;letter-spacing:3px}.wordmark p{font-size:12px}.home{font-size:12px}.collection{font-size:12px;margin-left:0}.collection output{font-size:13px;margin-right:3px}.gallery{display:flex;flex-direction:column}.scene-wrap{min-height:0;height:440px}.scene-instruction{left:20px;bottom:20px;font-size:12px}.workbench{border-left:0;border-top:1px solid #c6beaf;padding:23px 23px 20px;display:grid;grid-template-columns:1fr 1fr;column-gap:28px;align-items:start}.exhibit-heading,.workbench h2,.reference{grid-column:1}.exhibit-heading{grid-row:1}.workbench h2{grid-row:2;margin:12px 0}.reference{grid-row:3/5;border-bottom:0;padding:0;gap:10px}.reference p{font-size:12px}.reference canvas#reference{width:86px;height:86px;flex-basis:86px}.match-heading{grid-column:2;grid-row:1;margin-top:0}.match-track{grid-column:2;grid-row:2;margin:12px 0 0}.play-status{grid-column:2;grid-row:3;margin:0;font-size:12px}.angles{grid-column:2;grid-row:4/7}.tool-actions{grid-column:1;grid-row:5;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:7px}.tool-actions button{font-size:12px;padding:6px 9px;min-height:44px}.hint-copy{grid-column:1;grid-row:6;margin-top:10px}.exhibit-nav{grid-column:1/3;margin-top:15px}.gallery-footer{padding:17px 22px;display:block}.gallery-footer p:nth-child(2){max-width:none;margin-top:5px}.freeze-stamp{left:20px;bottom:56px}.freeze-stamp strong{font-size:22px}}@media(max-width:430px){.masthead{gap:12px}.wordmark{flex-basis:100%;display:flex;align-items:baseline;justify-content:space-between;gap:9px}.wordmark p{margin:0;font-size:12px}.wordmark h1{font-size:26px;letter-spacing:2px}.home{flex:1}.scene-wrap{height:345px}.scene-instruction{font-size:12px;bottom:16px}.workbench{display:block;padding:21px 20px}.workbench h2{font-size:27px}.reference{padding-bottom:16px;border-bottom:1px solid var(--line)}.reference canvas#reference{width:93px;height:93px;flex-basis:93px}.reference p{font-size:12px}.match-heading{margin-top:17px}.match-track{margin-top:7px}.play-status{min-height:0;margin:9px 0 18px}.angles{display:grid;grid-template-columns:1fr;row-gap:0}.angles label{font-size:12px}input[type=range]{height:31px;margin-bottom:10px}.tool-actions{display:grid;grid-template-columns:1fr 1.3fr;margin-top:2px}.tool-actions button{font-size:12px}.hint-copy{min-height:34px;margin-bottom:12px}.exhibit-nav{margin-top:0}.gallery-footer{font-size:12px}.freeze-stamp{padding:9px 13px;bottom:44px}.freeze-stamp small{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.home{display:inline-flex;align-items:center;min-height:44px}
+.angles input[type=range]{min-height:44px}
+@media(max-width:760px){.scene-wrap{position:sticky;top:0;z-index:2}.reference p{font-size:13px}.gallery-footer{font-size:12px}}
+</style>
+</head>
+<body>
+  <header class="masthead">
+    <a class="home" href="../../../index.html">返回 WindPlay</a>
+    <div class="wordmark"><h1>影子工坊</h1><p>转动雕塑，找到光里的形状。</p></div>
+    <span class="collection"><output id="collection-count">0 / 6</output> 已收藏</span>
+  </header>
+  <main>
+    <section class="gallery" aria-label="影子解谜展厅">
+      <div class="scene-wrap">
+        <canvas id="scene" tabindex="0" aria-label="立体雕塑与墙面投影。拖动转动雕塑；方向键调整，Q 和 E 调整侧倾，Shift 微调。"></canvas>
+        <p class="scene-instruction" id="scene-instruction">拖动雕塑，留意墙上的影子</p>
+        <div class="freeze-stamp" id="freeze-stamp" hidden><span>形状找到了</span><strong id="freeze-name"></strong><small>这束光已收入你的收藏</small></div>
+      </div>
+      <aside class="workbench">
+        <div class="exhibit-heading"><span id="level-number">第一束光</span><select id="level-select" aria-label="选择谜题"></select></div>
+        <h2 id="level-name">窗边的猫</h2>
+        <div class="reference"><canvas id="reference" width="192" height="192" role="img" aria-label="本关需要拼出的目标剪影"></canvas><div><span>要寻找的影子</span><p id="level-description"></p></div></div>
+        <div class="match-heading"><span>影子吻合度</span><output id="score">0%</output></div>
+        <div class="match-track" aria-hidden="true"><i id="match-fill"></i><span></span></div>
+        <p id="play-status" class="play-status" role="status" aria-live="polite">达到 90%，停留片刻便能定格。</p>
+        <fieldset class="angles"><legend>转动方向</legend>
+          <label for="angle-x"><span>俯仰</span><output id="value-x">0°</output></label><input id="angle-x" data-axis="0" type="range" min="-180" max="180" step="1" value="0" aria-label="俯仰角度">
+          <label for="angle-y"><span>左右</span><output id="value-y">0°</output></label><input id="angle-y" data-axis="1" type="range" min="-180" max="180" step="1" value="0" aria-label="左右角度">
+          <label for="angle-z" id="roll-label"><span>侧倾</span><output id="value-z">0°</output></label><input id="angle-z" data-axis="2" type="range" min="-180" max="180" step="1" value="0" aria-label="侧倾角度">
+        </fieldset>
+        <div class="tool-actions"><button id="shuffle">重新摆放</button><button id="hint">给我一点提示</button></div>
+        <p class="hint-copy" id="hint-copy">先大幅转动，再轻轻微调。</p>
+        <nav class="exhibit-nav" aria-label="切换谜题"><button id="previous">上一束光</button><span id="level-position">1 / 6</span><button id="next">下一束光</button></nav>
+      </aside>
+    </section>
+    <footer class="gallery-footer"><p>一盏灯，一面墙，一些看似凌乱的块。</p><p>拖动转动 · 方向键俯仰 / 左右 · Q / E 侧倾 · Shift 微调</p><span id="storage-status"></span></footer>
+  </main>
+  <script>
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.ShadowCore = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const GRID = 28, CELL = 0.17, MASK_SIZE = 112, MASK_EXTENT = 3.5;
+  const PASS_SCORE = 0.9, HOLD_MS = 600;
+  const FACE_INDICES = [[0,3,2,1],[4,5,6,7],[0,1,5,4],[3,7,6,2],[0,4,7,3],[1,2,6,5]];
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+  const wrapAngle = v => Number.isFinite(v) ? ((v + 180) % 360 + 360) % 360 - 180 : 0;
+  function rotationMatrix(angles) {
+    const [x,y,z] = angles.map(v => v * Math.PI / 180);
+    const a=Math.cos(x), b=Math.sin(x), c=Math.cos(y), d=Math.sin(y), e=Math.cos(z), f=Math.sin(z);
+    return [e*c, e*d*b-f*a, e*d*a+f*b, f*c, f*d*b+e*a, f*d*a-e*b, -d, c*b, c*a];
+  }
+  const transform = (m,p) => [m[0]*p[0]+m[1]*p[1]+m[2]*p[2],m[3]*p[0]+m[4]*p[1]+m[5]*p[2],m[6]*p[0]+m[7]*p[1]+m[8]*p[2]];
+  const transpose = m => [m[0],m[3],m[6],m[1],m[4],m[7],m[2],m[5],m[8]];
+  function polygonContains(points,x,y) {
+    let inside=false;
+    for(let i=0,j=points.length-1;i<points.length;j=i++) {
+      const a=points[i],b=points[j];
+      if((a[1]>y)!==(b[1]>y) && x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]) inside=!inside;
+    }
+    return inside;
+  }
+  const ellipse = (x,y,cx,cy,rx,ry=rx) => ((x-cx)/rx)**2+((y-cy)/ry)**2<=1;
+  const poly = (points,x,y) => polygonContains(points,x,y);
+  const shapes = [
+    {id:'cat',name:'窗边的猫',clue:'尖耳朵、圆脑袋，还有一条向上卷起的尾巴。',description:'让两只耳朵朝上，找到坐在窗边的猫。',solution:[18,-46,0],start:[-48,68,0],axes:2,
+      contains:(x,y)=>ellipse(x,y,16,19,6.1,7.5)||ellipse(x,y,15,9.4,5.1,5.1)||poly([[10,7],[9.6,1.5],[14.2,5.5]],x,y)||poly([[16,5.5],[20.5,1.7],[20,8]],x,y)||(ellipse(x,y,6.4,19,4.9,6.1)&&!ellipse(x,y,6.4,17.9,2.6,3.7)&&y<24.4)||poly([[7,23],[16,22],[19,26],[6,26]],x,y)},
+    {id:'bird',name:'掠过的飞鸟',clue:'先找展开的两翼，再让短短的尾羽落在下方。',description:'两翼展开，像从展墙上掠过的一只鸟。',solution:[-27,38,0],start:[58,-76,0],axes:2,
+      contains:(x,y)=>poly([[14,12],[10,9],[3,3],[1,5],[3,11],[7,16],[11,18],[12,22],[14,24],[16,22],[17,18],[21,16],[25,11],[27,5],[25,3],[18,9]],x,y)||ellipse(x,y,14,6.7,2.3,2.6)||poly([[12,8],[16,8],[16,17],[12,17]],x,y)||poly([[15,5.5],[19,7],[15,8]],x,y)},
+    {id:'key',name:'旧门的钥匙',clue:'圆环中间留一束光，钥匙的两个齿指向右下。',description:'保留钥匙头的空心圆环，再对齐齿和柄。',solution:[34,-32,24],start:[-58,64,-37],axes:3,
+      contains:(x,y)=>(ellipse(x,y,8.5,8.3,6.8)&&!ellipse(x,y,8.5,8.3,3.3))||poly([[11,12],[14,10],[25,21],[22,24]],x,y)||poly([[18,16],[21,13],[23,15],[20,18]],x,y)||poly([[22,20],[25,17],[27,19],[24,22]],x,y)},
+    {id:'lighthouse',name:'海岸的灯塔',clue:'塔身上窄下宽。让灯室坐在塔顶，底座落稳。',description:'屋顶、灯室、塔身与底座从上到下连成一线。',solution:[-41,28,-18],start:[57,-65,44],axes:3,
+      contains:(x,y)=>poly([[8,7],[14,1],[20,7]],x,y)||(x>=8&&x<=20&&y>=7&&y<=10&&!(x>11&&x<17&&y>7.8&&y<9.6))||poly([[10,10],[18,10],[21,23],[7,23]],x,y)||(x>=4&&x<=24&&y>=23&&y<=26)},
+    {id:'teapot',name:'午后的茶壶',clue:'弯弯的壶嘴在左边，右边的把手中间要透光。',description:'看清左侧壶嘴和右侧空心把手，找回午后的茶壶。',solution:[29,43,-31],start:[-61,-57,49],axes:3,
+      contains:(x,y)=>ellipse(x,y,13,17.5,7.5,7.3)||(ellipse(x,y,22,16,5.1,6.1)&&!ellipse(x,y,22,16,2.8,3.8))||poly([[7,13],[3,10],[1,7],[4,7],[7,10],[9,12],[9,19],[6,17]],x,y)||poly([[7,11],[10,8],[17,8],[20,11]],x,y)||ellipse(x,y,13.5,6.5,2.1,1.8)||(x>=7&&x<=19&&y>=23&&y<=25)},
+    {id:'butterfly',name:'停驻的蝴蝶',clue:'两对翅膀之间，是细细的身体和伸出的触角。',description:'让两侧翅膀展开，细身体与触角保持竖直。',solution:[-32,-39,36],start:[63,59,-46],axes:3,
+      contains:(x,y)=>ellipse(x,y,6.8,9.2,5.5,7.3)||ellipse(x,y,21.2,9.2,5.5,7.3)||ellipse(x,y,8.8,20.3,4.7,5.5)||ellipse(x,y,19.2,20.3,4.7,5.5)||ellipse(x,y,14,15.5,1.7,9)||poly([[13.2,8],[9.5,2],[11,1],[14,7]],x,y)||poly([[14,7],[17,1],[18.5,2],[14.8,8]],x,y)}
+  ];
+  function hull(points) {
+    const p = points.map(v=>[v[0],v[1]]).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+    const unique=p.filter((v,i)=>!i||v[0]!==p[i-1][0]||v[1]!==p[i-1][1]);
+    if(unique.length<3)return unique;
+    const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+    const lower=[],upper=[];
+    for(const v of unique){while(lower.length>1&&cross(lower.at(-2),lower.at(-1),v)<=0)lower.pop();lower.push(v);}
+    for(const v of unique.slice().reverse()){while(upper.length>1&&cross(upper.at(-2),upper.at(-1),v)<=0)upper.pop();upper.push(v);}
+    lower.pop();upper.pop();return lower.concat(upper);
+  }
+  function boxVertices(x0,y0,x1,y1,z0,z1) {
+    return [[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0],[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]];
+  }
+  function createLevel(def,index) {
+    const cells=Array.from({length:GRID},(_,row)=>Array.from({length:GRID},(_,col)=>def.contains(col+.5,row+.5)));
+    const inverse=transpose(rotationMatrix(def.solution));
+    const blocks=[];
+    for(let row=0;row<GRID;row++)for(let col=0;col<GRID;col++) {
+      if(!cells[row][col])continue;
+      let end=col+1;while(end<Math.min(GRID,col+3)&&cells[row][end])end++;
+      const hash=((row*131+col*73+index*59)%97)/96;
+      const z=(hash-.5)*(def.id==='key'?1.2:1.95), thickness=.28+((row+col)%3)*.09;
+      const vertices=boxVertices((col-GRID/2)*CELL,(GRID/2-row-1)*CELL,(end-GRID/2)*CELL,(GRID/2-row)*CELL,z-thickness/2,z+thickness/2);
+      blocks.push({vertices:vertices.map(p=>transform(inverse,p)),tint:(row*7+col*3)%5});col=end-1;
+    }
+    const level={id:def.id,name:def.name,clue:def.clue,description:def.description,solution:def.solution.slice(),start:def.start.slice(),axes:def.axes,blocks,index};
+    level.targetPolygons=projectShadow(level,level.solution);
+    level.targetMask=rasterize(level.targetPolygons);
+    return level;
+  }
+  function rotatedBlocks(level,angles) {
+    const matrix=rotationMatrix(angles);
+    return level.blocks.map(block=>({tint:block.tint,vertices:block.vertices.map(p=>transform(matrix,p))}));
+  }
+  // The single light emits parallel rays along -Z. Intersecting those rays with
+  // the wall keeps X/Y; the convex hull of each box is its exact cast shadow.
+  function projectShadow(level,angles) {
+    return rotatedBlocks(level,angles).map(block=>hull(block.vertices));
+  }
+  function rasterize(polygons,size=MASK_SIZE,extent=MASK_EXTENT) {
+    const mask=new Uint8Array(size*size),scale=size/(extent*2);
+    for(const polygon of polygons) {
+      if(polygon.length<3)continue;
+      const points=polygon.map(([x,y])=>[(x+extent)*scale,(extent-y)*scale]);
+      const minY=clamp(Math.ceil(Math.min(...points.map(p=>p[1]))-.5),0,size-1);
+      const maxY=clamp(Math.floor(Math.max(...points.map(p=>p[1]))-.5),0,size-1);
+      for(let y=minY;y<=maxY;y++) {
+        const scan=y+.5,crossings=[];
+        for(let i=0,j=points.length-1;i<points.length;j=i++) {
+          const a=points[i],b=points[j];
+          if((a[1]>scan)!==(b[1]>scan))crossings.push(a[0]+(scan-a[1])*(b[0]-a[0])/(b[1]-a[1]));
+        }
+        crossings.sort((a,b)=>a-b);
+        for(let i=0;i+1<crossings.length;i+=2) {
+          const from=clamp(Math.ceil(crossings[i]-.5),0,size),to=clamp(Math.ceil(crossings[i+1]-.5),0,size);
+          for(let x=from;x<to;x++)mask[y*size+x]=1;
+        }
+      }
+    }
+    return mask;
+  }
+  function maskIoU(a,b) {
+    if(a.length!==b.length)throw new RangeError('Mask dimensions must match');
+    let intersection=0,union=0;
+    for(let i=0;i<a.length;i++){if(a[i]||b[i])union++;if(a[i]&&b[i])intersection++;}
+    return union ? intersection/union : 0;
+  }
+  function evaluate(level,angles) {
+    const polygons=projectShadow(level,angles),mask=rasterize(polygons);
+    return {polygons,mask,score:maskIoU(mask,level.targetMask)};
+  }
+  function advanceStability(previous,score,deltaMs,moving=false) {
+    const held=(!moving&&Number.isFinite(score)&&score>=PASS_SCORE)?Math.min(HOLD_MS,Math.max(0,previous)+clamp(Number.isFinite(deltaMs)?deltaMs:0,0,100)):0;
+    return {held,complete:held>=HOLD_MS};
+  }
+  const LEVELS=shapes.map(createLevel);
+  function initialAngles(level,attempt=0) {
+    if(!attempt)return level.start.slice();
+    for(let n=0;n<12;n++) {
+      const angles=[wrapAngle(level.start[0]+attempt*41+n*17),wrapAngle(level.start[1]-attempt*53-n*23),level.axes===3?wrapAngle(level.start[2]+attempt*37+n*19):0];
+      if(evaluate(level,angles).score<.65)return angles;
+    }
+    return level.start.slice();
+  }
+  function parseProgress(raw) {
+    const fallback={version:1,completed:[],lastLevel:LEVELS[0].id};
+    if(typeof raw!=='string'||raw.length>4096)return fallback;
+    try {
+      const value=JSON.parse(raw),ids=new Set(LEVELS.map(level=>level.id));
+      if(!value||value.version!==1||!Array.isArray(value.completed))return fallback;
+      return {version:1,completed:[...new Set(value.completed.filter(id=>typeof id==='string'&&ids.has(id)))],lastLevel:ids.has(value.lastLevel)?value.lastLevel:LEVELS[0].id};
+    }catch{return fallback;}
+  }
+  return Object.freeze({GRID,CELL,MASK_SIZE,MASK_EXTENT,PASS_SCORE,HOLD_MS,FACE_INDICES,LEVELS,clamp,wrapAngle,rotationMatrix,transform,transpose,hull,polygonContains,boxVertices,rotatedBlocks,projectShadow,rasterize,maskIoU,evaluate,advanceStability,initialAngles,parseProgress});
+});
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  const C = root.ShadowCore;
+  const WALL = -3.8, FLOOR = -3.12;
+  const faceColors=['#676980','#5d5f78','#555970','#73738b','#62647d'];
+  const path = (ctx,points) => {ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();};
+  const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+  function drawReference(canvas,level) {
+    const ctx=canvas.getContext('2d'),size=canvas.width;
+    ctx.clearRect(0,0,size,size);ctx.fillStyle='#efeadc';ctx.fillRect(0,0,size,size);
+    ctx.fillStyle='#4c4c60';
+    for(const polygon of level.targetPolygons){path(ctx,polygon.map(([x,y])=>[size/2+x*size/5.6,size/2-y*size/5.6]));ctx.fill();}
+  }
+  class Renderer {
+    constructor(canvas) {this.canvas=canvas;this.ctx=canvas.getContext('2d');this.width=0;this.height=0;this.ratio=1;}
+    resize() {
+      const rect=this.canvas.getBoundingClientRect();
+      const ratio=Math.min(root.devicePixelRatio||1,2),width=Math.max(1,rect.width),height=Math.max(1,rect.height);
+      if(width===this.width&&height===this.height&&ratio===this.ratio)return;
+      this.width=width;this.height=height;this.ratio=ratio;
+      this.canvas.width=Math.round(width*ratio);this.canvas.height=Math.round(height*ratio);
+    }
+    draw(level,angles,projection,solved=false) {
+      this.resize();
+      const ctx=this.ctx,w=this.width,h=this.height;
+      ctx.setTransform(this.ratio,0,0,this.ratio,0,0);
+      const small=w<500,scale=Math.min(w/(small?11.9:12.4),h/8.5);
+      const ox=w*(small?.59:.57),oy=h*.46;
+      const screen=p=>[ox+(p[0]+p[2]*.73)*scale,oy+(-p[1]+p[2]*.27)*scale];
+      ctx.clearRect(0,0,w,h);
+      const plaster=ctx.createLinearGradient(0,0,w,h);plaster.addColorStop(0,'#d6cfbf');plaster.addColorStop(.65,'#e4ddce');plaster.addColorStop(1,'#c9c0af');ctx.fillStyle=plaster;ctx.fillRect(0,0,w,h);
+      // Exhibition wall and floor form a fixed, oblique view. The cast shadow is
+      // projected onto that wall before the camera projection is applied.
+      const wallPoints=[[-8,FLOOR,WALL],[8,FLOOR,WALL],[8,7,WALL],[-8,7,WALL]].map(screen);
+      path(ctx,wallPoints);ctx.fillStyle='#d9d0bd';ctx.fill();
+      const spot=screen([0,0,WALL]);
+      ctx.save();path(ctx,wallPoints);ctx.clip();
+      const light=ctx.createRadialGradient(spot[0],spot[1],scale*.3,spot[0],spot[1],scale*3.45);
+      light.addColorStop(0,'#fbf5dc');light.addColorStop(.7,'#eee4c8');light.addColorStop(1,'#d9d0bd');
+      ctx.fillStyle=light;ctx.fillRect(0,0,w,h);
+      // A faint plaster texture belongs to the scene, not to the controls.
+      ctx.fillStyle='#7e725a';ctx.globalAlpha=.035;
+      for(let i=0;i<155;i++){const x=(i*167.31)%w,y=(i*91.17)%h;ctx.fillRect(x,y,1,1);}
+      ctx.globalAlpha=1;ctx.fillStyle=solved?'#505062':'#646171';
+      for(const polygon of projection.polygons){path(ctx,polygon.map(([x,y])=>screen([x,y,WALL+.003])));ctx.fill();}
+      ctx.restore();
+      const floorPoints=[[-8,FLOOR,WALL],[8,FLOOR,WALL],[8,FLOOR,11],[-8,FLOOR,11]].map(screen);
+      path(ctx,floorPoints);const floor=ctx.createLinearGradient(0,h*.6,0,h);floor.addColorStop(0,'#c2b39e');floor.addColorStop(1,'#b4a28a');ctx.fillStyle=floor;ctx.fill();
+      path(ctx,[[-8,FLOOR,WALL],[8,FLOOR,WALL],[8,FLOOR+.085,WALL],[-8,FLOOR+.085,WALL]].map(screen));ctx.fillStyle='#a99c88';ctx.fill();
+      ctx.strokeStyle='#aa9b84';ctx.lineWidth=1;ctx.globalAlpha=.37;
+      for(let x=-10;x<=10;x+=1.6){ctx.beginPath();ctx.moveTo(...screen([x,FLOOR,WALL]));ctx.lineTo(...screen([x,FLOOR,10]));ctx.stroke();}ctx.globalAlpha=1;
+      const pedestalCenter=screen([0,FLOOR+.1,.25]);
+      ctx.save();ctx.translate(...pedestalCenter);ctx.scale(1,.31);const drop=ctx.createRadialGradient(0,0,scale*.6,0,0,scale*2.8);drop.addColorStop(0,'#79695288');drop.addColorStop(1,'#79695200');ctx.fillStyle=drop;ctx.beginPath();ctx.ellipse(scale*.4,scale*.25,scale*3,scale*2,0,0,Math.PI*2);ctx.fill();ctx.restore();
+      this.drawPedestal(ctx,screen,scale);
+      this.drawLamp(ctx,screen,scale);
+      const faces=[],camera=[-.73,.27,1];
+      for(const block of C.rotatedBlocks(level,angles))for(const ids of C.FACE_INDICES) {
+        const vertices=ids.map(i=>block.vertices[i]);
+        const a=vertices[0],b=vertices[1],d=vertices[2],ab=b.map((v,i)=>v-a[i]),ad=d.map((v,i)=>v-a[i]);
+        const normal=[ab[1]*ad[2]-ab[2]*ad[1],ab[2]*ad[0]-ab[0]*ad[2],ab[0]*ad[1]-ab[1]*ad[0]];
+        if(dot(normal,camera)<=0)continue;
+        const length=Math.hypot(...normal),illumination=.6+.4*Math.max(0,normal[2]/length);
+        const center=[0,1,2].map(i=>vertices.reduce((sum,p)=>sum+p[i],0)/4);
+        faces.push({vertices,depth:dot(center,camera),illumination,tint:block.tint});
+      }
+      faces.sort((a,b)=>a.depth-b.depth);
+      ctx.lineJoin='round';ctx.lineWidth=Math.max(.35,scale*.007);
+      for(const face of faces) {
+        path(ctx,face.vertices.map(screen));ctx.fillStyle=faceColors[face.tint];ctx.fill();
+        ctx.fillStyle=`rgba(24,23,43,${(1-face.illumination)*.7})`;ctx.fill();
+        ctx.strokeStyle='#2e31464a';ctx.stroke();
+      }
+      // A quiet exhibit label is anchored to the wooden base.
+      const label=screen([.35,-2.74,1.7]);ctx.save();ctx.translate(...label);ctx.rotate(-.02);ctx.fillStyle='#e4d7bc';ctx.fillRect(-scale*.62,0,scale*1.22,scale*.25);ctx.fillStyle='#5a5145';ctx.font=`${Math.max(8,scale*.1)}px "PingFang SC",sans-serif`;ctx.textAlign='center';ctx.fillText(`影子 ${String(level.index+1).padStart(2,'0')}`,0,scale*.17);ctx.restore();
+      if(small) {
+        // The reference remains in sight while the mobile controls scroll.
+        const center=[w-48,48],radius=35;
+        ctx.fillStyle='#efe8d8';ctx.beginPath();ctx.arc(...center,radius,0,Math.PI*2);ctx.fill();
+        ctx.fillStyle='#4c4c60';
+        for(const polygon of level.targetPolygons){path(ctx,polygon.map(([x,y])=>[center[0]+x*12,center[1]-y*12]));ctx.fill();}
+        ctx.font='12px "PingFang SC",sans-serif';ctx.textAlign='center';ctx.fillStyle='#454149';ctx.fillText('目标',center[0],97);
+      }
+    }
+    drawPedestal(ctx,screen,scale) {
+      const ring=(y,r)=>Array.from({length:42},(_,i)=>{const t=i/42*Math.PI*2;return [Math.cos(t)*r,y,Math.sin(t)*r+.35];});
+      const top=ring(-2.72,1.7),bottom=ring(-3.1,1.7);
+      for(let i=0;i<42;i++){const n=(i+1)%42;if(Math.sin(i/42*Math.PI*2)>.25){path(ctx,[top[i],top[n],bottom[n],bottom[i]].map(screen));ctx.fillStyle=i%5===0?'#9f7d5c':'#ad8966';ctx.fill();}}
+      path(ctx,top.map(screen));ctx.fillStyle='#ccb08b';ctx.fill();ctx.strokeStyle='#9a7b5c';ctx.lineWidth=1;ctx.stroke();
+      for(const r of [1.2,1.35,1.55]){path(ctx,ring(-2.715,r).map(screen));ctx.strokeStyle='#b99b7780';ctx.lineWidth=.6;ctx.stroke();}
+      // Fine dark pivot connects the sculpture to its plinth without casting an
+      // additional puzzle shadow; it is a separate piece of gallery furniture.
+      const a=screen([0,-2.71,0]),b=screen([0,-2.28,0]);ctx.strokeStyle='#666473';ctx.lineWidth=Math.max(2,scale*.045);ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke();
+    }
+    drawLamp(ctx,screen,scale) {
+      const foot=screen([-3.15,FLOOR,3.15]),head=screen([-3.15,2.75,3.15]);
+      ctx.strokeStyle='#7b756c';ctx.lineWidth=Math.max(3,scale*.06);ctx.lineCap='round';ctx.beginPath();ctx.moveTo(...foot);ctx.lineTo(...head);ctx.stroke();
+      const left=screen([-3.48,FLOOR,3.05]),right=screen([-2.82,FLOOR,3.25]);ctx.beginPath();ctx.moveTo(...left);ctx.lineTo(...right);ctx.stroke();
+      ctx.save();ctx.translate(...head);ctx.rotate(-.23);ctx.fillStyle='#777476';ctx.beginPath();ctx.moveTo(-scale*.36,-scale*.21);ctx.lineTo(scale*.37,-scale*.13);ctx.lineTo(scale*.5,scale*.14);ctx.lineTo(-scale*.4,scale*.2);ctx.closePath();ctx.fill();ctx.strokeStyle='#47484f';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#fff3ca';ctx.beginPath();ctx.ellipse(-scale*.37,0,scale*.055,scale*.17,0,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
+  }
+  root.ShadowRender=Object.freeze({Renderer,drawReference});
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script>
+  <script>
+(function () {
+  'use strict';
+  const C=window.ShadowCore,R=window.ShadowRender,$=id=>document.getElementById(id);
+  const canvas=$('scene'),renderer=new R.Renderer(canvas),ranges=Array.from(document.querySelectorAll('[data-axis]'));
+  const axes=['俯仰','左右','侧倾'],numerals=['一','二','三','四','五','六'];
+  const KEY='windplay-shadow-atelier-v1';
+  let progress,storageAvailable=true;
+  try{progress=C.parseProgress(localStorage.getItem(KEY));}catch{progress=C.parseProgress(null);storageAvailable=false;}
+  let levelIndex=C.LEVELS.findIndex(level=>level.id===progress.lastLevel),level=C.LEVELS[levelIndex];
+  let angles=[],projection,held=0,solved=false,moving=false,drag=null,dirty=true,raf=0,lastFrame=0,attempt=0,hints=0,lastBucket=-1;
+  for(const item of C.LEVELS){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;$('level-select').append(option);}
+  function announce(message){$('play-status').textContent=message;}
+  function save() {
+    progress.lastLevel=level.id;
+    if(storageAvailable)try{localStorage.setItem(KEY,JSON.stringify(progress));}catch{storageAvailable=false;}
+    $('storage-status').textContent=storageAvailable?'':'浏览器未开放存储，本次仍可完整游玩。';
+  }
+  function updateCollection() {
+    $('collection-count').value=`${progress.completed.length} / ${C.LEVELS.length}`;
+    for(const option of $('level-select').options){const item=C.LEVELS.find(v=>v.id===option.value);option.textContent=item.name+(progress.completed.includes(item.id)?' · 已收藏':'');}
+  }
+  function refreshControls() {
+    for(let i=0;i<3;i++) {
+      ranges[i].value=Math.round(angles[i]);ranges[i].disabled=solved||(i===2&&level.axes===2);
+      $(`value-${['x','y','z'][i]}`).value=`${Math.round(angles[i])}°`;
+      ranges[i].setAttribute('aria-valuetext',`${axes[i]} ${Math.round(angles[i])} 度`);
+    }
+    $('roll-label').classList.toggle('locked',level.axes===2);
+    $('hint').disabled=solved;$('shuffle').textContent=solved?'再拼一次':'重新摆放';
+    $('score').value=`${Math.round(projection.score*100)}%`;
+    $('match-fill').style.width=`${projection.score*100}%`;
+    $('scene-instruction').textContent=solved?'这一束光，已定格。':level.axes===2?'拖动：左右 / 俯仰。侧倾本关已固定。':'拖动：左右 / 俯仰。侧倾可用下方滑杆。';
+  }
+  function requestDraw() {
+    dirty=true;if(!raf&&!document.hidden)raf=requestAnimationFrame(frame);
+  }
+  function frame(time) {
+    raf=0;
+    if(document.hidden){lastFrame=0;return;}
+    const delta=lastFrame?time-lastFrame:0;lastFrame=time;
+    if(!solved) {
+      const result=C.advanceStability(held,projection.score,delta,moving);held=result.held;
+      if(result.complete)finish();
+      else if(held>0&&$('play-status').textContent!=='保持片刻，正在定格。')announce('保持片刻，正在定格。');
+    }
+    if(dirty){renderer.draw(level,angles,projection,solved);dirty=false;}
+    if(!solved&&projection.score>=C.PASS_SCORE)raf=requestAnimationFrame(frame);
+    else lastFrame=0;
+  }
+  function recompute() {
+    projection=C.evaluate(level,angles);held=0;refreshControls();
+    const bucket=Math.floor(projection.score*10);
+    if(projection.score>=C.PASS_SCORE)announce(moving?'已经很接近了，松开后稍作停留。':'已经吻合，保持片刻便能定格。');
+    else if(bucket!==lastBucket||$('play-status').textContent.includes('吻合'))announce(bucket>=7?'轮廓快出来了，轻轻微调试试看。':'达到 90%，停留片刻便能定格。');
+    lastBucket=bucket;requestDraw();
+  }
+  function finish() {
+    solved=true;moving=false;drag=null;canvas.classList.remove('dragging');canvas.classList.add('solved');
+    if(!progress.completed.includes(level.id))progress.completed.push(level.id);
+    save();updateCollection();refreshControls();$('freeze-stamp').hidden=false;$('freeze-name').textContent=level.name;
+    announce(progress.completed.length===C.LEVELS.length?'六束光都找到了。你可以选一件作品，再拼一次。':`${level.name}已定格并收藏。可以前往下一束光。`);dirty=true;
+  }
+  function choose(index) {
+    levelIndex=(index+C.LEVELS.length)%C.LEVELS.length;level=C.LEVELS[levelIndex];attempt=0;resetPuzzle();
+    $('level-select').value=level.id;$('level-number').textContent=`第${numerals[levelIndex]}束光`;$('level-name').textContent=level.name;
+    $('level-description').textContent=level.description;$('level-position').textContent=`${levelIndex+1} / ${C.LEVELS.length}`;
+    $('reference').setAttribute('aria-label',`${level.name}的目标剪影。${level.description}`);R.drawReference($('reference'),level);save();
+  }
+  function resetPuzzle() {
+    solved=false;moving=false;drag=null;held=0;hints=0;lastBucket=-1;lastFrame=0;
+    angles=C.initialAngles(level,attempt);canvas.classList.remove('solved','dragging');$('freeze-stamp').hidden=true;
+    $('hint').textContent='给我一点提示';$('hint-copy').textContent=level.axes===2?'这一关只需俯仰和左右。先大幅转动，再微调。':'先大幅转动，再轻轻微调。';recompute();
+  }
+  for(const input of ranges) {
+    input.addEventListener('input',()=>{if(solved)return;angles[Number(input.dataset.axis)]=Number(input.value);recompute();});
+    input.addEventListener('pointerdown',()=>{moving=true;held=0;});
+    input.addEventListener('pointerup',()=>{moving=false;requestDraw();});
+    input.addEventListener('pointercancel',()=>{moving=false;held=0;requestDraw();});
+    input.addEventListener('change',()=>{moving=false;requestDraw();});
+  }
+  canvas.addEventListener('pointerdown',event=> {
+    if(solved||drag||(event.pointerType==='mouse'&&event.button!==0))return;
+    drag={id:event.pointerId,x:event.clientX,y:event.clientY,angles:angles.slice(),roll:event.shiftKey&&level.axes===3};
+    moving=true;held=0;canvas.setPointerCapture(event.pointerId);canvas.classList.add('dragging');canvas.focus({preventScroll:true});
+  });
+  canvas.addEventListener('pointermove',event=> {
+    if(!drag||event.pointerId!==drag.id)return;
+    const factor=event.shiftKey && !drag.roll ? .14 : .48,dx=event.clientX-drag.x,dy=event.clientY-drag.y;
+    if(drag.roll)angles[2]=C.wrapAngle(drag.angles[2]+dx*.35);
+    else{angles[1]=C.wrapAngle(drag.angles[1]+dx*factor);angles[0]=C.wrapAngle(drag.angles[0]+dy*factor);}
+    recompute();
+  });
+  function endDrag(event) {
+    if(!drag||event.pointerId!==drag.id)return;
+    drag=null;moving=false;canvas.classList.remove('dragging');held=0;requestDraw();
+  }
+  canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);canvas.addEventListener('lostpointercapture',endDrag);
+  canvas.addEventListener('keydown',event=> {
+    if(solved)return;
+    const bindings={ArrowLeft:[1,-1],ArrowRight:[1,1],ArrowUp:[0,-1],ArrowDown:[0,1],q:[2,-1],Q:[2,-1],e:[2,1],E:[2,1]};
+    const binding=bindings[event.key];if(!binding||(binding[0]===2&&level.axes===2))return;
+    event.preventDefault();angles[binding[0]]=C.wrapAngle(angles[binding[0]]+binding[1]*(event.shiftKey?1:3));recompute();
+  });
+  $('hint').addEventListener('click',()=> {
+    hints=Math.min(hints+1,level.axes+1);
+    if(hints===1)$('hint-copy').textContent=level.clue;
+    else{const values=level.solution.slice(0,hints-1).map((value,i)=>`${axes[i]} ${value}°`).join('，');$('hint-copy').textContent=`试着调整到：${values}。${hints<=level.axes?'再点一次，可看下一方向。':'微调后松开，等待影子定格。'}`;}
+    $('hint').textContent=hints===level.axes+1?'提示已展开':'再给一点提示';
+  });
+  $('shuffle').addEventListener('click',()=>{attempt++;resetPuzzle();});
+  $('level-select').addEventListener('change',event=>choose(C.LEVELS.findIndex(item=>item.id===event.target.value)));
+  $('previous').addEventListener('click',()=>choose(levelIndex-1));$('next').addEventListener('click',()=>choose(levelIndex+1));
+  window.addEventListener('resize',requestDraw);
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(requestDraw).observe(canvas);
+  document.addEventListener('visibilitychange',()=> {
+    lastFrame=0;held=0;moving=false;drag=null;canvas.classList.remove('dragging');
+    if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=0;}else requestDraw();
+  });
+  // Read-only diagnostic snapshot used by the repository's browser checks.
+  Object.defineProperty(window,'ShadowAtelier',{value:Object.freeze({inspect:()=>Object.freeze({level:level.id,levelIndex,angles:Object.freeze(angles.slice()),score:projection.score,held,solved,completed:Object.freeze(progress.completed.slice()),storageAvailable,visible:!document.hidden})}),writable:false,configurable:false});
+  updateCollection();choose(levelIndex);
+})();
+</script>
+</body>
+</html>
