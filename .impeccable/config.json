@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "createdAt": "2026-10-06T07:44:39.447Z",
+        "reason": "Agent: Helvetica Neue is the pre-existing WindPlay launcher font stack; the requested polish preserves the incumbent visual identity and does not introduce a new typeface."
+      }
+    ]
+  }
+}
