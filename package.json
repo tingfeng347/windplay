@@ -15,6 +15,7 @@
     "dev:reel": "npm run dev --workspace @windplay/tingfeng-reel",
     "dev:voxel": "npm run dev --workspace @windplay/voxel-frontier",
     "dev:survival": "npm run dev --workspace @windplay/ember-wilds",
+    "dev:runner": "npm run dev --workspace @windplay/metro-rush",
     "build": "npm run build:works && npm run build:site",
     "build:works": "npm run build --workspaces --if-present",
     "build:site": "node scripts/build-site.mjs",

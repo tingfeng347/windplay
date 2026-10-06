@@ -1,0 +1,12 @@
+{
+  "name": "@windplay/metro-rush",
+  "version": "0.1.0",
+  "private": true,
+  "description": "原创 3D 城市跑酷：三道轨道、列车车顶、金币、道具与挑战任务",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.cjs"
+  }
+}
