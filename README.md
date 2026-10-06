@@ -30,6 +30,7 @@ npm run dev
 | 作品 | 类型 | 状态 | 说明 |
 | --- | --- | --- | --- |
 | [城市疾跑 · Metro Rush](works/metro-rush/) | 3D 城市跑酷 | [直接打开成品](https://tingfeng347.github.io/windplay/works/metro-rush/demo/index.html) | 第三人称三道跑酷，包含跳跃、滑铲、列车车顶、金币、道具、任务和角色解锁 |
+| [临界行动 · Strike Arena](works/strike-arena/) | 3D 第一人称枪战 | [直接打开成品](https://tingfeng347.github.io/windplay/works/strike-arena/demo/index.html) | 原创工业园战场，包含步枪/手枪、瞄准换弹、手雷、战术敌人、击杀目标与结算 |
 | [方块旷野 · Voxel Frontier](works/voxel-frontier/) | 第一人称方块沙盒 | [直接打开成品](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) | 我的世界玩法启发的原创方块世界，支持采集、建造、制作、创造/生存模式与本地存档 |
 | [余烬荒野 · Ember Wilds](works/ember-wilds/) | 手绘荒野生存 | [直接打开成品](https://tingfeng347.github.io/windplay/works/ember-wilds/demo/index.html) | 饥荒玩法启发的原创生存游戏，包含采集、制作、营火、烹饪、昼夜、敌人与生命/饥饿/精神状态 |
 | [Point Cloud Studio](works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
