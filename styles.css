@@ -128,6 +128,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .window-dots i { width: 6px; height: 6px; border: 1px solid var(--line); border-radius: 50%; background: var(--wash); }
 .preview-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--preview-paper); }
 .preview-image img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translateY(var(--image-shift, 0px)) scale(1.08); will-change: transform; }
+.runner-card .preview-image, .shooter-card .preview-image { aspect-ratio: 16 / 9; }
+.runner-card .preview-image img, .shooter-card .preview-image img { object-fit: contain; transform: none; will-change: auto; }
 .portrait-card img { object-position: 50% 34%; }
 .reel-card img { object-fit: contain; }
 .preview-caption { position: absolute; inset: auto 0 0; padding: 30px 20px 16px; color: #eeeeee; background: linear-gradient(transparent, rgb(0 0 0 / 72%)); font-size: 11px; }
