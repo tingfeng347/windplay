@@ -38,6 +38,14 @@ npm run dev
 
 ## 作品预览
 
+### [城市疾跑 · Metro Rush](works/metro-rush/)
+
+[![城市疾跑：穿过三维城市轨道、列车与障碍](assets/screenshots/metro-rush.jpg)](works/metro-rush/demo/index.html)
+
+### [临界行动 · Strike Arena](works/strike-arena/)
+
+[![临界行动：第一人称工业园枪战](assets/screenshots/strike-arena.jpg)](works/strike-arena/demo/index.html)
+
 ### [方块旷野 · Voxel Frontier](works/voxel-frontier/)
 
 [![方块旷野：可采集、建造、制作的第一人称方块世界](assets/screenshots/voxel-frontier.png)](works/voxel-frontier/demo/index.html)
@@ -68,7 +76,9 @@ windplay/
 │   │   └── demo/index.html  # 可直接打开的完整成品
 │   ├── tingfeng-reel/       # 动态作品片头
 │   ├── voxel-frontier/      # 第一人称方块沙盒
-│   └── ember-wilds/         # 手绘荒野生存
+│   ├── ember-wilds/         # 手绘荒野生存
+│   ├── metro-rush/          # 3D 城市跑酷
+│   └── strike-arena/        # 3D 第一人称枪战
 ├── AGENTS.md                # 自动化协作规则
 ├── CONTRIBUTING.md          # 新增作品与开发说明
 ├── index.html               # 作品启动台
@@ -95,8 +105,9 @@ npm run dev --workspace @windplay/point-cloud-studio
 开发服务启动后，访问终端显示的本机地址。也可以进入作品目录，按该作品 README
 中的方式单独开发。
 
-两个游戏也可以用根级快捷命令开发：`npm run dev:voxel` 和 `npm run dev:survival`。
-它们的单文件成品支持离线体验，存档保存在当前浏览器中。
+游戏也可以用根级快捷命令开发：`npm run dev:voxel`、`npm run dev:survival`、
+`npm run dev:runner` 和 `npm run dev:shooter`。
+它们的单文件成品支持离线体验，存档或个人纪录保存在当前浏览器中。
 
 ## 统一检查
 
