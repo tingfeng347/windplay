@@ -25,6 +25,7 @@
   let metrics = null;
   let frameId = null;
   let lastFrame = null;
+  let published = null;
   let lastScroll = window.scrollY || 0;
   let needsMeasure = false;
 
@@ -94,7 +95,12 @@
   }
 
   function moving(value) {
-    hero.setAttribute('data-moving', String(value));
+    // Only when it changes: this attribute drives a will-change rule, so writing the same value back
+    // every frame is a style invalidation per frame for no change at all.
+    if (published !== value) {
+      published = value;
+      hero.setAttribute('data-moving', String(value));
+    }
     for (const preview of previews) preview.element.classList.toggle('is-moving', value && preview.visible);
   }
 

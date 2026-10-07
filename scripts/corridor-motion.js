@@ -46,13 +46,20 @@
   const GAP = 32;
   const HANDOVER = 0.5;
   const LAG = 40;         // px a flick drags the ribbon behind by, so the gallery carries weight
-  // How long a switch takes. One work of travel is SWITCH milliseconds, a longer throw stretches that
-  // but only as far as LONGEST — the ribbon is never still gliding after the hand has stopped, which
-  // is what an asymptotic follow used to do. QUICKEST is the floor, so a single notch still reads as a
-  // movement rather than a cut.
+  // How long a switch takes. One work of travel settles in SWITCH milliseconds, a longer throw
+  // stretches that but only as far as LONGEST, and QUICKEST is the floor so a single notch still
+  // reads as a movement rather than a cut. These size the follow's settling time, and settling is
+  // what it does: it is never still gliding after the hand has stopped.
   const SWITCH = 210;
   const QUICKEST = 130;
   const LONGEST = 520;
+  // A critically damped follow settles in about 3.3 of its own time constants, which is how a
+  // duration in milliseconds becomes the number the follow actually wants.
+  const SETTLE = 3300;
+  // Inside this, and moving slower than this, the ribbon is simply at the work it was asked for. The
+  // follow stops there instead of creeping the last hundredth of a pixel for another half second.
+  const ARRIVED = 0.00002;
+  const STILL = 0.002;
 
   const current = { progress: 0, velocity: 0 };
   const target = { progress: 0 };
@@ -74,10 +81,9 @@
   let needsMeasure = false;
   let elapsedTime = 0;
   let drag = null;
-  // The switch in flight: where it started, when, and how long it is allowed to take.
-  let from = 0;
-  let moveStart = 0;
-  let moveSpan = 0;
+  let moved = null;
+  let previewsWanted = false;
+  let previewsWarmed = false;
 
   function property(element, name, value) {
     let values = written.get(element);
@@ -134,7 +140,7 @@
     const spread = metrics.spread;
     const spacing = metrics.spacing;
     // A flick drags the ribbon behind and it catches up as it slows.
-    const lean = current.velocity * LAG;
+    const lean = clamp(current.velocity, -1, 1) * LAG;
     let nearest = 0;
     let nearestDistance = Infinity;
 
@@ -179,7 +185,11 @@
     if (atmosphere) atmosphere.update({ progress: p, time: elapsedTime });
   }
 
+  // Published for whoever is watching, but only when it changes: writing the same value back sixty
+  // times a second is a style invalidation on the gallery for no change at all.
   function moving(value) {
+    if (moved === value) return;
+    moved = value;
     catalog.setAttribute('data-moving', String(value));
   }
 
@@ -196,24 +206,36 @@
     frameId = window.requestAnimationFrame(tick);
   }
 
-  function approach(value, destination, amount, epsilon) {
-    const next = value + (destination - value) * amount;
-    return Math.abs(next - destination) < epsilon ? destination : next;
+  // A critically damped follow, and the reason a trackpad swipe reads as one movement. Aiming at a
+  // new place moves the target and nothing else: the ribbon keeps the speed it already had and is
+  // carried on into the new place, so a burst of deltas integrates into a single glide instead of a
+  // lurch on every event. Critically damped is the choice because it is the fastest approach that
+  // does not overshoot — the works arrive in order and none of them swings back past the middle.
+  function follow(delta, smoothTime) {
+    const omega = 2 / Math.max(smoothTime, 0.001);
+    const x = omega * delta;
+    const decay = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+    const change = current.progress - target.progress;
+    const carry = (current.velocity + omega * change) * delta;
+    current.velocity = (current.velocity - omega * carry) * decay;
+    const next = target.progress + (change + carry) * decay;
+    if (Math.abs(target.progress - next) < ARRIVED && Math.abs(current.velocity) < STILL) {
+      current.progress = target.progress;
+      current.velocity = 0;
+      return;
+    }
+    current.progress = next;
   }
 
   // Every gesture — a wheel notch, a trackpad flick, a finger drag — ends up here as a place along
-  // the ribbon, and the follow in tick() turns the change into motion.
+  // the ribbon. Nothing is started or restarted: the follow in tick() carries the ribbon there from
+  // wherever it has got to, at whatever speed it has, so a second flick landing mid-switch joins the
+  // first rather than beginning again, and a steady stream of deltas tracks the hand without
+  // stopping between the events.
   function seek(progress) {
     const next = clamp(progress, 0, 1);
     if (next === target.progress) return;
     target.progress = next;
-    // Re-aimed from wherever the ribbon has actually got to, so a second flick landing mid-switch
-    // carries on from the first instead of starting over. That is also what keeps a steady stream of
-    // trackpad deltas tracking the hand rather than stuttering between stops.
-    const spacing = metrics ? metrics.spacing : 1 / (cards.length - 1);
-    from = current.progress;
-    moveStart = performance.now();
-    moveSpan = clamp(Math.abs(next - from) / spacing * SWITCH, QUICKEST, LONGEST);
     begin();
   }
 
@@ -236,19 +258,15 @@
 
     const elapsed = lastFrame === null ? 1000 / 60 : clamp(time - lastFrame, 1, 64);
     lastFrame = time;
-    const before = current.progress;
 
     if (mode === 'active') {
-      const t = moveSpan > 0 ? clamp((time - moveStart) / moveSpan, 0, 1) : 1;
-      // Away at once, home gently. The travel between works is not linear either — the step curve
-      // gives each one its own run-up and landing — but a switch that starts slowly would read as lag
-      // behind the wheel that asked for it.
-      const eased = 1 - (1 - t) * (1 - t) * (1 - t);
-      current.progress = t >= 1 ? target.progress : from + (target.progress - from) * eased;
-      // The lean is read back off the motion itself, so a wheel notch and a finger drag weigh the
-      // same, and a settled gallery carries no lean at all.
-      const rate = (current.progress - before) / (elapsed / 1000);
-      current.velocity = approach(current.velocity, clamp(rate * 4, -1, 1), 0.42, 0.006);
+      // How long this switch is allowed to take, sized from how far it still has to go: one work is
+      // SWITCH, half a work is quicker than that, and a throw right across the gallery stops at
+      // LONGEST. Read from what is left rather than from what was asked for, so a re-aimed switch
+      // is judged on the distance it now has rather than the distance it once had.
+      const spacing = metrics ? metrics.spacing : 1 / (cards.length - 1);
+      const span = clamp(Math.abs(target.progress - current.progress) / spacing * SWITCH, QUICKEST, LONGEST);
+      follow(elapsed / 1000, span / SETTLE);
     } else {
       // Paused means the ribbon still reaches every work — the works have to stay reachable when the
       // reader has asked the page to hold still — but it arrives there without travelling, so there
@@ -301,6 +319,32 @@
       render();
     }).catch(drop);
   }
+
+  // The band is a carousel, so any work can be asked for at any moment and none of the ten bitmaps
+  // can be left to arrive on demand. Left lazy, a work begins downloading at the instant it slides
+  // into frame — which is the one moment in the interaction when there is no time to spare, and the
+  // reason a swipe could stutter while the pictures caught up. They are asked for, and decoded, while
+  // the band is still a screen or more away, and only once the ribbon is actually in play: on a page
+  // that never reaches the band, or one that has been asked to hold still, nothing is fetched.
+  //
+  // The page itself goes first. The band sits less than a screen below the hero, so it is already
+  // "near" the moment the page opens, and warming on that alone would have ten pictures competing
+  // with the two the reader is actually looking at.
+  function warmPreviews() {
+    if (previewsWarmed || !previewsWanted || !enabled()) return;
+    if (document.readyState !== 'complete') return;
+    previewsWarmed = true;
+    for (const image of grid.querySelectorAll('img')) {
+      image.loading = 'eager';
+      image.decode?.().catch(() => {});
+    }
+  }
+
+  const warmth = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    previewsWanted = true;
+    warmPreviews();
+  }, { rootMargin: '150% 0px' });
 
   // A wheel event, in pixels, along whichever axis the gesture leans on — a trackpad swiping sideways
   // across the band means the same thing there as a wheel does.
@@ -387,6 +431,7 @@
     // longer belong to, so they are cleared rather than merely ignored.
     if (!enabled()) {
       current.velocity = 0;
+      warmth.unobserve(grid);
       for (const card of cards) {
         card.transform = '';
         card.element.style.transform = '';
@@ -400,8 +445,7 @@
     activeIndex = -1;
     current.progress = target.progress;
     current.velocity = 0;
-    from = current.progress;
-    moveSpan = 0;
+    warmth.observe(grid);
     // The band's own size is what the geometry is measured against, so measure only after the
     // attribute has landed. If the measurement trips over something, the band is put back rather
     // than left as ten cards stacked on one another.
@@ -431,7 +475,11 @@
   }
 
   window.addEventListener('resize', invalidateGeometry, { passive: true });
-  window.addEventListener('load', invalidateGeometry, { once: true });
+  window.addEventListener('load', () => {
+    invalidateGeometry();
+    // Now that the page has everything it was waiting for, the band's ten bitmaps may go.
+    warmPreviews();
+  }, { once: true });
   document.fonts?.ready.then(invalidateGeometry);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancel();
