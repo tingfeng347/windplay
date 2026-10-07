@@ -4,12 +4,18 @@
   <a href="assets/windplay-logo.svg"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/windplay-logo-dark.svg"><img src="assets/windplay-logo.svg" alt="WindPlay" width="88"></picture></a>
 </p>
 
-WindPlay 是一个网页创意实验场，收录点云人像、粒子动画、交互艺术和小游戏。
+WindPlay 是一个网页创意实验场，收录点云人像、动态片头、音乐玩具、空间解谜和小游戏。
 这里的每个作品都可以独立开发与构建，也可以随着想法成熟继续扩展。
 
 ## 启动台
 
 ![WindPlay 作品启动台](assets/screenshots/launcher.jpg)
+
+首页用 8 张真实界面缩略图展示全部作品。滚动时，悬浮屏幕随镜头展开；指针移动时，
+屏幕产生轻微倾斜。动效可随时暂停，系统开启“减少动态效果”时则显示静态网格。
+下方作品目录保留每个作品的封面、介绍和独立入口。
+
+[查看手机端首页](assets/screenshots/launcher-mobile.jpg)
 
 在线体验：[打开 WindPlay](https://tingfeng347.github.io/windplay/)，无需安装依赖。
 
@@ -42,11 +48,11 @@ npm run dev
 
 ### [听风花园 · Wind Garden](works/wind-garden/)
 
-[![听风花园：种植音符，让旋律随风经过](assets/wind-garden-preview.jpg)](works/wind-garden/demo/index.html)
+[![听风花园：种植音符，让旋律随风经过](assets/screenshots/wind-garden.jpg)](works/wind-garden/demo/index.html)
 
 ### [影子工坊 · Shadow Atelier](works/shadow-atelier/)
 
-[![影子工坊：转动立体雕塑，拼出墙上的剪影](assets/shadow-atelier-preview.jpg)](works/shadow-atelier/demo/index.html)
+[![影子工坊：转动立体雕塑，拼出墙上的剪影](assets/screenshots/shadow-atelier.jpg)](works/shadow-atelier/demo/index.html)
 
 ### [城市疾跑 · Metro Rush](works/metro-rush/)
 
@@ -117,10 +123,20 @@ npm run dev --workspace @windplay/point-cloud-studio
 开发服务启动后，访问终端显示的本机地址。也可以进入作品目录，按该作品 README
 中的方式单独开发。
 
-游戏也可以用根级快捷命令开发：`npm run dev:voxel`、`npm run dev:survival`、
-`npm run dev:runner` 和 `npm run dev:shooter`。
-听风花园和影子工坊分别使用 `npm run dev:garden` 和 `npm run dev:shadow`。
-它们的单文件成品支持离线体验，存档或个人纪录保存在当前浏览器中。
+全部作品也可以用根级快捷命令开发：
+
+| 作品 | 命令 |
+| --- | --- |
+| 听风花园 | `npm run dev:garden` |
+| 影子工坊 | `npm run dev:shadow` |
+| 城市疾跑 | `npm run dev:runner` |
+| 临界行动 | `npm run dev:shooter` |
+| 方块旷野 | `npm run dev:voxel` |
+| 余烬荒野 | `npm run dev:survival` |
+| Point Cloud Studio | `npm run dev:point-cloud` |
+| Tingfeng Reel | `npm run dev:reel` |
+
+作品的单文件成品支持离线体验，存档或个人纪录保存在当前浏览器中。
 
 ## 统一检查
 

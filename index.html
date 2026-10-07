@@ -45,36 +45,68 @@
       <div class="hero-copy">
       <h1 id="hero-title">把好奇心，<br>放进浏览器。</h1>
       <p class="hero-note">点云、影像、跑酷、枪战，还有自由探索的世界。<br>打开一个作品，动手玩一会儿。</p>
-      <a class="button primary-button" href="#works">
+      <div class="hero-actions"><a class="button primary-button" href="#works">
         探索作品
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a>
+      </a></div>
       </div>
 
-      <div class="hero-art" id="hero-art" role="group" aria-label="作品画廊">
-        <div class="art-orbit" aria-hidden="true"></div>
-        <svg class="art-wind" viewBox="0 0 1200 500" aria-hidden="true"><path d="M-60 365C140 365 115 80 325 80s165 325 420 325 125-275 300-275 110 170 240 170"/></svg>
-        <span class="art-word" aria-hidden="true">Play.</span>
-
-        <a class="art-layer art-portrait" href="works/point-cloud-studio/demo/index.html" target="_blank" rel="noopener" aria-label="打开 Point Cloud Studio">
-          <div class="art-frame">
-            <div class="art-frame-bar"><span>Point Cloud Studio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
-            <img src="assets/point-cloud-studio-preview.png" alt="" width="1600" height="1600" decoding="async">
+      <div class="hero-art" id="hero-art" role="group" aria-label="八个作品的互动缩略图画廊">
+        <div class="art-stage" id="art-stage">
+          <svg class="art-wind" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden="true"><path class="wind-trail" d="M-60 455C160 455 80 90 350 90s70 450 370 450 110-380 340-380 140 260 240 260"/><path class="art-progress" pathLength="1" d="M-60 455C160 455 80 90 350 90s70 450 370 450 110-380 340-380 140 260 240 260"/></svg>
+          <span class="art-word" aria-hidden="true">Play.</span>
+          <div class="art-field">
+            <a class="art-layer" href="works/wind-garden/demo/index.html" target="_blank" rel="noopener" aria-label="打开 听风花园" style="--dx:-26px;--dy:-28px;--depth:120px;--turn:-10deg;--tilt:-16deg;--wave:-56px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>听风花园</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/wind-garden.jpg" alt="听风花园的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/shadow-atelier/demo/index.html" target="_blank" rel="noopener" aria-label="打开 影子工坊" style="--dx:-10px;--dy:18px;--depth:-100px;--turn:6deg;--tilt:18deg;--wave:44px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>影子工坊</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/shadow-atelier.jpg" alt="影子工坊的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/metro-rush/demo/index.html" target="_blank" rel="noopener" aria-label="打开 城市疾跑" style="--dx:12px;--dy:-26px;--depth:165px;--turn:-5deg;--tilt:-14deg;--wave:-38px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>城市疾跑</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/metro-rush.jpg" alt="城市疾跑的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/strike-arena/demo/index.html" target="_blank" rel="noopener" aria-label="打开 临界行动" style="--dx:30px;--dy:24px;--depth:-140px;--turn:9deg;--tilt:20deg;--wave:52px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>临界行动</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/strike-arena.jpg" alt="临界行动的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/voxel-frontier/demo/index.html" target="_blank" rel="noopener" aria-label="打开 方块旷野" style="--dx:22px;--dy:26px;--depth:-130px;--turn:8deg;--tilt:16deg;--wave:48px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>方块旷野</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/voxel-frontier.png" alt="方块旷野的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/ember-wilds/demo/index.html" target="_blank" rel="noopener" aria-label="打开 余烬荒野" style="--dx:-16px;--dy:-14px;--depth:150px;--turn:-6deg;--tilt:-18deg;--wave:-48px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>余烬荒野</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/ember-wilds.png" alt="余烬荒野的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/point-cloud-studio/demo/index.html" target="_blank" rel="noopener" aria-label="打开 Point Cloud Studio" style="--dx:20px;--dy:26px;--depth:-80px;--turn:7deg;--tilt:14deg;--wave:40px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>Point Cloud Studio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/point-cloud-studio.png" alt="Point Cloud Studio的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
+            <a class="art-layer" href="works/tingfeng-reel/demo/index.html" target="_blank" rel="noopener" aria-label="打开 Tingfeng Reel" style="--dx:-20px;--dy:-10px;--depth:105px;--turn:-8deg;--tilt:-16deg;--wave:-42px">
+              <div class="art-frame">
+                <div class="art-frame-bar"><span>Tingfeng Reel</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+                <img src="assets/screenshots/tingfeng-reel.png" alt="Tingfeng Reel的真实界面缩略图" width="1280" height="720" decoding="async">
+              </div>
+            </a>
           </div>
-        </a>
-
-        <a class="art-layer art-reel" href="works/metro-rush/demo/index.html" target="_blank" rel="noopener" aria-label="打开城市疾跑">
-          <div class="art-frame">
-            <div class="art-frame-bar"><span>城市疾跑</span><span class="art-duration">向城市深处，一路向前</span></div>
-            <img src="assets/metro-rush-preview.svg" alt="" width="1600" height="900" decoding="async">
-          </div>
-        </a>
-
-        <div class="art-detail" aria-hidden="true">
-          <img src="assets/point-cloud-studio-preview.png" alt="" width="1600" height="1600" decoding="async">
-          <svg class="detail-orbit" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/><path d="M50 0v9M50 91v9M0 50h9M91 50h9"/></svg>
+          <p class="art-caption"><span>八个小世界，随风展开。</span><span class="art-controls"><span class="scroll-note">继续滚动，看作品展开<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span><button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" hidden>暂停动效</button></span></p>
         </div>
-        <span class="art-caption">图像、声音与可以走进去的世界。</span>
       </div>
     </section>
 
@@ -302,85 +334,7 @@
       update();
     })();
 
-    (() => {
-      const hero = document.getElementById('hero-art');
-      const motion = matchMedia('(prefers-reduced-motion: reduce)');
-      const compact = matchMedia('(max-width: 640px)');
-      const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
-      const previews = Array.from(document.querySelectorAll('.preview-image'));
-      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-      let frame = 0;
-      let geometry = null;
-      let measureNeeded = true;
-      let pointerX = 0;
-      let pointerY = 0;
-      const last = { progress: null, px: null, py: null };
-
-      function measure() {
-        const scroll = window.scrollY;
-        const bounds = hero.getBoundingClientRect();
-        geometry = {
-          top: bounds.top + scroll,
-          height: bounds.height,
-          viewport: window.innerHeight,
-          previews: previews.map(element => {
-            const box = element.getBoundingClientRect();
-            return { element, top: box.top + scroll, height: box.height, shift: null };
-          })
-        };
-        measureNeeded = false;
-      }
-
-      function draw() {
-        frame = 0;
-        if (measureNeeded || !geometry) measure();
-        const { top, height, viewport } = geometry;
-        const scroll = window.scrollY;
-        const progress = motion.matches ? 0 : clamp(
-          (scroll - Math.max(0, top - viewport * .62)) / Math.max(1, height * .9), 0, 1
-        );
-        const eased = progress * progress * (3 - 2 * progress);
-        const value = eased.toFixed(4);
-        if (value !== last.progress) { hero.style.setProperty('--progress', value); last.progress = value; }
-        const px = motion.matches ? '0' : pointerX.toFixed(3);
-        if (px !== last.px) { hero.style.setProperty('--pointer-x', px); last.px = px; }
-        const py = motion.matches ? '0' : pointerY.toFixed(3);
-        if (py !== last.py) { hero.style.setProperty('--pointer-y', py); last.py = py; }
-        for (const item of geometry.previews) {
-          const visible = item.top < scroll + viewport && item.top + item.height > scroll;
-          const offset = motion.matches || !visible ? 0 : clamp(
-            (scroll + viewport * .5 - item.top - item.height * .5) / viewport, -.5, .5
-          ) * (compact.matches ? 16 : 32);
-          const shift = `${offset.toFixed(2)}px`;
-          if (shift !== item.shift) { item.element.style.setProperty('--image-shift', shift); item.shift = shift; }
-        }
-      }
-
-      function schedule() {
-        if (!frame && !document.hidden) frame = requestAnimationFrame(draw);
-      }
-      function refresh() { measureNeeded = true; schedule(); }
-
-      window.addEventListener('scroll', () => { if (!motion.matches) schedule(); }, { passive: true });
-      window.addEventListener('resize', refresh, { passive: true });
-      window.addEventListener('load', refresh, { once: true });
-      motion.addEventListener?.('change', refresh);
-      compact.addEventListener?.('change', refresh);
-      document.fonts?.ready.then(refresh);
-      hero.addEventListener('pointermove', event => {
-        if (motion.matches || compact.matches || !finePointer.matches || event.pointerType === 'touch') return;
-        const bounds = hero.getBoundingClientRect();
-        pointerX = clamp((event.clientX - bounds.left) / bounds.width - .5, -.5, .5);
-        pointerY = clamp((event.clientY - bounds.top) / bounds.height - .5, -.5, .5);
-        schedule();
-      }, { passive: true });
-      hero.addEventListener('pointerleave', () => { pointerX = pointerY = 0; schedule(); });
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) { cancelAnimationFrame(frame); frame = 0; }
-        else refresh();
-      });
-      refresh();
-    })();
   </script>
+  <script src="scripts/launcher-motion.js"></script>
 </body>
 </html>

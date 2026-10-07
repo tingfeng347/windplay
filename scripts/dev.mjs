@@ -12,6 +12,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 const mime = {
   '.css':'text/css; charset=utf-8',
   '.html':'text/html; charset=utf-8',
+  '.js':'text/javascript; charset=utf-8',
   '.jpg':'image/jpeg',
   '.png':'image/png',
   '.svg':'image/svg+xml'

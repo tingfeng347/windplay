@@ -7,10 +7,12 @@ const output = resolve(root, '_site');
 
 await rm(output, { recursive:true, force:true });
 await mkdir(output, { recursive:true });
+await mkdir(resolve(output, 'scripts'), { recursive:true });
 
 await Promise.all([
   cp(resolve(root, 'index.html'), resolve(output, 'index.html')),
   cp(resolve(root, 'styles.css'), resolve(output, 'styles.css')),
+  cp(resolve(root, 'scripts/launcher-motion.js'), resolve(output, 'scripts/launcher-motion.js')),
   cp(resolve(root, 'assets'), resolve(output, 'assets'), { recursive:true }),
   writeFile(resolve(output, '.nojekyll'), '')
 ]);
