@@ -40,7 +40,9 @@
 }
 
 * { box-sizing: border-box; }
-html { min-width: 320px; scroll-behavior: smooth; scroll-padding-top: 32px; scrollbar-color: var(--muted) var(--paper); }
+/* The corridor stage reaches the screen edges on its own axis; clip, rather than hidden, so the
+   viewport is still the scrollport that sticky positioning resolves against. */
+html { min-width: 320px; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 32px; scrollbar-color: var(--muted) var(--paper); }
 body { margin: 0; background: var(--paper); color: var(--ink); }
 ::selection { background: var(--ink); color: var(--button-ink); }
 a { color: inherit; text-decoration: none; }
@@ -85,14 +87,14 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .secondary-button { border-color: var(--line); background: var(--surface); white-space: nowrap; }
 .secondary-button:hover { border-color: var(--muted); }
 
-/* Eight real browser works share a camera; scroll opens them into a contact sheet. */
+/* Ten real browser works share a camera; scroll opens them into a contact sheet. */
 .hero-actions { display:flex; justify-content:center; align-items:center; gap:12px; }
 .motion-toggle { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 18px; background:transparent; border:1px solid var(--line); border-radius:999px; font-size:13px; cursor:pointer; }
 .motion-toggle:hover { background:var(--surface); border-color:var(--muted); }
 .motion-toggle:disabled { cursor:default; color:var(--muted); }
 .hero-art { --progress:0; --pointer-x:0; --pointer-y:0; --velocity:0; position:relative; margin-top:24px; isolation:isolate; }
 .art-stage { position:relative; padding:40px 36px 54px; perspective:1600px; overflow:clip; }
-.art-field { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; }
+.art-field { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; }
 .art-layer { display:block; min-width:0; position:relative; transform-style:preserve-3d; }
 .art-frame { overflow:hidden; border-radius:var(--radius); background:var(--surface); box-shadow:0 18px 28px -20px rgb(0 0 0 / 45%),0 0 0 1px var(--line); transition:box-shadow 180ms ease; }
 .art-layer:hover .art-frame { box-shadow:0 24px 36px -20px rgb(0 0 0 / 55%),0 0 0 1px var(--muted); }
@@ -119,8 +121,10 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .hero-art[data-motion="reduced"] .art-wind,.hero-art:not([data-motion]) .art-wind { display:none; }
 .hero-art[data-motion="reduced"] .scroll-note,.hero-art:not([data-motion]) .scroll-note { display:none; }
 @media(max-width:1000px) {
+  /* 十个作品始终是两行五列；四列会把第三行压进 620px 的舞台，行与行互相遮挡。 */
   .art-field { gap:16px; }
   .art-frame-bar { padding:8px; font-size:11px; }
+  .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-layer { transform:translate3d(calc(var(--dx) * (1 - var(--progress)) * .6 + var(--pointer-x) * 7px),calc(var(--dy) * (1 - var(--progress)) * .6 + var(--wave) * var(--progress) * (1 - var(--progress)) * 2.4 + var(--velocity) * -9px),calc(var(--depth) * (1 - var(--progress)) * .6)) rotateZ(calc(var(--turn) * (1 - var(--progress)) * .8)) rotateY(calc(var(--tilt) * (1 - var(--progress)) * .8 + var(--pointer-x) * -4deg)); }
 }
 @media(max-width:700px) {
   .hero-actions { gap:10px; }
@@ -132,7 +136,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .art-caption { display:block; }
   .art-controls { justify-content:space-between; gap:12px; }
   .scroll-note { display:flex; margin-top:4px; }
-  .hero-art:is([data-motion="active"],[data-motion="paused"]) { --stage-height:max(700px,calc(100vw * 1.125 + 232px)); height:calc(var(--stage-height) + 450px); }
+  .hero-art:is([data-motion="active"],[data-motion="paused"]) { --stage-height:max(850px,calc(100vw * 1.40625 + 280px)); height:calc(var(--stage-height) + 450px); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-stage { top:16px; height:var(--stage-height); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-field { inset:42px 12px 84px; transform:rotateX(calc((1 - var(--progress)) * 5deg)); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-layer { transform:translate3d(calc(var(--dx) * (1 - var(--progress)) * .22),calc(var(--dy) * (1 - var(--progress)) * .35 + var(--wave) * var(--progress) * (1 - var(--progress)) * 1.2),calc(var(--depth) * (1 - var(--progress)) * .3)) rotateZ(calc(var(--turn) * (1 - var(--progress)) * .4)); }
@@ -174,6 +178,94 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .launch svg { width: 17px; height: 17px; transition: transform 160ms ease; }
 .work-card:is(:hover, :focus-visible) .launch svg { transform: translateX(4px); }
 .work-card:active .launch svg { transform: translateX(6px); }
+
+/* Ten real browser works ride along one horizontal ribbon; scrolling sweeps each of them across the
+   stage from the right and out to the left while the next follows, so the frame holds one work at a
+   time. The cards stay ordinary links, and with motion off this whole block simply never applies. */
+.corridor-caption { display: none; }
+.catalog:is([data-motion="active"],[data-motion="paused"]) {
+  /* The band is one screen of the page, not a runway the page scrolls through: it is the wheel over
+     this band that moves the works, so nothing here adds height to the document. */
+  --corridor-stage: min(92svh, 860px);
+  /* The work in the gate is the only thing in the frame, so it is sized to fill it: the viewport
+     height is the real constraint on short screens, where a card this wide would overrun. */
+  --corridor-card: min(1000px, 76vw, 108svh);
+}
+.catalog:is([data-motion="active"],[data-motion="paused"]) .work-grid {
+  position: relative;
+  display: block;
+  height: var(--corridor-stage);
+  /* A drag across the band belongs to the works; a drag down it still belongs to the page. */
+  touch-action: pan-y;
+  /* The stage runs out past the text column to both screen edges, so a work leaves frame through the
+     edge of the window and not through an invisible line inside it. The measured bleed is what keeps
+     that from ever becoming horizontal overflow. */
+  width: calc(100% + var(--bleed, 0px) * 2);
+  margin-inline: calc(-1 * var(--bleed, 0px));
+  overflow: clip;
+  /* The cards are painted over the air and under the caption, so their order must not leak. */
+  isolation: isolate;
+}
+.corridor-air { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.catalog:is([data-motion="active"],[data-motion="paused"]) .work-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--corridor-card);
+  z-index: 2;
+  transform-origin: 50% 50%;
+  /* Centring is the outermost shift, so growing a work into focus never disturbs where the ribbon has
+     carried it. The travel itself is written straight onto the card by the corridor: transform is
+     not inherited, so a frame of motion costs the works that are actually moving and nothing else.
+     Nothing is faded or masked — a work is either in the band at its own size or it is past the edge. */
+  transform: translate(-50%, -50%);
+}
+/* Only the work in the gate answers the pointer; the rest are on their way past. */
+.catalog:is([data-motion="active"],[data-motion="paused"]) .work-card:not(.is-live) { pointer-events: none; }
+/* Only the works that are actually on the stage are promoted: ten promoted cards of this size would
+   be ten full-size layers, and two of them are the whole story. */
+.catalog:is([data-motion="active"],[data-motion="paused"]) .work-card.is-near { will-change: transform; }
+.catalog:is([data-motion="active"],[data-motion="paused"]) .work-preview {
+  border-color: transparent;
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 45%), 0 0 0 1px var(--line);
+}
+/* The corridor drives the card; the inner image parallax belongs to the plain catalogue. */
+.catalog:is([data-motion="active"],[data-motion="paused"]) .preview-image img {
+  transform: scale(1.06);
+  will-change: auto;
+}
+.catalog:is([data-motion="active"],[data-motion="paused"]) .corridor-caption {
+  position: absolute;
+  inset: auto 0 0;
+  /* The stage runs to both screen edges, so the caption is pulled back to the text column. */
+  padding-inline: var(--bleed, 0px);
+  /* The hint stays legible over whichever work is passing under it. */
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.corridor-hint { display: inline-flex; align-items: center; gap: 8px; transition: opacity 320ms var(--ease-out), visibility 320ms; }
+.corridor-hint svg { width: 16px; height: 16px; }
+.catalog[data-started="true"] .corridor-hint { opacity: 0; visibility: hidden; }
+.corridor-rail { display: flex; align-items: center; gap: 6px; }
+.corridor-rail i { width: 14px; height: 2px; border-radius: 1px; background: var(--line); transition: background-color 260ms var(--ease-out), transform 260ms var(--ease-out); }
+.corridor-rail i.is-on { background: var(--ink); transform: scaleY(2); }
+
+@media(max-width:700px) {
+  .catalog:is([data-motion="active"],[data-motion="paused"]) {
+    --corridor-stage: min(86svh, 720px);
+    --corridor-card: min(560px, 92vw, 104svh);
+  }
+  /* The hint and the rail cannot share a line at phone width, so the caption takes two rather than
+     breaking the hint across one and a half. */
+  .catalog:is([data-motion="active"],[data-motion="paused"]) .corridor-caption { flex-wrap: wrap; font-size: 11px; }
+}
 
 .about { display: flex; align-items: center; gap: 30px; padding: 42px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .about-mark { width: 72px; height: 72px; stroke-width: 2; color: var(--muted); }

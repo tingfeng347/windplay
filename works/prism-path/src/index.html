@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e7efea"><meta name="description" content="转动世界，让不可能的路相遇。十章原创空间视错觉解谜，可离线游玩。"><title>折光之径 · Prism Path — WindPlay</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header><a class="back" href="../../../index.html">← WindPlay</a><span class="wordmark">PRISM / PATH</span><button id="help-toggle" aria-expanded="false" aria-controls="help">游玩指南</button></header>
+<main>
+  <aside class="chapter">
+    <div class="chapter-number" id="chapter-number">01</div>
+    <h1>折光之径</h1><h2 id="level-name">初见</h2>
+    <p class="story" id="story"></p>
+    <div class="objective"><span class="tiny-label">这一章的旅程</span><p id="objective">收集星光，走向拱门。</p><div class="journey-stats"><span>星光 <b id="lights">0 / 2</b></span><span>步数 <b id="moves">0</b></span></div></div>
+    <p class="hint-text" id="status" role="status" aria-live="polite"></p>
+    <div class="small-actions"><button id="hint">指引</button><button id="undo">撤回一步</button><button id="restart">重走</button></div>
+    <p class="save-note" id="save-note">旅程会自动保存在此浏览器</p>
+  </aside>
+  <section class="world" aria-label="可旋转的空间谜题">
+    <div class="world-caption"><span id="world-label">第一章 · 初见</span><span id="view-label">东南视角</span></div>
+    <canvas id="scene" width="1000" height="800" tabindex="0" aria-label="点击石台移动旅人。也可用下方可走路径按钮移动，Q、E 旋转，空格操作机关。"></canvas>
+    <div class="completion" id="completion" hidden><h2 id="complete-title">光，找到归途。</h2><p id="complete-detail"></p><button class="primary" id="next">进入下一章 →</button></div>
+    <div class="camera-controls"><button id="rotate-left" aria-label="向左旋转视角"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h9a7 7 0 1 1 0 14M4 9l5-5M4 9l5 5"/></svg> <kbd>Q</kbd></button><div><span id="rotation-rule">转动世界，让断桥相遇</span><div id="compass" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><button id="rotate-right" aria-label="向右旋转视角"><kbd>E</kbd> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 9h-9a7 7 0 1 0 0 14M20 9l-5-5M20 9l-5 5"/></svg></button></div>
+    <div class="path-controls"><span>可走路径</span><div id="paths"></div><button id="switch" hidden>切换机关 <kbd>空格</kbd></button></div>
+  </section>
+  <nav class="chapters" aria-label="十章旅程"><span class="tiny-label">十章旅程</span><div id="level-list"></div><p id="progress">0 / 10 章已完成</p></nav>
+  <section id="help" class="help" hidden><h2>换个方向，路就在眼前。</h2><p>点击相邻石台或下方「可走路径」移动。金色桥头在正确视角会重合成一段路，Q / E 或旋转按钮切换视角。收齐本章所有星光，再走到拱门即可通关。</p><p>从第五章起，只能站在带圆环的星盘上转动世界。铜色菱形是机关，站上后按空格切换门。指引给出下一步，撤回可恢复刚才的状态。十章均可自由选择。</p><p>键盘：Q / E 旋转 · 1–9 选择可走路径 · 空格切换机关 · Z 撤回 · R 重走 · Esc 关闭指南。</p><button id="help-close">回到旅程</button></section>
+</main>
+<footer><span>一场关于视角的十章旅程</span><span>原创空间解谜 · PRISM PATH</span></footer>
+<script src="core.js"></script><script src="render.js"></script><script src="app.js"></script>
+</body></html>

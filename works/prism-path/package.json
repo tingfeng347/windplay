@@ -1,0 +1,14 @@
+{
+  "name": "@windplay/prism-path",
+  "version": "0.1.0",
+  "private": true,
+  "description": "折光之径 · 独立离线浏览器游戏",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.cjs"
+  }
+}

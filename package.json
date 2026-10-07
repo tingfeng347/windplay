@@ -21,8 +21,15 @@
     "dev:shadow": "npm run dev --workspace @windplay/shadow-atelier",
     "build": "npm run build:works && npm run build:site",
     "build:works": "npm run build --workspaces --if-present",
-    "build:site": "node scripts/build-site.mjs",
+    "build:atmosphere": "esbuild scripts/atmosphere.js --bundle --minify --format=esm --target=es2020 --outfile=scripts/vendor/atmosphere.js",
+    "build:site": "npm run build:atmosphere && node scripts/build-site.mjs",
     "test": "node --test tests/*.test.cjs && npm run test:works",
-    "test:works": "npm run test --workspaces --if-present"
+    "test:works": "npm run test --workspaces --if-present",
+    "dev:prism": "npm run dev --workspace @windplay/prism-path",
+    "dev:delve": "npm run dev --workspace @windplay/ascii-delve"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "three": "^0.186.1"
   }
 }

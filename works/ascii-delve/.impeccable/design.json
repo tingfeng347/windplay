@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T12:40:00+08:00",
+  "title": "Design System: 余烬地牢 · ASCII Delve",
+  "extensions": {
+    "colorMeta": {
+      "firelight": {
+        "role": "primary",
+        "displayName": "灯火琥珀 Firelight",
+        "canonical": "#e3b768",
+        "tonalRamp": ["#412e0c", "#704f15", "#9f711e", "#cf9226", "#deab4f", "#e7c17e", "#f1dab2", "#fbf5e9"]
+      },
+      "moss": {
+        "role": "secondary",
+        "displayName": "苔绿 Moss",
+        "canonical": "#a7c18e",
+        "tonalRamp": ["#26311b", "#42562f", "#5e7a43", "#7a9e57", "#96b578", "#b2c99c", "#d1dec4", "#f2f6ef"]
+      },
+      "ember-coral": {
+        "role": "tertiary",
+        "displayName": "余烬珊瑚 Ember Coral",
+        "canonical": "#e48f79",
+        "tonalRamp": ["#40170d", "#6e2816", "#9d3920", "#cc4b29", "#dc6e51", "#e59580", "#f0bfb3", "#fbedea"]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "炭地 Charcoal Ground",
+        "canonical": "#171d1b",
+        "tonalRamp": ["#222b28", "#3b4a45", "#536962", "#6c897f", "#8aa39a", "#aabbb5", "#ccd6d3", "#f1f4f3"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "灯雾面 Lantern Surface",
+        "canonical": "#1c2420",
+        "tonalRamp": ["#212b26", "#3a4b42", "#536a5e", "#6b8a7a", "#89a496", "#a9bcb3", "#cbd7d1", "#f1f4f2"]
+      },
+      "map-plane": {
+        "role": "neutral",
+        "displayName": "地牢底 Dungeon Plane",
+        "canonical": "#111814",
+        "tonalRamp": ["#202d25", "#374e41", "#4e6e5c", "#668f77", "#85a894", "#a5c0b1", "#c9d9d0", "#f0f4f2"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "纸白 Paper White",
+        "canonical": "#e0e4d1",
+        "tonalRamp": ["#2c301c", "#4c5431", "#6d7746", "#8d9a5b", "#a6b27b", "#bec69f", "#d8ddc5", "#f4f6ef"]
+      },
+      "dim-ink": {
+        "role": "neutral",
+        "displayName": "灰墨 Dim Ink",
+        "canonical": "#a1ad9f",
+        "tonalRamp": ["#242923", "#3f483d", "#596657", "#748471", "#919f8e", "#aeb9ac", "#cfd5cd", "#f2f3f1"]
+      },
+      "stone-line": {
+        "role": "neutral",
+        "displayName": "石线 Stone Line",
+        "canonical": "#39453b",
+        "tonalRamp": ["#232a24", "#3c493e", "#556758", "#6f8673", "#8ca090", "#abbaae", "#cdd5ce", "#f1f3f1"]
+      },
+      "unseen": {
+        "role": "neutral",
+        "displayName": "未视 Unseen",
+        "canonical": "#263129",
+        "tonalRamp": ["#212b24", "#3a4b3e", "#526a59", "#6b8a73", "#89a490", "#a9bcae", "#cbd7ce", "#f1f4f2"]
+      },
+      "floor-dim": {
+        "role": "neutral",
+        "displayName": "暗底 Dim Floor",
+        "canonical": "#576348",
+        "tonalRamp": ["#272c20", "#434d38", "#606d4f", "#7d8e67", "#98a786", "#b4bfa6", "#d2d8ca", "#f2f4f0"]
+      },
+      "wall-moss": {
+        "role": "neutral",
+        "displayName": "墙苔 Wall Moss",
+        "canonical": "#687e66",
+        "tonalRamp": ["#232a22", "#3c493b", "#566854", "#70876e", "#8da18b", "#acbbaa", "#cdd6cc", "#f1f4f1"]
+      },
+      "exit-teal": {
+        "role": "tertiary",
+        "displayName": "出口青 Exit Teal",
+        "canonical": "#abd1ca",
+        "tonalRamp": ["#1b312d", "#2f564f", "#437a70", "#579e91", "#78b5aa", "#9cc9c1", "#c4dfda", "#eff6f5"]
+      },
+      "traveler": {
+        "role": "tertiary",
+        "displayName": "旅人 Traveler",
+        "canonical": "#f9d78c",
+        "tonalRamp": ["#493304", "#7e5907", "#b37e09", "#e9a40c", "#f5ba38", "#f7cc6e", "#fae1a8", "#fef7e7"]
+      },
+      "enemy": {
+        "role": "tertiary",
+        "displayName": "敌人 Enemy",
+        "canonical": "#de9480",
+        "tonalRamp": ["#3d1910", "#692c1b", "#963f27", "#c25132", "#d47359", "#df9986", "#ecc2b6", "#faeeeb"]
+      },
+      "boss": {
+        "role": "tertiary",
+        "displayName": "首领 Boss",
+        "canonical": "#ef966b",
+        "tonalRamp": ["#451c07", "#78300d", "#aa4412", "#dd5818", "#eb7942", "#f09d75", "#f6c4ac", "#fdefe8"]
+      },
+      "key-gold": {
+        "role": "tertiary",
+        "displayName": "钥匙 Key Gold",
+        "canonical": "#f2cf7b",
+        "tonalRamp": ["#463307", "#79590c", "#ac7e11", "#dfa416", "#ecba41", "#f1cc74", "#f7e1ab", "#fdf7e8"]
+      },
+      "potion-violet": {
+        "role": "tertiary",
+        "displayName": "药水 Potion Violet",
+        "canonical": "#b9a1cd",
+        "tonalRamp": ["#271b32", "#442e57", "#61427b", "#7e55a0", "#9977b6", "#b59bca", "#d2c3df", "#f3eef6"]
+      },
+      "merchant-gold": {
+        "role": "tertiary",
+        "displayName": "商人 Merchant Gold",
+        "canonical": "#d2b679",
+        "tonalRamp": ["#392d13", "#634f21", "#8d702f", "#b7913e", "#caaa62", "#d9c18c", "#e8daba", "#f9f5ec"]
+      },
+      "lore-teal": {
+        "role": "tertiary",
+        "displayName": "碑文 Lore Teal",
+        "canonical": "#94b7ba",
+        "tonalRamp": ["#1e2d2f", "#344e51", "#4a7073", "#609195", "#80a9ad", "#a2c0c3", "#c7d9db", "#eff5f5"]
+      },
+      "trap-clay": {
+        "role": "tertiary",
+        "displayName": "陷阱 Trap Clay",
+        "canonical": "#c18b76",
+        "tonalRamp": ["#352018", "#5b3729", "#824f3b", "#a9664c", "#be856f", "#cfa696", "#e2c9c0", "#f7f0ed"]
+      },
+      "weapon-paper": {
+        "role": "tertiary",
+        "displayName": "兵器 Weapon Paper",
+        "canonical": "#dcdfc5",
+        "tonalRamp": ["#2f311b", "#51552f", "#737a43", "#969e57", "#aeb578", "#c3c99c", "#dbdec4", "#f5f6ef"]
+      },
+      "armor-steel": {
+        "role": "tertiary",
+        "displayName": "护甲 Armor Steel",
+        "canonical": "#abbcc0",
+        "tonalRamp": ["#212a2c", "#39484c", "#51676c", "#69858c", "#88a0a5", "#a8b9bd", "#cbd5d8", "#f0f3f4"]
+      },
+      "track": {
+        "role": "neutral",
+        "displayName": "轨道底 Track",
+        "canonical": "#343f34",
+        "tonalRamp": ["#232a23", "#3c493c", "#556755", "#6f866f", "#8ca08c", "#abbaab", "#cdd5cd", "#f1f3f1"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display 作品名", "purpose": "仅用于页面主标题「余烬地牢.」。" },
+      "headline": { "displayName": "Headline 结算主句", "purpose": "仅用于回合结算弹层的胜负文案。" },
+      "title": { "displayName": "Title 区块标题", "purpose": "侧栏区块与游戏内小标题。" },
+      "body": { "displayName": "Body 界面正文", "purpose": "全站唯一工作字号；说明、图例、手记、按钮、页脚。" },
+      "label": { "displayName": "Label 字标", "purpose": "顶部宽字距全大写字标。" }
+    },
+    "fonts": [
+      { "name": "Delve Display", "value": "url(\"../assets/display.woff2\") format(\"woff2\")", "purpose": "自托管的 ZCOOL XiaoWei 汉字子集（OFL 1.1），作品名与结算文案；构建时内联进单文件成品。" },
+      { "name": "ui-mono", "value": "\"SFMono-Regular\", Consolas, \"Liberation Mono\", \"PingFang SC\", monospace", "purpose": "界面与地牢共用的等宽栈，画布渲染也复用同一栈。" }
+    ],
+    "shadows": [],
+    "motion": [
+      { "name": "health-fill", "value": "transform 180ms ease", "purpose": "生命条与移动端生命条的长度变化，用 scaleX 而非 width。" },
+      { "name": "reduced-motion", "value": "@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }", "purpose": "全局降级，关闭全部过渡与动画。" }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1400px", "purpose": "画布锁定 510px 高。" },
+      { "name": "md", "value": "1050px", "purpose": "右栏收窄到 220px，隐藏控制提示，内边距 4%。" },
+      { "name": "mobile", "value": "740px", "purpose": "单列布局、地图条吸顶、显示移动端生命读数、方向键放大。" },
+      { "name": "narrow", "value": "380px", "purpose": "隐藏字标，页脚转纵向。" }
+    ],
+    "canvas": {
+      "note": "地图由字符实时渲染，非图片。视野格：桌面 31x23，窄于 450px 时 19x17，全景模式铺满整层；DPR 上限 2。字符尺寸由格子宽高推导，字体复用 ui-mono。"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "推进主线的唯一实底按钮（点燃灯火 / 再次点灯）。",
+      "html": "<button class=\"ds-btn-primary\">点燃灯火</button>",
+      "css": ".ds-btn-primary { background: var(--gold); color: var(--map); border: 1px solid var(--gold); border-radius: 3px; min-height: 42px; padding: 9px 13px; font: inherit; font-size: 12px; cursor: pointer; transition: background 180ms ease; } .ds-btn-primary:hover { background: #eed098; border-color: var(--gold); } .ds-btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; } .ds-btn-primary:disabled { opacity: 0.4; cursor: default; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "默认按钮：透明底、石线描边，用于页头、结算、帮助与商店行项。",
+      "html": "<button class=\"ds-btn-ghost\">操作指南</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 3px; min-height: 42px; padding: 9px 13px; font: inherit; font-size: 12px; cursor: pointer; } .ds-btn-ghost:hover { background: #2b352c; border-color: var(--muted); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; } .ds-btn-ghost:disabled { opacity: 0.4; cursor: default; }"
+    },
+    {
+      "name": "Direction Pad Key",
+      "kind": "button",
+      "refersTo": "dpad-key",
+      "description": "3x3 方向盘中的一枚按键；中心等待键为琥珀色。",
+      "html": "<button class=\"ds-dpad-key\" aria-label=\"向上移动\">↑</button><button class=\"ds-dpad-key ds-dpad-key--wait\" aria-label=\"等待一回合\">·</button>",
+      "css": ".ds-dpad-key { width: 38px; height: 33px; padding: 0; font: inherit; font-size: 17px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 3px; cursor: pointer; } .ds-dpad-key:hover { background: #2b352c; border-color: var(--muted); } .ds-dpad-key:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; } .ds-dpad-key--wait { color: var(--gold); }"
+    },
+    {
+      "name": "Action Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "行动行：按键提示 kbd + 文字 + 右浮数量。",
+      "html": "<button class=\"ds-action-btn\"><kbd>H</kbd><span>饮用药水 <b>3</b></span></button>",
+      "css": ".ds-action-btn { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 32px; padding: 6px 11px; text-align: left; font: inherit; font-size: 12px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 3px; cursor: pointer; } .ds-action-btn kbd { font: 11px inherit; color: var(--gold); } .ds-action-btn span { flex: 1; } .ds-action-btn b { float: right; font-weight: 400; } .ds-action-btn:hover { background: #2b352c; border-color: var(--muted); } .ds-action-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; } .ds-action-btn:disabled { opacity: 0.4; cursor: default; }"
+    },
+    {
+      "name": "Map Bar",
+      "kind": "nav",
+      "refersTo": "panel",
+      "description": "地图顶部状态条：存活点 + 楼层名 + 回合数；桌面动态注入视图切换按钮。",
+      "html": "<div class=\"ds-map-bar\"><span class=\"ds-live\"><i class=\"ds-live-dot\"></i><b>苔石入口</b></span><span class=\"ds-turn\">回合 0000</span></div>",
+      "css": ".ds-map-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 18px; font: 12px/1.4 \"SFMono-Regular\", Consolas, monospace; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0; } .ds-map-bar b { font-weight: 400; } .ds-live { display: flex; align-items: center; gap: 8px; } .ds-live-dot { display: inline-block; width: 5px; height: 5px; background: var(--green); } .ds-turn { color: var(--muted); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Mobile Health Readout",
+      "kind": "custom",
+      "refersTo": "health-track",
+      "description": "移动端（<=740px）吸顶地图条内的紧凑生命读数，与侧栏生命条同源同色。",
+      "html": "<div class=\"ds-mobile-health\"><span>生命 <b>38 / 38</b></span><div class=\"ds-mobile-health-track\"><i style=\"transform: scaleX(1)\"></i></div></div>",
+      "css": ".ds-mobile-health { min-width: 86px; } .ds-mobile-health > span { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; } .ds-mobile-health b { font-weight: 400; } .ds-mobile-health-track { height: 4px; background: #343f34; margin-top: 6px; } .ds-mobile-health-track i { display: block; height: 100%; background: var(--green); transform-origin: left; transition: transform 180ms ease; }"
+    },
+    {
+      "name": "Health Track",
+      "kind": "custom",
+      "refersTo": "health-track",
+      "description": "侧栏完整生命条；低于 30% 时转余烬珊瑚。",
+      "html": "<div class=\"ds-health\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"38\" aria-valuenow=\"30\"><i style=\"transform: scaleX(0.79)\"></i></div>",
+      "css": ".ds-health { height: 6px; background: #343f34; } .ds-health i { display: block; height: 100%; width: 100%; background: var(--green); transform-origin: left; transition: transform 180ms ease; } .ds-health i.is-low { background: var(--danger); }"
+    },
+    {
+      "name": "Journal Entry",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "旅途手记：倒序列表，最新一条为纸白，其余灰墨，前置琥珀色假项目符号。",
+      "html": "<ol class=\"ds-journal\"><li>你点燃了灯火，走下第一层石阶。</li><li>穴鼠拦住了去路。</li></ol>",
+      "css": ".ds-journal { list-style: none; padding: 0; margin: 18px 0 0; max-height: 255px; overflow: auto; } .ds-journal li { position: relative; padding-left: 14px; margin-bottom: 13px; font: 12px/1.9 \"SFMono-Regular\", Consolas, monospace; color: var(--muted); } .ds-journal li::before { content: '.'; position: absolute; left: 0; color: var(--gold); } .ds-journal li:first-child { color: var(--ink); }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "灯雾面容器：帮助区、新旅程表单、行脚商人。6px 圆角、1px 石线、无阴影。",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">行脚商人</h2><p class=\"ds-panel-note\">旅途漫长，备些补给。</p><button class=\"ds-btn-ghost\" style=\"width: 100%; display: flex; justify-content: space-between;\">药水 +1 <span style=\"color: var(--gold)\">15 G</span></button></section>",
+      "css": ".ds-panel { padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; } .ds-panel-title { margin: 0 0 8px; font: 500 14px/1.4 \"SFMono-Regular\", Consolas, monospace; color: var(--gold); } .ds-panel-note { margin: 0 0 12px; font-size: 12px; color: var(--muted); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "提灯手稿 (The Lanterned Manuscript)",
+    "overview": "整个界面是一页在黑暗中被人提灯照亮的手稿。底色是炭，字是纸白，唯一的光就是那一点琥珀灯火；玩家读到的不是图形，而是字符本身构成的世界。所有面板、按钮、图例都使用同一套等宽字体，界面与地牢共享同一种字母，仿佛地牢是从这页手稿里长出来的，而不是被画在它上面。\n\n密度是「一屏之内看完一局」的密度：地图占桌面视口约三分之二，左侧地图、右侧旅人状态与手记，底部方向与行动控制。没有卡片栅格、没有装饰插画、没有过场动画；每一次移动、每一次受击都由字符状态与颜色直接表达。视觉层级只来自三个来源：炭与纸的明度差、视野内外的迷雾、以及琥珀色的稀有点缀。",
+    "keyCharacteristics": [
+      "炭黑底 + 纸白字 + 单一琥珀光源，界面是「黑暗中提灯」的三色关系。",
+      "地图由字符实时渲染，颜色即语义（旅人、敌人、钥匙、商人各有一色），不依赖任何图像素材。",
+      "界面与地牢共用一套等宽字体，标题单独使用自托管的「Delve Display」汉字子集。",
+      "无阴影、无渐变、无圆角大弧线；深度只由明度层级与迷雾产生。",
+      "回合制节奏：玩家行动，世界才行动。"
+    ],
+    "rules": [
+      { "name": "The One Lantern Rule", "body": "「只有一盏灯」琥珀色是唯一的光源色，一屏之内只出现在少数几处（主按钮、焦点、玩家、钥匙、关键数字）。它一旦铺开成面，这个世界就失去了黑暗。", "section": "colors" },
+      { "name": "The Character Carries Color Rule", "body": "「字符即语义」地图上的每一种颜色都必须绑定一个可交互的字符或地形；不要为了好看给地图加装饰色。玩家应该能靠颜色一眼读出「那是敌人还是钥匙」。", "section": "colors" },
+      { "name": "The Charcoal-Not-Black Rule", "body": "「炭不是黑」底色是 #171d1b 的炭绿灰，不是纯黑。纯黑会让琥珀失去暖意，也会让地图失去地牢的潮湿感。", "section": "colors" },
+      { "name": "The One Alphabet Rule", "body": "「同一种字母」地牢里的字符和界面上的文字必须来自同一套等宽字体。不要把界面换成无衬线 UI 字体——那会让界面和地牢分属两个世界。", "section": "typography" },
+      { "name": "The Single Working Size Rule", "body": "「只有一个工作字号」界面正文固定 12px，层级靠颜色与位置拉开，不靠字号堆叠。只有标题、数字与结算允许跳出这一档。", "section": "typography" },
+      { "name": "The Fog-Not-Shadow Rule", "body": "「用迷雾造深，不用阴影」不得引入 box-shadow 或渐变阴影。需要强调层级时，用明度更高的面板、用描边、或用迷雾透明度。", "section": "elevation" },
+      { "name": "The Two-Step Surface Rule", "body": "「面板只亮一档」面板底色只比页面底亮一档（#171d1b → #1c2420），再深一档就是地图洞（#111814）。不要造出中间灰。", "section": "elevation" },
+      { "name": "The Printed-Corner Rule", "body": "「印刷角」圆角只允许 3px（控件）与 6px（面板）两档。看到更大的圆角，说明有人把别处的界面语言搬了进来。", "section": "shapes" },
+      { "name": "The Reachable-Thumb Rule", "body": "「移动端拇指可达」手机下方向盘与行动按钮居中排在内容下方、方向键放大到 42px、行动按钮 44px；地图条吸顶并带移动端生命读数。任何重排都不得让操作落出屏幕。", "section": "components" },
+      { "name": "The No-Synthetic-Marks Rule", "body": "「不用合成图标」界面里的所有标记（箭头、生命点、图例符号、等待点）都必须是等宽字体里的真实字符，或纯 CSS 几何。不要引入 SVG 图标、图标字体或图片符号。", "section": "components" }
+    ],
+    "dos": [
+      "Do 让琥珀色保持稀有：一屏通常不超过三处（例如玩家、主按钮、一个关键数字）。",
+      "Do 把每个新交互字符绑定到一个明确颜色，并让画布渲染与图例使用同一个值。",
+      "Do 把界面正文锁在 12px 等宽，靠颜色、位置、明度拉开层级。",
+      "Do 用面板明度（#171d1b → #1c2420 → #111814）和 1px 石线表达层级与分组。",
+      "Do 用迷雾三档（未视 / 暗底 / 视野）表达地图远近；用 transform:scaleX 表达生命变化。",
+      "Do 保留动效的降级路径：prefers-reduced-motion 下停掉全部过渡与动画。"
+    ],
+    "donts": [
+      "Don't 引入 box-shadow、投影或渐变阴影来表达层级。",
+      "Don't 把琥珀色铺成大面积底色或整块区域。",
+      "Don't 使用纯黑 #000 作底；炭绿灰 #171d1b 才是这个世界的黑。",
+      "Don't 使用大于 6px 的圆角，或引入胶囊形、圆形控件。",
+      "Don't 为地图添加无字符语义的装饰色或装饰图形。",
+      "Don't 用 SVG 图标 / 图标字体替代等宽字符标记。",
+      "Don't 把界面换成无衬线 UI 字体；界面与地牢必须共用同一套等宽字母。"
+    ]
+  }
+}

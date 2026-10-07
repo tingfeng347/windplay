@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T00:00:00.000Z",
+  "title": "Design System: 折光之径 · Prism Path",
+  "extensions": {
+    "colorMeta": {
+      "sky": { "role": "primary", "displayName": "天空青", "canonical": "#e7efea", "tonalRamp": ["#080d09", "#222824", "#3e4440", "#5e6561", "#818884", "#a5ada8", "#cbd3ce", "#e9f1ec"] },
+      "ink": { "role": "neutral", "displayName": "深墨绿", "canonical": "#284a46", "tonalRamp": ["#00100e", "#092d29", "#274946", "#486b67", "#6b8e8a", "#8fb4ae", "#b4dad5", "#d1f8f2"] },
+      "muted": { "role": "neutral", "displayName": "次级灰绿", "canonical": "#516962", "tonalRamp": ["#000f0a", "#152b26", "#314841", "#516962", "#748d85", "#98b1aa", "#bdd8d0", "#daf6ed"] },
+      "line": { "role": "neutral", "displayName": "发丝线", "canonical": "#b8ccc1", "tonalRamp": ["#020f08", "#1b2b22", "#36473e", "#56685f", "#798b81", "#9db0a6", "#c3d7cc", "#e0f4e9"] },
+      "accent": { "role": "secondary", "displayName": "焦点赭红", "canonical": "#b44734", "tonalRamp": ["#330000", "#5a0000", "#7e0f00", "#a63a28", "#cf5f4b", "#f9856f", "#ffab94", "#ffc9b0"] },
+      "paper": { "role": "neutral", "displayName": "纸白", "canonical": "#f7f6eb", "tonalRamp": ["#0c0b05", "#28271f", "#44433a", "#65645a", "#88877d", "#acaba1", "#d2d1c7", "#f0efe4"] },
+      "stone-top": { "role": "tertiary", "displayName": "象牙石顶", "canonical": "#faf4df", "tonalRamp": ["#0f0b01", "#2b2616", "#474231", "#686351", "#8c8673", "#b1ab97", "#d7d1bd", "#f5efda"] },
+      "stone-side": { "role": "tertiary", "displayName": "鼠尾草石侧", "canonical": "#c6d8ca", "tonalRamp": ["#030e06", "#1c2a20", "#38473b", "#58685c", "#7a8b7e", "#9fb0a3", "#c4d6c8", "#e2f4e6"] },
+      "stone-shade": { "role": "tertiary", "displayName": "石影青", "canonical": "#8bb5ac", "tonalRamp": ["#00110c", "#032e27", "#234b43", "#446c64", "#679087", "#8bb5ac", "#b0dcd2", "#cdf9f0"] },
+      "traveler": { "role": "primary", "displayName": "旅人珊瑚", "canonical": "#d15e48", "tonalRamp": ["#340000", "#5b0000", "#7f0a00", "#a83824", "#d15e48", "#fb836c", "#ffaa91", "#ffc7ad"] },
+      "gold": { "role": "secondary", "displayName": "桥头金", "canonical": "#b88a43", "tonalRamp": ["#210000", "#421a00", "#613800", "#855901", "#aa7d35", "#d1a25b", "#f9c881", "#ffe59e"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "题刻 Display", "purpose": "作品名、页眉字标；仅此二处。" },
+      "chapter-numeral": { "displayName": "章节号 Numeral", "purpose": "左侧栏的大号章节号，移动端缩至 62px 退到右上角。" },
+      "story": { "displayName": "故事 Story", "purpose": "每章一句叙事，行宽收窄至约 14em。" },
+      "body": { "displayName": "正文 Body", "purpose": "目标、提示、游玩指南与状态播报。" },
+      "label": { "displayName": "标签 Label", "purpose": "视角标签、区块小标题、章节列表、页脚；靠字距而非字重分层。" }
+    },
+    "shadows": [
+      { "name": "浮层抬升", "value": "0 18px 70px #284a4633", "purpose": "通关卡片从石庭上浮起一层；界面层唯一的软阴影。" },
+      { "name": "场景接地影", "value": "ellipse(fill #355a5010)", "purpose": "Canvas 内每块石台脚下的一圈极淡投影，把悬空几何按在地上，只服务于可读性。" }
+    ],
+    "motion": [
+      { "name": "视角旋转", "value": "380ms cubic-bezier 缓出四阶 1-(1-t)^4", "purpose": "Q/E 或旋转按钮切换等距视角时整体重投影。" },
+      { "name": "逐格行走", "value": "150ms step", "purpose": "点石台后旅人沿连通路径逐格移动。" },
+      { "name": "状态过渡", "value": "0.2s", "purpose": "按钮的 background / border-color 过渡。" },
+      { "name": "减少动态", "value": "@media (prefers-reduced-motion: reduce)", "purpose": "取消全部旋转与步行动画，直接跳到终点。" }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1600px" },
+      { "name": "md", "value": "1100px" },
+      { "name": "sm", "value": "650px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "默认描边按钮：指引 / 撤回一步 / 重走等场景动作。",
+      "html": "<button class=\"ds-btn\">指引</button>",
+      "css": ".ds-btn{font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:12px;color:#284a46;background:transparent;border:1px solid #b8ccc1;border-radius:6px;min-height:44px;padding:10px 16px;cursor:pointer;transition:background .2s,border-color .2s}.ds-btn:hover{background:#ffffff70;border-color:#284a46}.ds-btn:focus-visible{outline:3px solid #b44734;outline-offset:4px}.ds-btn:disabled{opacity:.4;cursor:default}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "深墨绿实底主操作，用于通关卡片的「进入下一章」。",
+      "html": "<button class=\"ds-btn-primary\">进入下一章 →</button>",
+      "css": ".ds-btn-primary{font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:13px;color:#f7f6eb;background:#284a46;border:1px solid #284a46;border-radius:6px;min-height:44px;padding:10px 16px;cursor:pointer;transition:background .2s,color .2s}.ds-btn-primary:hover{background:#39675f;color:#fff}.ds-btn-primary:focus-visible{outline:3px solid #b44734;outline-offset:4px}"
+    },
+    {
+      "name": "Path Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "可走路径的次要按钮，半透明白底，列出当前可移动到的石台。",
+      "html": "<button class=\"ds-path\">1 · 石台 2</button>",
+      "css": ".ds-path{font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:12px;color:#284a46;background:#ffffff50;border:1px solid #b8ccc1;border-radius:6px;min-height:36px;padding:7px 12px;cursor:pointer;transition:background .2s,border-color .2s}.ds-path:hover{background:#ffffff70;border-color:#284a46}.ds-path:focus-visible{outline:3px solid #b44734;outline-offset:4px}"
+    },
+    {
+      "name": "Switch Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "站在铜色机关上时出现的「切换机关」按钮，沙金底色区分于普通动作。",
+      "html": "<button class=\"ds-switch\">切换机关 <kbd>空格</kbd></button>",
+      "css": ".ds-switch{font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:12px;color:#284a46;background:#d9ba83;border:1px solid #b8ccc1;border-radius:6px;min-height:36px;padding:7px 12px;cursor:pointer;transition:background .2s}.ds-switch kbd{font-size:12px;opacity:.7}.ds-switch:hover{background:#e3c795}.ds-switch:focus-visible{outline:3px solid #b44734;outline-offset:4px}"
+    },
+    {
+      "name": "Chapter List Item",
+      "kind": "nav",
+      "refersTo": "level-list-item",
+      "description": "右侧十章索引的一行：序号 + 章名 + 完成勾；当前章用半透明白底与描边标记。",
+      "html": "<button class=\"ds-level-item\" aria-current=\"true\"><span>01</span>初见<small>✓</small></button>",
+      "css": ".ds-level-item{display:flex;align-items:center;gap:13px;width:100%;text-align:left;font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:12px;color:#284a46;background:transparent;border:1px solid transparent;border-radius:6px;padding:9px 10px;min-height:43px;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s}.ds-level-item span{font-family:Georgia,serif;font-size:12px;color:#516962}.ds-level-item small{margin-left:auto;font-size:12px;color:#b44734}.ds-level-item:hover{background:#ffffff50}.ds-level-item[aria-current=\"true\"]{background:#ffffff70;border-color:#b8ccc1}.ds-level-item:focus-visible{outline:3px solid #b44734;outline-offset:4px}"
+    },
+    {
+      "name": "View Compass",
+      "kind": "custom",
+      "description": "四个圆点表示等距朝向，实心点为当前 view。",
+      "html": "<div class=\"ds-compass\"><i class=\"active\"></i><i></i><i></i><i></i></div>",
+      "css": ".ds-compass{display:flex;gap:8px;justify-content:center}.ds-compass i{width:5px;height:5px;border:1px solid #516962;border-radius:50%}.ds-compass i.active{background:#284a46}"
+    },
+    {
+      "name": "Rotation Control",
+      "kind": "custom",
+      "description": "画布下的旋转控制行（signature）：左右内联 SVG 箭头夹住视角提示与罗盘，让「转动世界」读作场景的一部分。",
+      "html": "<div class=\"ds-camera\"><button class=\"ds-camera-btn\" aria-label=\"向左旋转视角\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 9h9a7 7 0 1 1 0 14M4 9l5-5M4 9l5 5\"/></svg></button><div class=\"ds-camera-mid\"><span class=\"ds-camera-rule\">转动世界，让断桥相遇</span><div class=\"ds-compass\"><i class=\"active\"></i><i></i><i></i><i></i></div></div><button class=\"ds-camera-btn\" aria-label=\"向右旋转视角\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 9h-9a7 7 0 1 0 0 14M20 9l-5-5M20 9l-5 5\"/></svg></button></div>",
+      "css": ".ds-camera{display:flex;justify-content:center;align-items:center;gap:24px;font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif;color:#284a46}.ds-camera-btn{display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 16px;font-size:26px;color:inherit;background:transparent;border:0;border-radius:6px;cursor:pointer;transition:background .2s}.ds-camera-btn:hover{background:#ffffff50}.ds-camera-btn:focus-visible{outline:3px solid #b44734;outline-offset:4px}.ds-camera-btn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}.ds-camera-mid{text-align:center;min-width:176px;font-size:12px}.ds-camera-rule{display:block;margin-bottom:6px}"
+    },
+    {
+      "name": "Completion Card",
+      "kind": "card",
+      "refersTo": "completion-card",
+      "description": "通关浮层：报出本章步数与星级，并给出下一步动作。",
+      "html": "<div class=\"ds-completion\"><h2>光，找到归途。</h2><p>本章 24 步 · 3 / 3 星</p><button class=\"ds-completion-cta\">进入下一章 →</button></div>",
+      "css": ".ds-completion{position:relative;width:min(340px,92%);box-sizing:border-box;text-align:center;padding:28px;background:#f7f6eb;color:#284a46;border-radius:12px;box-shadow:0 18px 70px #284a4633;font-family:\"Avenir Next\",\"PingFang SC\",\"Microsoft YaHei\",sans-serif}.ds-completion h2{font-family:\"Prism Display\",\"Songti SC\",serif;font-size:26px;font-weight:500;line-height:1.2;margin:15px 0}.ds-completion p{font-size:13px;line-height:1.8;margin:0 0 18px}.ds-completion-cta{font:inherit;font-size:13px;color:#f7f6eb;background:#284a46;border:1px solid #284a46;border-radius:6px;min-height:44px;padding:10px 16px;cursor:pointer;transition:background .2s}.ds-completion-cta:hover{background:#39675f}.ds-completion-cta:focus-visible{outline:3px solid #b44734;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "一座被光读出的等距石庭",
+    "overview": "第一视觉不是介绍、不是菜单，而是一片可以直接辨识的等距石阵：浅青的天空铺满整个视口，象牙色的石顶、鼠尾草色的石侧在同一个投影里堆出高低，珊瑚色的旅人站在其中最小的一点上。玩家第一眼看到的是可以走的建筑，而不是需要先学会的界面。\n\n界面是这座石庭的注脚，不是它的框架。所有文字退出到浅青底色上，只用一种深墨绿说话；线条是发丝一样的存在，用来分隔而不用来装饰。深度全部交给等距投影本身：投影里靠前的石台自然压住靠后的，石侧的两种明暗交替出体积，地面只留一圈极淡的影子。没有卡片栅格、没有霓虹、没有装饰图；画面里的每一个形状都是可点击、可走的几何。\n\n世界随章节换色，但换的是同一套几何的五条色带（绿、紫、蓝、沙、灰绿），不是为了好看，而是让每一章在视觉上可被记忆。位置决定语义：同一个色槽在不同章节永远是同一个职责。",
+    "keyCharacteristics": [
+      "浅青天空、象牙石顶、鼠尾草石侧、珊瑚旅人，五色定角色，不随时间漂移。",
+      "场景由 Canvas 2D 运行时几何绘制，零装饰性图片，字体是唯一的外部位图。",
+      "深度来自等距投影与明暗，不来自阴影。",
+      "十章共用一套网格；每章只换色带与规则，不换语言。"
+    ],
+    "rules": [
+      { "name": "The 一色一职 Rule", "body": "每个色槽在一个章节里只承担一个职责：天空是地面，象牙是石顶，鼠尾草是石侧，珊瑚只属于旅人。跨章节换色带时槽位不变，绝不把一个颜色借给第二个语义。", "section": "colors" },
+      { "name": "The 金色即通路 Rule", "body": "只有当投影中的两段桥确实相接、机关确实开门时，才画出金缝（#b88a43）；否则是虚线铁锈红。金色是状态，不是装饰。", "section": "colors" },
+      { "name": "The 题刻只刻四处 Rule", "body": "Prism Display 只用于作品名、章节号、通关标题与字标；任何正文、按钮、列表都不使用它。第三支字体（宋体）只服务故事段落。", "section": "typography" },
+      { "name": "The 无硬投影 Rule", "body": "不使用硬偏移阴影、浮雕、描边投影或拟物按钮；界面的层级由底色明度与 1px 发丝线表达，场景的层级由投影表达。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 让画面本身可玩：新增任何视觉元素前，先问它是否能被点击、被走、被转动。",
+      "Do 保持五色槽位不变，只更换章节色带；珊瑚只属于旅人，金色只标真通路。",
+      "Do 让深度由等距投影和石侧两个明暗槽表达，地面影只用于把几何按在地上。",
+      "Do 用字距和字号（12px / 0.12em）表达层级，而不是靠加粗或加色。",
+      "Do 让所有控制在桌面与手机上保持 36–44px 的可触高度，旋转控制始终贴着画布。"
+    ],
+    "donts": [
+      "Don't 引入装饰性图片、图标包或位图纹理；场景里的每个形状都必须是运行时几何。",
+      "Don't 给控件加硬偏移阴影、浮雕或拟物边框；系统的层级由明度与发丝线承担。",
+      "Don't 在场景里使用高饱和的第三种暖色；除珊瑚与金色外，画面保持雾色。",
+      "Don't 让 Prism Display 出现在正文、按钮或列表里；它只用于四处题刻。",
+      "Don't 把「转动世界」降级成工具栏动作；视角旋转是核心玩法，必须贴近场景呈现。"
+    ]
+  }
+}

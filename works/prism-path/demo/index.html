@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#e7efea"><meta name="description" content="转动世界，让不可能的路相遇。十章原创空间视错觉解谜，可离线游玩。"><title>折光之径 · Prism Path — WindPlay</title><style>
+/* Display font license:
+Copyright 2018 The ZCOOL XiaoWei Project Authors (https://github.com/googlefonts/zcool-xiaowei/)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+*/
+@font-face{font-family:"Prism Display";src:url("data:font/woff2;base64,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") format("woff2");font-style:normal;font-weight:400 700;font-display:swap}
+:root{color-scheme:light;--sky:#e7efea;--ink:#284a46;--muted:#516962;--line:#b8ccc1;--accent:#b44734;--paper:#f7f6eb;font-family:"Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--sky);color:var(--ink)}button,a{touch-action:manipulation}button{font:inherit;color:inherit;background:transparent;border:1px solid var(--line);min-height:44px;padding:10px 16px;border-radius:6px;cursor:pointer}button:hover{background:#ffffff70;border-color:var(--ink)}button:disabled{opacity:.4;cursor:default}button:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button[hidden],[hidden]{display:none!important}a{color:inherit;text-decoration:none}::selection{background:var(--accent);color:white}html{scrollbar-color:var(--muted) var(--sky)}header{height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;border-bottom:1px solid var(--line);gap:20px}.back{font-size:14px;min-height:44px;display:flex;align-items:center}.wordmark{font-family:Georgia,serif;letter-spacing:.18em;font-size:17px}header button{font-size:13px;border-color:transparent}main{max-width:1700px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr) 164px;padding:40px 4% 22px;gap:24px}.chapter{padding-top:22px}.chapter-number{font:italic 72px/1 Georgia,serif;color:#728c81;margin-bottom:24px}h1{font-family:"Songti SC","STSong",serif;font-size:35px;font-weight:500;letter-spacing:.08em;margin:0 0 12px}h2{font-size:16px;font-weight:500;margin:0}.chapter h2{color:var(--muted);letter-spacing:.13em}.story{font-family:"Songti SC",serif;font-size:17px;line-height:1.95;margin:27px 0 35px;max-width:14em}.tiny-label{font-size:12px;letter-spacing:.12em;color:var(--muted)}.objective{border-top:1px solid var(--line);padding-top:18px}.objective p{font-size:13px;line-height:1.85;margin:12px 0 18px}.journey-stats{display:flex;gap:28px;font-size:12px;color:var(--muted)}.journey-stats b{display:block;color:var(--ink);font-size:20px;line-height:1.7;font-weight:500;font-variant-numeric:tabular-nums}.hint-text{font-size:12px;line-height:1.8;min-height:66px;margin:20px 0 10px}.small-actions{display:flex;flex-wrap:wrap;gap:5px}.small-actions button{font-size:12px;padding:7px 10px;min-height:40px}.save-note{color:var(--muted);font-size:12px;line-height:1.8;margin-top:20px}.world{min-width:0;position:relative;display:flex;flex-direction:column}.world-caption{display:flex;justify-content:space-between;padding:0 12px;font-size:12px;letter-spacing:.07em;color:var(--muted)}canvas{display:block;width:100%;height:clamp(400px,51vw,650px);cursor:pointer;touch-action:manipulation}.camera-controls{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:-15px;z-index:1}.camera-controls>button{font-size:26px;border:0;display:flex;align-items:center;gap:10px}.camera-controls>div{text-align:center;min-width:176px;font-size:12px}.camera-controls kbd{font-size:12px}.camera-controls button:hover{background:#ffffff50}kbd{font:11px inherit;opacity:.7}#compass{display:flex;gap:8px;justify-content:center;margin-top:14px}#compass i{width:5px;height:5px;border:1px solid var(--muted);border-radius:50%}#compass i.active{background:var(--ink)}.path-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px 0 0;min-height:44px;font-size:12px}.path-controls>span{color:var(--muted)}#paths{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}#paths button{font-size:12px;min-height:36px;padding:7px 12px;background:#ffffff50}#switch{font-size:12px;background:#d9ba83}.chapters{padding-top:30px}.chapters>.tiny-label{display:block;margin:0 0 22px 12px}#level-list{display:flex;flex-direction:column;gap:5px}#level-list button{display:flex;align-items:center;gap:13px;border-color:transparent;text-align:left;font-size:12px;padding:9px 10px;min-height:43px;white-space:nowrap}#level-list button span{font:12px Georgia,serif;color:var(--muted)}#level-list button small{font-size:12px;margin-left:auto;color:var(--accent)}#level-list button[aria-current="true"]{background:#ffffff70;border-color:var(--line)}.chapters>p{font-size:12px;color:var(--muted);margin:25px 0 0 12px}.completion{position:absolute;z-index:3;left:50%;top:42%;transform:translate(-50%,-50%);width:min(340px,92%);text-align:center;padding:28px;background:var(--paper);box-shadow:0 18px 70px #284a4633;border-radius:12px}.completion-mark{font-size:38px;color:var(--accent)}.completion h2{font-family:"Songti SC",serif;font-size:26px;margin:15px 0}.completion p{font-size:13px;line-height:1.8}.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}.primary:hover{background:#39675f;color:white}.help{grid-column:1/-1;max-width:780px;margin:25px auto;padding:28px;background:#ffffff80;border-radius:12px}.help h2{font-size:22px}.help p{font-size:14px;line-height:1.9}footer{max-width:1500px;margin:0 auto;padding:22px 4%;display:flex;justify-content:space-between;color:var(--muted);font-size:12px;letter-spacing:.1em;border-top:1px solid var(--line)}@media(min-width:1600px){canvas{height:680px}}@media(max-width:1100px){main{grid-template-columns:190px minmax(0,1fr);gap:12px}.chapters{grid-column:1/-1;padding:16px 0}.chapters>.tiny-label{margin:0 0 12px}#level-list{flex-direction:row;flex-wrap:wrap;gap:4px}#level-list button{font-size:12px;padding:7px 10px;gap:7px}.chapters>p{margin:15px 0 0}.story{font-size:15px}h1{font-size:30px}}@media(max-width:650px){header{height:65px;padding:0 5%}.wordmark{font-size:12px;letter-spacing:.12em}header button{padding:8px;font-size:12px}main{padding:22px 5% 18px;display:flex;flex-direction:column;gap:0}.chapter{position:relative;padding:0}.chapter-number{position:absolute;right:0;top:0;font-size:62px;opacity:.55;margin:0}h1{font-size:30px;margin-bottom:9px}.chapter h2{font-size:13px}.story{margin:14px 0 18px;max-width:26em;font-size:13px}.objective{display:flex;gap:16px;align-items:center;padding-top:12px}.objective>.tiny-label{display:none}.objective p{flex:1;font-size:12px;margin:0}.journey-stats{gap:14px;white-space:nowrap;font-size:12px}.journey-stats b{font-size:18px}.hint-text{min-height:0;font-size:12px;margin:12px 0}.small-actions{gap:6px}.small-actions button{min-height:36px;font-size:12px}.save-note{margin:8px 0 15px;font-size:12px}.world-caption{padding:12px 0 0;font-size:12px}canvas{height:300px}.camera-controls{gap:8px;margin-top:-6px}.camera-controls>div{font-size:12px;min-width:168px}.camera-controls>button{padding:7px 12px}.path-controls{margin:12px 0}.chapters{margin-top:20px;border-top:1px solid var(--line)}#level-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}#level-list button{font-size:12px;min-height:40px}.chapters>.tiny-label{margin-top:8px}footer{gap:16px;font-size:12px}.help{padding:22px;margin-top:15px}.help h2{font-size:19px}.help p{font-size:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.camera-controls svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+
+h1,.wordmark,.completion h2,.chapter-number{font-family:"Prism Display","Songti SC",serif}
+</style></head>
+<body>
+<header><a class="back" href="../../../index.html">← WindPlay</a><span class="wordmark">PRISM / PATH</span><button id="help-toggle" aria-expanded="false" aria-controls="help">游玩指南</button></header>
+<main>
+  <aside class="chapter">
+    <div class="chapter-number" id="chapter-number">01</div>
+    <h1>折光之径</h1><h2 id="level-name">初见</h2>
+    <p class="story" id="story"></p>
+    <div class="objective"><span class="tiny-label">这一章的旅程</span><p id="objective">收集星光，走向拱门。</p><div class="journey-stats"><span>星光 <b id="lights">0 / 2</b></span><span>步数 <b id="moves">0</b></span></div></div>
+    <p class="hint-text" id="status" role="status" aria-live="polite"></p>
+    <div class="small-actions"><button id="hint">指引</button><button id="undo">撤回一步</button><button id="restart">重走</button></div>
+    <p class="save-note" id="save-note">旅程会自动保存在此浏览器</p>
+  </aside>
+  <section class="world" aria-label="可旋转的空间谜题">
+    <div class="world-caption"><span id="world-label">第一章 · 初见</span><span id="view-label">东南视角</span></div>
+    <canvas id="scene" width="1000" height="800" tabindex="0" aria-label="点击石台移动旅人。也可用下方可走路径按钮移动，Q、E 旋转，空格操作机关。"></canvas>
+    <div class="completion" id="completion" hidden><h2 id="complete-title">光，找到归途。</h2><p id="complete-detail"></p><button class="primary" id="next">进入下一章 →</button></div>
+    <div class="camera-controls"><button id="rotate-left" aria-label="向左旋转视角"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h9a7 7 0 1 1 0 14M4 9l5-5M4 9l5 5"/></svg> <kbd>Q</kbd></button><div><span id="rotation-rule">转动世界，让断桥相遇</span><div id="compass" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div><button id="rotate-right" aria-label="向右旋转视角"><kbd>E</kbd> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 9h-9a7 7 0 1 0 0 14M20 9l-5-5M20 9l-5 5"/></svg></button></div>
+    <div class="path-controls"><span>可走路径</span><div id="paths"></div><button id="switch" hidden>切换机关 <kbd>空格</kbd></button></div>
+  </section>
+  <nav class="chapters" aria-label="十章旅程"><span class="tiny-label">十章旅程</span><div id="level-list"></div><p id="progress">0 / 10 章已完成</p></nav>
+  <section id="help" class="help" hidden><h2>换个方向，路就在眼前。</h2><p>点击相邻石台或下方「可走路径」移动。金色桥头在正确视角会重合成一段路，Q / E 或旋转按钮切换视角。收齐本章所有星光，再走到拱门即可通关。</p><p>从第五章起，只能站在带圆环的星盘上转动世界。铜色菱形是机关，站上后按空格切换门。指引给出下一步，撤回可恢复刚才的状态。十章均可自由选择。</p><p>键盘：Q / E 旋转 · 1–9 选择可走路径 · 空格切换机关 · Z 撤回 · R 重走 · Esc 关闭指南。</p><button id="help-close">回到旅程</button></section>
+</main>
+<footer><span>一场关于视角的十章旅程</span><span>原创空间解谜 · PRISM PATH</span></footer>
+<script>
+(function (root) {
+  'use strict';
+  const THEMES = [
+    ['#e7efea','#faf4df','#c6d8ca','#8bb5ac','#d15e48'],
+    ['#e9e3ee','#f8edf0','#d7bed4','#aa97bf','#b55c70'],
+    ['#e2edf0','#f1f4e1','#bed5d7','#7ba7b6','#cb6749'],
+    ['#f0e6d7','#fff2d8','#e3c6a2','#b99d77','#b75840'],
+    ['#dde9e5','#eef0d6','#b6c9bb','#789e91','#c75d49']
+  ];
+  const CHAPTERS = [
+    ['初见','世界并没有断开，只是你还没有换一个方向。','转动视角，让两段金色断桥在画面中相接。',[0],false,false],
+    ['回廊','走过的路，也会成为另一条路的起点。','先取回支路上的光，再穿过折叠桥。',[1],false,true],
+    ['双生塔','两座相望的塔，藏着同一段阶梯。','两座折叠桥分别在不同视角连通。',[0,2],false,false],
+    ['潮汐机关','石头记得每一次轻轻的叩击。','走到铜色机关上，按空格开启门。',[3,1],false,true],
+    ['星盘','只有安静站立时，世界才愿意转动。','从本关起，只能站在圆环星盘上旋转。',[1,0],true,false],
+    ['沉默的庭院','绕远一点，才能带走所有的星光。','在支路寻找星光，再返回星盘。',[2,3],true,true],
+    ['错位长阶','向上的路，有时要先向后走。','连续穿过三次折叠，留意桥头的星盘。',[0,2,1],true,false],
+    ['月之门','月光穿过打开的门，也穿过漫长的等待。','机关控制通路；开门后返回主路。',[3,0,2],true,true],
+    ['无尽之环','重叠并非终点。记住你最初的方向。','每次旋转都改变空间，星光却留在原处。',[2,1,3,0],true,true],
+    ['归光','把散落的光，送回世界的中心。','综合星盘、机关与四次空间折叠。',[1,3,0,2],true,true]
+  ];
+  function inverse(x,z,view) { for(let i=0;i<view;i++) [x,z]=[z,-x]; return [x,z]; }
+  function makeLevel(index) {
+    const [name,story,help,folds,restricted,branch] = CHAPTERS[index];
+    const nodes=[], edges=[];
+    function node(x,y,z,kind='stone') { const n={id:nodes.length,x,y,z,kind}; nodes.push(n); return n; }
+    function link(a,b,extra={}) { edges.push({a:a.id,b:b.id,...extra}); }
+    let current=node(-2,0,-1,'start'); current.dial=true;
+    let token=0, switchIndex=0;
+    const add=(dx,dz,kind='stone')=>{ const n=node(current.x+dx,current.y,current.z+dz,kind);link(current,n);current=n;return n; };
+    add(1,0); add(1,0,'light').bit=1<<token++;
+    for(let i=0;i<folds.length;i++) {
+      current.dial=true;
+      if(branch && (i===0 || (index>=7 && i===2))) {
+        const origin=current;
+        const [bx,bz]=inverse(0,-1,folds[i]);
+        const a=node(origin.x+bx,origin.y,origin.z+bz);link(origin,a);
+        const b=node(a.x+bx,a.y,a.z+bz,index>=3?'switch':'light');link(a,b);
+        if(index>=3) { b.bit=1<<switchIndex++; b.dial=true; }
+        else b.bit=1<<token++;
+      }
+      const view=folds[i];
+      const [jx,jz]=inverse(3,2,view);
+      const n=node(current.x+jx,current.y+2,current.z+jz,'stone');
+      n.dial=true;
+      link(current,n,{view,gate:(branch && index>=3 && (i===0 || (index>=7 && i===2)))?1<<(switchIndex-1):0});
+      current=n;
+      const [sx,sz]=inverse(1,0,view);
+      add(sx,sz);
+      const [tx,tz]=inverse(0,1,view);
+      add(tx,tz,'light').bit=1<<token++;
+      if(i<folds.length-1) add(tx,tz);
+    }
+    const [ex,ez]=inverse(1,0,folds.at(-1));
+    add(ex,ez,'goal');
+    return {id:index,name,story,help,nodes,edges,restricted,start:0,goal:current.id,allLights:(1<<token)-1,theme:THEMES[index%THEMES.length]};
+  }
+  const levels=CHAPTERS.map((_,i)=>makeLevel(i));
+  const create=(id=0)=>({level:id,node:0,view:(levels[id].edges.find(e=>e.view!==undefined).view+1)%4,lights:0,switches:0,moves:0,won:false});
+  function available(state) {
+    const l=levels[state.level];
+    return l.edges.filter(e=>(e.a===state.node || e.b===state.node) && (e.view===undefined || e.view===state.view) && (!e.gate || (state.switches&e.gate)===e.gate)).map(e=>e.a===state.node?e.b:e.a);
+  }
+  function canRotate(state) { const l=levels[state.level]; return !l.restricted || !!l.nodes[state.node].dial; }
+  function apply(state,action) {
+    if(state.won) return state;
+    const l=levels[state.level], next={...state};
+    if(action.type==='move') {
+      if(!available(state).includes(action.node)) return state;
+      next.node=action.node;
+      const n=l.nodes[next.node];
+      if(n.kind==='light') next.lights|=n.bit;
+    } else if(action.type==='rotate') {
+      if(!canRotate(state) || ![-1,1].includes(action.direction)) return state;
+      next.view=(state.view+action.direction+4)%4;
+    } else if(action.type==='switch') {
+      const n=l.nodes[state.node];
+      if(n.kind!=='switch') return state;
+      next.switches^=n.bit;
+    } else return state;
+    next.moves++;
+    next.won=next.node===l.goal && next.lights===l.allLights;
+    return next;
+  }
+  function actions(state) {
+    const list=available(state).map(node=>({type:'move',node}));
+    if(canRotate(state)) list.push({type:'rotate',direction:-1},{type:'rotate',direction:1});
+    if(levels[state.level].nodes[state.node].kind==='switch') list.push({type:'switch'});
+    return list;
+  }
+  function solve(state) {
+    const key=s=>[s.node,s.view,s.lights,s.switches].join(',');
+    const seen=new Set([key(state)]), queue=[{s:state,parent:-1,action:null}];
+    for(let cursor=0;cursor<queue.length && cursor<100000;cursor++) {
+      const entry=queue[cursor];
+      if(entry.s.won) { const path=[];let i=cursor;while(queue[i].parent!==-1){path.push(queue[i].action);i=queue[i].parent;}return path.reverse(); }
+      for(const action of actions(entry.s)) {
+        const s=apply(entry.s,action), k=key(s);
+        if(seen.has(k)) continue;seen.add(k);queue.push({s,parent:cursor,action});
+      }
+    }
+    return null;
+  }
+  function route(state,target) {
+    const queue=[{s:state,path:[]}],seen=new Set([state.node]);
+    for(let i=0;i<queue.length;i++) {
+      const {s,path}=queue[i];if(s.node===target)return path;
+      for(const n of available(s))if(!seen.has(n)){seen.add(n);queue.push({s:apply(s,{type:'move',node:n}),path:[...path,n]});}
+    }
+    return null;
+  }
+  function restoreProgress(raw) {
+    const result={completed:{},selected:0};
+    try { const data=JSON.parse(raw);if(data?.version!==1)return result;
+      if(Number.isInteger(data.selected)&&data.selected>=0&&data.selected<10)result.selected=data.selected;
+      for(let i=0;i<10;i++){const r=data.completed?.[i];if(r&&Number.isInteger(r.moves)&&r.moves>0&&r.moves<10000&&Number.isInteger(r.stars)&&r.stars>=1&&r.stars<=3)result.completed[i]={moves:r.moves,stars:r.stars};}
+    }catch(_){}return result;
+  }
+  const api={levels,create,available,canRotate,apply,actions,solve,route,restoreProgress,inverse};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PrismCore=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script><script>
+(function(root){
+'use strict';
+class PrismRenderer{
+ constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.hits=[];this.angle=0;this.scene=null;this.frame=0;this.reduced=matchMedia('(prefers-reduced-motion: reduce)');this.resize=new ResizeObserver(()=>this.draw());this.resize.observe(canvas);}
+ set(state,animate=false){const old=this.angle;this.scene=state;let target=state.view*Math.PI/2;while(target-old>Math.PI)target-=Math.PI*2;while(target-old< -Math.PI)target+=Math.PI*2;cancelAnimationFrame(this.frame);
+ if(!animate||this.reduced.matches){this.angle=target;this.draw();return;}
+ const begin=performance.now();const tick=now=>{const t=Math.min(1,(now-begin)/380);this.angle=old+(target-old)*(1-Math.pow(1-t,4));this.draw();if(t<1&&!document.hidden)this.frame=requestAnimationFrame(tick);else{this.angle=target;this.draw();}};this.frame=requestAnimationFrame(tick);}
+ project(n,unit=1){const c=Math.cos(this.angle),s=Math.sin(this.angle),x=n.x*c-n.z*s,z=n.x*s+n.z*c;return{x:(x-z)*unit,y:((x+z)*.5-n.y)*unit,depth:x+z+n.y*.015};}
+ draw(){if(!this.scene)return;const state=this.scene,l=PrismCore.levels[state.level],canvas=this.canvas,ctx=this.ctx,w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);if(!w||!h)return;
+ if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ const raw=l.nodes.map(n=>this.project(n));let minX=Math.min(...raw.map(p=>p.x))-1.4,maxX=Math.max(...raw.map(p=>p.x))+1.4,minY=Math.min(...raw.map(p=>p.y))-2.1,maxY=Math.max(...raw.map(p=>p.y))+4;
+ const unit=Math.min(54,(w-30)/(maxX-minX),(h-45)/(maxY-minY));const ox=w/2-(maxX+minX)*unit/2,oy=h/2-(maxY+minY)*unit/2;
+ this.point=n=>{const p=this.project(n,unit);return{x:p.x+ox,y:p.y+oy,depth:p.depth};};
+ const P=this.point,poly=(points,fill,stroke)=>{ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=.6;ctx.stroke();}};
+ // Broad, grounded shadows make the freestanding geometry legible.
+ ctx.fillStyle='#355a5010';for(const n of l.nodes){const p=P(n);ctx.beginPath();ctx.ellipse(p.x+12,p.y+unit*2.45,unit*.8,unit*.26,0,0,Math.PI*2);ctx.fill();}
+ const active=PrismCore.available(state),ordered=l.nodes.slice().sort((a,b)=>P(a).depth-P(b).depth);
+ this.hits=[];
+ for(const n of ordered){
+  const p=P(n),r=.49,base=n.y-2.1-(n.id%3)*.4;
+  const corners=[{x:n.x-r,y:n.y,z:n.z-r},{x:n.x+r,y:n.y,z:n.z-r},{x:n.x+r,y:n.y,z:n.z+r},{x:n.x-r,y:n.y,z:n.z+r}].map(P);
+  for(let i=0;i<4;i++){const j=(i+1)%4;const a=corners[i],b=corners[j];if((a.y+b.y)/2<p.y+.01)continue;poly([a,b,{x:b.x,y:b.y+(n.y-base)*unit},{x:a.x,y:a.y+(n.y-base)*unit}],i%2?l.theme[2]:l.theme[3]);}
+  const selected=n.id===state.node;
+  poly(corners,active.includes(n.id)?'#fffbea':l.theme[1],selected?'#ae7e44':'#ffffff55');
+  if(active.includes(n.id)){ctx.strokeStyle='#6c9284';ctx.lineWidth=1.3;ctx.beginPath();ctx.ellipse(p.x,p.y,unit*.22,unit*.11,0,0,Math.PI*2);ctx.stroke();}
+  if(n.dial){ctx.strokeStyle='#899d87';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(p.x,p.y,unit*.37,unit*.185,0,0,Math.PI*2);ctx.stroke();for(let i=0;i<4;i++){const a=i*Math.PI/2;ctx.beginPath();ctx.moveTo(p.x+Math.cos(a)*unit*.3,p.y+Math.sin(a)*unit*.15);ctx.lineTo(p.x+Math.cos(a)*unit*.4,p.y+Math.sin(a)*unit*.2);ctx.stroke();}}
+  const folds=l.edges.filter(e=>e.view!==undefined&&(e.a===n.id||e.b===n.id));
+  if(folds.length){ctx.fillStyle=folds.some(e=>e.view===state.view&&(!e.gate||(state.switches&e.gate)))?'#d99846':'#9e7f51';ctx.fillRect(p.x-unit*.11,p.y+unit*.17,unit*.22,unit*.055);}
+  if(n.kind==='light'&&!(state.lights&n.bit)){const y=p.y-unit*.55;poly([{x:p.x,y:y-unit*.17},{x:p.x+unit*.12,y},{x:p.x,y:y+unit*.17},{x:p.x-unit*.12,y}], '#c28a3e');ctx.fillStyle='#fffdf2';ctx.beginPath();ctx.arc(p.x,y,unit*.035,0,7);ctx.fill();}
+  if(n.kind==='switch'){const on=!!(state.switches&n.bit);poly([{x:p.x,y:p.y-unit*.15},{x:p.x+unit*.2,y:p.y},{x:p.x,y:p.y+unit*.15},{x:p.x-unit*.2,y:p.y}],on?'#789876':'#ba774d');ctx.strokeStyle='#fff9df';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(p.x,p.y-unit*.08);ctx.lineTo(p.x,p.y+unit*.07);ctx.stroke();}
+  if(n.kind==='goal'){
+   const archY=p.y-unit*1.3;ctx.strokeStyle=l.theme[2];ctx.lineWidth=unit*.18;ctx.beginPath();ctx.moveTo(p.x-unit*.3,p.y);ctx.lineTo(p.x-unit*.3,archY+unit*.27);ctx.arc(p.x,archY+unit*.27,unit*.3,Math.PI,0);ctx.lineTo(p.x+unit*.3,p.y);ctx.stroke();ctx.strokeStyle=l.theme[1];ctx.lineWidth=unit*.11;ctx.stroke();
+   ctx.fillStyle='#bd9757';ctx.beginPath();ctx.arc(p.x,archY-unit*.16,unit*.07,0,7);ctx.fill();
+  }
+  if(selected){const y=p.y-unit*.17;ctx.fillStyle='#405c5730';ctx.beginPath();ctx.ellipse(p.x,y+unit*.1,unit*.18,unit*.08,0,0,7);ctx.fill();poly([{x:p.x,y:y-unit*.6},{x:p.x-unit*.14,y:y+unit*.06},{x:p.x+unit*.14,y:y+unit*.06}],l.theme[4]);ctx.fillStyle='#fff8e8';ctx.beginPath();ctx.arc(p.x,y-unit*.64,unit*.1,0,7);ctx.fill();ctx.fillStyle=l.theme[4];ctx.beginPath();ctx.moveTo(p.x-unit*.14,y-unit*.68);ctx.lineTo(p.x+unit*.1,y-unit*.7);ctx.lineTo(p.x,y-unit*.96);ctx.closePath();ctx.fill();}
+  this.hits.push({id:n.id,x:p.x,y:p.y,unit});
+ }
+ // A fine gold seam is drawn only when the projected bridge is actually traversable.
+ for(const e of l.edges.filter(e=>e.view!==undefined&&e.view===state.view)){
+  const a=P(l.nodes[e.a]),b=P(l.nodes[e.b]);ctx.strokeStyle=e.gate&&!(state.switches&e.gate)?'#a45139':'#b88a43';ctx.lineWidth=2;ctx.setLineDash(e.gate&&!(state.switches&e.gate)?[3,4]:[]);ctx.beginPath();ctx.moveTo(a.x+(b.x-a.x)*.47,a.y+(b.y-a.y)*.47);ctx.lineTo(a.x+(b.x-a.x)*.53,a.y+(b.y-a.y)*.53);ctx.stroke();ctx.setLineDash([]);
+ }
+ }
+ hit(x,y){return this.hits.slice().reverse().find(p=>Math.abs(x-p.x)/p.unit+Math.abs(y-p.y)/(p.unit*.55)<.95)?.id;}
+}
+root.PrismRenderer=PrismRenderer;
+})(window);
+</script><script>
+(()=>{
+'use strict';
+const C=PrismCore,$=id=>document.getElementById(id),key='windplay:prism-path:v1';let progress=C.restoreProgress(null),canSave=true;
+try{progress=C.restoreProgress(localStorage.getItem(key));}catch(_){canSave=false;}
+let state=C.create(progress.selected),history=[],hints=0,walking=false,walkToken=0;const renderer=new PrismRenderer($('scene'));const par=C.levels.map(l=>C.solve(C.create(l.id)).length);
+function save(){try{localStorage.setItem(key,JSON.stringify({version:1,...progress}));}catch(_){canSave=false;}$('save-note').textContent=canSave?'旅程会自动保存在此浏览器':'浏览器未允许保存；本次仍可完整游玩';}
+function chapterList(){const list=$('level-list');list.replaceChildren();C.levels.forEach(l=>{const b=document.createElement('button');b.innerHTML='<span>'+String(l.id+1).padStart(2,'0')+'</span>'+l.name+'<small>'+(progress.completed[l.id]?'✓':'')+'</small>';b.setAttribute('aria-current',String(l.id===state.level));b.setAttribute('aria-label','第 '+(l.id+1)+' 章 '+l.name+(progress.completed[l.id]?'，已完成':''));b.addEventListener('click',()=>load(l.id));list.append(b);});$('progress').textContent=Object.keys(progress.completed).length+' / 10 章已完成';}
+function announce(text){$('status').textContent=text;}
+function update(animate=false){const l=C.levels[state.level];renderer.set(state,animate);$('chapter-number').textContent=String(l.id+1).padStart(2,'0');$('level-name').textContent=l.name;$('story').textContent=l.story;$('objective').textContent=l.help;$('world-label').textContent='第 '+(l.id+1)+' 章 · '+l.name;$('view-label').textContent=['东南视角','西南视角','西北视角','东北视角'][state.view];$('lights').textContent=state.lights.toString(2).replaceAll('0','').length+' / '+l.allLights.toString(2).replaceAll('0','').length;$('moves').textContent=state.moves;
+ $('rotate-left').disabled=$('rotate-right').disabled=!C.canRotate(state)||state.won||walking;$('undo').disabled=!history.length||walking;$('switch').hidden=l.nodes[state.node].kind!=='switch';$('switch').disabled=state.won||walking;
+ $('rotation-rule').textContent=l.restricted?(C.canRotate(state)?'已站在星盘上 · 可以旋转':'走到圆环星盘，再转动世界'):'转动世界，让断桥相遇';[...$('compass').children].forEach((n,i)=>n.classList.toggle('active',i===state.view));
+ $('paths').replaceChildren();C.available(state).forEach((node,i)=>{const b=document.createElement('button');const n=l.nodes[node],name=n.kind==='goal'?'拱门':n.kind==='light'&&!(state.lights&n.bit)?'星光':n.kind==='switch'?'机关':n.dial?'星盘':'石台';b.textContent=(i+1)+' · '+name+' '+(node+1);b.disabled=state.won||walking;b.onclick=()=>act({type:'move',node});$('paths').append(b);});
+ $('completion').hidden=!state.won;if(state.won){const stars=progress.completed[state.level]?.stars||1;$('complete-title').textContent=state.level===9?'所有光，都已归来。':'光，找到归途。';$('complete-detail').textContent='本章 '+state.moves+' 步 · '+stars+' / 3 星\n'+(hints?'你跟随指引完成了旅程。':'再试一次，寻找更短的路。');$('next').textContent=state.level===9?'回到第一章 →':'进入下一章 →';}
+}
+function act(action,fromWalk=false){if(walking&&!fromWalk)return;const next=C.apply(state,action);if(next===state){if(action.type==='rotate')announce('先走到带圆环的星盘，才能旋转。');return;}history.push(state);state=next;
+ if(state.won){const stars=1+Number(state.moves<=par[state.level]*1.35)+Number(hints===0),old=progress.completed[state.level];progress.completed[state.level]={moves:Math.min(old?.moves||Infinity,state.moves),stars:Math.max(old?.stars||0,stars)};save();chapterList();announce('第 '+(state.level+1)+' 章完成。');}
+ else if(action.type==='switch')announce('机关已'+((state.switches&C.levels[state.level].nodes[state.node].bit)?'开启':'关闭')+'。');
+ else if(state.node===C.levels[state.level].goal)announce('拱门还在等待。请先收齐所有星光。');
+ else announce(action.type==='rotate'?'视角已切换，寻找相接的金色桥头。':'旅人来到石台 '+(state.node+1)+'。');update(action.type==='rotate');}
+function load(id){walkToken++;walking=false;state=C.create(id);history=[];hints=0;progress.selected=id;save();chapterList();announce(C.levels[id].restricted?'带圆环的石台是星盘，站在这里才能转动世界。':'点击石台移动。试着转动世界，接上金色桥头。');update();}
+$('rotate-left').onclick=()=>act({type:'rotate',direction:-1});$('rotate-right').onclick=()=>act({type:'rotate',direction:1});$('switch').onclick=()=>act({type:'switch'});$('restart').onclick=()=>load(state.level);$('next').onclick=()=>load((state.level+1)%10);
+$('undo').onclick=()=>{if(!history.length||walking)return;state=history.pop();announce('已撤回一步。');update(true);};
+$('hint').onclick=()=>{if(state.won)return;const plan=C.solve(state);hints++;const a=plan?.[0];announce(!a?'已经抵达终点。':a.type==='move'?'下一步：走到石台 '+(a.node+1)+'，可用下方路径按钮。':a.type==='rotate'?'下一步：向'+(a.direction===1?'右':'左')+'旋转一次。':'下一步：切换脚下的机关。');};
+$('scene').onclick=async e=>{if(walking||state.won)return;const rect=e.currentTarget.getBoundingClientRect(),target=renderer.hit(e.clientX-rect.left,e.clientY-rect.top);if(target===undefined)return;const route=C.route(state,target);if(!route){announce('这条路还没有连接。试试旋转视角，或寻找机关。');return;}const token=++walkToken;walking=true;update();for(const node of route){if(token!==walkToken)break;act({type:'move',node},true);if(!renderer.reduced.matches)await new Promise(resolve=>setTimeout(resolve,150));}if(token===walkToken){walking=false;update();}};
+function help(open){$('help').hidden=!open;$('help-toggle').setAttribute('aria-expanded',String(open));if(open){$('help').scrollIntoView({block:'nearest',behavior:renderer.reduced.matches?'instant':'smooth'});$('help-close').focus();}else $('help-toggle').focus();}
+$('help-toggle').onclick=()=>help($('help').hidden);$('help-close').onclick=()=>help(false);
+document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea')||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.toLowerCase();if(k==='escape'&&!$('help').hidden){help(false);return;}if(e.target.tagName==='BUTTON'&&(k===' '||k==='enter'))return;if(!['q','e','z','r',' ','1','2','3','4','5','6','7','8','9'].includes(k))return;e.preventDefault();if(e.repeat)return;if(k==='q'||k==='e')act({type:'rotate',direction:k==='q'?-1:1});else if(k===' ')act({type:'switch'});else if(k==='z')$('undo').click();else if(k==='r')$('restart').click();else{const n=C.available(state)[Number(k)-1];if(n!==undefined)act({type:'move',node:n});}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(renderer.frame);renderer.angle=state.view*Math.PI/2;}else renderer.draw();});load(progress.selected);
+})();
+</script>
+</body></html>

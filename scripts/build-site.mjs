@@ -13,6 +13,8 @@ await Promise.all([
   cp(resolve(root, 'index.html'), resolve(output, 'index.html')),
   cp(resolve(root, 'styles.css'), resolve(output, 'styles.css')),
   cp(resolve(root, 'scripts/launcher-motion.js'), resolve(output, 'scripts/launcher-motion.js')),
+  cp(resolve(root, 'scripts/corridor-motion.js'), resolve(output, 'scripts/corridor-motion.js')),
+  cp(resolve(root, 'scripts/vendor'), resolve(output, 'scripts/vendor'), { recursive:true }),
   cp(resolve(root, 'assets'), resolve(output, 'assets'), { recursive:true }),
   writeFile(resolve(output, '.nojekyll'), '')
 ]);

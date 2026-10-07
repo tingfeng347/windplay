@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#171d1b"><meta name="description" content="提灯下潜五层字符地牢。回合制战斗、迷雾、装备、商人、种子地图与本地存档。"><title>余烬地牢 · ASCII Delve — WindPlay</title><style>
+/* Display font license:
+Copyright 2018 The ZCOOL XiaoWei Project Authors (https://github.com/googlefonts/zcool-xiaowei/)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+*/
+@font-face{font-family:"Delve Display";src:url("data:font/woff2;base64,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") format("woff2");font-style:normal;font-weight:400 700;font-display:swap}
+:root{color-scheme:dark;--bg:#171d1b;--surface:#1c2420;--map:#111814;--ink:#e0e4d1;--muted:#a1ad9f;--line:#39453b;--gold:#e3b768;--green:#a7c18e;--danger:#e48f79;font-family:"SFMono-Regular",Consolas,"Liberation Mono","PingFang SC",monospace;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}html{scrollbar-color:var(--line) var(--bg)}::selection{background:var(--gold);color:var(--bg)}button,input,select{font:inherit;color:inherit;border:1px solid var(--line);border-radius:3px;background:transparent;min-height:42px;padding:9px 13px}button{cursor:pointer;touch-action:manipulation}button:hover{background:#2b352c;border-color:var(--muted)}button:disabled{opacity:.4;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,canvas:focus-visible{outline:2px solid var(--gold);outline-offset:4px}input,select{background:var(--map);caret-color:var(--gold)}[hidden]{display:none!important}a{color:inherit;text-decoration:none}header{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid var(--line);font-size:12px;gap:18px}header>a{display:flex;align-items:center;min-height:44px}header>div{display:flex;gap:9px}header button{font-size:12px;border-color:transparent}.brand{letter-spacing:.18em;font-size:15px;font-weight:700}.brand-cursor{color:var(--gold)}main{max-width:1500px;padding:30px 5% 20px;margin:auto}.heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}h1{font-family:"Songti SC","STSong",serif;font-weight:600;font-size:38px;margin:0;letter-spacing:.06em}h1>span{color:var(--gold);padding-left:7px}.heading p{font-size:12px;color:var(--muted);margin:11px 0 0}.depth{display:flex;align-items:center;gap:22px}.depth>span{font-size:12px;color:var(--muted)}.depth strong{font-size:28px;font-weight:400}.depth strong span{font-size:13px;color:var(--muted)}.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 276px;gap:30px}.map-panel{min-width:0}.map-bar,.map-footer{background:var(--surface);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 18px;font-size:12px}.map-bar{border:1px solid var(--line);border-bottom:0;border-radius:6px 6px 0 0}.map-bar>span:first-child{display:flex;align-items:center;gap:8px}.map-bar b{font-weight:400}.live-dot{display:inline-block;width:5px;height:5px;background:var(--green)}#turn{color:var(--muted);font-variant-numeric:tabular-nums}.map-wrap{position:relative;background:var(--map);padding:12px 8px;border:1px solid var(--line);border-block:0}canvas{display:block;width:100%;height:clamp(370px,36vw,510px);outline-offset:-4px!important;touch-action:none}.map-footer{color:var(--muted);border:1px solid var(--line);border-top:0;border-radius:0 0 6px 6px;font-size:12px}.legend{display:flex;flex-wrap:wrap;gap:12px;padding:16px 2px;color:var(--muted);font-size:12px;line-height:1.8}.legend b{font-weight:400;font-size:13px;margin-right:5px}.player,.gold{color:var(--gold)}.enemy{color:var(--danger)}.potion{color:#b5a2c9}.relic{color:var(--green)}.exit{color:#abc7c7}.controls{border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;gap:22px}.dpad{display:grid;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(3,33px);gap:3px;flex-shrink:0}.dpad button{padding:0;min-height:0;font-size:17px;border-radius:3px}.up{grid-area:1/2}.left{grid-area:2/1}.wait{grid-area:2/2;color:var(--gold)}.right{grid-area:2/3}.down{grid-area:3/2}.action-buttons{display:flex;flex-direction:column;gap:5px;min-width:174px;flex:1;max-width:250px}.action-buttons button{min-height:32px;font-size:12px;display:flex;align-items:center;gap:14px;padding:6px 11px;text-align:left}.action-buttons button kbd{color:var(--gold);font:11px inherit}.action-buttons button span{flex:1}.action-buttons b{float:right;font-weight:400}.control-note{font-size:12px;color:var(--muted);line-height:2.2;margin:0}.sidebar{min-width:0}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}.section-title h2{font-size:15px;font-weight:500;margin:0}.section-title>span{color:var(--muted);font-size:12px}.health-label{display:flex;align-items:center;justify-content:space-between;margin:25px 0 9px;font-size:12px}.health-label strong{font-weight:400;font-size:12px}.health-track{height:6px;background:#343f34}#hp-fill{height:100%;width:100%;background:var(--green);transition:transform 180ms ease;transform-origin:left}.stats{display:flex;justify-content:space-between;padding:23px 0 18px}.stats>div{display:flex;flex-direction:column;gap:8px}.stats span{font-size:12px;color:var(--muted)}.stats b{font-size:21px;font-weight:400;font-variant-numeric:tabular-nums}#gold{color:var(--gold)}#xp{margin:0;color:var(--muted);font-size:12px}.equipment{font-size:12px;margin:20px 0 0;padding-top:18px;border-top:1px solid var(--line)}.equipment>div{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}.equipment dt{color:var(--muted)}.equipment dd{margin:0}.journal{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}.journal ol{list-style:none;padding:0;margin:18px 0 0;max-height:255px;overflow:auto;scrollbar-width:thin}.journal li{font-size:12px;line-height:1.9;color:var(--muted);margin-bottom:13px;padding:0 0 0 14px;position:relative}.journal li::before{content:'.';position:absolute;left:0;color:var(--gold)}.journal li:first-child{color:var(--ink)}.save-info{display:flex;flex-direction:column;gap:7px;margin-top:22px;padding-top:17px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);overflow-wrap:anywhere}.save-info span:first-child{color:var(--green)}.shop{padding:20px 0 0;margin-top:20px;border-top:1px solid var(--line)}.shop h2{font-size:14px;color:var(--gold)}.shop p{font-size:12px;color:var(--muted)}.shop button{display:flex;justify-content:space-between;width:100%;margin-bottom:7px;font-size:12px}.shop button span{color:var(--gold)}.new-run{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;padding:22px;margin:0 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:6px}.new-run>div{flex-basis:100%}.new-run h2{font-size:17px;margin:0}.new-run p{font-size:12px;color:var(--muted);line-height:1.8}.new-run label{display:flex;flex-direction:column;gap:9px;font-size:12px}.new-run input,.new-run select{font-size:12px;max-width:100%}.new-run button{font-size:12px}.primary{color:var(--map);background:var(--gold);border-color:var(--gold)}.primary:hover{background:#eed098;color:var(--map);border-color:var(--gold)}.run-ending{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#111814f2;text-align:center;padding:30px}.run-ending>span{font-size:56px;color:var(--gold)}.run-ending h2{font-family:"Songti SC",serif;font-size:32px;font-weight:500;margin:18px 0 8px}.run-ending p{max-width:30em;font-size:12px;line-height:2;color:var(--muted)}.run-ending button{margin-top:10px;min-width:140px;font-size:12px}.help{margin-top:30px;padding:28px;border:1px solid var(--line);background:var(--surface);border-radius:6px}.help h2{font-size:22px;font-weight:500}.help h3{font-size:13px;color:var(--gold);margin:10px 0}.help-columns{display:grid;grid-template-columns:1fr 1fr;gap:32px}.help p{font-size:12px;line-height:2;color:var(--muted)}.help button{font-size:12px;margin-top:10px}footer{margin:15px 5% 0;border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}@media(min-width:1400px){canvas{height:510px}}@media(max-width:1050px){.game-layout{grid-template-columns:minmax(0,1fr) 220px;gap:22px}.control-note{display:none}.controls{gap:17px}main{padding-inline:4%}.map-bar,.map-footer{padding-inline:12px}.legend{gap:10px}.journal li{font-size:12px}}@media(max-width:740px){header{height:64px;padding-inline:5%;gap:12px}.brand{font-size:12px;letter-spacing:.06em}header>a{font-size:12px}header>div{gap:0}header button{font-size:12px;padding:8px}main{padding:24px 4% 10px}.heading{margin-bottom:20px}.heading h1{font-size:30px}.heading p{font-size:12px;line-height:1.8;max-width:21em}.depth{flex-direction:column;align-items:flex-end;gap:5px}.depth>span{font-size:12px}.depth strong{font-size:24px}.depth strong span{font-size:12px}.game-layout{display:flex;flex-direction:column;gap:24px}.map-wrap{padding:9px 2px}canvas{height:330px}.map-bar{font-size:12px;padding:12px}.map-footer{font-size:12px;padding:12px 10px}.map-footer>span:first-child{max-width:25em;line-height:1.7}.legend{font-size:12px;gap:7px 11px;padding:12px 1px}.legend b{font-size:12px}.controls{justify-content:center;padding-top:15px;gap:20px}.dpad{grid-template-columns:repeat(3,42px);grid-template-rows:repeat(3,42px)}.action-buttons{min-width:0;max-width:210px}.action-buttons button{min-height:44px;font-size:12px}.sidebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding-top:24px}.traveler{min-width:0}.section-title h2{font-size:13px}.section-title>span{font-size:12px}.health-label{margin-top:17px}.stats{padding:17px 0}.stats b{font-size:18px}.journal{margin:0;border:0;padding:0}.journal ol{margin-top:15px;max-height:290px}.journal li{font-size:12px;margin-bottom:10px}.equipment{font-size:12px}.save-info{grid-column:1/-1;margin-top:0;padding-top:14px}.shop{grid-column:1/-1;order:3}.help{padding:20px}.help h2{font-size:19px}.help-columns{grid-template-columns:1fr;gap:8px}.help p{font-size:12px}.new-run{padding:18px}.new-run label{width:100%}.new-run h2{font-size:15px}.new-run button{flex-grow:1}.run-ending{padding:20px}.run-ending>span{font-size:36px}.run-ending h2{font-size:25px}.run-ending p{font-size:12px}.run-ending button{font-size:12px;min-height:38px}footer{font-size:12px;line-height:1.8}#explored{white-space:nowrap}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+@media(max-width:380px){header .brand{display:none}.controls{gap:12px}.map-footer{align-items:flex-start}footer{flex-direction:column}}
+
+.mobile-health{display:none}.mobile-health>span{display:flex;justify-content:space-between;gap:10px;font-size:11px}.mobile-health b{font-weight:400}.mobile-health-track{height:4px;background:#343f34;margin-top:6px}.mobile-health-track i{display:block;height:100%;background:var(--green);transform-origin:left;transition:transform 180ms ease}
+@media(max-width:740px){.map-bar{position:sticky;top:0;z-index:2}.map-bar #turn{display:none}.mobile-health{display:block;min-width:86px}}
+@media(prefers-reduced-motion:reduce){.mobile-health-track i{transition:none}}
+
+h1,.run-ending h2{font-family:"Delve Display","Songti SC",serif}
+</style></head>
+<body>
+<header><a href="../../../index.html">← WindPlay</a><span class="brand">ASCII DELVE<span class="brand-cursor" aria-hidden="true">_</span></span><div><button id="help-toggle" aria-expanded="false" aria-controls="help">操作指南</button><button id="new-toggle" aria-expanded="false" aria-controls="new-run">新旅程</button></div></header>
+<main>
+<section class="heading"><div><h1>余烬地牢<span aria-hidden="true">.</span></h1><p>灯火之内，是你尚未走完的世界。</p></div><div class="depth"><span>当前深度</span><strong id="floor-number">B1<span> / B5</span></strong></div></section>
+<section class="new-run" id="new-run" hidden><div><h2>每一次下潜，都是新的故事。</h2><p id="new-warning">开始新旅程会替换当前浏览器存档。相同种子生成相同地牢。</p></div><label>旅人身份<select id="role"><option value="warden">守灯人 · 均衡防御</option><option value="scout">寻路者 · 攻击与视野</option><option value="scholar">烛火学者 · 双倍震荡</option></select></label><label>世界种子<input id="seed" maxlength="32" value="LANTERN" spellcheck="false" autocomplete="off"></label><button id="random-seed">随机种子</button><button class="primary" id="start-run">点燃灯火</button><button id="cancel-run">取消</button></section>
+<div class="game-layout">
+<section class="map-panel" aria-label="地牢探索地图">
+ <div class="map-bar"><span><i class="live-dot" aria-hidden="true"></i><b id="floor-title">苔石入口</b></span><span id="turn">回合 0000</span><div class="mobile-health" aria-label="当前生命"><span>生命 <b id="mobile-hp">38 / 38</b></span><div class="mobile-health-track"><i id="mobile-hp-fill"></i></div></div></div>
+ <div class="map-wrap"><canvas id="dungeon" width="1078" height="754" tabindex="0" aria-label="ASCII 地牢。方向键或 WASD 移动，撞击敌人攻击。H 药水，F 震荡，E 交互。"></canvas><div class="run-ending" id="run-ending" hidden><span id="ending-symbol" aria-hidden="true">@</span><h2 id="ending-title"></h2><p id="ending-summary"></p><button class="primary" id="try-again">再次点灯</button><button id="ending-new">换个世界</button></div></div>
+ <div class="map-footer"><span id="objective">寻找铜钥匙 k，再走向阶梯 &gt;</span><span id="explored">探索 0%</span></div>
+ <div class="legend" aria-label="地图图例"><span><b class="player">@</b> 你</span><span><b class="enemy">r s w</b> 敌人</span><span><b class="gold">k</b> 钥匙</span><span><b class="potion">!</b> 药水</span><span><b class="gold">$</b> 金币</span><span><b class="relic">&amp;</b> 商人</span><span><b class="relic">+</b> 泉眼</span><span><b class="exit">&gt;</b> 阶梯</span></div>
+ <div class="controls"><div class="dpad" aria-label="方向控制"><button data-move="0,-1" class="up" aria-label="向上移动">↑</button><button data-move="-1,0" class="left" aria-label="向左移动">←</button><button data-action="wait" class="wait" aria-label="等待一回合">·</button><button data-move="1,0" class="right" aria-label="向右移动">→</button><button data-move="0,1" class="down" aria-label="向下移动">↓</button></div><div class="action-buttons"><button data-action="heal" id="heal"><kbd>H</kbd><span>饮用药水 <b id="potion-count">3</b></span></button><button data-action="pulse" id="pulse"><kbd>F</kbd><span>灯焰震荡 <b id="charge-count">1</b></span></button><button data-action="interact" id="interact"><kbd>E</kbd><span>交互 / 下潜</span></button></div><p class="control-note">WASD / 方向键移动<br>撞击敌人即可攻击<br>你行动，世界才行动</p></div>
+</section>
+<aside class="sidebar">
+ <section class="traveler"><div class="section-title"><h2 id="role-name">守灯人</h2><span id="player-level">LV. 01</span></div><div class="health-label"><span>生命</span><strong id="hp">38 / 38</strong></div><div class="health-track" role="progressbar" aria-label="生命" id="hp-bar" aria-valuemin="0" aria-valuemax="38" aria-valuenow="38"><div id="hp-fill"></div></div><div class="stats"><div><span>攻击</span><b id="attack">7</b></div><div><span>护甲</span><b id="defense">2</b></div><div><span>金币</span><b id="gold">0</b></div></div><p id="xp">经验 0 / 18</p><dl class="equipment"><div><dt>手持</dt><dd id="weapon">旧旅剑</dd></div><div><dt>身着</dt><dd id="armor">旅行外衣</dd></div><div><dt>钥匙</dt><dd id="key">尚未找到</dd></div></dl></section>
+ <section class="shop" id="shop" hidden><h2>行脚商人</h2><p>旅途漫长，备些补给。</p><button data-buy="potion">药水 +1 <span>15 G</span></button><button data-buy="attack">攻击 +1 <span>30 G</span></button><button data-buy="defense">护甲 +1 <span>25 G</span></button></section>
+ <section class="journal"><div class="section-title"><h2>旅途手记</h2><span aria-hidden="true">[ LOG ]</span></div><p id="live-status" class="sr-only" role="status" aria-live="polite"></p><ol id="log"></ol></section>
+ <div class="save-info"><span id="save-status">已自动保存</span><span id="seed-label">SEED / LANTERN</span><span id="record"></span></div>
+</aside>
+</div>
+<section id="help" class="help" hidden><h2>在黑暗里，走得慢一点。</h2><div class="help-columns"><div><h3>探索与战斗</h3><p>移动是一个回合，敌人随后行动。走向敌人会攻击；墙壁和无效操作不消耗回合。亮色区域是当前视野，暗色地形是走过的地方，未探索处留白。敌人只在视野中显示。</p><p>靠近敌人前准备药水。H 恢复 20 生命；F 对两格内敌人造成范围伤害，每层恢复次数。打败敌人获得金币、经验；升级提高生命上限与攻击。</p></div><div><h3>带回火种</h3><p>每层找到铜钥匙 k，站在阶梯 &gt; 上按 E 下潜。钥匙在西南的房间。第五层击败 W 守火者，再到阶梯取回火种。守火者举刃蓄力时可以后退躲开。</p><p>/ 是武器，] 是护甲，走上即自动装备；+ 是一次性治疗泉眼，? 是碑文，^ 是陷阱。站在商人 &amp; 身旁按 E 可购买物品。支持五层探索、三种职业与任意世界种子。</p></div></div><button id="help-close">继续探索</button></section>
+</main>
+<footer><span>五层深处，一点不灭的光。</span><span>字符即世界 / A WINDPLAY ORIGINAL</span></footer>
+<script>
+(function(root){
+  'use strict';
+  const WIDTH=49,HEIGHT=29,FLOORS=5;
+  const FLOOR_NAMES=['苔石入口','遗忘水道','灰烬藏书室','无声陵寝','守火者的王座'];
+  const ROLES={warden:{name:'守灯人',hp:38,attack:7,defense:2,potions:3,description:'可靠的护甲与充足补给，适合初次下潜。'},scout:{name:'寻路者',hp:29,attack:9,defense:1,potions:2,description:'更远的视野与更锋利的匕首。'},scholar:{name:'烛火学者',hp:31,attack:6,defense:1,potions:3,description:'每层两次震荡，擅长应对成群敌人。'}};
+  const BESTIARY=[{name:'穴鼠',char:'r',hp:9,attack:3,xp:4,color:'#b5bf94'},{name:'骸骨哨兵',char:'s',hp:17,attack:5,xp:8,color:'#e8ddc4'},{name:'灰烬幽灵',char:'w',hp:13,attack:6,xp:9,color:'#98bdc4'}];
+  const pos=(x,y)=>y*WIDTH+x;
+  function rng(seed){let t=seed>>>0;return()=>{t+=0x6D2B79F5;let r=Math.imul(t^(t>>>15),1|t);r^=r+Math.imul(r^(r>>>7),61|r);return((r^(r>>>14))>>>0)/4294967296;};}
+  function hash(text){let n=2166136261;for(const c of String(text)){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return n>>>0;}
+  function generate(seed,floor){
+    const random=rng((seed+floor*7919)>>>0),tiles=Array(WIDTH*HEIGHT).fill('#'),rooms=[];
+    // Nine jittered rooms and a connected corridor tree; optional loops offer detours.
+    for(let row=0;row<3;row++)for(let col=0;col<3;col++){
+      const w=8+Math.floor(random()*4),h=5+Math.floor(random()*2);
+      const x=2+col*16+Math.floor(random()*2),y=2+row*9+Math.floor(random()*2);
+      const room={x,y,w:Math.min(w,WIDTH-x-2),h:Math.min(h,HEIGHT-y-2)};room.cx=x+Math.floor(room.w/2);room.cy=y+Math.floor(room.h/2);rooms.push(room);
+      for(let yy=y;yy<y+room.h;yy++)for(let xx=x;xx<x+room.w;xx++)tiles[pos(xx,yy)]='.';
+    }
+    function corridor(a,b){let x=a.cx,y=a.cy;while(x!==b.cx){tiles[pos(x,y)]='.';x+=Math.sign(b.cx-x);}while(y!==b.cy){tiles[pos(x,y)]='.';y+=Math.sign(b.cy-y);}tiles[pos(x,y)]='.';}
+    for(let i=1;i<rooms.length;i++)corridor(rooms[i],rooms[i%3===0?i-3:i-1]);
+    corridor(rooms[1],rooms[4]);corridor(rooms[4],rooms[7]);
+    const start={x:rooms[0].cx,y:rooms[0].cy},exit={x:rooms[8].cx,y:rooms[8].cy};
+    const occupied=new Set([pos(start.x,start.y),pos(exit.x,exit.y)]),items=[],enemies=[];
+    if(floor===FLOORS)occupied.add(pos(exit.x,exit.y-1));
+    function spot(room){for(let tries=0;tries<100;tries++){const x=room.x+Math.floor(random()*room.w),y=room.y+Math.floor(random()*room.h),p=pos(x,y);if(!occupied.has(p)){occupied.add(p);return {x,y};}}throw new Error('Room has no free tile');}
+    function item(type,room,extra={}){items.push({type,...spot(room),...extra});}
+    item('potion',rooms[0]);item('gold',rooms[0],{amount:8});
+    for(let i=1;i<9;i++){
+      item('gold',rooms[i],{amount:7+floor*3+Math.floor(random()*9)});
+      if(i%2===0)item('potion',rooms[i]);
+      if(i===2)item('weapon',rooms[i],{power:7+floor*2,name:['','旅人的短剑','水纹长刀','刻字战斧','守墓长剑','白焰之刃'][floor]});
+      if(i===6)item('armor',rooms[i],{power:2+floor,name:'第 '+floor+' 层护甲'});
+      const count=i===8&&floor===FLOORS?0:1+(i===5||i===7?1:0);
+      for(let j=0;j<count;j++){
+        const type=BESTIARY[Math.min(2,Math.floor(random()*(1+floor/2)))];
+        enemies.push({...type,...spot(rooms[i]),id:enemies.length,hp:type.hp+floor*2,maxHp:type.hp+floor*2,attack:type.attack+floor-1,boss:false,awake:false});
+      }
+      if(i===3||i===7)item('trap',rooms[i]);
+    }
+    item('key',rooms[6]);item('shrine',rooms[3]);item('merchant',rooms[4]);item('lore',rooms[5]);
+    if(floor===FLOORS)enemies.push({x:exit.x,y:exit.y-1,id:enemies.length,name:'失落的守火者',char:'W',hp:62,maxHp:62,attack:11,xp:45,color:'#ef966b',boss:true,awake:false});
+    tiles[pos(exit.x,exit.y)]='>';
+    return {tiles,rooms,start,exit,items,enemies};
+  }
+  function log(s,text){s.log.unshift(text);s.log=s.log.slice(0,40);}
+  function newGame(seedText='LANTERN',role='warden'){
+    if(!ROLES[role])role='warden';const stats=ROLES[role],seed=hash(seedText);
+    const s={version:1,seed,seedText:String(seedText).slice(0,32),role,floor:1,turn:0,status:'playing',gold:0,kills:0,relics:0,log:[],seen:[],visible:[],player:{x:0,y:0,hp:stats.hp,maxHp:stats.hp,attack:stats.attack,defense:stats.defense,potions:stats.potions,level:1,xp:0,key:false,charges:role==='scholar'?2:1,weapon:'旧旅剑',armor:'旅行外衣'},shop:null};
+    enterFloor(s);log(s,'提起灯，走入苔石入口。找到钥匙 k 与下行阶梯 >。');return s;
+  }
+  function enterFloor(s){
+    const map=generate(s.seed,s.floor);Object.assign(s,map);s.player.x=map.start.x;s.player.y=map.start.y;s.player.key=false;s.player.charges=s.role==='scholar'?2:1;s.seen=Array(WIDTH*HEIGHT).fill(false);s.shop=null;reveal(s);
+  }
+  function walkable(s,x,y){return x>=0&&x<WIDTH&&y>=0&&y<HEIGHT&&s.tiles[pos(x,y)]!=='#';}
+  function lineVisible(s,x0,y0,x1,y1){let dx=Math.abs(x1-x0),dy=-Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1,err=dx+dy;
+    for(let steps=0;steps<100;steps++){if(x0===x1&&y0===y1)return true;if(steps>0&&s.tiles[pos(x0,y0)]==='#')return false;const e=2*err;if(e>=dy){err+=dy;x0+=sx;}if(e<=dx){err+=dx;y0+=sy;}}return false;}
+  function reveal(s){const radius=s.role==='scout'?8:6;s.visible=Array(WIDTH*HEIGHT).fill(false);
+    for(let y=Math.max(0,s.player.y-radius);y<=Math.min(HEIGHT-1,s.player.y+radius);y++)for(let x=Math.max(0,s.player.x-radius);x<=Math.min(WIDTH-1,s.player.x+radius);x++)if(Math.hypot(x-s.player.x,y-s.player.y)<=radius&&lineVisible(s,s.player.x,s.player.y,x,y)){s.visible[pos(x,y)]=true;s.seen[pos(x,y)]=true;}}
+  function defeat(s,e){s.kills++;s.player.xp+=e.xp;s.gold+=e.boss?50:3+s.floor;log(s,'击败'+e.name+'，获得 '+e.xp+' 经验。');
+    while(s.player.xp>=s.player.level*18){s.player.xp-=s.player.level*18;s.player.level++;s.player.maxHp+=5;s.player.hp=Math.min(s.player.maxHp,s.player.hp+12);s.player.attack+=1;log(s,'升至 '+s.player.level+' 级：生命上限 +5，攻击 +1，恢复生命。');}
+    s.enemies=s.enemies.filter(enemy=>enemy.hp>0);
+  }
+  function enemyTurn(s){
+    const p=s.player;
+    // A distance field prevents monsters getting stuck in corners when chasing the lantern.
+    const distances=new Map([[pos(p.x,p.y),0]]),queue=[[p.x,p.y]];
+    for(let i=0;i<queue.length;i++){const [x,y]=queue[i],d=distances.get(pos(x,y));if(d>=14)continue;for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=pos(nx,ny);if(walkable(s,nx,ny)&&!distances.has(k)){distances.set(k,d+1);queue.push([nx,ny]);}}}
+    for(const e of s.enemies){
+      if(s.visible[pos(e.x,e.y)])e.awake=true;if(!e.awake)continue;
+      const distance=Math.abs(e.x-p.x)+Math.abs(e.y-p.y);
+      if(distance===1){
+        if(e.boss&&s.turn%3===0){log(s,'守火者举起巨刃。下一击更加猛烈。');e.charged=true;continue;}
+        const damage=Math.max(1,e.attack-p.defense)+(e.charged?4:0);e.charged=false;p.hp=Math.max(0,p.hp-damage);log(s,e.name+' 击中你，生命 -'+damage+'。');
+        if(p.hp===0){s.status='dead';log(s,'灯火熄灭。你的足迹仍留在石墙之间。');break;}
+      }else{
+        const candidates=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>({x:e.x+dx,y:e.y+dy})).filter(n=>walkable(s,n.x,n.y)&&!(n.x===p.x&&n.y===p.y)&&!s.enemies.some(other=>other!==e&&other.x===n.x&&other.y===n.y));
+        candidates.sort((a,b)=>(distances.get(pos(a.x,a.y))??999)-(distances.get(pos(b.x,b.y))??999));
+        const n=candidates[0];if(n&&(distances.get(pos(n.x,n.y))??999)<(distances.get(pos(e.x,e.y))??999)){e.x=n.x;e.y=n.y;}
+      }
+    }
+  }
+  function pickup(s){const p=s.player;const found=s.items.find(i=>i.x===p.x&&i.y===p.y);if(!found)return;
+    let consume=true;
+    switch(found.type){
+      case 'gold':s.gold+=found.amount;log(s,'拾起 '+found.amount+' 枚旧金币。');break;
+      case 'potion':p.potions++;log(s,'收起一瓶药水。按 H 恢复生命。');break;
+      case 'key':p.key=true;log(s,'找到这一层的铜钥匙。可以前往阶梯 >。');break;
+      case 'weapon':p.attack=Math.max(p.attack,found.power+p.level-1);p.weapon=found.name;log(s,'装备 '+found.name+'，攻击 '+p.attack+'。');break;
+      case 'armor':p.defense=Math.max(p.defense,found.power);p.armor=found.name;log(s,'穿上 '+found.name+'，防御 '+p.defense+'。');break;
+      case 'trap':p.hp=Math.max(1,p.hp-(3+s.floor));log(s,'踏上陷阱，生命降至 '+p.hp+'。陷阱不会直接致死。');break;
+      case 'shrine':p.hp=p.maxHp;s.relics++;log(s,'古老泉眼让你恢复全部生命。发现一处遗迹。');break;
+      case 'lore':s.relics++;log(s,['','墙上刻着：钥匙总在西南的房间。','旧纸页：在商人 & 身旁可购买补给。','石碑：震荡 F 会同时击中身边的敌人。','旅人笔记：守火者蓄力时，退后一步。','最后的碑文：带回火种，让黑暗止步于此。'][s.floor]);break;
+      case 'merchant':consume=false;log(s,'抵达行脚商人的摊位。按 E 交易。');break;
+    }
+    if(consume)s.items=s.items.filter(i=>i!==found);
+  }
+  function nearbyMerchant(s){return s.items.some(i=>i.type==='merchant'&&Math.abs(i.x-s.player.x)+Math.abs(i.y-s.player.y)<=1);}
+  function step(s,action){
+    if(s.status!=='playing')return false;
+    const p=s.player;let spent=false;s.shop=null;
+    if(action.type==='move'){
+      const {dx,dy}=action;if(!Number.isInteger(dx)||!Number.isInteger(dy)||Math.abs(dx)+Math.abs(dy)!==1)return false;
+      const x=p.x+dx,y=p.y+dy;if(!walkable(s,x,y))return false;
+      const enemy=s.enemies.find(e=>e.x===x&&e.y===y);
+      if(enemy){const damage=Math.max(1,p.attack);enemy.hp-=damage;enemy.awake=true;log(s,'攻击 '+enemy.name+'，造成 '+damage+' 点伤害。');if(enemy.hp<=0)defeat(s,enemy);}
+      else{p.x=x;p.y=y;pickup(s);}spent=true;
+    }else if(action.type==='wait'){spent=true;log(s,'你倾听了一回合黑暗。');}
+    else if(action.type==='heal'){
+      if(p.potions<=0){log(s,'没有药水了。寻找 ! 或拜访商人。');return false;}
+      if(p.hp===p.maxHp){log(s,'生命已满，留着药水吧。');return false;}
+      p.potions--;p.hp=Math.min(p.maxHp,p.hp+20);log(s,'喝下药水，恢复至 '+p.hp+' 生命。');spent=true;
+    }else if(action.type==='pulse'){
+      if(p.charges<=0){log(s,'本层的震荡已用尽。下层会恢复。');return false;}
+      const targets=s.enemies.filter(e=>Math.abs(e.x-p.x)+Math.abs(e.y-p.y)<=2&&lineVisible(s,p.x,p.y,e.x,e.y));
+      if(!targets.length){log(s,'两格内没有敌人，保留震荡。');return false;}
+      p.charges--;for(const e of targets){e.hp-=p.attack+6;if(e.hp<=0)defeat(s,e);}log(s,'灯焰震荡扫过周围的敌人。');spent=true;
+    }else if(action.type==='interact'){
+      if(p.x===s.exit.x&&p.y===s.exit.y){
+        if(!p.key){log(s,'阶梯封印需要本层的铜钥匙 k。');return false;}
+        if(s.floor===FLOORS){if(s.enemies.some(e=>e.boss)){log(s,'守火者仍在。击败 W 才能取回火种。');return false;}s.status='won';s.turn++;log(s,'你带回了不灭的火种。地牢之外，天正在亮。');return true;}
+        s.floor++;p.hp=Math.min(p.maxHp,p.hp+8);enterFloor(s);s.turn++;log(s,'下潜至 '+FLOOR_NAMES[s.floor-1]+'，恢复 8 生命，震荡已补满。');return true;
+      }
+      if(nearbyMerchant(s)){s.shop='open';log(s,'商人：药水 15 金币，磨剑 30 金币，加固护甲 25 金币。');return true;}
+      log(s,'站在阶梯 > 上下潜，或在商人 & 身旁交易。');return false;
+    }else if(action.type==='buy'){
+      if(!nearbyMerchant(s))return false;
+      const prices={potion:15,attack:30,defense:25},price=prices[action.item];if(!price)return false;
+      s.shop='open';if(s.gold<price){log(s,'金币不足，继续探索房间吧。');return false;}
+      s.gold-=price;if(action.item==='potion')p.potions++;else p[action.item]++;log(s,'交易完成。');return true;
+    }else return false;
+    if(spent){s.turn++;reveal(s);enemyTurn(s);reveal(s);}return spent;
+  }
+  function serialize(s){const data={...s};delete data.visible;delete data.rooms;return JSON.stringify(data);}
+  function restore(raw){
+    try{const s=JSON.parse(raw),p=s?.player,integer=(v,a,b)=>Number.isInteger(v)&&v>=a&&v<=b;
+      if(s?.version!==1||!ROLES[s.role]||!integer(s.seed,0,4294967295)||!integer(s.floor,1,FLOORS)||!['playing','dead','won'].includes(s.status)||!p)return null;
+      if(!Array.isArray(s.tiles)||s.tiles.length!==WIDTH*HEIGHT||!s.tiles.every(t=>['#','.','>'].includes(t)))return null;
+      if(!integer(p.x,0,WIDTH-1)||!integer(p.y,0,HEIGHT-1)||!walkable(s,p.x,p.y)||!integer(p.maxHp,1,10000)||!integer(p.hp,0,p.maxHp))return null;
+      for(const field of ['attack','defense','potions','level','xp','charges'])if(!integer(p[field],0,10000))return null;
+      for(const field of ['turn','gold','kills','relics'])if(!integer(s[field],0,10000000))return null;
+      if(typeof s.seedText!=='string'||s.seedText.length>32||typeof p.weapon!=='string'||typeof p.armor!=='string'||typeof p.key!=='boolean')return null;
+      if(!s.exit||!integer(s.exit.x,0,WIDTH-1)||!integer(s.exit.y,0,HEIGHT-1)||s.tiles[pos(s.exit.x,s.exit.y)]!=='>')return null;
+      if(!Array.isArray(s.seen)||s.seen.length!==WIDTH*HEIGHT||!s.seen.every(b=>typeof b==='boolean')||!Array.isArray(s.enemies)||s.enemies.length>50||!Array.isArray(s.items)||s.items.length>100)return null;
+      for(const e of s.enemies)if(!e||!walkable(s,e.x,e.y)||!integer(e.x,0,WIDTH-1)||!integer(e.y,0,HEIGHT-1)||!integer(e.hp,1,10000)||!integer(e.maxHp,e.hp,10000)||!integer(e.attack,1,100)||!integer(e.xp,0,100)||typeof e.name!=='string'||typeof e.char!=='string'||e.char.length!==1||typeof e.boss!=='boolean')return null;
+      for(const i of s.items){if(!i||!integer(i.x,0,WIDTH-1)||!integer(i.y,0,HEIGHT-1)||!walkable(s,i.x,i.y)||!['gold','potion','key','weapon','armor','trap','shrine','merchant','lore'].includes(i.type))return null;if(i.type==='gold'&&!integer(i.amount,0,1000))return null;if(['weapon','armor'].includes(i.type)&&(!integer(i.power,1,100)||typeof i.name!=='string'))return null;}
+      if(!Array.isArray(s.log)||!s.log.every(t=>typeof t==='string'))return null;
+      s.log=s.log.slice(0,40);s.shop=null;reveal(s);return s;
+    }catch(_){return null;}
+  }
+  const api={WIDTH,HEIGHT,FLOORS,FLOOR_NAMES,ROLES,BESTIARY,pos,rng,hash,generate,newGame,step,walkable,reveal,lineVisible,nearbyMerchant,serialize,restore};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.DelveCore=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script><script>
+(function(root){
+'use strict';
+const SYMBOLS={gold:['$','#e3b768'],potion:['!','#b9a1cd'],key:['k','#f2cf7b'],weapon:['/','#dcdfc5'],armor:[']','#abbcc0'],trap:['^','#c18b76'],shrine:['+','#a7c18e'],merchant:['&','#d2b679'],lore:['?','#94b7ba']};
+class DelveRenderer{
+ constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.state=null;this.full=false;this.resize=new ResizeObserver(()=>this.draw());this.resize.observe(canvas);}
+ set(state){this.state=state;this.draw();}
+ draw(){const s=this.state;if(!s)return;const C=DelveCore,ctx=this.ctx,w=this.canvas.clientWidth,h=this.canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);if(!w||!h)return;if(this.canvas.width!==Math.round(w*dpr)||this.canvas.height!==Math.round(h*dpr)){this.canvas.width=Math.round(w*dpr);this.canvas.height=Math.round(h*dpr);}ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#111814';ctx.fillRect(0,0,w,h);
+ const cols=this.full?C.WIDTH:w<450?19:31,rows=this.full?C.HEIGHT:w<450?17:23,cw=w/cols,ch=h/rows;
+ const left=this.full?0:s.player.x-Math.floor(cols/2),top=this.full?0:s.player.y-Math.floor(rows/2);this.metrics={cols,rows,cw,ch,left,top};
+ ctx.font=Math.floor(Math.min(ch*.8,cw*1.35))+'px "SFMono-Regular",Consolas,"Liberation Mono",monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+ for(let ry=0;ry<rows;ry++)for(let rx=0;rx<cols;rx++){
+  const x=left+rx,y=top+ry,px=(rx+.5)*cw,py=(ry+.5)*ch,inside=x>=0&&x<C.WIDTH&&y>=0&&y<C.HEIGHT,k=C.pos(x,y);
+  if(!inside||!s.seen[k]){ctx.fillStyle='#263129';ctx.fillText((rx+ry*3)%11===0?'·':' ',px,py);continue;}
+  const visible=s.visible[k],tile=s.tiles[k];let char=tile==='.'?'·':tile,color=visible?(tile==='#'?'#687e66':tile==='>'?'#abd1ca':'#576348'):'#354034';
+  if(visible&&tile!== '#'){ctx.fillStyle='#a7c18e06';ctx.fillRect(rx*cw,ry*ch,cw,ch);}
+  if(visible){const item=s.items.find(i=>i.x===x&&i.y===y);if(item)[char,color]=SYMBOLS[item.type]||['?','#e3b768'];
+   const enemy=s.enemies.find(e=>e.x===x&&e.y===y);if(enemy){char=enemy.char;color=enemy.boss?'#ef966b':'#de9480';if(enemy.hp<enemy.maxHp){ctx.fillStyle='#514438';ctx.fillRect(rx*cw+2,ry*ch+ch-3,cw-4,2);ctx.fillStyle='#de9480';ctx.fillRect(rx*cw+2,ry*ch+ch-3,(cw-4)*enemy.hp/enemy.maxHp,2);}}
+  }
+  if(x===s.player.x&&y===s.player.y){char='@';color='#f9d78c';ctx.fillStyle='#e3b76819';ctx.fillRect(rx*cw,ry*ch,cw,ch);}
+  ctx.fillStyle=color;ctx.fillText(char,px,py);
+ }
+ ctx.font='10px "SFMono-Regular",Consolas,monospace';ctx.textAlign='left';ctx.fillStyle='#899c89';ctx.fillText('X '+String(s.player.x).padStart(2,'0')+' / Y '+String(s.player.y).padStart(2,'0'),12,h-10);ctx.textAlign='right';ctx.fillText(this.full?'M / 返回灯火视野':'M / 已探索地图',w-12,h-10);
+ }
+}
+root.DelveRenderer=DelveRenderer;
+})(window);
+</script><script>
+(()=>{
+'use strict';
+const C=DelveCore,$=id=>document.getElementById(id),SAVE='windplay:ascii-delve:v1',RECORD='windplay:ascii-delve:record:v1';let state,saveError=false,record={wins:0,deepest:1},credited=false;
+try{state=C.restore(localStorage.getItem(SAVE));const r=JSON.parse(localStorage.getItem(RECORD));if(r&&Number.isInteger(r.wins)&&r.wins>=0&&Number.isInteger(r.deepest)&&r.deepest>=1&&r.deepest<=5)record=r;}catch(_){saveError=true;}
+state=state||C.newGame();credited=state.status==='won';const renderer=new DelveRenderer($('dungeon'));
+const mapButton=document.createElement('button');mapButton.id='map-toggle';mapButton.textContent='地图 M';mapButton.setAttribute('aria-pressed','false');mapButton.style.cssText='font-size:12px;min-height:36px;padding:4px 9px';document.querySelector('.map-bar').append(mapButton);mapButton.onclick=()=>{renderer.full=!renderer.full;mapButton.setAttribute('aria-pressed',String(renderer.full));mapButton.textContent=renderer.full?'视野 M':'地图 M';renderer.draw();};
+function save(){record.deepest=Math.max(record.deepest,state.floor);if(state.status==='won'&&!credited){record.wins++;credited=true;}try{localStorage.setItem(SAVE,C.serialize(state));localStorage.setItem(RECORD,JSON.stringify(record));saveError=false;}catch(_){saveError=true;}$('save-status').textContent=saveError?'保存不可用 · 本次仍可完整游玩':'已自动保存 · 可随时回来';}
+function update(){renderer.set(state);const p=state.player;$('floor-number').innerHTML='B'+state.floor+'<span> / B5</span>';$('floor-title').textContent=C.FLOOR_NAMES[state.floor-1];$('turn').textContent='回合 '+String(state.turn).padStart(4,'0');$('role-name').textContent=C.ROLES[state.role].name;$('player-level').textContent='LV. '+String(p.level).padStart(2,'0');$('hp').textContent=p.hp+' / '+p.maxHp;$('mobile-hp').textContent=p.hp+' / '+p.maxHp;$('mobile-hp-fill').style.transform='scaleX('+p.hp/p.maxHp+')';$('mobile-hp-fill').style.background=p.hp<p.maxHp*.3?'var(--danger)':'var(--green)';$('hp-fill').style.transform='scaleX('+p.hp/p.maxHp+')';$('hp-fill').style.background=p.hp<p.maxHp*.3?'var(--danger)':'var(--green)';$('hp-bar').setAttribute('aria-valuemax',p.maxHp);$('hp-bar').setAttribute('aria-valuenow',p.hp);for(const id of ['attack','defense'])$(id).textContent=p[id];$('gold').textContent=state.gold;$('xp').textContent='经验 '+p.xp+' / '+p.level*18;$('weapon').textContent=p.weapon;$('armor').textContent=p.armor;$('key').textContent=p.key?'铜钥匙 · 已找到':'尚未找到';$('potion-count').textContent=p.potions;$('charge-count').textContent=p.charges;
+ $('objective').textContent=p.key?(state.floor===5?'击败守火者 W，抵达阶梯取回火种':'找到阶梯 >，按 E 继续下潜'):'寻找铜钥匙 k，再走向阶梯 >';const floors=state.tiles.filter(t=>t!=='#').length,explored=state.seen.filter((seen,i)=>seen&&state.tiles[i]!=='#').length;$('explored').textContent='探索 '+Math.round(explored/floors*100)+'%';
+ $('log').replaceChildren();state.log.slice(0,10).forEach(text=>{const li=document.createElement('li');li.textContent=text;$('log').append(li);});$('live-status').textContent=state.log[0]+' 生命 '+p.hp+'，位置 '+p.x+'，'+p.y+'。';$('shop').hidden=state.shop!=='open';$('seed-label').textContent='SEED / '+state.seedText;$('record').textContent='最深 B'+record.deepest+' · '+record.wins+' 次带回火种';
+ document.querySelectorAll('[data-action],[data-move]').forEach(b=>b.disabled=state.status!=='playing');$('heal').disabled=state.status!=='playing'||p.potions===0||p.hp===p.maxHp;$('pulse').disabled=state.status!=='playing'||p.charges===0;
+ $('run-ending').hidden=state.status==='playing';if(state.status!=='playing'){const won=state.status==='won';$('ending-symbol').textContent=won?'*':'@';$('ending-title').textContent=won?'天，终于亮了。':'灯火暂时熄灭。';$('ending-summary').textContent=(won?'你带回了不灭的火种。':'每一次倒下，都让下一段旅程更清晰。')+' 抵达 B'+state.floor+' · '+state.turn+' 回合 · 击败 '+state.kills+' 位敌人 · 发现 '+state.relics+' 处遗迹。';}
+}
+function act(action){if(!$('new-run').hidden||!$('help').hidden)return;C.step(state,action);save();update();}
+document.querySelectorAll('[data-move]').forEach(button=>button.onclick=()=>{const [dx,dy]=button.dataset.move.split(',').map(Number);act({type:'move',dx,dy});});document.querySelectorAll('[data-action]').forEach(button=>button.onclick=()=>act({type:button.dataset.action}));document.querySelectorAll('[data-buy]').forEach(button=>button.onclick=()=>act({type:'buy',item:button.dataset.buy}));
+function newPanel(open){$('new-run').hidden=!open;$('new-toggle').setAttribute('aria-expanded',String(open));if(open){$('seed').value=state.seedText;$('role').value=state.role;$('new-run').scrollIntoView({block:'nearest'});$('role').focus();}else $('new-toggle').focus();}
+$('new-toggle').onclick=()=>newPanel($('new-run').hidden);$('cancel-run').onclick=()=>newPanel(false);$('ending-new').onclick=()=>newPanel(true);$('random-seed').onclick=()=>{$('seed').value='EMBER-'+Math.random().toString(36).slice(2,8).toUpperCase();};
+function start(seed,role){state=C.newGame(seed.trim()||'LANTERN',role);credited=false;renderer.full=false;mapButton.setAttribute('aria-pressed','false');mapButton.textContent='地图 M';$('new-run').hidden=true;$('new-toggle').setAttribute('aria-expanded','false');save();update();$('dungeon').focus();}
+$('start-run').onclick=()=>start($('seed').value,$('role').value);$('try-again').onclick=()=>start(state.seedText,state.role);
+function help(open){$('help').hidden=!open;$('help-toggle').setAttribute('aria-expanded',String(open));if(open){$('help').scrollIntoView({block:'nearest'});$('help-close').focus();}else $('help-toggle').focus();}
+$('help-toggle').onclick=()=>help($('help').hidden);$('help-close').onclick=()=>help(false);
+document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea')||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.toLowerCase();if(k==='escape'){if(!$('help').hidden)help(false);if(!$('new-run').hidden)newPanel(false);return;}if(e.target.tagName==='BUTTON'&&(k===' '||k==='enter'))return;const dirs={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]};if(dirs[k]){e.preventDefault();if(e.repeat)return;const [dx,dy]=dirs[k];act({type:'move',dx,dy});}else if(['h','f','e','.',' ','m'].includes(k)){e.preventDefault();if(e.repeat)return;if(k==='m')mapButton.click();else act({type:{h:'heal',f:'pulse',e:'interact','.':'wait',' ':'wait'}[k]});}});
+let touchStart=null;$('dungeon').addEventListener('pointerdown',e=>{touchStart={x:e.clientX,y:e.clientY};$('dungeon').setPointerCapture(e.pointerId);});$('dungeon').addEventListener('pointerup',e=>{if(!touchStart)return;const dx=e.clientX-touchStart.x,dy=e.clientY-touchStart.y;touchStart=null;if(Math.hypot(dx,dy)>18)act({type:'move',dx:Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0,dy:Math.abs(dy)>=Math.abs(dx)?Math.sign(dy):0});});$('dungeon').addEventListener('pointercancel',()=>touchStart=null);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save();});save();update();
+})();
+</script>
+</body></html>

@@ -8,3 +8,6 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Local visual-review captures; shipping previews live in assets/screenshots.
+.impeccable/review/

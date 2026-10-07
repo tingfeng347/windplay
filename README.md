@@ -11,7 +11,7 @@ WindPlay 是一个网页创意实验场，收录点云人像、动态片头、�
 
 ![WindPlay 作品启动台](assets/screenshots/launcher.jpg)
 
-首页用 8 张真实界面缩略图展示全部作品。滚动时，悬浮屏幕随镜头展开；指针移动时，
+首页用 10 张真实界面缩略图展示全部作品。滚动时，悬浮屏幕随镜头展开；指针移动时，
 屏幕产生轻微倾斜。动效可随时暂停，系统开启“减少动态效果”时则显示静态网格。
 下方作品目录保留每个作品的封面、介绍和独立入口。
 
@@ -35,6 +35,8 @@ npm run dev
 
 | 作品 | 类型 | 状态 | 说明 |
 | --- | --- | --- | --- |
+| [折光之径 · Prism Path](works/prism-path/) | 空间视错觉解谜 | [直接打开成品](https://tingfeng347.github.io/windplay/works/prism-path/demo/index.html) | 十章原创空间解谜。旋转视角连接断桥，收集星光，解开机关，在错位的建筑之间找到归途。 |
+| [余烬地牢 · ASCII Delve](works/ascii-delve/) | ASCII 地牢探索 | [直接打开成品](https://tingfeng347.github.io/windplay/works/ascii-delve/demo/index.html) | 提灯探索五层字符地牢。选择职业，在迷雾中寻找装备、药水与商人，用回合制战斗带回最后的火种。 |
 | [听风花园 · Wind Garden](works/wind-garden/) | 音乐玩具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/wind-garden/demo/index.html) | 种植与拖动音符植物，编排三种音色，调整节奏，保存音乐花园 |
 | [影子工坊 · Shadow Atelier](works/shadow-atelier/) | 空间解谜 | [直接打开成品](https://tingfeng347.github.io/windplay/works/shadow-atelier/demo/index.html) | 旋转立体雕塑，让真实投影与目标剪影重合，挑战六个光影谜题 |
 | [城市疾跑 · Metro Rush](works/metro-rush/) | 3D 城市跑酷 | [直接打开成品](https://tingfeng347.github.io/windplay/works/metro-rush/demo/index.html) | 第三人称三道跑酷，包含跳跃、滑铲、列车车顶、金币、道具、任务和角色解锁 |
@@ -45,6 +47,14 @@ npm run dev
 | [Tingfeng Reel](works/tingfeng-reel/) | 动态片头 / 音画同步 | [直接打开成品](https://tingfeng347.github.io/windplay/works/tingfeng-reel/demo/index.html) | 根据 GitHub 主页编排的 28 秒片头，支持 2D/3D、亮暗主题与合成配乐 |
 
 ## 作品预览
+
+### [折光之径 · Prism Path](works/prism-path/)
+
+[![折光之径：转动世界，让不可能的路相遇](assets/screenshots/prism-path.jpg)](works/prism-path/demo/index.html)
+
+### [余烬地牢 · ASCII Delve](works/ascii-delve/)
+
+[![余烬地牢：五层深处，一点不灭的光](assets/screenshots/ascii-delve.jpg)](works/ascii-delve/demo/index.html)
 
 ### [听风花园 · Wind Garden](works/wind-garden/)
 
@@ -96,6 +106,8 @@ windplay/
 │   ├── metro-rush/          # 3D 城市跑酷
 │   ├── strike-arena/        # 3D 第一人称枪战
 │   ├── wind-garden/         # 植物音符与循环音乐
+│   ├── prism-path/          # 十章空间视错觉解谜
+│   ├── ascii-delve/         # 五层 ASCII 地牢探索
 │   └── shadow-atelier/      # 立体雕塑与剪影解谜
 ├── AGENTS.md                # 自动化协作规则
 ├── CONTRIBUTING.md          # 新增作品与开发说明
@@ -127,6 +139,8 @@ npm run dev --workspace @windplay/point-cloud-studio
 
 | 作品 | 命令 |
 | --- | --- |
+| 折光之径 | `npm run dev:prism` |
+| 余烬地牢 | `npm run dev:delve` |
 | 听风花园 | `npm run dev:garden` |
 | 影子工坊 | `npm run dev:shadow` |
 | 城市疾跑 | `npm run dev:runner` |

@@ -1,0 +1,106 @@
+/* Display font license:
+Copyright 2018 The ZCOOL XiaoWei Project Authors (https://github.com/googlefonts/zcool-xiaowei/)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+*/
+@font-face{font-family:"Delve Display";src:url("../assets/display.woff2") format("woff2");font-style:normal;font-weight:400 700;font-display:swap}
+:root{color-scheme:dark;--bg:#171d1b;--surface:#1c2420;--map:#111814;--ink:#e0e4d1;--muted:#a1ad9f;--line:#39453b;--gold:#e3b768;--green:#a7c18e;--danger:#e48f79;font-family:"SFMono-Regular",Consolas,"Liberation Mono","PingFang SC",monospace;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}html{scrollbar-color:var(--line) var(--bg)}::selection{background:var(--gold);color:var(--bg)}button,input,select{font:inherit;color:inherit;border:1px solid var(--line);border-radius:3px;background:transparent;min-height:42px;padding:9px 13px}button{cursor:pointer;touch-action:manipulation}button:hover{background:#2b352c;border-color:var(--muted)}button:disabled{opacity:.4;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,canvas:focus-visible{outline:2px solid var(--gold);outline-offset:4px}input,select{background:var(--map);caret-color:var(--gold)}[hidden]{display:none!important}a{color:inherit;text-decoration:none}header{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid var(--line);font-size:12px;gap:18px}header>a{display:flex;align-items:center;min-height:44px}header>div{display:flex;gap:9px}header button{font-size:12px;border-color:transparent}.brand{letter-spacing:.18em;font-size:15px;font-weight:700}.brand-cursor{color:var(--gold)}main{max-width:1500px;padding:30px 5% 20px;margin:auto}.heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}h1{font-family:"Songti SC","STSong",serif;font-weight:600;font-size:38px;margin:0;letter-spacing:.06em}h1>span{color:var(--gold);padding-left:7px}.heading p{font-size:12px;color:var(--muted);margin:11px 0 0}.depth{display:flex;align-items:center;gap:22px}.depth>span{font-size:12px;color:var(--muted)}.depth strong{font-size:28px;font-weight:400}.depth strong span{font-size:13px;color:var(--muted)}.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 276px;gap:30px}.map-panel{min-width:0}.map-bar,.map-footer{background:var(--surface);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 18px;font-size:12px}.map-bar{border:1px solid var(--line);border-bottom:0;border-radius:6px 6px 0 0}.map-bar>span:first-child{display:flex;align-items:center;gap:8px}.map-bar b{font-weight:400}.live-dot{display:inline-block;width:5px;height:5px;background:var(--green)}#turn{color:var(--muted);font-variant-numeric:tabular-nums}.map-wrap{position:relative;background:var(--map);padding:12px 8px;border:1px solid var(--line);border-block:0}canvas{display:block;width:100%;height:clamp(370px,36vw,510px);outline-offset:-4px!important;touch-action:none}.map-footer{color:var(--muted);border:1px solid var(--line);border-top:0;border-radius:0 0 6px 6px;font-size:12px}.legend{display:flex;flex-wrap:wrap;gap:12px;padding:16px 2px;color:var(--muted);font-size:12px;line-height:1.8}.legend b{font-weight:400;font-size:13px;margin-right:5px}.player,.gold{color:var(--gold)}.enemy{color:var(--danger)}.potion{color:#b5a2c9}.relic{color:var(--green)}.exit{color:#abc7c7}.controls{border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;gap:22px}.dpad{display:grid;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(3,33px);gap:3px;flex-shrink:0}.dpad button{padding:0;min-height:0;font-size:17px;border-radius:3px}.up{grid-area:1/2}.left{grid-area:2/1}.wait{grid-area:2/2;color:var(--gold)}.right{grid-area:2/3}.down{grid-area:3/2}.action-buttons{display:flex;flex-direction:column;gap:5px;min-width:174px;flex:1;max-width:250px}.action-buttons button{min-height:32px;font-size:12px;display:flex;align-items:center;gap:14px;padding:6px 11px;text-align:left}.action-buttons button kbd{color:var(--gold);font:11px inherit}.action-buttons button span{flex:1}.action-buttons b{float:right;font-weight:400}.control-note{font-size:12px;color:var(--muted);line-height:2.2;margin:0}.sidebar{min-width:0}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}.section-title h2{font-size:15px;font-weight:500;margin:0}.section-title>span{color:var(--muted);font-size:12px}.health-label{display:flex;align-items:center;justify-content:space-between;margin:25px 0 9px;font-size:12px}.health-label strong{font-weight:400;font-size:12px}.health-track{height:6px;background:#343f34}#hp-fill{height:100%;width:100%;background:var(--green);transition:transform 180ms ease;transform-origin:left}.stats{display:flex;justify-content:space-between;padding:23px 0 18px}.stats>div{display:flex;flex-direction:column;gap:8px}.stats span{font-size:12px;color:var(--muted)}.stats b{font-size:21px;font-weight:400;font-variant-numeric:tabular-nums}#gold{color:var(--gold)}#xp{margin:0;color:var(--muted);font-size:12px}.equipment{font-size:12px;margin:20px 0 0;padding-top:18px;border-top:1px solid var(--line)}.equipment>div{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}.equipment dt{color:var(--muted)}.equipment dd{margin:0}.journal{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}.journal ol{list-style:none;padding:0;margin:18px 0 0;max-height:255px;overflow:auto;scrollbar-width:thin}.journal li{font-size:12px;line-height:1.9;color:var(--muted);margin-bottom:13px;padding:0 0 0 14px;position:relative}.journal li::before{content:'.';position:absolute;left:0;color:var(--gold)}.journal li:first-child{color:var(--ink)}.save-info{display:flex;flex-direction:column;gap:7px;margin-top:22px;padding-top:17px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);overflow-wrap:anywhere}.save-info span:first-child{color:var(--green)}.shop{padding:20px 0 0;margin-top:20px;border-top:1px solid var(--line)}.shop h2{font-size:14px;color:var(--gold)}.shop p{font-size:12px;color:var(--muted)}.shop button{display:flex;justify-content:space-between;width:100%;margin-bottom:7px;font-size:12px}.shop button span{color:var(--gold)}.new-run{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;padding:22px;margin:0 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:6px}.new-run>div{flex-basis:100%}.new-run h2{font-size:17px;margin:0}.new-run p{font-size:12px;color:var(--muted);line-height:1.8}.new-run label{display:flex;flex-direction:column;gap:9px;font-size:12px}.new-run input,.new-run select{font-size:12px;max-width:100%}.new-run button{font-size:12px}.primary{color:var(--map);background:var(--gold);border-color:var(--gold)}.primary:hover{background:#eed098;color:var(--map);border-color:var(--gold)}.run-ending{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#111814f2;text-align:center;padding:30px}.run-ending>span{font-size:56px;color:var(--gold)}.run-ending h2{font-family:"Songti SC",serif;font-size:32px;font-weight:500;margin:18px 0 8px}.run-ending p{max-width:30em;font-size:12px;line-height:2;color:var(--muted)}.run-ending button{margin-top:10px;min-width:140px;font-size:12px}.help{margin-top:30px;padding:28px;border:1px solid var(--line);background:var(--surface);border-radius:6px}.help h2{font-size:22px;font-weight:500}.help h3{font-size:13px;color:var(--gold);margin:10px 0}.help-columns{display:grid;grid-template-columns:1fr 1fr;gap:32px}.help p{font-size:12px;line-height:2;color:var(--muted)}.help button{font-size:12px;margin-top:10px}footer{margin:15px 5% 0;border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}@media(min-width:1400px){canvas{height:510px}}@media(max-width:1050px){.game-layout{grid-template-columns:minmax(0,1fr) 220px;gap:22px}.control-note{display:none}.controls{gap:17px}main{padding-inline:4%}.map-bar,.map-footer{padding-inline:12px}.legend{gap:10px}.journal li{font-size:12px}}@media(max-width:740px){header{height:64px;padding-inline:5%;gap:12px}.brand{font-size:12px;letter-spacing:.06em}header>a{font-size:12px}header>div{gap:0}header button{font-size:12px;padding:8px}main{padding:24px 4% 10px}.heading{margin-bottom:20px}.heading h1{font-size:30px}.heading p{font-size:12px;line-height:1.8;max-width:21em}.depth{flex-direction:column;align-items:flex-end;gap:5px}.depth>span{font-size:12px}.depth strong{font-size:24px}.depth strong span{font-size:12px}.game-layout{display:flex;flex-direction:column;gap:24px}.map-wrap{padding:9px 2px}canvas{height:330px}.map-bar{font-size:12px;padding:12px}.map-footer{font-size:12px;padding:12px 10px}.map-footer>span:first-child{max-width:25em;line-height:1.7}.legend{font-size:12px;gap:7px 11px;padding:12px 1px}.legend b{font-size:12px}.controls{justify-content:center;padding-top:15px;gap:20px}.dpad{grid-template-columns:repeat(3,42px);grid-template-rows:repeat(3,42px)}.action-buttons{min-width:0;max-width:210px}.action-buttons button{min-height:44px;font-size:12px}.sidebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding-top:24px}.traveler{min-width:0}.section-title h2{font-size:13px}.section-title>span{font-size:12px}.health-label{margin-top:17px}.stats{padding:17px 0}.stats b{font-size:18px}.journal{margin:0;border:0;padding:0}.journal ol{margin-top:15px;max-height:290px}.journal li{font-size:12px;margin-bottom:10px}.equipment{font-size:12px}.save-info{grid-column:1/-1;margin-top:0;padding-top:14px}.shop{grid-column:1/-1;order:3}.help{padding:20px}.help h2{font-size:19px}.help-columns{grid-template-columns:1fr;gap:8px}.help p{font-size:12px}.new-run{padding:18px}.new-run label{width:100%}.new-run h2{font-size:15px}.new-run button{flex-grow:1}.run-ending{padding:20px}.run-ending>span{font-size:36px}.run-ending h2{font-size:25px}.run-ending p{font-size:12px}.run-ending button{font-size:12px;min-height:38px}footer{font-size:12px;line-height:1.8}#explored{white-space:nowrap}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+@media(max-width:380px){header .brand{display:none}.controls{gap:12px}.map-footer{align-items:flex-start}footer{flex-direction:column}}
+
+.mobile-health{display:none}.mobile-health>span{display:flex;justify-content:space-between;gap:10px;font-size:11px}.mobile-health b{font-weight:400}.mobile-health-track{height:4px;background:#343f34;margin-top:6px}.mobile-health-track i{display:block;height:100%;background:var(--green);transform-origin:left;transition:transform 180ms ease}
+@media(max-width:740px){.map-bar{position:sticky;top:0;z-index:2}.map-bar #turn{display:none}.mobile-health{display:block;min-width:86px}}
+@media(prefers-reduced-motion:reduce){.mobile-health-track i{transition:none}}
+
+h1,.run-ending h2{font-family:"Delve Display","Songti SC",serif}

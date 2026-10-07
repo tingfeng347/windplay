@@ -160,6 +160,8 @@
     if (mode === 'reduced' && previousMode !== 'reduced') rememberedProgress = current.progress;
     if (previousMode === 'reduced' && mode === 'paused') current.progress = rememberedProgress;
     hero.setAttribute('data-motion', mode);
+    // The corridor below reads the same decision off the root, so one toggle governs the page.
+    document.documentElement.setAttribute('data-motion', mode);
     document.documentElement.classList.add('motion-ready');
     current.x = current.y = current.velocity = target.x = target.y = target.velocity = 0;
     if (mode === 'reduced') current.progress = 0;
