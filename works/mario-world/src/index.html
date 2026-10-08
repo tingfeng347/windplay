@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="description" content="8 个世界，32 个关卡。用键盘或触屏，重温马里奥的像素冒险。"><title>超级马里奥 · WindPlay</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header><a href="../../../index.html" class="back">← WindPlay</a><h1>超级马里奥<span>像素冒险</span></h1><button id="sound" type="button" aria-pressed="false">声音：关</button></header>
+<main>
+ <section class="console" aria-label="马里奥游戏">
+  <div class="screen-top"><span>SUPER MARIO BROS.</span><span id="stage-name">WORLD 1-1 · 蘑菇王国</span></div>
+  <div class="screen">
+   <canvas id="game" width="768" height="448" tabindex="0" aria-label="马里奥游戏画面，方向键移动，空格跳跃，Shift 加速，X 发射火球"></canvas>
+   <div class="overlay" id="overlay"><div class="overlay-inner"><h2 id="overlay-title">SUPER<br>MARIO BROS.</h2><p id="overlay-note">8 个世界 · 32 道冒险<br>蘑菇、金币与城堡，等你再次出发。</p><div class="overlay-actions"><button id="primary" type="button">开始游戏</button><button id="continue" type="button" hidden>继续上次冒险</button></div></div></div>
+  </div>
+  <div class="console-bar"><p id="message" role="status" aria-live="polite">向右出发。长按跳跃跳得更高，踩住敌人可以弹起。</p><div><button id="pause" type="button" disabled>暂停</button><button id="restart" type="button">重玩本关</button><button id="fullscreen" type="button">全屏</button></div></div>
+ </section>
+ <div class="touch-controls" aria-label="触屏游戏手柄"><div class="direction"><button data-input="left" aria-label="向左">◀</button><button data-input="down" aria-label="进入管道">▼</button><button data-input="right" aria-label="向右">▶</button></div><div class="action"><button data-input="run" class="run">加速<br>火球</button><button data-input="jump" class="jump">跳跃</button></div></div>
+ <div class="below"><div class="instructions"><h2>再跳一次。</h2><p>顶问号砖，吃蘑菇长大。拿到火焰花后发射火球，越过深坑，抵达每个世界的城堡。</p><dl><div><dt>← → / A D</dt><dd>移动</dd></div><div><dt>Space / Z / W / ↑</dt><dd>跳跃 / 游泳</dd></div><div><dt>Shift / X</dt><dd>加速 / 火球</dd></div><div><dt>↓ / S</dt><dd>进入管道</dd></div><div><dt>P / Esc</dt><dd>暂停</dd></div></dl><p class="small">关卡选择可直接练习任一关。进度自动保存在此浏览器。<br>FC 初代玩法重制；关卡布局、画面与音效为代码重建。</p></div>
+ <section class="campaign" aria-labelledby="campaign-title"><div class="campaign-heading"><h2 id="campaign-title">选择关卡</h2><span id="progress">0 / 32 已通关</span></div><div id="levels"></div><p class="small">4-4、7-4：依指示选择上下路线。城堡尽头越过库巴触及斧头。</p></section></div>
+</main><footer><span>为那些“再来一局”的时刻。</span><span>WindPlay · 离线可玩</span></footer>
+<script src="levels.js"></script><script src="engine.js"></script><script src="render.js"></script><script src="game.js"></script>
+</body></html>

@@ -11,7 +11,7 @@ WindPlay 是一个网页创意实验场，收录点云人像、动态片头、�
 
 ![WindPlay 作品启动台](assets/screenshots/launcher.jpg)
 
-首页用 10 张真实界面缩略图展示全部作品。滚动时，悬浮屏幕随镜头展开；指针移动时，
+首页用 10 张真实界面缩略图展示公开作品。Tingfeng Reel 的代码保留，不在首页展示。滚动时，悬浮屏幕随镜头展开；指针移动时，
 屏幕产生轻微倾斜。动效可随时暂停，系统开启“减少动态效果”时则显示静态网格。
 下方作品目录保留每个作品的封面、介绍和独立入口。
 
@@ -44,7 +44,7 @@ npm run dev
 | [方块旷野 · Voxel Frontier](works/voxel-frontier/) | 第一人称方块沙盒 | [直接打开成品](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) | 我的世界玩法启发的原创方块世界，支持采集、建造、制作、创造/生存模式与本地存档 |
 | [余烬荒野 · Ember Wilds](works/ember-wilds/) | 手绘荒野生存 | [直接打开成品](https://tingfeng347.github.io/windplay/works/ember-wilds/demo/index.html) | 饥荒玩法启发的原创生存游戏，包含采集、制作、营火、烹饪、昼夜、敌人与生命/饥饿/精神状态 |
 | [Point Cloud Studio](works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
-| [Tingfeng Reel](works/tingfeng-reel/) | 动态片头 / 音画同步 | [直接打开成品](https://tingfeng347.github.io/windplay/works/tingfeng-reel/demo/index.html) | 根据 GitHub 主页编排的 28 秒片头，支持 2D/3D、亮暗主题与合成配乐 |
+| [超级马里奥 · 像素冒险](works/mario-world/) | 像素平台冒险 | [直接打开成品](works/mario-world/demo/index.html) | FC 初代玩法重制：8 个世界 32 关，跳跃、踩怪、蘑菇、火球、水下与城堡，支持触屏与进度保存 |
 
 ## 作品预览
 
@@ -84,9 +84,9 @@ npm run dev
 
 [![Point Cloud Studio：把照片转成彩色点阵与三维点云](assets/screenshots/point-cloud-studio.png)](works/point-cloud-studio/demo/index.html)
 
-### [Tingfeng Reel](works/tingfeng-reel/)
+### [超级马里奥 · 像素冒险](works/mario-world/)
 
-[![Tingfeng Reel：28 秒动态片头与合成配乐](assets/screenshots/tingfeng-reel.png)](works/tingfeng-reel/demo/index.html)
+[![超级马里奥：8 个世界，32 道像素冒险](assets/screenshots/mario-world.png)](works/mario-world/demo/index.html)
 
 ## 目录
 
@@ -100,7 +100,8 @@ windplay/
 ├── works/                   # 可独立运行的网页作品
 │   ├── point-cloud-studio/  # 点云人像生成器
 │   │   └── demo/index.html  # 可直接打开的完整成品
-│   ├── tingfeng-reel/       # 动态作品片头
+│   ├── mario-world/         # FC 初代玩法重制，32 关平台冒险
+│   ├── tingfeng-reel/       # 动态片头（保留代码，不在首页展示）
 │   ├── voxel-frontier/      # 第一人称方块沙盒
 │   ├── ember-wilds/         # 手绘荒野生存
 │   ├── metro-rush/          # 3D 城市跑酷
@@ -148,7 +149,8 @@ npm run dev --workspace @windplay/point-cloud-studio
 | 方块旷野 | `npm run dev:voxel` |
 | 余烬荒野 | `npm run dev:survival` |
 | Point Cloud Studio | `npm run dev:point-cloud` |
-| Tingfeng Reel | `npm run dev:reel` |
+| 超级马里奥 | `npm run dev:mario` |
+| Tingfeng Reel（已隐藏） | `npm run dev:reel` |
 
 作品的单文件成品支持离线体验，存档或个人纪录保存在当前浏览器中。
 

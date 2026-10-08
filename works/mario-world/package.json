@@ -1,0 +1,1 @@
+{"name":"@windplay/mario-world","version":"0.1.0","private":true,"description":"FC 初代马里奥玩法重制，8 个世界 32 关","engines":{"node":">=22"},"scripts":{"dev":"node scripts/dev.mjs","build":"node scripts/build.mjs","test":"node --test tests/*.test.cjs"}}

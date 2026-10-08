@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T15:01:06.116Z",
+  "title": "Design System: 超级马里奥 · WindPlay",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "暖纸白",
+        "tonalRamp": [
+          "oklch(15% 0.035 85)",
+          "oklch(26% 0.035 85)",
+          "oklch(37% 0.035 85)",
+          "oklch(48% 0.035 85)",
+          "oklch(59% 0.035 85)",
+          "oklch(70% 0.035 85)",
+          "oklch(81% 0.035 85)",
+          "oklch(95% 0.035 85)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "灰褐",
+        "tonalRamp": [
+          "oklch(15% 0.02 82)",
+          "oklch(26% 0.02 82)",
+          "oklch(37% 0.02 82)",
+          "oklch(48% 0.02 82)",
+          "oklch(59% 0.02 82)",
+          "oklch(70% 0.02 82)",
+          "oklch(81% 0.02 82)",
+          "oklch(95% 0.02 82)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "深炭",
+        "tonalRamp": [
+          "oklch(15% 0.007 180)",
+          "oklch(26% 0.007 180)",
+          "oklch(37% 0.007 180)",
+          "oklch(48% 0.007 180)",
+          "oklch(59% 0.007 180)",
+          "oklch(70% 0.007 180)",
+          "oklch(81% 0.007 180)",
+          "oklch(95% 0.007 180)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "控制台灰",
+        "tonalRamp": [
+          "oklch(15% 0.008 180)",
+          "oklch(26% 0.008 180)",
+          "oklch(37% 0.008 180)",
+          "oklch(48% 0.008 180)",
+          "oklch(59% 0.008 180)",
+          "oklch(70% 0.008 180)",
+          "oklch(81% 0.008 180)",
+          "oklch(95% 0.008 180)"
+        ]
+      },
+      "red": {
+        "role": "primary",
+        "displayName": "珊瑚红",
+        "tonalRamp": [
+          "oklch(15% 0.19 29)",
+          "oklch(26% 0.19 29)",
+          "oklch(37% 0.19 29)",
+          "oklch(48% 0.19 29)",
+          "oklch(59% 0.19 29)",
+          "oklch(70% 0.19 29)",
+          "oklch(81% 0.19 29)",
+          "oklch(95% 0.19 29)"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "金币金",
+        "tonalRamp": [
+          "oklch(15% 0.14 90)",
+          "oklch(26% 0.14 90)",
+          "oklch(37% 0.14 90)",
+          "oklch(48% 0.14 90)",
+          "oklch(59% 0.14 90)",
+          "oklch(70% 0.14 90)",
+          "oklch(81% 0.14 90)",
+          "oklch(95% 0.14 90)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "边界灰",
+        "tonalRamp": [
+          "oklch(15% 0.01 150)",
+          "oklch(26% 0.01 150)",
+          "oklch(37% 0.01 150)",
+          "oklch(48% 0.01 150)",
+          "oklch(59% 0.01 150)",
+          "oklch(70% 0.01 150)",
+          "oklch(81% 0.01 150)",
+          "oklch(95% 0.01 150)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "游戏标题",
+        "purpose": "居中开始和状态面板的两行等宽标题；窄屏22px、1.05行高。"
+      },
+      "title": {
+        "displayName": "页头名称",
+        "purpose": "作品名称；窄屏缩为17px。"
+      },
+      "section": {
+        "displayName": "说明标题",
+        "purpose": "操作说明区标题；关卡标题采用20px。"
+      },
+      "body": {
+        "displayName": "玩法说明",
+        "purpose": "14px中文说明，1.9行高。"
+      },
+      "label": {
+        "displayName": "辅助文字",
+        "purpose": "状态、脚注、关卡进度与操作标签，至少12px。"
+      },
+      "metadata": {
+        "displayName": "屏幕元数据",
+        "purpose": "屏幕顶部12px等宽标签。"
+      },
+      "stage": {
+        "displayName": "关卡编号",
+        "purpose": "13px等宽按钮标签。"
+      },
+      "game-hud": {
+        "displayName": "Canvas HUD",
+        "purpose": "16px内部绘图单位，随游戏画布缩放。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "console",
+        "value": "0 20px 45px -25px #000",
+        "purpose": "深色控制台承托像素画面；按钮无抬升阴影。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-background",
+        "value": "background .15s",
+        "purpose": "按钮背景悬停反馈；减少动态效果偏好关闭此过渡。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "700px"
+      }
+    ],
+    "focus": [
+      {
+        "name": "keyboard-focus",
+        "value": "outline:3px solid var(--gold);outline-offset:4px",
+        "purpose": "按钮、链接与Canvas共用可见焦点。"
+      }
+    ],
+    "mediaQueries": [
+      {
+        "name": "touch-controls",
+        "value": "(pointer: coarse), (max-width: 700px)",
+        "purpose": "显示多指触屏手柄。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "(prefers-reduced-motion: reduce)",
+        "purpose": "关闭界面按钮过渡；玩法必要运动仍保留。"
+      }
+    ],
+    "tonalRampNote": "面板展示用的8步OKLCH色阶由当前颜色近似推导，不是应用新增的语义色。规范色值仍由DESIGN.md前置令牌与src/styles.css拥有。",
+    "sourceFiles": [
+      "src/styles.css",
+      "src/index.html",
+      "src/render.js",
+      "src/game.js"
+    ],
+    "directionContract": {
+      "experience": "可游玩的像素Canvas为首屏主体，深色最小控制台承托。",
+      "pinnedReference": "FC/NES初代Super Mario Bros.，八个世界、32关，尽实际条件接近；代码重建不等同于完全复刻验证。",
+      "repositoryScope": "启动台继承原有风格；听风Reel从启动台隐藏且代码保留。"
+    }
+  },
+  "components": [
+    {
+      "name": "开始游戏",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "珊瑚红主操作，最小44px高度。",
+      "html": "<button class=\"ds-primary\">开始游戏</button>",
+      "css": ".ds-primary{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;border-radius:4px;min-height:44px;cursor:pointer;transition:background .15s;background:var(--red,#ef594b);color:#171717;border:0;font-weight:700;padding:12px 30px}.ds-primary:hover{background:#ff7769}.ds-primary:disabled{cursor:default;opacity:.45}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-stage:focus-visible,.ds-touch:focus-visible,.ds-back:focus-visible{outline:3px solid var(--gold,#ffd76d);outline-offset:4px}@media(max-width:700px){.ds-primary{padding:7px 12px;font-size:12px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "次级操作",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "暂停、重玩、全屏等描边操作。",
+      "html": "<button class=\"ds-secondary\">重玩本关</button>",
+      "css": ".ds-secondary{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;border-radius:4px;min-height:44px;cursor:pointer;transition:background .15s;font-size:12px;color:var(--paper,#fcf3d9);border:1px solid var(--line,#444946);background:transparent;padding:8px 12px}.ds-secondary:hover{background:#3d4240}.ds-secondary:disabled{cursor:default;opacity:.45}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-stage:focus-visible,.ds-touch:focus-visible,.ds-back:focus-visible{outline:3px solid var(--gold,#ffd76d);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "关卡选择",
+      "kind": "custom",
+      "refersTo": "stage-button",
+      "description": "当前关暖白反转，已通关金黄字和角标。",
+      "html": "<div class=\"ds-world\"><span>世界 1</span><button class=\"ds-stage ds-completed\">1-1</button><button class=\"ds-stage ds-current\">1-2</button><button class=\"ds-stage\">1-3</button><button class=\"ds-stage\">1-4</button></div>",
+      "css": ".ds-world{display:grid;grid-template-columns:72px repeat(4,1fr);gap:8px;align-items:center}.ds-world>span{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:12px;color:var(--muted,#bcb6aa)}.ds-stage{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;border-radius:4px;min-height:44px;cursor:pointer;transition:background .15s;position:relative;font:13px ui-monospace,monospace;min-height:44px;padding:6px;background:transparent;color:var(--paper,#fcf3d9);border:1px solid var(--line,#444946)}.ds-stage:hover{background:#3d4240}.ds-stage.ds-current{background:var(--paper,#fcf3d9);color:var(--ink,#181b1b);border-color:var(--paper,#fcf3d9)}.ds-completed:not(.ds-current){color:var(--gold,#ffd76d);border-color:#8d773d}.ds-completed:after{content:\"\";position:absolute;right:5px;top:5px;width:4px;height:4px;background:var(--gold,#ffd76d)}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-stage:focus-visible,.ds-touch:focus-visible,.ds-back:focus-visible{outline:3px solid var(--gold,#ffd76d);outline-offset:4px}@media(max-width:700px){.ds-world{grid-template-columns:65px repeat(4,1fr)}}@media(prefers-reduced-motion:reduce){.ds-stage{transition:none}}"
+    },
+    {
+      "name": "触屏手柄",
+      "kind": "custom",
+      "refersTo": "touch-button",
+      "description": "55px高控件；运行时按住状态以金币金反馈。",
+      "html": "<div class=\"ds-gamepad\"><div class=\"ds-direction\"><button class=\"ds-touch\" aria-label=\"向左\">◀</button><button class=\"ds-touch\" aria-label=\"进入管道\">▼</button><button class=\"ds-touch\" aria-label=\"向右\">▶</button></div><div class=\"ds-action\"><button class=\"ds-touch ds-run\">加速<br>火球</button><button class=\"ds-touch ds-jump\">跳跃</button></div></div>",
+      "css": ".ds-gamepad{display:flex;justify-content:space-between;gap:10px;touch-action:none;user-select:none}.ds-direction,.ds-action{display:flex;gap:8px}.ds-touch{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;border-radius:4px;min-height:44px;cursor:pointer;transition:background .15s;height:55px;min-width:48px;padding:9px 15px;border:1px solid var(--line,#444946);background:var(--panel,#252929);color:var(--paper,#fcf3d9);font-size:16px}.ds-touch:hover{background:#3d4240}.ds-touch.ds-run{font-size:12px;line-height:1.2}.ds-touch.ds-jump{background:var(--red,#ef594b);color:#141817;font-size:14px;font-weight:700;min-width:64px}.ds-touch:active,.ds-touch.ds-held{background:var(--gold,#ffd76d);color:var(--ink,#181b1b)}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-stage:focus-visible,.ds-touch:focus-visible,.ds-back:focus-visible{outline:3px solid var(--gold,#ffd76d);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-touch{transition:none}}"
+    },
+    {
+      "name": "WindPlay返回导航",
+      "kind": "nav",
+      "description": "克制的文本链接，保持离开作品的路径。",
+      "html": "<nav><a class=\"ds-back\" href=\"#\">← WindPlay</a></nav>",
+      "css": ".ds-back{font-family:\"PingFang SC\",\"Microsoft YaHei\",sans-serif;font-size:14px;color:var(--muted,#bcb6aa);text-decoration:none;text-underline-offset:4px}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-stage:focus-visible,.ds-touch:focus-visible,.ds-back:focus-visible{outline:3px solid var(--gold,#ffd76d);outline-offset:4px}@media(max-width:700px){.ds-back{font-size:12px}}"
+    },
+    {
+      "name": "像素控制台",
+      "kind": "card",
+      "refersTo": "console",
+      "description": "实际游戏画面承托容器；此示例只展示外框。",
+      "html": "<section class=\"ds-console\"><div class=\"ds-screen-top\"><span>SUPER MARIO BROS.</span><span>WORLD 1-1 · 蘑菇王国</span></div><div class=\"ds-screen\" aria-label=\"游戏画面容器\"></div></section>",
+      "css": ".ds-console{background:var(--panel,#252929);padding:12px;border-radius:12px;box-shadow:0 20px 45px -25px #000}.ds-screen-top{display:flex;justify-content:space-between;gap:10px;padding:7px 6px 15px;font:12px ui-monospace,monospace;letter-spacing:.08em;color:var(--muted,#bcb6aa)}.ds-screen{background:#5c94fc;aspect-ratio:12/7;overflow:hidden}@media(max-width:700px){.ds-console{padding:7px;border-radius:8px}.ds-screen-top{letter-spacing:0;flex-wrap:wrap;padding:5px 3px 10px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "可直接游玩的 FC 控制台",
+    "overview": "**Creative North Star: 可直接游玩的 FC 控制台。** 用户指定 FC/NES 初代《Super Mario Bros.》的画面、玩法与八个世界、32 关的内容方向，尽实际条件接近原作。首屏以可游玩的像素 Canvas 为主体，深炭色控制台让游戏成为视觉中心。蓝天、棕砖、绿管道与红帽角色是画面的识别锚点。\n\n这是当前源码的设计记录。关卡布局、画面与音效由代码重建；方向约定不等同于逐像素、逐关卡完全复刻的验收结论。作品独立运行并生成离线成品。启动台沿用现有 WindPlay 风格；听风 Reel 从启动台隐藏但保留代码，这是仓库范围约束，不扩展本作品的视觉系统。",
+    "keyCharacteristics": [
+      "像素画面先于说明文字，界面保持克制。",
+      "中文系统字体与等宽游戏标签搭配，离线可用。",
+      "键盘、触屏手柄与八行四列关卡选择都可直接使用。",
+      "HTML 辅助文字至少 12px，操作按钮至少 44px 高。"
+    ],
+    "rules": [],
+    "dos": [
+      "Do 让可游玩的像素 Canvas 成为第一视觉中心，使用实际游戏画面。",
+      "Do 保留至少 12px 的 HTML 辅助文字和至少 44px 高的操作按钮。",
+      "Do 保留键盘焦点、触屏多指输入、状态文字与清晰的关卡状态。",
+      "Do 从 `src/` 构建并验证离线成品，保持源码与 demo 一致。"
+    ],
+    "donts": [
+      "Don't 添加新的视觉隐喻、装饰性营销首屏或与 FC/NES 方向冲突的风格。",
+      "Don't 将代码重建表述为已验证的逐像素、逐关卡完全复刻。",
+      "Don't 手工改动生成的 `demo/` 或 `dist/`。",
+      "Don't 在本作品的视觉文档更新中替换启动台风格或删除听风 Reel 的代码。"
+    ]
+  }
+}

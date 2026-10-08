@@ -26,7 +26,8 @@
     "test": "node --test tests/*.test.cjs && npm run test:works",
     "test:works": "npm run test --workspaces --if-present",
     "dev:prism": "npm run dev --workspace @windplay/prism-path",
-    "dev:delve": "npm run dev --workspace @windplay/ascii-delve"
+    "dev:delve": "npm run dev --workspace @windplay/ascii-delve",
+    "dev:mario": "npm run dev --workspace @windplay/mario-world"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

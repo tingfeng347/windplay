@@ -5,10 +5,10 @@ const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
 
-test('启动台链接所有作品的完整成品', async () => {
+test('启动台链接所有公开作品的完整成品', async () => {
   const homepage = await readFile(path.join(root, 'index.html'), 'utf8');
   const entries = await readdir(path.join(root, 'works'), { withFileTypes:true });
-  const works = entries.filter(entry => entry.isDirectory()).map(entry => entry.name);
+  const works = entries.filter(entry => entry.isDirectory() && entry.name !== 'tingfeng-reel').map(entry => entry.name);
   const gallery = homepage.slice(homepage.indexOf('id="hero-art"'), homepage.indexOf('class="catalog"'));
 
   assert.ok(works.length > 0);
@@ -32,3 +32,11 @@ test('启动台可以通过文件协议完整加载', async () => {
     .map(match => match[1]);
   for (const asset of new Set(assets)) await access(path.join(root, asset));
 });
+
+ test('Tingfeng Reel 源码保留但不展示，马里奥替换其入口',async()=>{
+ const homepage=await readFile(path.join(root,'index.html'),'utf8');
+ assert.doesNotMatch(homepage,/tingfeng-reel|Tingfeng Reel/);
+ assert.match(homepage,/works\/mario-world\/demo\/index.html/);
+ await access(path.join(root,'works/tingfeng-reel/src/index.html'));
+ assert.equal((homepage.match(/class="work-card /g)||[]).length,10);
+ });

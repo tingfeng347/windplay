@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="description" content="8 个世界，32 个关卡。用键盘或触屏，重温马里奥的像素冒险。"><title>超级马里奥 · WindPlay</title><style>
+:root{color-scheme:dark;--paper:#fcf3d9;--muted:#bcb6aa;--ink:#181b1b;--panel:#252929;--red:#ef594b;--gold:#ffd76d;--line:#444946;font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--ink);color:var(--paper)}*{box-sizing:border-box}body{margin:0}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer;border:1px solid var(--line);background:transparent;border-radius:4px;min-height:44px;padding:9px 15px;transition:background .15s}button:hover{background:#3d4240}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid var(--gold);outline-offset:4px}a{color:inherit;text-underline-offset:4px}::selection{background:var(--red);color:#fff}header{max-width:1192px;margin:auto;padding:28px 24px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}.back{font-size:14px;color:var(--muted);text-decoration:none}h1{font-size:22px;margin:0;letter-spacing:.03em}h1 span{font-size:12px;font-weight:400;color:var(--muted);margin-left:14px}header button{font-size:13px}main{max-width:1192px;margin:auto;padding:0 24px}.console{background:var(--panel);padding:12px;border-radius:12px;box-shadow:0 20px 45px -25px #000}.screen-top{display:flex;justify-content:space-between;padding:7px 6px 15px;font:12px ui-monospace,monospace;letter-spacing:.08em;color:var(--muted)}.screen{position:relative;background:#5c94fc;overflow:hidden;aspect-ratio:12/7}canvas{display:block;width:100%;height:100%;image-rendering:pixelated;touch-action:none}.overlay{position:absolute;inset:0;display:grid;place-items:center;background:#09121b80;text-align:center}.overlay[hidden]{display:none}.overlay-inner{max-width:90%;padding:28px 38px;background:#161e23f2;border:2px solid #faf0d2}h2{margin:0;font-size:23px}#overlay-title{font-family:ui-monospace,monospace;font-size:clamp(26px,4.2vw,52px);line-height:1.12;color:var(--gold);letter-spacing:-.025em;white-space:pre-line}#overlay-note{line-height:1.8;font-size:14px;margin:22px 0}#primary{background:var(--red);color:#171717;border:0;font-weight:700;padding:12px 30px}#primary:hover{background:#ff7769}#continue{display:block;margin:12px auto 0}#continue[hidden]{display:none}.console-bar{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 5px 3px}.console-bar p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}.console-bar>div{display:flex;gap:7px;flex-shrink:0}.console-bar button{font-size:12px;padding:8px 12px;min-height:44px}.below{display:grid;grid-template-columns:1fr 1.25fr;gap:80px;padding:44px 4px 48px}.instructions h2{font-size:29px}.instructions p{font-size:14px;line-height:1.9;color:var(--muted);max-width:38em;margin:15px 0 22px}dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:13px 24px;font-size:12px}dl>div{display:flex;flex-direction:column;gap:5px}dt{font-family:ui-monospace,monospace;color:var(--paper)}dd{margin:0;color:var(--muted)}.small,.instructions .small{font-size:12px;color:var(--muted);line-height:1.85;margin:24px 0 0}.campaign-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.campaign-heading h2{font-size:20px}.campaign-heading span{font-size:12px;color:var(--gold);font-variant-numeric:tabular-nums}.world-row{display:grid;grid-template-columns:72px repeat(4,1fr);gap:8px;align-items:center;margin:8px 0}.world-row>span{font-size:12px;color:var(--muted)}.level-button{min-height:44px;padding:6px;font:13px ui-monospace,monospace;position:relative}.level-button.current{background:var(--paper);color:var(--ink);border-color:var(--paper)}.level-button.completed:not(.current){color:var(--gold);border-color:#8d773d}.level-button.completed:after{content:"";position:absolute;right:5px;top:5px;width:4px;height:4px;background:var(--gold)}footer{max-width:1144px;margin:0 auto 26px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:12px}.touch-controls{display:none;justify-content:space-between;align-items:center;gap:10px;padding:18px 0 0;touch-action:none;user-select:none}.direction,.action{display:flex;gap:8px}.touch-controls button{height:55px;min-width:48px;font-size:16px;background:var(--panel)}.touch-controls .jump{background:var(--red);color:#141817;font-size:14px;font-weight:700;min-width:64px}.touch-controls .run{font-size:12px;line-height:1.2}.touch-controls button.held{background:var(--gold);color:var(--ink)}body:has(.console:fullscreen){overflow:hidden}.console:fullscreen{width:100%;height:100%;display:flex;flex-direction:column;padding:8px;border-radius:0;background:#111}.console:fullscreen .screen{height:calc(100% - 90px);aspect-ratio:auto;flex:1}.console:fullscreen canvas{object-fit:contain}.console:fullscreen .screen-top{padding:4px}.console:fullscreen .touch-controls{display:flex}.console:fullscreen .overlay{inset:0}@media(pointer:coarse),(max-width:700px){.touch-controls{display:flex}}@media(max-width:700px){header{padding:20px 16px;gap:10px}h1{font-size:17px}h1 span{display:none}.back{font-size:12px}header button{padding:6px 9px;min-height:44px}main{padding:0 12px}.console{padding:7px;border-radius:8px}.screen-top{font-size:12px;letter-spacing:0;padding:5px 3px 10px;gap:10px;flex-wrap:wrap}.console-bar{flex-direction:column;align-items:stretch;padding:10px 2px 2px;gap:8px}.console-bar>div{justify-content:flex-end}.console-bar p{font-size:12px}.console-bar button{min-height:44px}.overlay-inner{padding:14px 20px}#overlay-title{font-size:26px}#overlay-note{font-size:12px;margin:12px 0}#primary{padding:7px 20px;min-height:44px;font-size:12px}#continue{min-height:44px;font-size:12px;margin-top:7px;padding:5px 10px}.below{grid-template-columns:1fr;gap:34px;padding:30px 4px}.instructions h2{font-size:26px}.world-row{grid-template-columns:65px repeat(4,1fr)}footer{margin:0 16px 20px;font-size:12px}.touch-controls button{min-height:55px}}@media(prefers-reduced-motion:reduce){button{transition:none}}
+
+@media(max-width:700px){.overlay-inner{padding:10px 12px;max-width:96%}#overlay-title{font-size:22px;line-height:1.05}#overlay-note{font-size:12px;line-height:1.5;margin:8px 0}.overlay-actions{display:flex;justify-content:center;gap:8px}#primary,#continue{display:inline-block;margin:0;min-height:44px;padding:7px 12px;font-size:12px}#continue[hidden]{display:none}}
+</style></head>
+<body>
+<header><a href="../../../index.html" class="back">← WindPlay</a><h1>超级马里奥<span>像素冒险</span></h1><button id="sound" type="button" aria-pressed="false">声音：关</button></header>
+<main>
+ <section class="console" aria-label="马里奥游戏">
+  <div class="screen-top"><span>SUPER MARIO BROS.</span><span id="stage-name">WORLD 1-1 · 蘑菇王国</span></div>
+  <div class="screen">
+   <canvas id="game" width="768" height="448" tabindex="0" aria-label="马里奥游戏画面，方向键移动，空格跳跃，Shift 加速，X 发射火球"></canvas>
+   <div class="overlay" id="overlay"><div class="overlay-inner"><h2 id="overlay-title">SUPER<br>MARIO BROS.</h2><p id="overlay-note">8 个世界 · 32 道冒险<br>蘑菇、金币与城堡，等你再次出发。</p><div class="overlay-actions"><button id="primary" type="button">开始游戏</button><button id="continue" type="button" hidden>继续上次冒险</button></div></div></div>
+  </div>
+  <div class="console-bar"><p id="message" role="status" aria-live="polite">向右出发。长按跳跃跳得更高，踩住敌人可以弹起。</p><div><button id="pause" type="button" disabled>暂停</button><button id="restart" type="button">重玩本关</button><button id="fullscreen" type="button">全屏</button></div></div>
+ </section>
+ <div class="touch-controls" aria-label="触屏游戏手柄"><div class="direction"><button data-input="left" aria-label="向左">◀</button><button data-input="down" aria-label="进入管道">▼</button><button data-input="right" aria-label="向右">▶</button></div><div class="action"><button data-input="run" class="run">加速<br>火球</button><button data-input="jump" class="jump">跳跃</button></div></div>
+ <div class="below"><div class="instructions"><h2>再跳一次。</h2><p>顶问号砖，吃蘑菇长大。拿到火焰花后发射火球，越过深坑，抵达每个世界的城堡。</p><dl><div><dt>← → / A D</dt><dd>移动</dd></div><div><dt>Space / Z / W / ↑</dt><dd>跳跃 / 游泳</dd></div><div><dt>Shift / X</dt><dd>加速 / 火球</dd></div><div><dt>↓ / S</dt><dd>进入管道</dd></div><div><dt>P / Esc</dt><dd>暂停</dd></div></dl><p class="small">关卡选择可直接练习任一关。进度自动保存在此浏览器。<br>FC 初代玩法重制；关卡布局、画面与音效为代码重建。</p></div>
+ <section class="campaign" aria-labelledby="campaign-title"><div class="campaign-heading"><h2 id="campaign-title">选择关卡</h2><span id="progress">0 / 32 已通关</span></div><div id="levels"></div><p class="small">4-4、7-4：依指示选择上下路线。城堡尽头越过库巴触及斧头。</p></section></div>
+</main><footer><span>为那些“再来一局”的时刻。</span><span>WindPlay · 离线可玩</span></footer>
+<script>
+/* Hand-authored campaign. Tile coordinates; each row is a distinct stage, not a random seed. */
+(function(root){
+'use strict';
+const rows = [
+// id, theme, length, pits [start,width], pipes [x,height], stairs [x,height], enemy positions, blocks [x,y,width]
+['1-1','day',212,[[69,2],[86,3],[153,2]],[[28,2],[38,3],[46,4],[57,4],[163,2],[179,2]],[[134,4],[140,-4],[148,4],[155,-4],[181,8]],[22,40,51,52,80,82,97,98,114,116,124,125,170],[[16,8,1],[20,8,5],[77,8,3],[80,4,8],[94,8,3],[100,4,3],[106,8,1],[109,8,1],[112,8,1],[118,8,3],[129,4,4]]],
+['1-2','cave',190,[[43,2],[66,3],[119,3],[145,4]],[[96,3],[135,2],[167,3]],[[18,3],[53,4],[155,5]],[15,28,30,49,71,73,103,104,130,152],[[12,7,7],[25,4,11],[38,8,3],[50,5,7],[76,8,12],[109,5,6],[127,7,4],[150,4,8]]],
+['1-3','trees',145,[[12,121]],[],[],[31,52,81,107],[[18,9,5],[29,7,7],[42,5,5],[53,8,8],[67,5,6],[79,7,5],[91,4,8],[107,7,8],[122,9,8]]],
+['1-4','castle',135,[[28,4],[46,5],[70,5],[96,22]],[],[[20,2],[83,2]],[40,83],[[34,8,4],[56,8,7],[76,7,6],[100,9,18]]],
+['2-1','day',225,[[62,3],[97,3],[146,3],[176,3]],[[24,2],[46,4],[81,3],[123,2],[156,4]],[[111,5],[188,8]],[19,35,49,52,70,85,90,116,130,132,160,180],[[15,8,5],[36,5,6],[69,8,4],[104,7,5],[137,4,7],[169,8,4]]],
+['2-2','water',190,[[35,2],[87,3],[131,2]],[[24,3],[49,4],[76,3],[105,4],[140,3],[168,4]],[],[31,46,61,81,95,119,139,151,166],[[18,6,5],[57,4,6],[91,7,4],[120,3,6],[151,6,5]]],
+['2-3','bridge',205,[[15,175]],[],[],[31,51,72,93,120,142,165,181],[[13,9,22],[40,9,23],[68,8,20],[93,8,22],[121,9,20],[146,8,21],[174,9,18]]],
+['2-4','castle',145,[[24,4],[48,5],[77,4],[106,23]],[],[],[40,90],[[31,8,9],[57,7,7],[84,8,9],[110,9,19]]],
+['3-1','night',232,[[59,2],[86,3],[140,3],[173,2]],[[27,3],[43,4],[76,3],[103,4],[158,3]],[[117,4],[190,8]],[20,35,48,50,67,81,94,120,124,147,162,176],[[16,8,4],[34,4,6],[66,8,5],[91,6,6],[131,4,5],[165,7,6]]],
+['3-2','night',205,[[75,2],[127,3]],[[94,3],[149,2]],[[173,8]],[18,24,29,37,45,51,58,67,83,87,103,107,113,137,143,159],[[32,8,3],[60,8,4],[101,7,5],[139,6,6]]],
+['3-3','trees',155,[[12,130]],[],[],[30,64,89,116],[[18,9,6],[31,6,5],[44,8,6],[59,5,6],[73,8,7],[87,4,6],[102,7,7],[120,9,7],[134,7,7]]],
+['3-4','castle',150,[[22,5],[49,5],[80,6],[109,25]],[],[],[35,94],[[30,8,9],[59,6,7],[87,8,9],[113,9,21]]],
+['4-1','day',238,[[78,3],[119,3],[165,3]],[[31,3],[59,4],[94,3],[141,4],[179,3]],[[205,8]],[22,47,71,99,131,157,183],[[18,8,5],[45,5,6],[67,8,5],[105,6,8],[151,4,5],[188,8,7]]],
+['4-2','cave',220,[[42,3],[85,3],[124,4],[169,4]],[[67,3],[148,4],[193,3]],[[22,3],[110,4],[181,4]],[16,31,51,58,78,100,115,137,153,185],[[12,7,7],[28,4,8],[49,8,9],[73,4,9],[96,8,5],[131,5,8],[159,7,7],[179,4,7]]],
+['4-3','trees',165,[[12,141]],[],[],[30,58,83,117,141],[[19,8,6],[32,5,6],[46,8,7],[60,4,6],[75,7,6],[89,9,6],[103,5,7],[121,7,6],[140,9,7]]],
+['4-4','castle',210,[[31,4],[67,4],[110,5],[174,20]],[],[],[53,91,139],[[38,8,20],[75,7,20],[117,8,23],[150,6,13],[178,9,16]]],
+['5-1','day',222,[[62,3],[109,3],[155,4]],[[35,2],[89,3],[136,3],[175,2]],[[194,8]],[18,23,28,44,49,54,71,76,96,101,118,123,143,149,169],[[21,8,5],[50,6,5],[78,8,5],[120,5,6],[163,8,5]]],
+['5-2','day',238,[[68,3],[114,4],[168,3]],[[27,3],[54,4],[91,3],[145,4],[185,3]],[[125,4],[211,8]],[19,38,61,77,99,131,151,157,179,197],[[17,8,4],[42,5,7],[75,8,6],[103,4,7],[155,7,7],[193,5,6]]],
+['5-3','trees',155,[[12,130]],[],[],[31,52,78,107,130],[[18,9,5],[29,7,7],[42,5,5],[53,8,8],[67,5,6],[79,7,5],[91,4,8],[107,7,8],[128,9,8]]],
+['5-4','castle',155,[[26,5],[53,5],[82,6],[112,25]],[],[],[42,95],[[34,8,9],[62,7,7],[90,8,9],[116,9,21]]],
+['6-1','night',235,[[71,3],[114,3],[157,4],[181,3]],[[29,3],[52,4],[91,3],[136,4],[168,3]],[[207,8]],[20,40,63,82,102,127,146,175,193],[[18,8,5],[44,5,7],[79,8,5],[122,4,8],[149,7,6],[188,5,7]]],
+['6-2','night',255,[[61,3],[112,3],[162,4],[202,3]],[[25,3],[43,4],[79,3],[95,4],[133,3],[148,4],[180,4],[217,3]],[[232,8]],[18,35,52,71,87,104,124,140,154,175,194,223],[[16,8,5],[49,5,6],[85,8,4],[119,4,6],[169,7,6],[208,5,6]]],
+['6-3','snow',160,[[12,135]],[],[],[30,61,88,120],[[18,9,5],[31,6,6],[45,8,5],[58,4,6],[74,7,6],[90,5,5],[105,8,6],[124,6,6],[139,9,7]]],
+['6-4','castle',160,[[23,5],[50,6],[84,6],[117,26]],[],[],[38,98],[[31,8,10],[60,6,9],[92,8,10],[121,9,22]]],
+['7-1','day',240,[[76,3],[127,3],[177,4]],[[31,3],[58,4],[104,3],[149,4],[190,3]],[[213,8]],[20,43,65,87,111,138,160,180,200],[[17,8,5],[45,5,7],[90,7,6],[136,4,7],[166,8,5],[199,5,6]]],
+['7-2','water',210,[[41,3],[98,3],[143,3]],[[27,4],[58,3],[86,4],[117,3],[152,4],[181,4]],[],[32,47,64,78,94,110,129,144,163,180,193],[[17,5,6],[68,3,6],[100,7,6],[135,4,6],[169,6,6]]],
+['7-3','bridge',230,[[15,200]],[],[],[28,45,62,78,96,113,135,156,178,202],[[13,9,20],[38,8,18],[62,9,20],[88,8,18],[112,9,21],[139,8,20],[165,9,18],[189,8,26]]],
+['7-4','castle',235,[[30,5],[76,4],[121,5],[194,24]],[],[],[56,98,149,173],[[38,8,23],[83,7,24],[129,8,26],[165,6,18],[198,9,20]]],
+['8-1','day',376,[[56,3],[93,4],[133,3],[168,4],[207,4],[243,3],[279,4],[315,4]],[[28,2],[75,3],[113,3],[150,4],[190,2],[228,4],[262,3],[296,4],[337,3]],[[349,8]],[20,37,43,64,83,101,121,142,158,181,197,216,235,251,270,289,304,325,342],[[18,8,4],[66,8,3],[124,7,4],[176,8,4],[236,7,4],[307,8,4]]],
+['8-2','day',275,[[49,3],[85,4],[123,4],[162,4],[202,4],[236,4]],[[28,3],[66,4],[107,3],[144,4],[183,3],[222,4]],[[253,8]],[19,38,57,76,95,115,135,154,174,194,214,231,246],[[18,8,5],[57,5,5],[97,8,4],[135,6,5],[192,7,5]]],
+['8-3','day',240,[[81,3],[135,3],[182,3]],[[31,3],[111,4],[161,3]],[[210,8]],[22,47,61,72,95,119,145,170,193,202],[[42,8,11],[62,5,11],[101,8,8],[122,5,9],[153,8,9],[174,5,8]]],
+['8-4','castle',290,[[31,4],[74,4],[111,5],[159,4],[210,4],[251,23]],[[48,3],[91,3],[132,3],[182,3],[226,3]],[],[23,59,84,103,146,169,195,232],[[37,8,7],[80,7,7],[118,8,9],[165,7,9],[216,8,9],[255,9,19]]]
+];
+const names={day:'蘑菇王国',night:'夜色原野',cave:'地下通道',trees:'树顶跳跃',bridge:'飞鱼长桥',water:'水下世界',snow:'雪色高空',castle:'库巴城堡'};
+const levels=rows.map((r,i)=>({id:r[0],theme:r[1],length:r[2],pits:r[3],pipes:r[4],stairs:r[5],enemies:r[6],blocks:r[7],world:1+(i>>2),stage:1+i%4,name:names[r[1]],time:r[0]==='8-1'?400:300}));
+const api={levels,names};if(typeof module!=='undefined')module.exports=api;root.MarioLevels=api;
+})(typeof window==='undefined'?globalThis:window);
+</script><script>
+(function(root){
+'use strict';
+const L=typeof module!=='undefined'?require('./levels.js'):root.MarioLevels;
+const T=32, GROUND=384, STEP=1/120;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+function create(index=0, carry={}){
+ const level=L.levels[clamp(Math.trunc(index)||0,0,31)];
+ const s={index:L.levels.indexOf(level),level,status:'playing',age:0,time:level.time,score:carry.score||0,coins:carry.coins||0,lives:carry.lives||3,camera:0,events:[],solids:[],enemies:[],items:[],shots:[],particles:[],firebars:[],checkpoint:0,bonus:null,route:0,completed:false};
+ const big=(carry.power||0)>0;
+ s.player={x:80,y:GROUND-(big?54:30),w:24,h:big?54:30,vx:0,vy:0,grounded:true,face:1,power:carry.power||0,invincible:0,star:0,coyote:0,jumpBuffer:0,fireCooldown:0};
+ for(let x=0;x<level.length;x++)if(!level.pits.some(([a,w])=>x>=a&&x<a+w))s.solids.push({x:x*T,y:GROUND,w:T,h:64,type:'ground'});
+ for(const [x,h] of level.pipes)s.solids.push({x:x*T,y:GROUND-h*T,w:64,h:h*T,type:'pipe',entry:level.theme!=='castle',plant:level.world>=2});
+ for(const [x,h] of level.stairs)for(let k=0;k<Math.abs(h);k++)s.solids.push({x:(x+k)*T,y:GROUND-(h>0?k+1:Math.abs(h)-k)*T,w:T,h:(h>0?k+1:Math.abs(h)-k)*T,type:'stone'});
+ level.blocks.forEach(([x,y,w],n)=>{for(let k=0;k<w;k++){
+  const platform=['trees','bridge','snow'].includes(level.theme)||level.theme==='castle';
+  s.solids.push({x:(x+k)*T,y:y*T,w:T,h:T,type:platform?'platform':(k%3===1||w===1?'question':'brick'),content:n===0?'power':(n===2?'star':'coin'),used:false,bump:0});
+ }});
+ if(level.theme==='cave')for(let x=0;x<level.length-18;x++)s.solids.push({x:x*T,y:32,w:T,h:32,type:'brick'});
+ const groundAt=x=>{const a=s.solids.filter(b=>x>=b.x&&x<b.x+b.w&&b.y>=96&&!['brick','question'].includes(b.type));return a.length?Math.min(...a.map(b=>b.y)):GROUND;};
+ level.enemies.forEach((x,i)=>{
+  let type=level.theme==='water'?(i%3===0?'blooper':'fish'):level.theme==='bridge'?'flyingfish':i%4===2?'koopa':'goomba';
+  if(level.id==='8-3'||(level.world>=3&&i%7===4))type='hammer';
+  s.enemies.push({x:x*T,y:groundAt(x*T)-(type==='koopa'||type==='hammer'?42:28),w:28,h:type==='koopa'||type==='hammer'?42:28,vx:-36-(level.world*2),vy:0,type,alive:true,phase:i*1.4,hits:0,cooldown:1+i%3});
+ });
+ if(['4-1','6-1','8-2'].includes(level.id))s.enemies.push({x:550,y:88,w:38,h:32,type:'lakitu',vx:0,vy:0,alive:true,cooldown:3,phase:0});
+ if(level.world>=5&&level.theme!=='castle'&&level.theme!=='water')for(let x=60;x<level.length-30;x+=45)s.solids.push({x:x*T,y:GROUND-64,w:32,h:64,type:'cannon',cooldown:3});
+ if(['trees','snow'].includes(level.theme))for(let x=37;x<level.length-20;x+=32)s.solids.push({x:x*T,y:280+Math.sin(x)*72,w:96,h:16,type:'moving',baseY:280,phase:x,dx:0,dy:0});
+ if(level.theme==='castle'){
+  for(let x=36;x<level.length-35;x+=24)s.firebars.push({x:x*T,y:256,length:level.world>=5?6:4,phase:x});
+  s.enemies.push({x:(level.length-15)*T,y:GROUND-62,w:58,h:62,type:'bowser',vx:-24,vy:0,alive:true,hits:0,cooldown:2,phase:0});
+ }
+ s.goal=(level.length-8)*T;
+ s.water=level.theme==='water';
+ return s;
+}
+function event(s,name){s.events.push(name);}
+function coin(s,n=1){s.coins+=n;s.score+=200*n;while(s.coins>=100){s.coins-=100;s.lives++;event(s,'life');}event(s,'coin');}
+function power(s,n){const p=s.player;p.y-=n>0&&p.h===30?24:0;p.h=n>0?54:30;p.power=n;}
+function hit(s){const p=s.player;if(p.invincible>0||p.star>0||s.status!=='playing')return;if(p.power){power(s,0);p.invincible=2;p.vx=-p.face*130;event(s,'hurt');}else die(s);}
+function die(s){if(s.status!=='playing')return;s.lives--;s.status=s.lives>0?'dead':'gameover';event(s,'death');}
+function bump(s,b){if(b.type==='question'&&!b.used){b.used=true;b.bump=.18;s.score+=50;const kind=b.content==='power'?(s.player.power?'flower':'mushroom'):b.content;if(kind==='coin')coin(s);else s.items.push({x:b.x+4,y:b.y-28,w:24,h:26,vx:kind==='flower'?0:65,vy:-30,kind});event(s,'bump');}else if(b.type==='brick'){b.bump=.15;if(s.player.power){b.removed=true;s.score+=50;for(let i=0;i<4;i++)s.particles.push({x:b.x+16,y:b.y+16,vx:(i%2?1:-1)*90,vy:-160-i*20,life:.6});event(s,'break');}}}
+function move(s,o,dt,head=false){
+ o.x+=o.vx*dt;
+ for(const b of s.solids){if(b.removed||b.type==='moving'||!overlap(o,b))continue;if(o.vx>0)o.x=b.x-o.w;else if(o.vx<0)o.x=b.x+b.w;if(head)o.vx=0;else o.vx=-o.vx;}
+ const prev=o.y;o.y+=o.vy*dt;o.grounded=false;
+ for(const b of s.solids){if(b.removed||!overlap(o,b))continue;if(b.type==='moving'&&!(o.vy>=0&&prev+o.h<=b.y-b.dy+3))continue;
+  if(o.vy>=0&&prev+o.h<=b.y+Math.abs(b.dy||0)+6){o.y=b.y-o.h;o.vy=0;o.grounded=true;if(b.type==='moving'){o.x+=b.dx;}}
+  else if(o.vy<0&&prev>=b.y+b.h-6){o.y=b.y+b.h;o.vy=0;if(head)bump(s,b);}
+ }
+}
+function enterPipe(s){
+ if(s.bonus)return;
+ const p=s.player,b=s.solids.find(b=>b.type==='pipe'&&b.entry&&Math.abs(p.y+p.h-b.y)<3&&p.x+p.w/2>b.x+8&&p.x+p.w/2<b.x+b.w-8);
+ if(!b)return;
+ s.bonus={returnX:b.x+b.w+8,returnY:GROUND-p.h,solids:s.solids,enemies:s.enemies,camera:s.camera,goal:s.goal,water:s.water};
+ s.solids=[];s.enemies=[];s.camera=0;s.goal=Infinity;s.water=false;
+ for(let x=0;x<28;x++)s.solids.push({x:x*T,y:GROUND,w:T,h:64,type:'ground'});
+ for(let x=4;x<20;x++)for(const y of [190,254,318])s.items.push({x:x*T,y,w:20,h:24,kind:'coin',vx:0,vy:0});
+ s.solids.push({x:24*T,y:GROUND-64,w:64,h:64,type:'pipe',exit:true});p.x=64;p.y=GROUND-p.h;p.vx=p.vy=0;event(s,'pipe');
+}
+function exitPipe(s){const b=s.bonus,p=s.player;s.solids=b.solids;s.enemies=b.enemies;s.camera=b.camera;s.goal=b.goal;s.water=b.water;s.items=[];s.bonus=null;p.x=b.returnX;p.y=b.returnY;p.vx=p.vy=0;event(s,'pipe');}
+function clear(s){if(s.status!=='playing')return;s.status=s.index===31?'won':'clear';s.completed=true;s.score+=Math.ceil(s.time)*10+1000;event(s,'clear');}
+function step(s,input={},dt=STEP){
+ if(s.status!=='playing')return;
+ dt=clamp(dt,0,1/30);s.age+=dt;s.time-=dt*2.5;if(s.time<=0){s.time=0;die(s);return;}
+ const p=s.player;p.invincible=Math.max(0,p.invincible-dt);p.star=Math.max(0,p.star-dt);p.fireCooldown=Math.max(0,p.fireCooldown-dt);
+ for(const b of s.solids){b.bump=Math.max(0,(b.bump||0)-dt);if(b.type==='moving'){const old=b.y;b.y=b.baseY+Math.sin(s.age*1.1+b.phase)*72;b.dy=b.y-old;b.dx=0;if(p.grounded&&p.x+p.w>b.x&&p.x<b.x+b.w&&Math.abs(p.y+p.h-old)<2)p.y+=b.dy;}if(b.type==='cannon'&&Math.abs(b.x-p.x)<900){b.cooldown-=dt;if(b.cooldown<=0){b.cooldown=3;s.enemies.push({x:b.x,y:b.y,w:30,h:24,type:'bullet',vx:p.x<b.x?-160:160,vy:0,alive:true,phase:0});}}}
+ const underwater=s.water||(s.level.id==='8-4'&&p.x>145*T&&p.x<191*T);
+ const dir=(input.right?1:0)-(input.left?1:0),max=underwater?150:input.run?285:190;
+ p.vx=clamp(p.vx+dir*(underwater?480:1050)*dt,-max,max);if(!dir)p.vx*=Math.pow(p.grounded?.001:.15,dt);if(dir)p.face=dir;
+ p.coyote=p.grounded?.095:Math.max(0,p.coyote-dt);p.jumpBuffer=input.jumpPressed?.12:Math.max(0,p.jumpBuffer-dt);
+ if((p.jumpBuffer>0&&p.coyote>0)||(underwater&&input.jumpPressed)){p.vy=underwater?-215:-620;p.grounded=false;p.coyote=0;p.jumpBuffer=0;event(s,'jump');}
+ if(!input.jump&&p.vy< -200&&!underwater)p.vy+=1900*dt;
+ p.vy=Math.min(underwater?125:850,p.vy+(underwater?320:1300)*dt);
+ const previousBottom=p.y+p.h;
+ move(s,p,dt,true);p.x=clamp(p.x,0,s.bonus?860:s.level.length*T-32);if(underwater&&p.y<60){p.y=60;p.vy=Math.max(0,p.vy);}
+ if(input.down){if(s.bonus&&p.x>23*T)exitPipe(s);else enterPipe(s);}
+ if(input.firePressed&&p.power===2&&p.fireCooldown<=0&&s.shots.filter(x=>!x.enemy).length<2){p.fireCooldown=.22;s.shots.push({x:p.x+12,y:p.y+18,w:12,h:12,vx:p.face*380,vy:120,life:2,enemy:false});event(s,'fire');}
+ const spawned=[];
+ for(const e of s.enemies){if(!e.alive||Math.abs(e.x-p.x)>1050)continue;e.phase+=dt;
+  if(e.type==='lakitu'){e.x+=(p.x+200-e.x)*dt;e.y=95+Math.sin(e.phase)*22;e.cooldown-=dt;if(e.cooldown<=0){e.cooldown=3;spawned.push({x:e.x,y:e.y+32,w:28,h:24,vx:-45,vy:0,alive:true,type:'spiny',phase:0});}}
+  else if(['fish','blooper'].includes(e.type)){e.x+=e.vx*dt;e.y=220+Math.sin(e.phase*1.8)*105;}
+  else if(e.type==='flyingfish'){e.x+=e.vx*dt;e.y=370-Math.abs(Math.sin(e.phase*1.9))*240;}
+  else if(e.type==='bullet'){e.x+=e.vx*dt;}
+  else{
+   e.vy=Math.min(850,e.vy+1450*dt);move(s,e,dt);
+   if(e.type==='bowser'||e.type==='hammer'){
+    e.cooldown-=dt;if(e.cooldown<=0){e.cooldown=e.type==='bowser'?1.7:1.5;e.vy=-350;s.shots.push({x:e.x,y:e.y+15,w:18,h:18,vx:-170,vy:e.type==='hammer'?-330:0,life:4,enemy:true,hammer:e.type==='hammer'});}
+    if(e.type==='bowser'&&Math.abs(e.x-(s.goal-180))>80)e.vx=-e.vx;
+   }
+  }
+  if(e.y>500){e.alive=false;continue;}
+  if(overlap(p,e)){
+   if(p.star>0){e.alive=false;s.score+=200;event(s,'stomp');}
+   else if(p.vy>=0&&previousBottom<=e.y+16&&!['spiny','bowser','blooper','fish'].includes(e.type)){
+    p.y=e.y-p.h;p.vy=-340;s.score+=100;event(s,'stomp');
+    if(e.type==='koopa'){e.type='shell';e.y+=18;e.h=24;e.vx=0;}
+    else if(e.type==='shell'&&e.vx===0){e.vx=p.face*330;p.invincible=.18;}else e.alive=false;
+   }else if(e.type==='shell'&&e.vx===0){e.vx=(p.x<e.x?1:-1)*330;p.invincible=.18;event(s,'stomp');}else hit(s);
+  }
+  if(e.type==='shell'&&Math.abs(e.vx)>100)for(const other of s.enemies)if(other!==e&&other.alive&&overlap(e,other)){other.alive=false;s.score+=200;event(s,'stomp');}
+ }
+ s.enemies.push(...spawned);
+ for(const b of s.solids)if(b.type==='pipe'&&b.plant){const h=clamp(Math.sin(s.age*1.2+b.x)*42+16,0,42);if(h>8&&Math.abs(p.x-b.x)>42&&overlap(p,{x:b.x+20,y:b.y-h,w:24,h}))hit(s);}
+ for(const bar of s.firebars)for(let k=1;k<=bar.length;k++){const a=s.age*(.9+s.level.world*.04)+bar.phase;if(overlap(p,{x:bar.x+Math.cos(a)*k*16-6,y:bar.y+Math.sin(a)*k*16-6,w:12,h:12}))hit(s);}
+ for(const it of s.items){if(it.taken)continue;if(!['coin','flower'].includes(it.kind)){it.vy=Math.min(850,it.vy+1450*dt);move(s,it,dt);}if(overlap(p,it)){it.taken=true;if(it.kind==='coin')coin(s);else if(it.kind==='star'){p.star=10;s.score+=1000;}else{power(s,it.kind==='flower'?2:Math.max(1,p.power));s.score+=1000;}event(s,'power');}}
+ for(const shot of s.shots){shot.life-=dt;shot.x+=shot.vx*dt;if(shot.hammer||!shot.enemy){shot.vy+=1100*dt;shot.y+=shot.vy*dt;}else shot.y+=Math.sin(s.age*8)*dt*20;
+  for(const b of s.solids)if(!b.removed&&overlap(shot,b)){if(shot.vy>0&&shot.y+shot.h-shot.vy*dt<=b.y+6){shot.y=b.y-shot.h;shot.vy=-270;}else shot.life=0;}
+  if(shot.enemy){if(overlap(p,shot)){hit(s);shot.life=0;}}else for(const e of s.enemies)if(e.alive&&overlap(shot,e)){shot.life=0;e.hits++;if(e.type!=='bowser'||e.hits>=5){e.alive=false;s.score+=200;}event(s,'stomp');break;}
+ }
+ s.shots=s.shots.filter(x=>x.life>0&&x.y<500);s.items=s.items.filter(x=>!x.taken&&x.y<500);
+ for(const it of s.particles){it.life-=dt;it.x+=it.vx*dt;it.vy+=1200*dt;it.y+=it.vy*dt;}s.particles=s.particles.filter(x=>x.life>0);
+ // Castle route checks are visible gates: wrong elevation returns to the section entrance.
+ if(['4-4','7-4'].includes(s.level.id)&&s.route<2&&p.x>(s.route===0?100:160)*T){const correct=s.route===0?p.y<260:p.y>270;if(correct){s.route++;event(s,'route');}else{p.x=(s.route===0?72:126)*T;p.y=GROUND-p.h;p.vx=p.vy=0;event(s,'wrongroute');}}
+ if(p.y>490)die(s);
+ if(p.x>=s.goal&&!s.bonus)clear(s);
+ s.camera=clamp(p.x-270,0,(s.bonus?28:s.level.length)*T-768);
+}
+function next(s){return create(Math.min(31,s.index+1),{...s,power:s.player.power});}
+function retry(s){return create(s.index,{...s,power:0,lives:s.lives>0?s.lives:3});}
+function serialize(s){return JSON.stringify({version:1,index:s.index,score:s.score,coins:s.coins,lives:s.lives,power:s.player.power,completed:s.completed});}
+function restore(raw){try{const v=JSON.parse(raw);if(v.version!==1||!Number.isInteger(v.index)||v.index<0||v.index>31)return null;return create(v.completed&&v.index<31?v.index+1:v.index,{score:clamp(Number(v.score)||0,0,9999999),coins:clamp(Number(v.coins)||0,0,99),lives:clamp(Number(v.lives)||3,1,99),power:clamp(Math.trunc(v.power)||0,0,2)});}catch{return null;}}
+const api={T,GROUND,STEP,create,step,next,retry,serialize,restore,overlap,power,hit,clear};if(typeof module!=='undefined')module.exports=api;root.MarioEngine=api;
+})(typeof window==='undefined'?globalThis:window);
+</script><script>
+(function(root){
+'use strict';
+const sprites={
+ mario:['.....RRRRR......','....RRRRRRRRR...','....BBBSSBS.....','...BSBSSSBS.....','...BSBBSSSBS....','....BSSSSBB.....','.....SSSSSS.....','....RRBRR.......','...RRRBRRBRRR...','..RRRRBBBBRRRR..','..SSRBYYBYBRSS..','..SSSBBBBBBSSS..','....BBBBBBBB....','...BBBB..BBBB...','..BBBB....BBBB..','..KKK......KKK..'],
+ goomba:['.....BBBBBB.....','...BBBBBBBBBB...','..BBBBBBBBBBBB..','.BBBWWBBBBWWBBB.','.BBBWKBBBBKWBBB.','BBBBBBBBBBBBBBBB','BBBSSSSSSSSSSBBB','..SSSSSSSSSSSS..','...SSSSSSSSSS...','..KKKK....KKKK..','.KKKKK....KKKKK.'],
+ koopa:['.....GGGG.......','....GSSSGG......','....SWKSSG......','....SSSSSG......','.....SSSS.......','...GGGGGGGG.....','..GGWGGGGWGG....','.GGWGGGGGGWGG...','.GWWGGGGGGWWG...','..GGGGGGGGGG....','...SSSSSSSS.....','..SSS....SSS....','..KKK....KKK....'],
+ mushroom:['.....RRRRRR.....','...RRWWRRWWRR...','..RRWWWRRWWWRR..','.RRRWWRRRRWWRRR.','RRRRRRRRRRRRRRRR','RRWWRRRRRRRRWWRR','RRWWRRRRRRRRWWRR','..SSSSSSSSSSSS..','....SSSSSSSS....','....SSKSSKSS....','....SSSSSSSS....'],
+ flower:['.....YYYYYY.....','...YYRRRRRRYY...','..YRRWWWWWWRRY..','..YRRWWKKWWRRY..','...YYRRRRRRYY...','.....YYYYYY.....','.......GG.......','...GG..GG..GG...','....GGGGGGGG....','......GGGG......'],
+ bowser:['.....GGGG.......','...GGGGGGGG.....','..GSSGGGSSGG....','.GGWKGGGKWGG....','.GGSSSSSSSSGG...','..SSKSSSSKSSG...','...SSSSSSSSGG...','..GGGGGGGGGGGG..','.GWWGSSSSGGWWGG.','GGWGSSSSSSGWGGGG','GGGGSSSSSSGGGGGG','..GGSSSSSSGGGG..','..GGGGGGGGGGG...','..SSGGGGGGSS....','.SSSS....SSSS...'],
+ fish:['.....RRRR.......','...RRRRRRRR.....','..RRWWRRRRRR....','.RRRWKRRRSSRR...','RRRRRRRRSSSSRR..','.RRRRRSSSSSSR...','..RRRSSSSSSR....','....RRRRRR......'],
+ blooper:['....WWWWWW......','..WWWWWWWWWW....','.WWWWWWWWWWWW...','WWWWKKWWKKWWWW..','WWWWWWWWWWWWWW..','..WWWWWWWWWW....','...WWWWWWWW.....','..WW.WW.WW.WW...','.WW..WW.WW..WW..'],
+ princess:['......YYYY......','.....YRYRY......','.....SSSSS......','....SSKSKSS.....','.....SSSSS......','....PPPPPPP.....','...PPPPPPPPP....','..PPPPPPPPPPP...','.PPPPPPPPPPPPP..','...SS....SS.....']
+};
+const pal={R:'#e83c23',B:'#91491e',S:'#ffb778',K:'#241912',W:'#fff6dc',G:'#60b62d',Y:'#ffd44a',P:'#ff819d'};
+function pixel(ctx,name,x,y,w,h,flip=false,colors={}){const rows=sprites[name]||sprites.goomba;ctx.save();ctx.translate(Math.round(x)+(flip?w:0),Math.round(y));ctx.scale(flip?-1:1,1);for(let j=0;j<rows.length;j++)for(let i=0;i<rows[j].length;i++){const c=rows[j][i];if(c!=='.'){ctx.fillStyle=colors[c]||pal[c];ctx.fillRect(Math.floor(i*w/16),Math.floor(j*h/rows.length),Math.ceil(w/16),Math.ceil(h/rows.length));}}ctx.restore();}
+function render(ctx,s){
+ const theme=s.bonus?'cave':s.level.theme,night=['night','cave','castle','snow'].includes(theme),water=s.water,cam=Math.floor(s.camera),age=s.age,p=s.player;
+ const sky=theme==='water'?'#2055d5':theme==='cave'?'#10121c':theme==='castle'?'#100d16':night?'#10162c':'#5c94fc';ctx.fillStyle=sky;ctx.fillRect(0,0,768,448);
+ const rect=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h);};
+ if(['day','night','trees','snow','bridge'].includes(theme)){
+  for(let i=0;i<20;i++){let x=i*200-cam*.3;if(x< -200||x>800)continue;
+   if(night){rect(x+30,87,3,3,'#fff5c0');rect(x+109,140,2,2,'#fff5c0');}
+   else{rect(x,112,64,16,'#fff8e8');rect(x+12,100,40,16,'#fff8e8');rect(x+24,92,16,16,'#fff8e8');rect(x+7,126,50,6,'#bccbf8');}
+   const y=384;ctx.fillStyle=theme==='snow'?'#f2efe5':'#29983f';ctx.beginPath();ctx.moveTo(x-60,y);ctx.lineTo(x+20,y-70);ctx.lineTo(x+38,y-80);ctx.lineTo(x+58,y-70);ctx.lineTo(x+138,y);ctx.fill();rect(x+33,y-54,5,11,'#183c29');
+   if(!night){rect(x+104,352,64,32,'#5cce32');rect(x+116,340,40,20,'#5cce32');rect(x+132,329,16,20,'#5cce32');}
+  }
+ }
+ if(water){for(let i=0;i<20;i++){const x=i*110-cam*.45;for(let k=0;k<3;k++){ctx.strokeStyle='#96c9fa';ctx.strokeRect(Math.floor(x+k*19),Math.floor(370-((age*35+i*61+k*42)%280)),5,6);}for(let j=0;j<5;j++)rect(x+j*7,342+j%2*8,5,42-j%2*8,'#b03564');}}
+ if(theme==='castle'){for(let x=0;x<800;x+=64)for(let y=64;y<384;y+=32){ctx.strokeStyle='#292030';ctx.strokeRect(x-(cam%64)+(y%64?32:0),y,64,32);}rect(0,390,768,58,'#e33c16');for(let x=0;x<768;x+=32)rect(x,390+Math.sin(age*6+x)*3,24,7,'#ffd76d');}
+ if(theme==='bridge'){rect(0,390,768,58,'#234fb5');for(let x=0;x<768;x+=32)rect(x,392+Math.sin(age*4+x)*3,20,3,'#9dd9ff');}
+ for(const b of s.solids){if(b.removed||b.x+b.w<cam||b.x>cam+768)continue;const x=b.x-cam,y=b.y-(b.bump>0?Math.sin(b.bump/.18*Math.PI)*7:0);
+  if(b.type==='pipe'){rect(x,y,b.w,b.h,'#247c12');rect(x+5,y+5,10,b.h-5,'#a6e63a');rect(x+18,y+5,8,b.h-5,'#69bd25');rect(x+46,y+5,8,b.h-5,'#17480d');rect(x-3,y,b.w+6,20,'#183807');rect(x-1,y+2,b.w+2,15,'#62bf22');rect(x+4,y+3,10,14,'#b1ed4c');
+   if(b.plant){const h=Math.max(0,Math.min(42,Math.sin(age*1.2+b.x)*42+16));if(Math.abs(p.x-b.x)>42&&h>8){rect(x+30,y-h+15,5,h-15,'#56b837');rect(x+21,y-h,22,20,'#d93830');rect(x+23,y-h+2,5,5,'#fff1d3');rect(x+35,y-h+8,5,5,'#fff1d3');}}
+  }else if(b.type==='cannon'){rect(x,y,32,b.h,'#202225');rect(x+3,y+5,26,20,'#747881');rect(x+6,y+8,20,13,'#161923');}
+  else if(b.type==='moving'){rect(x,y,b.w,16,'#bc6544');for(let k=0;k<b.w;k+=16)rect(x+k+2,y+2,12,4,'#f9d5a6');}
+  else if(b.type==='platform'&&['trees','snow'].includes(theme)){rect(x+12,y+32,8,448-y,theme==='snow'?'#a8b2c9':'#aa7134');rect(x,y,32,18,theme==='snow'?'#eef2ff':'#da7731');rect(x+2,y+18,28,10,theme==='snow'?'#a8b2c9':'#ffe5a4');}
+  else if(b.type==='platform'&&theme==='bridge'){rect(x,y,32,8,'#ffb66a');rect(x,y+8,32,12,'#864329');rect(x+12,y+20,8,15,'#f6ba70');}
+  else if(b.type==='question'){rect(x,y,32,32,b.used?'#934620':'#f3a23c');rect(x+2,y+2,28,2,'#ffdc87');rect(x+28,y+2,3,28,'#7d3918');rect(x+3,y+3,3,3,'#713517');rect(x+25,y+25,3,3,'#713517');if(!b.used){ctx.fillStyle='#fff2be';ctx.font='bold 25px monospace';ctx.fillText('?',x+8,y+26);}}
+  else{const cave=['cave','water'].includes(theme),castle=theme==='castle';rect(x,y,b.w,b.h,cave?'#22799e':castle?'#68647b':'#b95b27');rect(x+1,y+1,b.w-2,3,cave?'#59c9e8':castle?'#9c95ad':'#edaa72');ctx.strokeStyle=cave?'#092537':castle?'#241c30':'#4e281b';for(let yy=0;yy<b.h;yy+=16){ctx.beginPath();ctx.moveTo(x,y+yy+15);ctx.lineTo(x+b.w,y+yy+15);ctx.moveTo(x+(yy%32?8:22),y+yy);ctx.lineTo(x+(yy%32?8:22),y+yy+16);ctx.stroke();}}
+ }
+ for(const it of s.items){const x=it.x-cam;if(it.kind==='coin'){rect(x+6,it.y,10,24,'#ffe776');rect(x+9,it.y+4,3,16,'#bb7b1c');}else if(it.kind==='star'){ctx.fillStyle=age% .2<.1?'#ffd447':'#faf4dd';ctx.font='28px sans-serif';ctx.fillText('★',x,it.y+25);}else pixel(ctx,it.kind==='flower'?'flower':'mushroom',x,it.y,it.w,it.h);}
+ for(const e of s.enemies){if(!e.alive||e.x<cam-64||e.x>cam+800)continue;const x=e.x-cam;
+  if(e.type==='shell'){rect(x,e.y+5,e.w,19,'#488e23');rect(x+3,e.y,22,12,'#80c438');rect(x,e.y+20,e.w,4,'#fff4d6');}
+  else if(e.type==='bullet'){rect(x,e.y,e.w,e.h,'#171c26');rect(x+4,e.y+4,6,6,'#fff1d6');rect(x+e.w-6,e.y+5,6,14,'#8b92a5');}
+  else if(e.type==='lakitu'){rect(x-5,e.y+17,48,20,'#fff5df');pixel(ctx,'koopa',x,e.y-10,30,30);}
+  else pixel(ctx,e.type==='hammer'?'koopa':e.type==='flyingfish'?'fish':e.type==='spiny'?'goomba':e.type,x,e.y,e.w,e.h,e.vx>0,e.type==='spiny'?{B:'#d74124'}:{});
+ }
+ for(const bar of s.firebars){const a=age*(.9+s.level.world*.04)+bar.phase;for(let k=0;k<=bar.length;k++){const x=bar.x+Math.cos(a)*k*16-cam,y=bar.y+Math.sin(a)*k*16;rect(x-6,y-6,12,12,'#ff5623');rect(x-3,y-3,6,6,'#ffeda3');}}
+ for(const sh of s.shots){rect(sh.x-cam,sh.y,sh.w,sh.h,sh.hammer?'#ae9f88':'#ff642a');rect(sh.x-cam+3,sh.y+3,sh.w-6,sh.h-6,'#ffe768');}
+ for(const it of s.particles)rect(it.x-cam,it.y,8,8,'#c2743f');
+ if(s.level.theme==='castle'&&!s.bonus){const x=s.goal-cam;rect(x,250,6,134,'#bdb5ad');rect(x-5,251,25,18,'#ddd7c5');rect(x+32,318,30,65,'#984939');pixel(ctx,s.index===31?'princess':'mushroom',x+35,322,26,40);}
+ else if(!s.bonus){const x=s.goal-cam;rect(x,112,5,272,'#faf1c9');rect(x-3,105,11,11,'#7ace48');rect(x-34,119,34,24,'#64c230');rect(x+60,312,96,72,'#ae5c39');rect(x+76,289,64,30,'#ae5c39');rect(x+96,340,24,44,'#241912');for(let k=0;k<5;k++)rect(x+61+k*20,300,13,14,'#ae5c39');}
+ if(p.invincible<=0||Math.floor(age*14)%2===0)pixel(ctx,'mario',p.x-cam,p.y,p.w,p.h,p.face<0,p.star>0?{R:Math.floor(age*8)%2?'#ffd64c':'#ffffff',B:'#38c5bc'}:p.power===2?{R:'#fff2dc',B:'#ea4426'}:{});
+ // Fixed HUD remains crisp at any CSS scale.
+ rect(0,0,768,63,night?'#10121ce6':'#5c94fc');ctx.fillStyle='#fff8db';ctx.font='bold 16px monospace';ctx.textBaseline='top';
+ const text=(t,x,y)=>ctx.fillText(t,x,y);text('MARIO',32,14);text(String(s.score).padStart(6,'0'),32,35);text('COIN',215,14);text('× '+String(s.coins).padStart(2,'0'),215,35);text('WORLD',385,14);text(s.level.id,401,35);text('TIME',526,14);text(String(Math.ceil(s.time)).padStart(3,'0'),535,35);text('LIVES',658,14);text('× '+s.lives,673,35);
+ if(s.bonus){text('COIN ROOM · ↓ EXIT',236,82);}else if(['4-4','7-4'].includes(s.level.id)){text(s.route===0?'ROUTE 1: TAKE THE HIGH PATH':s.route===1?'ROUTE 2: TAKE THE LOW PATH':'THE AXE IS AHEAD',170,82);}
+ ctx.textBaseline='alphabetic';
+}
+root.MarioRender={render,pixel};
+})(typeof window==='undefined'?globalThis:window);
+</script><script>
+(function(){
+'use strict';
+const E=window.MarioEngine,L=window.MarioLevels,canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),byId=id=>document.getElementById(id);
+let state=E.create(),running=false,acc=0,last=0,audio=null,sound=false;
+const keys=new Set(),touch=new Map(),edge={jumpPressed:false,firePressed:false},done=new Set();
+const SAVE='windplay:mario:save:v1',DONE='windplay:mario:completed:v1';
+let saved=null;try{saved=E.restore(localStorage.getItem(SAVE));const a=JSON.parse(localStorage.getItem(DONE)||'[]');if(Array.isArray(a))a.filter(x=>Number.isInteger(x)&&x>=0&&x<32).forEach(x=>done.add(x));}catch{}
+byId('continue').hidden=!saved;
+for(let world=1;world<=8;world++){
+ const row=document.createElement('div');row.className='world-row';const label=document.createElement('span');label.textContent='世界 '+world;row.append(label);
+ for(let stage=1;stage<=4;stage++){const i=(world-1)*4+stage-1,b=document.createElement('button');b.type='button';b.className='level-button';b.dataset.index=i;b.textContent=L.levels[i].id;b.title=L.levels[i].name;b.setAttribute('aria-label','游玩 '+L.levels[i].id+' '+L.levels[i].name);b.onclick=()=>{state=E.create(i);document.querySelector('.console').scrollIntoView({block:'start',behavior:'instant'});start();};row.append(b);}byId('levels').append(row);
+}
+function selection(){byId('stage-name').textContent='WORLD '+state.level.id+' · '+state.level.name;document.querySelectorAll('.level-button').forEach(b=>{const i=Number(b.dataset.index);b.classList.toggle('current',i===state.index);b.classList.toggle('completed',done.has(i));b.setAttribute('aria-pressed',String(i===state.index));});byId('progress').textContent=done.size+' / 32 已通关';}
+function save(){try{localStorage.setItem(SAVE,E.serialize(state));localStorage.setItem(DONE,JSON.stringify([...done]));saved=E.restore(E.serialize(state));}catch{byId('message').textContent='浏览器未允许存档，当前冒险仍可继续。';}}
+function beep(name){if(!sound||!audio)return;const notes={jump:[330,660,.1],coin:[988,1319,.12],bump:[150,220,.08],break:[110,50,.1],power:[523,1047,.22],stomp:[150,65,.08],fire:[240,80,.08],hurt:[220,80,.2],death:[392,130,.45],clear:[523,1047,.55],life:[660,1320,.35],pipe:[250,100,.2],route:[600,900,.12],wrongroute:[160,90,.25]};const [a,b,t]=notes[name]||notes.coin,o=audio.createOscillator(),gain=audio.createGain();o.type='square';o.frequency.setValueAtTime(a,audio.currentTime);o.frequency.exponentialRampToValueAtTime(b,audio.currentTime+t);gain.gain.setValueAtTime(.035,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+t);o.connect(gain);gain.connect(audio.destination);o.start();o.stop(audio.currentTime+t);}
+function clearInput(){keys.clear();touch.clear();edge.jumpPressed=edge.firePressed=false;document.querySelectorAll('[data-input]').forEach(b=>b.classList.remove('held'));}
+function start(){running=true;state.status='playing';byId('overlay').hidden=true;byId('pause').disabled=false;byId('pause').textContent='暂停';byId('message').textContent=state.level.theme==='water'?'反复按跳跃游泳，避开鱼和乌贼。':state.level.theme==='castle'?'避开火棒，越过库巴，在尽头触及斧头。':'向右出发。长按跳跃跳得更高，踩住敌人可以弹起。';clearInput();selection();save();canvas.focus({preventScroll:true});if(sound)audio?.resume();}
+function overlay(title,note,action,label){running=false;clearInput();byId('overlay-title').textContent=title;byId('overlay-note').textContent=note;byId('primary').textContent=label;byId('primary').onclick=action;byId('continue').hidden=true;byId('overlay').hidden=false;byId('pause').disabled=true;byId('primary').focus({preventScroll:true});}
+function pause(){if(!running){if(state.status==='paused'){state.status='playing';start();}return;}state.status='paused';save();overlay('暂停一下','世界 '+state.level.id+' · 冒险会在这里等你。',()=>{state.status='playing';start();},'继续游戏');byId('pause').disabled=false;byId('pause').textContent='继续';}
+byId('primary').onclick=()=>start();byId('continue').onclick=()=>{if(saved)state=saved;start();};byId('pause').onclick=pause;byId('restart').onclick=()=>{state=E.create(state.index);start();};
+byId('sound').onclick=async()=>{try{if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();await audio.resume();sound=!sound;byId('sound').textContent='声音：'+(sound?'开':'关');byId('sound').setAttribute('aria-pressed',String(sound));if(sound)beep('coin');}catch{byId('message').textContent='此浏览器无法开启音效，可继续静音游玩。';}};
+byId('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.console').requestFullscreen();}catch{byId('message').textContent='此浏览器暂不支持全屏，请横屏游玩。';}};
+const jumpKeys=['Space','KeyZ','KeyW','ArrowUp'],runKeys=['ShiftLeft','ShiftRight','KeyX'];
+function jumpHeld(){return jumpKeys.some(k=>keys.has(k))||[...touch.values()].includes('jump');}
+function inputs(){const held=x=>[...touch.values()].includes(x);return {left:keys.has('ArrowLeft')||keys.has('KeyA')||held('left'),right:keys.has('ArrowRight')||keys.has('KeyD')||held('right'),down:keys.has('ArrowDown')||keys.has('KeyS')||held('down'),jump:jumpHeld(),run:runKeys.some(k=>keys.has(k))||held('run'),...edge};}
+window.addEventListener('keydown',e=>{if(e.target.closest?.('button,a,input,select,textarea,[contenteditable]'))return;if(['KeyP','Escape'].includes(e.code)&&!e.repeat){if(state.status==='playing'||state.status==='paused'){e.preventDefault();pause();}return;}if(!running)return;const control=['ArrowLeft','ArrowRight','ArrowDown','KeyA','KeyD','KeyS',...jumpKeys,...runKeys];if(!control.includes(e.code))return;e.preventDefault();if(!keys.has(e.code)&&jumpKeys.includes(e.code))edge.jumpPressed=true;if(!keys.has(e.code)&&e.code==='KeyX')edge.firePressed=true;keys.add(e.code);});
+window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{clearInput();if(running)pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)pause();});
+const touchPad=document.querySelector('.touch-controls');document.querySelector('.console').append(touchPad);
+for(const button of document.querySelectorAll('[data-input]')){
+ button.addEventListener('pointerdown',e=>{if(!running)return;e.preventDefault();button.setPointerCapture(e.pointerId);touch.set(e.pointerId,button.dataset.input);button.classList.add('held');if(button.dataset.input==='jump')edge.jumpPressed=true;if(button.dataset.input==='run')edge.firePressed=true;});
+ const release=e=>{touch.delete(e.pointerId);button.classList.toggle('held',[...touch.values()].includes(button.dataset.input));};button.addEventListener('pointerup',release);button.addEventListener('pointercancel',release);button.addEventListener('lostpointercapture',release);
+}
+function result(){if(state.status==='clear'||state.status==='won'){done.add(state.index);save();selection();if(state.status==='won')overlay('冒险完成！','32 关的终点。公主获救，你的分数是 '+state.score+'。',()=>{state=E.create();start();},'再来一轮');else overlay('WORLD '+state.level.id+'\nCLEAR!','分数 '+state.score+' · 下一关 '+L.levels[state.index+1].id,()=>{state=E.next(state);start();},'下一关');}
+ else if(['dead','gameover'].includes(state.status)){save();overlay(state.status==='dead'?'再跳一次。':'GAME OVER',state.status==='dead'?'还剩 '+state.lives+' 条生命。重试世界 '+state.level.id+'。':'世界 '+state.level.id+' · 从这一关重新出发。',()=>{state=E.retry(state);start();},'重试本关');}}
+let autosave=0;
+function frame(now){const delta=Math.min(.08,(now-(last||now))/1000);last=now;if(running){acc+=delta;while(acc>=E.STEP&&running){E.step(state,inputs());edge.jumpPressed=edge.firePressed=false;acc-=E.STEP;if(state.status!=='playing')result();}autosave+=delta;if(autosave>5){autosave=0;save();}for(const name of state.events){beep(name);if(name==='wrongroute')byId('message').textContent='路线不对，已返回路口。按画面指示选择高路或低路。';else if(name==='route')byId('message').textContent='路线正确，继续前进！';}state.events=[];}else acc=0;window.MarioRender.render(ctx,state);requestAnimationFrame(frame);}
+selection();requestAnimationFrame(frame);
+})();
+</script>
+</body></html>
