@@ -32,7 +32,7 @@
 | 影子工坊 | `assets/screenshots/shadow-atelier.jpg` |
 | 城市疾跑 | `assets/screenshots/metro-rush.jpg` |
 | 临界行动 | `assets/screenshots/strike-arena.jpg` |
-| 方块旷野 | `assets/screenshots/voxel-frontier.png` |
+| 方块旷野 | `assets/screenshots/voxel-frontier-welcome.png` |
 | 余烬荒野 | `assets/screenshots/ember-wilds.png` |
 | 点云照片 | `assets/screenshots/point-cloud-studio.png` |
 | 超级马里奥 | `assets/screenshots/mario-world.png` |

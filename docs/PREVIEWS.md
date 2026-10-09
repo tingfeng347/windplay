@@ -45,7 +45,7 @@
 
 ### [方块旷野 · Voxel Frontier](../works/voxel-frontier/)
 
-[![方块旷野：可采集、建造、制作的第一人称方块世界](../assets/screenshots/voxel-frontier.png)](../works/voxel-frontier/demo/index.html)
+[![方块旷野：可采集、建造、制作的第一人称方块世界](../assets/screenshots/voxel-frontier-welcome.png)](../works/voxel-frontier/demo/index.html)
 
 ### [余烬荒野 · Ember Wilds](../works/ember-wilds/)
 
