@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T07:08:13.373608+00:00",
+  "title": "Design System: 字间飞行",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "暖灰读数",
+        "tonalRamp": [
+          "oklch(15% 0.0174 103.16)",
+          "oklch(26% 0.0174 103.16)",
+          "oklch(38% 0.0174 103.16)",
+          "oklch(49% 0.0174 103.16)",
+          "oklch(61% 0.0174 103.16)",
+          "oklch(72% 0.0174 103.16)",
+          "oklch(84% 0.0174 103.16)",
+          "oklch(95% 0.0174 103.16)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "冷灰说明",
+        "tonalRamp": [
+          "oklch(15% 0.0091 205.88)",
+          "oklch(26% 0.0091 205.88)",
+          "oklch(38% 0.0091 205.88)",
+          "oklch(49% 0.0091 205.88)",
+          "oklch(61% 0.0091 205.88)",
+          "oklch(72% 0.0091 205.88)",
+          "oklch(84% 0.0091 205.88)",
+          "oklch(95% 0.0091 205.88)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "航门金",
+        "tonalRamp": [
+          "oklch(15% 0.1352 78.99)",
+          "oklch(26% 0.1352 78.99)",
+          "oklch(38% 0.1352 78.99)",
+          "oklch(49% 0.1352 78.99)",
+          "oklch(61% 0.1352 78.99)",
+          "oklch(72% 0.1352 78.99)",
+          "oklch(84% 0.1352 78.99)",
+          "oklch(95% 0.1352 78.99)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "深灰分界",
+        "tonalRamp": [
+          "oklch(15% 0.0121 222.37)",
+          "oklch(26% 0.0121 222.37)",
+          "oklch(38% 0.0121 222.37)",
+          "oklch(49% 0.0121 222.37)",
+          "oklch(61% 0.0121 222.37)",
+          "oklch(72% 0.0121 222.37)",
+          "oklch(84% 0.0121 222.37)",
+          "oklch(95% 0.0121 222.37)"
+        ]
+      },
+      "sky": {
+        "role": "neutral",
+        "displayName": "黑色天空",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26% 0.0000 0.00)",
+          "oklch(38% 0.0000 0.00)",
+          "oklch(49% 0.0000 0.00)",
+          "oklch(61% 0.0000 0.00)",
+          "oklch(72% 0.0000 0.00)",
+          "oklch(84% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
+        ]
+      },
+      "button-bg": {
+        "role": "neutral",
+        "displayName": "深色按钮",
+        "tonalRamp": [
+          "oklch(15% 0.0112 217.03)",
+          "oklch(26% 0.0112 217.03)",
+          "oklch(38% 0.0112 217.03)",
+          "oklch(49% 0.0112 217.03)",
+          "oklch(61% 0.0112 217.03)",
+          "oklch(72% 0.0112 217.03)",
+          "oklch(84% 0.0112 217.03)",
+          "oklch(95% 0.0112 217.03)"
+        ]
+      },
+      "button-border": {
+        "role": "neutral",
+        "displayName": "按钮灰边",
+        "tonalRamp": [
+          "oklch(15% 0.0146 202.80)",
+          "oklch(26% 0.0146 202.80)",
+          "oklch(38% 0.0146 202.80)",
+          "oklch(49% 0.0146 202.80)",
+          "oklch(61% 0.0146 202.80)",
+          "oklch(72% 0.0146 202.80)",
+          "oklch(84% 0.0146 202.80)",
+          "oklch(95% 0.0146 202.80)"
+        ]
+      },
+      "panel-bg": {
+        "role": "neutral",
+        "displayName": "近黑面板",
+        "tonalRamp": [
+          "oklch(15% 0.0146 212.62)",
+          "oklch(26% 0.0146 212.62)",
+          "oklch(38% 0.0146 212.62)",
+          "oklch(49% 0.0146 212.62)",
+          "oklch(61% 0.0146 212.62)",
+          "oklch(72% 0.0146 212.62)",
+          "oklch(84% 0.0146 212.62)",
+          "oklch(95% 0.0146 212.62)"
+        ]
+      },
+      "panel-border": {
+        "role": "neutral",
+        "displayName": "面板灰边",
+        "tonalRamp": [
+          "oklch(15% 0.0159 202.31)",
+          "oklch(26% 0.0159 202.31)",
+          "oklch(38% 0.0159 202.31)",
+          "oklch(49% 0.0159 202.31)",
+          "oklch(61% 0.0159 202.31)",
+          "oklch(72% 0.0159 202.31)",
+          "oklch(84% 0.0159 202.31)",
+          "oklch(95% 0.0159 202.31)"
+        ]
+      },
+      "field-bg": {
+        "role": "neutral",
+        "displayName": "航线字段",
+        "tonalRamp": [
+          "oklch(15% 0.0176 222.50)",
+          "oklch(26% 0.0176 222.50)",
+          "oklch(38% 0.0176 222.50)",
+          "oklch(49% 0.0176 222.50)",
+          "oklch(61% 0.0176 222.50)",
+          "oklch(72% 0.0176 222.50)",
+          "oklch(84% 0.0176 222.50)",
+          "oklch(95% 0.0176 222.50)"
+        ]
+      },
+      "primary-ink": {
+        "role": "neutral",
+        "displayName": "金色按钮文字",
+        "tonalRamp": [
+          "oklch(15% 0.0025 247.95)",
+          "oklch(26% 0.0025 247.95)",
+          "oklch(38% 0.0025 247.95)",
+          "oklch(49% 0.0025 247.95)",
+          "oklch(61% 0.0025 247.95)",
+          "oklch(72% 0.0025 247.95)",
+          "oklch(84% 0.0025 247.95)",
+          "oklch(95% 0.0025 247.95)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "悬停浅金",
+        "tonalRamp": [
+          "oklch(15% 0.1074 79.25)",
+          "oklch(26% 0.1074 79.25)",
+          "oklch(38% 0.1074 79.25)",
+          "oklch(49% 0.1074 79.25)",
+          "oklch(61% 0.1074 79.25)",
+          "oklch(72% 0.1074 79.25)",
+          "oklch(84% 0.1074 79.25)",
+          "oklch(95% 0.1074 79.25)"
+        ]
+      },
+      "building-cyan": {
+        "role": "secondary",
+        "displayName": "楼房青灰",
+        "tonalRamp": [
+          "oklch(15% 0.0540 210.23)",
+          "oklch(26% 0.0540 210.23)",
+          "oklch(38% 0.0540 210.23)",
+          "oklch(49% 0.0540 210.23)",
+          "oklch(61% 0.0540 210.23)",
+          "oklch(72% 0.0540 210.23)",
+          "oklch(84% 0.0540 210.23)",
+          "oklch(95% 0.0540 210.23)"
+        ]
+      },
+      "building-lilac": {
+        "role": "secondary",
+        "displayName": "楼房灰紫",
+        "tonalRamp": [
+          "oklch(15% 0.0227 268.36)",
+          "oklch(26% 0.0227 268.36)",
+          "oklch(38% 0.0227 268.36)",
+          "oklch(49% 0.0227 268.36)",
+          "oklch(61% 0.0227 268.36)",
+          "oklch(72% 0.0227 268.36)",
+          "oklch(84% 0.0227 268.36)",
+          "oklch(95% 0.0227 268.36)"
+        ]
+      },
+      "building-sand": {
+        "role": "secondary",
+        "displayName": "楼房沙色",
+        "tonalRamp": [
+          "oklch(15% 0.0691 80.63)",
+          "oklch(26% 0.0691 80.63)",
+          "oklch(38% 0.0691 80.63)",
+          "oklch(49% 0.0691 80.63)",
+          "oklch(61% 0.0691 80.63)",
+          "oklch(72% 0.0691 80.63)",
+          "oklch(84% 0.0691 80.63)",
+          "oklch(95% 0.0691 80.63)"
+        ]
+      },
+      "leaf": {
+        "role": "secondary",
+        "displayName": "树冠绿",
+        "tonalRamp": [
+          "oklch(15% 0.1069 144.29)",
+          "oklch(26% 0.1069 144.29)",
+          "oklch(38% 0.1069 144.29)",
+          "oklch(49% 0.1069 144.29)",
+          "oklch(61% 0.1069 144.29)",
+          "oklch(72% 0.1069 144.29)",
+          "oklch(84% 0.1069 144.29)",
+          "oklch(95% 0.1069 144.29)"
+        ]
+      },
+      "window": {
+        "role": "secondary",
+        "displayName": "窗格暖黄",
+        "tonalRamp": [
+          "oklch(15% 0.0935 81.41)",
+          "oklch(26% 0.0935 81.41)",
+          "oklch(38% 0.0935 81.41)",
+          "oklch(49% 0.0935 81.41)",
+          "oklch(61% 0.0935 81.41)",
+          "oklch(72% 0.0935 81.41)",
+          "oklch(84% 0.0935 81.41)",
+          "oklch(95% 0.0935 81.41)"
+        ]
+      },
+      "road": {
+        "role": "neutral",
+        "displayName": "道路灰",
+        "tonalRamp": [
+          "oklch(15% 0.0299 269.46)",
+          "oklch(26% 0.0299 269.46)",
+          "oklch(38% 0.0299 269.46)",
+          "oklch(49% 0.0299 269.46)",
+          "oklch(61% 0.0299 269.46)",
+          "oklch(72% 0.0299 269.46)",
+          "oklch(84% 0.0299 269.46)",
+          "oklch(95% 0.0299 269.46)"
+        ]
+      },
+      "grass": {
+        "role": "secondary",
+        "displayName": "地面草绿",
+        "tonalRamp": [
+          "oklch(15% 0.0677 149.03)",
+          "oklch(26% 0.0677 149.03)",
+          "oklch(38% 0.0677 149.03)",
+          "oklch(49% 0.0677 149.03)",
+          "oklch(61% 0.0677 149.03)",
+          "oklch(72% 0.0677 149.03)",
+          "oklch(84% 0.0677 149.03)",
+          "oklch(95% 0.0677 149.03)"
+        ]
+      },
+      "future-gate": {
+        "role": "primary",
+        "displayName": "后续航门褐金",
+        "tonalRamp": [
+          "oklch(15% 0.0828 68.03)",
+          "oklch(26% 0.0828 68.03)",
+          "oklch(38% 0.0828 68.03)",
+          "oklch(49% 0.0828 68.03)",
+          "oklch(61% 0.0828 68.03)",
+          "oklch(72% 0.0828 68.03)",
+          "oklch(84% 0.0828 68.03)",
+          "oklch(95% 0.0828 68.03)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "作品标题",
+        "purpose": "页头作品名称。"
+      },
+      "headline": {
+        "displayName": "状态标题",
+        "purpose": "起飞与结果面板标题。"
+      },
+      "body": {
+        "displayName": "说明",
+        "purpose": "说明段落。"
+      },
+      "instrument": {
+        "displayName": "仪表值",
+        "purpose": "空速、高度、航向。"
+      },
+      "label": {
+        "displayName": "小标签",
+        "purpose": "单位与操纵提示。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "state-panel",
+        "value": "0 18px 70px #000c",
+        "purpose": "中央状态层。"
+      },
+      {
+        "name": "notice",
+        "value": "0 2px 5px #000",
+        "purpose": "状态提示文字。"
+      }
+    ],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "650px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "起飞主按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "开始飞行与重新起飞。",
+      "html": "<button class=\"ds-primary\">开始飞行</button>",
+      "css": ".ds-primary{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;background:var(--accent,#f5bb55);color:#151617;border:1px solid var(--accent,#f5bb55);border-radius:5px;padding:13px;width:100%;font-weight:bold;cursor:pointer}.ds-primary:hover{background:#ffd185;color:#151617}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-route:focus-visible,.ds-link:focus-visible{outline:2px solid var(--accent,#f5bb55);outline-offset:4px}"
+    },
+    {
+      "name": "次级动作",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "暂停、重飞、操纵说明。",
+      "html": "<button class=\"ds-secondary\">重飞</button>",
+      "css": ".ds-secondary{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;background:#12191b;color:var(--ink,#e6e5d8);border:1px solid #647071;padding:9px 15px;border-radius:5px;cursor:pointer}.ds-secondary:hover{border-color:var(--accent,#f5bb55);color:var(--accent,#f5bb55)}.ds-secondary:disabled{opacity:.4;cursor:default}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-route:focus-visible,.ds-link:focus-visible{outline:2px solid var(--accent,#f5bb55);outline-offset:4px}"
+    },
+    {
+      "name": "航线选择",
+      "kind": "input",
+      "refersTo": "route-field",
+      "description": "原生选择字段与冷灰标签。",
+      "html": "<label class=\"ds-route-label\" for=\"ds-route\">选择航线</label><select class=\"ds-route\" id=\"ds-route\"><option>沿街初航 · 8 道航门</option><option>自由飞行</option></select>",
+      "css": ".ds-route-label{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;display:block;font-size:12px;color:var(--muted,#acb4b5);margin-bottom:8px}.ds-route{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;background:#111c20;color:var(--ink,#e6e5d8);border:1px solid #5e6b6c;padding:12px;width:100%;border-radius:5px}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-route:focus-visible,.ds-link:focus-visible{outline:2px solid var(--accent,#f5bb55);outline-offset:4px}"
+    },
+    {
+      "name": "中央状态面板",
+      "kind": "card",
+      "refersTo": "state-panel",
+      "description": "起飞与结果层。",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">穿过字符里的城市</h2><p class=\"ds-panel-copy\">楼房、树木、道路，都是一行行彩色字符。</p></section>",
+      "css": ".ds-panel{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;background:#071012f5;color:var(--ink,#e6e5d8);padding:30px;border:1px solid #5e6b6c;border-radius:10px;box-shadow:0 18px 70px #000c;width:min(470px,calc(100% - 32px))}.ds-panel-title{font:500 25px/1.4 \"Courier New\",monospace;margin:0 0 16px}.ds-panel-copy{font-size:13px;line-height:1.9;color:var(--muted,#acb4b5);margin:0 0 18px}"
+    },
+    {
+      "name": "飞行仪表",
+      "kind": "custom",
+      "refersTo": "telemetry",
+      "description": "空速、高度与航向读数；不透明黑色底板隔开场景字符。",
+      "html": "<div class=\"ds-instruments\"><div class=\"ds-meter\"><span class=\"ds-meter-label\">空速</span><strong class=\"ds-meter-value\">25</strong><small class=\"ds-meter-unit\">m/s</small></div></div>",
+      "css": ".ds-instruments{display:flex;gap:32px;background:#000;padding:12px 15px;border-radius:4px;pointer-events:none}.ds-meter{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;display:grid;grid-template-columns:auto auto;align-items:baseline;gap:5px;color:var(--ink,#e6e5d8)}.ds-meter-label{font-size:11px;color:var(--muted,#acb4b5);grid-column:1/3}.ds-meter-value{font-size:28px;line-height:1;font-weight:500;font-variant-numeric:tabular-nums}.ds-meter-unit{font-size:11px;color:var(--muted,#acb4b5)}@media(max-width:650px){.ds-instruments{gap:16px;padding:10px}.ds-meter-value{font-size:21px}}"
+    },
+    {
+      "name": "返回导航",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "返回 WindPlay 启动台。",
+      "html": "<a class=\"ds-link\" href=\"#works\">WindPlay</a>",
+      "css": ".ds-link{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;font-size:13px;color:var(--muted,#acb4b5);text-decoration:none}.ds-link:hover{color:var(--ink,#e6e5d8)}.ds-primary:focus-visible,.ds-secondary:focus-visible,.ds-route:focus-visible,.ds-link:focus-visible{outline:2px solid var(--accent,#f5bb55);outline-offset:4px}"
+    },
+    {
+      "name": "姿态仪表",
+      "kind": "custom",
+      "refersTo": "attitude",
+      "description": "俯仰、滚转与偏航速度的黑底读数。",
+      "html": "<div class=\"ds-attitude\"><span>俯仰 +0°</span><span>滚转 +0°</span><span>偏航 +0°/s</span></div>",
+      "css": ".ds-attitude{font-family:\"Courier New\",\"Noto Sans Mono\",monospace;display:flex;flex-direction:column;gap:9px;font-size:12px;text-align:right;color:var(--muted,#acb4b5);pointer-events:none;background:#000;padding:12px 15px;border-radius:4px}@media(max-width:650px){.ds-attitude{font-size:11px;gap:6px;padding:10px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "字符构成的可操纵空间",
+    "overview": "以可操纵的字符空间为核心：天空保持纯黑，楼房、树木、道路和航门都由固定字格上的彩色 ASCII 字符绘制。界面沿用等宽字体，让仪表和画面属于同一种视觉语言。\n\n画面持续占据主要操作区；起飞和结果面板只在相应状态覆盖中央。青灰城市与绿色树木提供空间参照，金色同时标记当前航门和开始动作。此文记录现有源码，不把字符渲染描述为像素贴图或照片。",
+    "keyCharacteristics": [
+      "纯黑天空与彩色字符组成的第一视角空间。",
+      "固定字格、等宽字体和表格数字仪表。",
+      "金色当前航门与主操作按钮。",
+      "上方仪表、下方航线状态，中央状态面板。"
+    ],
+    "rules": [
+      {
+        "name": "字符空间",
+        "body": "场景中的城市与航门使用相同字格和深度缓冲；天空保持纯黑。",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do 保持天空纯黑，使用字符和深度遮挡表达空间。",
+      "Do 将金色用于当前航门、起飞动作和短状态提示。",
+      "Do 保留俯仰与滚转读数、空速单位和航线进度。",
+      "Do 从 src/ 提取修改，再通过构建生成 demo/index.html。"
+    ],
+    "donts": [
+      "Don’t 用照片、渐变天空或像素纹理替代字符场景。",
+      "Don’t 把松键后的姿态改成自动回中；当前操纵会保持姿态。",
+      "Don’t 把未实现的组件、动效或视觉完成度写成既有规范。"
+    ]
+  }
+}

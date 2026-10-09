@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>字间飞行 — WindPlay</title><link rel="stylesheet" href="styles.css"></head><body>
+<main>
+<header><a href="../../../index.html#works">WindPlay</a><h1>字间飞行</h1><button id="help" aria-expanded="false">操纵说明</button></header>
+<section class="flight-view" aria-label="第一视角彩色 ASCII 城市飞行"><canvas id="view" aria-label="彩色字符组成的城市、树木和道路"></canvas>
+<div class="telemetry"><div><span>空速</span><strong id="speed">25</strong><small>m/s</small></div><div><span>高度</span><strong id="altitude">27</strong><small>m</small></div><div><span>航向</span><strong id="heading">000</strong><small>°</small></div></div>
+<div class="attitude"><span id="pitch">俯仰 +0°</span><span id="roll">滚转 +0°</span><span id="turn">偏航 +0°/s</span></div>
+<div id="notice" role="status" aria-live="polite"></div>
+<div id="start-panel" class="panel"><h2>穿过字符里的城市</h2><p>没有像素贴图。楼房、树木、道路，都是一行行彩色字符。</p><label for="route">选择航线</label><select id="route"><option value="0">沿街初航 · 8 道航门</option><option value="1">街角转弯 · 8 道航门</option><option value="2">低空巡游 · 9 道航门</option><option value="free">自由飞行</option></select><p class="route-note" id="route-note">沿主街穿过 8 道航门，熟悉俯仰与油门。</p><button id="start" class="primary">开始飞行</button><p class="short-controls">W / S 俯仰　 A / D 滚转　 Z / X 速度</p></div>
+<div id="result" class="panel" hidden><h2 id="result-title"></h2><p id="result-text"></p><button id="retry" class="primary">重新起飞</button><button id="choose">更换航线</button></div>
+<aside id="instructions" hidden><h2>操纵说明</h2><p>W 压低机头，S 抬高机头；A 向左滚转，D 向右滚转。松开按键后保持当前姿态。</p><p>俯仰、滚转均限于 ±45°。滚转 45° 时以 90°/s 转弯，角速度随滚转角线性变化。</p><p>Z 加速，X 减速，空速 10–50 m/s。转过街角后用反向滚转把机翼放平。</p><p>穿过金色 O 航门；不要碰到楼房、树冠或地面。P / Esc 暂停，R 重飞。</p><p>触屏可使用下方按住操纵键。</p></aside>
+</section>
+<footer><div class="progress"><span id="route-name">沿街初航</span><span id="gate-count">航门 0 / 8</span><span id="distance">航程 0 m</span></div><div class="actions"><button id="pause" disabled>暂停</button><button id="reset">重飞</button></div></footer>
+<div class="touch" aria-label="触屏操纵"><button data-key="w" aria-label="压低机头">W</button><button data-key="s" aria-label="抬高机头">S</button><button data-key="a" aria-label="左滚转">A</button><button data-key="d" aria-label="右滚转">D</button><button data-key="z" aria-label="加速">Z</button><button data-key="x" aria-label="减速">X</button></div>
+</main><script type="module" src="app.js"></script></body></html>

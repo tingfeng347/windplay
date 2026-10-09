@@ -87,14 +87,14 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .secondary-button { border-color: var(--line); background: var(--surface); white-space: nowrap; }
 .secondary-button:hover { border-color: var(--muted); }
 
-/* Ten real browser works share a camera; scroll opens them into a contact sheet. */
+/* Twelve real browser works share a camera; scroll opens them into a contact sheet. */
 .hero-actions { display:flex; justify-content:center; align-items:center; gap:12px; }
 .motion-toggle { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 18px; background:transparent; border:1px solid var(--line); border-radius:999px; font-size:13px; cursor:pointer; }
 .motion-toggle:hover { background:var(--surface); border-color:var(--muted); }
 .motion-toggle:disabled { cursor:default; color:var(--muted); }
 .hero-art { --progress:0; --pointer-x:0; --pointer-y:0; --velocity:0; position:relative; margin-top:24px; isolation:isolate; }
 .art-stage { position:relative; padding:40px 36px 54px; perspective:1600px; overflow:clip; }
-.art-field { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; }
+.art-field { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; }
 .art-layer { display:block; min-width:0; position:relative; transform-style:preserve-3d; }
 .art-frame { overflow:hidden; border-radius:var(--radius); background:var(--surface); box-shadow:0 18px 28px -20px rgb(0 0 0 / 45%),0 0 0 1px var(--line); transition:box-shadow 180ms ease; }
 .art-layer:hover .art-frame { box-shadow:0 24px 36px -20px rgb(0 0 0 / 55%),0 0 0 1px var(--muted); }
@@ -121,7 +121,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .hero-art[data-motion="reduced"] .art-wind,.hero-art:not([data-motion]) .art-wind { display:none; }
 .hero-art[data-motion="reduced"] .scroll-note,.hero-art:not([data-motion]) .scroll-note { display:none; }
 @media(max-width:1000px) {
-  /* 十个作品始终是两行五列；四列会把第三行压进 620px 的舞台，行与行互相遮挡。 */
+  /* 十二个作品保持两行六列，避免第三行挤进固定高度的舞台。 */
   .art-field { gap:16px; }
   .art-frame-bar { padding:8px; font-size:11px; }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-layer { transform:translate3d(calc(var(--dx) * (1 - var(--progress)) * .6 + var(--pointer-x) * 7px),calc(var(--dy) * (1 - var(--progress)) * .6 + var(--wave) * var(--progress) * (1 - var(--progress)) * 2.4 + var(--velocity) * -9px),calc(var(--depth) * (1 - var(--progress)) * .6)) rotateZ(calc(var(--turn) * (1 - var(--progress)) * .8)) rotateY(calc(var(--tilt) * (1 - var(--progress)) * .8 + var(--pointer-x) * -4deg)); }
@@ -136,7 +136,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .art-caption { display:block; }
   .art-controls { justify-content:space-between; gap:12px; }
   .scroll-note { display:flex; margin-top:4px; }
-  .hero-art:is([data-motion="active"],[data-motion="paused"]) { --stage-height:max(850px,calc(100vw * 1.40625 + 280px)); height:calc(var(--stage-height) + 450px); }
+  .hero-art:is([data-motion="active"],[data-motion="paused"]) { --stage-height:max(1000px,calc(100vw * 1.6875 + 340px)); height:calc(var(--stage-height) + 450px); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-stage { top:16px; height:var(--stage-height); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-field { inset:42px 12px 84px; transform:rotateX(calc((1 - var(--progress)) * 5deg)); }
   .hero-art:is([data-motion="active"],[data-motion="paused"]) .art-layer { transform:translate3d(calc(var(--dx) * (1 - var(--progress)) * .22),calc(var(--dy) * (1 - var(--progress)) * .35 + var(--wave) * var(--progress) * (1 - var(--progress)) * 1.2),calc(var(--depth) * (1 - var(--progress)) * .3)) rotateZ(calc(var(--turn) * (1 - var(--progress)) * .4)); }

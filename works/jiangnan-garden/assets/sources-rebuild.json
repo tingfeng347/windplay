@@ -1,0 +1,581 @@
+[
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_branch_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_branch_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "a2efae9e7fede259601188cd5cb7e561fc502bd87e04d862a9532b2d8e647a62",
+    "bytes": 581831,
+    "sha256": "e403c16011987e3c880ba98c2e7984a8a5081d97b83d8e65fac62476a3e23924",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_branch_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_branch_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "a71b768e330c0c6cca097e30314f6b4e842ef724a1370f6aab14b4434eec64cb",
+    "bytes": 450210,
+    "sha256": "69f474bd9520c4f08da796907f5bd05286d51d752d3b9c572d6183799587f263",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_branch_arm_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_branch_arm_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "8968b46d76c67da09ebbf4eed04b8123c9e0ddf5b55d123968b35b32aa76d27a",
+    "bytes": 375964,
+    "sha256": "e4990d0fb35e0b52278cf2f1e396f5f0349a3c05720bca27f3abff0a12cb145c",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_leaves_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_leaves_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "8c72e04fb23e16ae1df79c01385a638473d1dd4dede3d51e83d70153c129f09b",
+    "bytes": 681839,
+    "sha256": "dc6ca4023f5c14b04b7bd9fbe06145e3c5827b8f792393b246786b098e69890e",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_leaves_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_leaves_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "261e7d7a5ac7d2e16ea8823ff8510be8f3f615999724232994039ad2885e5c36",
+    "bytes": 340236,
+    "sha256": "f38f6852dd64df16ce7ea1a938a393bb474ea2cf5c83343ab5c309f2bab8ca37",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_leaves_arm_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_leaves_arm_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "71f81374daf5a8f3e6eb2c694264a1769fdb0bea508178e4105618eecea83c3e",
+    "bytes": 633930,
+    "sha256": "0c7e2c78b5a8f254c8a77b39d8ad2324263a0983ae3c745a75a0a4b85bc2a621",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "9c83be074c950ea1b94c732c0c0291b53b9ba357f932d378bafe3ca3b4418871",
+    "bytes": 1228874,
+    "sha256": "d9825a76600608da5259b3a8e701d263dd3511f578dc49ed96187b8db244f286",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "4e0093f407b3a1120a36de49a48ebe5a465a9a9b77e361c7a3e66866e115e404",
+    "bytes": 863472,
+    "sha256": "4ad9915308bd2c0f442435400937c80ad619717565a40e875af090e9d6eb988b",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/tree_small_02/textures/tree_small_02_arm_1k.jpg",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_small_02/tree_small_02_arm_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "891c5a1bb124292984b01558e9f2b0302d27d2fa3ccf9dfc6c34f9ea4ca24e6c",
+    "bytes": 708467,
+    "sha256": "8ebf2cdeb8e10f470697d27e43a9ca9c087659faf5462d1ecc84ac62a29a5c38",
+    "author": "Rico Cilliers"
+  },
+  {
+    "file": "models/fern_02/textures/fern_02_arm_1k.jpg",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_arm_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "ebfb5d76ce9cbdaec20bcd22dce9b755f0b1b8650ef29ca13555e3e6961025d7",
+    "bytes": 280566,
+    "sha256": "b09ba517ee17a64631171d7a4ce36d90eb19e9f16e15ed82fbf8b7e264446368",
+    "author": "Rico Cilliers / Rob Tuytel"
+  },
+  {
+    "file": "models/fern_02/textures/fern_02_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "a828a6e7b4c01c826911e2eac4b3afc7457dab7b3b392a31c681ed88b7d50029",
+    "bytes": 315913,
+    "sha256": "c0e49b52a527a39e17b0ce979c1df95101c7e778699a80c08bbe683eed1d813f",
+    "author": "Rico Cilliers / Rob Tuytel"
+  },
+  {
+    "file": "models/fern_02/textures/fern_02_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "45bce132c6e96a0864bc89ab5da51361ab3f4afa83a6669ae499ab5ca811f621",
+    "bytes": 367432,
+    "sha256": "fa248bf609d1f282dba3eb299e6246f81a64641f8c821b03dd269ea203f224ba",
+    "author": "Rico Cilliers / Rob Tuytel"
+  },
+  {
+    "file": "textures/grey_roof_tiles_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/grey_roof_tiles",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grey_roof_tiles/grey_roof_tiles_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "f61107b70cf56074c9db09384a332620c94c678ed2baabfae78029a8242e49a3",
+    "bytes": 596390,
+    "sha256": "b725816eaa1f3bd274d178ef33822e833545c6abf91ca6a58e3ddc1c6df80b57",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "textures/grey_roof_tiles_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/grey_roof_tiles",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grey_roof_tiles/grey_roof_tiles_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "99546fdc2978d0950a2c61fe94dbd4230bb7825944bb4e4e7ad586839fdc721d",
+    "bytes": 522422,
+    "sha256": "79e1b52d6d7c07c06a95fb4777243d2c790e6a86a2fa45429f735028c691939a",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "textures/grey_roof_tiles_rough_1k.jpg",
+    "source": "https://polyhaven.com/a/grey_roof_tiles",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grey_roof_tiles/grey_roof_tiles_rough_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "edc3185b560a71b2b5f5f568710b8674da41becb39ca374f5e8efeca15b5794f",
+    "bytes": 261015,
+    "sha256": "7a692a640f94c40c2cc907bdd148b421ac1e9188e74b367a0e102f271f358cc0",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "textures/brick_floor_003_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/brick_floor_003",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_floor_003/brick_floor_003_diffuse_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "b70de50a5d00d98a5a11d950f905de3aa80cef9a2cb8a9f23c52dd87f50fe688",
+    "bytes": 199584,
+    "sha256": "330d2ab9ff8433ba775f38bf6497616e5b8e258d2cc1873687d5524bb43a1307",
+    "author": "Dimitrios Savva / Rob Tuytel"
+  },
+  {
+    "file": "textures/brick_floor_003_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/brick_floor_003",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_floor_003/brick_floor_003_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "82344f7390581f56cb49530b9bc27d5c1f1ce08d61154b29acefc2e51b0ef820",
+    "bytes": 254076,
+    "sha256": "fd465e6232c635df8d9c6dd3776c94f70d8fd542a6a612266bf9c9b40f579e42",
+    "author": "Dimitrios Savva / Rob Tuytel"
+  },
+  {
+    "file": "textures/brick_floor_003_rough_1k.jpg",
+    "source": "https://polyhaven.com/a/brick_floor_003",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_floor_003/brick_floor_003_rough_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "1ddb530541d06f0e77971bf7c01e6c03eff3c5bc390e5b1b374b37c37b03ee97",
+    "bytes": 159624,
+    "sha256": "57985bd862d9d4d4e0ff54b52e3fc72f63f8021be91e5d7f203819134ab1bcf0",
+    "author": "Dimitrios Savva / Rob Tuytel"
+  },
+  {
+    "file": "textures/wood_planks_dirt_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/wood_planks_dirt",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "230bb4aabaebde24ead3ae593a48f8f45e93705aaf3cfdc438589bb49c2a7af3",
+    "bytes": 918360,
+    "sha256": "4293d2e318487e895167c58e665217cb4944907d54b9cd71eab005169e16f9d7",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "textures/wood_planks_dirt_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/wood_planks_dirt",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "877bf561c0bc83a583238c5133c221026ff25052f8f567174c6b285af4b74f0e",
+    "bytes": 515241,
+    "sha256": "3ad339ee6cb35b02b2f56a7760097dd7ab4a26c17836b113ca91537715ec6925",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "textures/wood_planks_dirt_rough_1k.jpg",
+    "source": "https://polyhaven.com/a/wood_planks_dirt",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_dirt/wood_planks_dirt_rough_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "f9b706729bb727d3eeab4794f18d3c4df43760d580342bf28fe8f3f09a68c5e9",
+    "bytes": 523252,
+    "sha256": "559cf0975b45b91ba2fa13119392d66600e46df6b70ace95a88c59086ea4c8ef",
+    "author": "Rob Tuytel"
+  },
+  {
+    "file": "environment/lythwood_terrace_1k.hdr",
+    "source": "https://polyhaven.com/a/lythwood_terrace",
+    "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/lythwood_terrace_1k.hdr",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "sourceSha256": "c4a3465eaac3318575866a0c64ff06145be544b44a14c4c67992eadd820d6042",
+    "bytes": 1794290,
+    "sha256": "c4a3465eaac3318575866a0c64ff06145be544b44a14c4c67992eadd820d6042",
+    "author": "Greg Zaal"
+  },
+  {
+    "file": "textures/forest_floor_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_floor/forest_floor_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "f12e5adea1741f9eb7a528bfc621f8267885b9530b74c3a8afdb823899bdbf0b",
+    "bytes": 1330078,
+    "sha256": "9849a339a87ce6632953bd0dfee635815eee70a74cd9bbe66d3d5ac589da4dc0",
+    "author": "eye-candy.xyz"
+  },
+  {
+    "file": "textures/forest_floor_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_floor/forest_floor_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "681f3de8c756c4d19bcda33039f953295498f38b1425ce9d56b37d6f97f6e518",
+    "bytes": 1380331,
+    "sha256": "ab4075be3930306b31949f03cd634fb6b2b7b0540395ddee935247efefe33f36",
+    "author": "eye-candy.xyz"
+  },
+  {
+    "file": "textures/forest_floor_rough_1k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_floor/forest_floor_rough_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "ece0b331f08c03f3edcd8ab6815b74a5ae20768beef64cd4f96a5b2fa26e116e",
+    "bytes": 736579,
+    "sha256": "eeff59b5fc332e681b73203f379970a10fc6eaf798299943c560385f782a4342",
+    "author": "eye-candy.xyz"
+  },
+  {
+    "file": "models/tree_small_02/original.gltf.json",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/tree_small_02/tree_small_02_1k.gltf",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers",
+    "sha256": "3062a709614c05b80fdc1e56583998bc3cb1027b0d52f956c8ecfb882ff8ca6d",
+    "bytes": 9075,
+    "processing": "Original metadata"
+  },
+  {
+    "file": "models/tree_small_02/model.bin",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/tree_small_02/tree_small_02.bin",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers",
+    "sha256": "57abda1368f98ec1091c85eef2a4e61fdad46c7ee7dedd9dec19bd3026024da1",
+    "bytes": 43794120,
+    "processing": {
+      "origin": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "originalBufferSha256": "8da6c3c389ad8748286d1b7488cd827f75ebdad9d8f59ef7dfb0916df5edc634",
+      "preparation": "MeshoptSimplifier with normals/UV preservation; original geometry proportions and materials retained",
+      "trianglesBefore": 2062487,
+      "trianglesAfter": 1334988
+    }
+  },
+  {
+    "file": "models/tree_small_02/model.gltf",
+    "source": "https://polyhaven.com/a/tree_small_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/tree_small_02/tree_small_02_1k.gltf",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers",
+    "sha256": "9a01a2af1225b246b0671543906e5c8b69168dde7bed955e8169ca636988a535",
+    "bytes": 5792,
+    "processing": {
+      "origin": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "originalBufferSha256": "8da6c3c389ad8748286d1b7488cd827f75ebdad9d8f59ef7dfb0916df5edc634",
+      "preparation": "MeshoptSimplifier with normals/UV preservation; original geometry proportions and materials retained",
+      "trianglesBefore": 2062487,
+      "trianglesAfter": 1334988
+    }
+  },
+  {
+    "file": "models/fern_02/original.gltf.json",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fern_02/fern_02_1k.gltf",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers / Rob Tuytel",
+    "sha256": "33974295ee19670af4877705fc7d91f33f42d6302f0d44a625e072271223031f",
+    "bytes": 6899,
+    "processing": "Original metadata"
+  },
+  {
+    "file": "models/fern_02/model.bin",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fern_02/fern_02.bin",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers / Rob Tuytel",
+    "sha256": "7afbcaaf9afedf1958d687390339ddec5fef213d34e8aab4c435be4e3618100f",
+    "bytes": 213568,
+    "processing": {
+      "origin": "https://polyhaven.com/a/fern_02",
+      "license": "CC0-1.0",
+      "originalBufferSha256": "fe1abb762bcbbc7ad9e86925c8080437a62add257d9280e9142fdc85c226e64c",
+      "preparation": "MeshoptSimplifier with normals/UV preservation; original geometry proportions and materials retained",
+      "trianglesBefore": 6232,
+      "trianglesAfter": 6232
+    }
+  },
+  {
+    "file": "models/fern_02/model.gltf",
+    "source": "https://polyhaven.com/a/fern_02",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fern_02/fern_02_1k.gltf",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers / Rob Tuytel",
+    "sha256": "49a7c5923a4702c079ed111c2bd0efa9211fc1c3493917962144e88d5440155b",
+    "bytes": 4857,
+    "processing": {
+      "origin": "https://polyhaven.com/a/fern_02",
+      "license": "CC0-1.0",
+      "originalBufferSha256": "fe1abb762bcbbc7ad9e86925c8080437a62add257d9280e9142fdc85c226e64c",
+      "preparation": "MeshoptSimplifier with normals/UV preservation; original geometry proportions and materials retained",
+      "trianglesBefore": 6232,
+      "trianglesAfter": 6232
+    }
+  },
+  {
+    "file": "textures/rough_wood_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/rough_wood",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_wood/rough_wood_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "abc46d8e3163d911220f4ec3a4043b68d2b0c6d750513f80871211acfefb2a98",
+    "sha256": "ed9409a186af1a17c304e5f991f237a71bfde8d7f545ca7f08ce20217b53f4a5",
+    "bytes": 567271
+  },
+  {
+    "file": "textures/rough_wood_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/rough_wood",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_wood/rough_wood_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "3d1c6f098b66d93e52071b41834dd14a424d8cd2f7c4130c62dc062acfa65011",
+    "sha256": "8a5e08c2c1ddd7ee2251d17c001e14156893a1265c0ef660ad5b777f17891bfa",
+    "bytes": 790533
+  },
+  {
+    "file": "textures/rough_wood_rough_1k.jpg",
+    "source": "https://polyhaven.com/a/rough_wood",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_wood/rough_wood_rough_1k.jpg",
+    "license": "CC0-1.0",
+    "sourceSha256": "4e9ea9962a7e8b69057937e6723c4b0134b949c1ee5cdb5f3687a54113027b09",
+    "sha256": "20cbd8a16fab1322dbce76b2040901b24e6863b02e9b37c956af5c4438a77435",
+    "bytes": 195254
+  },
+  {
+    "file": "models/chinese_armchair/original.gltf.json",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/chinese_armchair/chinese_armchair_2k.gltf",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "91d1cdd6fba39af27b72ede79bd81ebc7e44f1bf944565ec5c60642cdf347eb7",
+    "bytes": 2816,
+    "sha256": "91d1cdd6fba39af27b72ede79bd81ebc7e44f1bf944565ec5c60642cdf347eb7"
+  },
+  {
+    "file": "models/chinese_armchair/textures/chinese_armchair_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_armchair/chinese_armchair_diff_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "f4820d32af21801c023aa68214ecd7143a0c050e8cc2fe59b93735c951e772a8",
+    "bytes": 1855085,
+    "sha256": "d12445a439f4ca51b99f387c37eb920446339125a90ce3bccfca9888774cd270"
+  },
+  {
+    "file": "models/chinese_armchair/model.bin",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/chinese_armchair/chinese_armchair.bin",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "7e72b5360513057bdc453d6c03d5a837d32a8c9a2e6185f1b016c1bc62dc5b27",
+    "bytes": 81428,
+    "sha256": "7e72b5360513057bdc453d6c03d5a837d32a8c9a2e6185f1b016c1bc62dc5b27"
+  },
+  {
+    "file": "models/chinese_armchair/textures/chinese_armchair_nor_gl_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_armchair/chinese_armchair_nor_gl_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "7b73aabeef66c0454ce5d89dc4ab98c6ea2ad52d7de929a3263ec0280f2d0178",
+    "bytes": 1742393,
+    "sha256": "16138341ca3ae614400cb1fba212580468456a0e005eda20722c641fd7271c4a"
+  },
+  {
+    "file": "models/chinese_armchair/textures/chinese_armchair_arm_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_armchair/chinese_armchair_arm_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "fe67e0b482fa206eb1dea3d803455b9639468de1104f6c2a5c5f8c17a6a8eb02",
+    "bytes": 2223253,
+    "sha256": "17affb6c1b0a7bab9408d237ed2ed863c4b0d22f43fddb389eb40c8ffefaf307"
+  },
+  {
+    "file": "models/chinese_tea_table/original.gltf.json",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/chinese_tea_table/chinese_tea_table_2k.gltf",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "bd79eb86ac2edcb87b312ce1c2ae2a0cf5881981d11d21f5b62e3dd69d486303",
+    "bytes": 2793,
+    "sha256": "bd79eb86ac2edcb87b312ce1c2ae2a0cf5881981d11d21f5b62e3dd69d486303"
+  },
+  {
+    "file": "models/chinese_tea_table/textures/chinese_tea_table_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_tea_table/chinese_tea_table_diff_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "0ea6290528c50a5c5c994a4648f101670fa0f2ce98209496a4dbba1b025ad669",
+    "bytes": 1696341,
+    "sha256": "f727cf01ab335912883a7c20e9fce85b5a40c334ba21e4421fc59923fc5c9346"
+  },
+  {
+    "file": "models/chinese_tea_table/model.bin",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/chinese_tea_table/chinese_tea_table.bin",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "e584dbcf8d654c662ef849ef6111b11dc9f87e9a7ea8dc98c7d32dbfe10b7e52",
+    "bytes": 78792,
+    "sha256": "e584dbcf8d654c662ef849ef6111b11dc9f87e9a7ea8dc98c7d32dbfe10b7e52"
+  },
+  {
+    "file": "models/chinese_tea_table/textures/chinese_tea_table_nor_gl_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_tea_table/chinese_tea_table_nor_gl_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "ca8484f0c8fa66c6922246cd129523cd4aee9f48a9fc5b0ce4c3f5f04b51e96c",
+    "bytes": 2329924,
+    "sha256": "99bf15fd4b5933d498e1d7935262e22ded2f67164de47938b384a3448914cf56"
+  },
+  {
+    "file": "models/chinese_tea_table/textures/chinese_tea_table_arm_2k.jpg",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/chinese_tea_table/chinese_tea_table_arm_2k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Kirill Sannikov",
+    "sourceSha256": "316bfe378289b18df8bec3bf906996e921153474417215baad8ce5c2f3701d88",
+    "bytes": 1922763,
+    "sha256": "3612bdb3b2a4d8fe222876133294b5eaac89fd516628323bd05fe555dbe7b8a6"
+  },
+  {
+    "file": "models/chinese_armchair/model.gltf",
+    "source": "https://polyhaven.com/a/chinese_armchair",
+    "license": "CC0-1.0",
+    "author": "Kirill Sannikov",
+    "bytes": 1981,
+    "sha256": "712bedcae132db3a670c5353c495e29aae8d23f64d923ff8d6142b5158b970b5",
+    "processing": "Local URI and provenance rewrite only; original geometry and materials retained"
+  },
+  {
+    "file": "models/chinese_tea_table/model.gltf",
+    "source": "https://polyhaven.com/a/chinese_tea_table",
+    "license": "CC0-1.0",
+    "author": "Kirill Sannikov",
+    "bytes": 1959,
+    "sha256": "2e45acf97931c031fe0ed75117472d34e51a7383751cca4969a06abad38d9309",
+    "processing": "Local URI and provenance rewrite only; original geometry and materials retained"
+  },
+  {
+    "file": "models/shrub_04/original.gltf.json",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/shrub_04/shrub_04_1k.gltf",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Rico Cilliers",
+    "sourceSha256": "782832cbc57e96686b78c6ef9df6234c25f564f78421c8ed4bd42c3631f5aeae",
+    "bytes": 2882,
+    "sha256": "782832cbc57e96686b78c6ef9df6234c25f564f78421c8ed4bd42c3631f5aeae"
+  },
+  {
+    "file": "models/shrub_04/textures/shrub_04_nor_gl_1k.jpg",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_04/shrub_04_nor_gl_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Rico Cilliers",
+    "sourceSha256": "200d791e0474495bfc876ba1c289dade669c6a5b124647c55bc840a875f6b51c",
+    "bytes": 449442,
+    "sha256": "85480090d35df7f903a1a09187f38b6a24a8c0deed6ead24228bf494f8be2a3b"
+  },
+  {
+    "file": "models/shrub_04/textures/shrub_04_diff_1k.jpg",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_04/shrub_04_diff_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Rico Cilliers",
+    "sourceSha256": "0b0fa0a474753d13f3093858cea79d0de05da1e6a0c5d6e181cd351080980b6c",
+    "bytes": 373549,
+    "sha256": "46a5a7ab36c566a74dc1ed0f775582cd45f0fdf6ec6404ee66e37f7b58f65d87"
+  },
+  {
+    "file": "models/shrub_04/textures/shrub_04_arm_1k.jpg",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_04/shrub_04_arm_1k.jpg",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Rico Cilliers",
+    "sourceSha256": "d1085df021928b29b0f38dde7e58e9a2e304c4e8d838e390b37cf57f8aa492e8",
+    "bytes": 333155,
+    "sha256": "19375cd4b34c8f024e3b5b83edaa91bb183d4fb871172f930afc29a9d1db7ce2"
+  },
+  {
+    "file": "models/shrub_04/model.bin",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "download": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/shrub_04/shrub_04.bin",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "author": "Rico Cilliers",
+    "sourceSha256": "cb442c39682e54cc63f912aa78ab17a03566f947a61adbbbaaa6473166744f01",
+    "bytes": 749084,
+    "sha256": "cb442c39682e54cc63f912aa78ab17a03566f947a61adbbbaaa6473166744f01"
+  },
+  {
+    "file": "models/shrub_04/model.gltf",
+    "source": "https://polyhaven.com/a/shrub_04",
+    "license": "CC0-1.0",
+    "author": "Rico Cilliers",
+    "bytes": 1970,
+    "sha256": "8efbd32b08964ed3813a6e8e0440dc66ca564d9b44888d7cfdc523a94df8f056",
+    "processing": "Local URI and provenance rewrite only; original topology and materials retained"
+  }
+]

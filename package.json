@@ -27,7 +27,9 @@
     "test:works": "npm run test --workspaces --if-present",
     "dev:prism": "npm run dev --workspace @windplay/prism-path",
     "dev:delve": "npm run dev --workspace @windplay/ascii-delve",
-    "dev:mario": "npm run dev --workspace @windplay/mario-world"
+    "dev:mario": "npm run dev --workspace @windplay/mario-world",
+    "dev:flight": "npm run dev --workspace @windplay/ascii-flight",
+    "dev:jiangnan": "npm run dev --workspace @windplay/jiangnan-garden"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

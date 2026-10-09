@@ -1,0 +1,13 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#c7d0c8"><title>烟雨江南 — WindPlay</title><link rel="stylesheet" href="styles.css"></head><body>
+<main>
+<header><a href="../../../index.html#works">WindPlay</a><h1>烟雨江南</h1><div class="view-switch" role="group" aria-label="视角"><button id="overview" aria-pressed="true">环绕园林</button><button id="walk" aria-pressed="false">入园漫游</button></div></header>
+<section id="viewport" aria-label="可旋转、缩放和漫游的江南私家园林"><canvas id="scene" aria-label="江南园林三维场景"></canvas><div id="loading" role="status"><span class="loading-mark"></span><p>园门将启</p><small>正在准备木构、山水与光影</small></div><div id="error" hidden role="alert"><h2>园林暂时无法打开</h2><p id="error-text"></p><button id="reload">重新打开</button></div>
+<div class="place"><h2 id="place-name">一池烟雨，半窗闲云</h2><p id="place-note">拖动环绕 · 滚轮拉近 · 入园看梁柱与陈设</p></div>
+<aside class="visit-panel" aria-label="园内去处"><button id="places-toggle" aria-expanded="true" aria-controls="places-nav">移步换景<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></button><nav id="places-nav"><button data-room="hall"><span>待客堂屋</span><small>明间 · 梁柱露明</small></button><button data-room="study"><span>听雨书房</span><small>次间 · 案头清供</small></button><button data-room="bedroom"><span>疏影卧房</span><small>次间 · 帐幔架子床</small></button><button data-room="pond"><span>池畔曲廊</span><small>临水 · 借景听雨</small></button></nav></aside>
+<div class="weather"><span id="time-name">白昼 · 细雨</span><span>檐滴 / 涟漪 / 轻雾</span></div>
+<div id="crosshair" hidden aria-hidden="true"></div>
+<div class="walk-controls" id="walk-controls" hidden aria-label="触屏漫游"><button data-move="w" aria-label="前进">前进</button><div><button data-move="a" aria-label="左移">左移</button><button data-move="s" aria-label="后退">后退</button><button data-move="d" aria-label="右移">右移</button></div></div>
+</section>
+<footer><div class="day-controls" role="group" aria-label="日夜切换"><button id="day" aria-pressed="true">日景</button><input id="time" type="range" min="0" max="100" value="100" aria-label="光照时辰：0 为夜，100 为昼"><button id="night" aria-pressed="false">夜景</button></div><label class="roof-control"><input type="checkbox" id="roof">揭顶看木构</label><button id="reset-view">回到初景</button><button id="quality" aria-pressed="true">精细画质</button><button id="help" aria-expanded="false">操作</button></footer>
+<aside id="help-panel" hidden><h2>游园方式</h2><p>环绕：拖动旋转，滚轮缩放，右键拖动平移。触屏单指旋转，双指缩放。</p><p>漫游：WASD 或方向键移动，拖动画面转头；按 Shift 加快步伐，Esc 回到环绕。</p><p>选择“移步换景”可直接走进堂屋、书房或卧房。空间相连，可从隔扇旁的通道依次游览。</p><p>日景、夜景或时辰滑杆会连续改变光照。“揭顶看木构”可在环绕视角查看梁、檩、椽的关系。</p><p>设备较慢时，可关闭“精细画质”。</p></aside>
+</main><script type="module" src="app.js"></script></body></html>

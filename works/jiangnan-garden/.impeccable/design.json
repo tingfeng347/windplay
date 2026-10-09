@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T14:26:22.400412+00:00",
+  "title": "Design System: 烟雨江南",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "深灰绿文字",
+        "tonalRamp": [
+          "oklch(15% 0.0329 177.38)",
+          "oklch(26% 0.0329 177.38)",
+          "oklch(38% 0.0329 177.38)",
+          "oklch(49% 0.0329 177.38)",
+          "oklch(61% 0.0329 177.38)",
+          "oklch(72% 0.0329 177.38)",
+          "oklch(84% 0.0329 177.38)",
+          "oklch(95% 0.0329 177.38)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "灰绿说明",
+        "tonalRamp": [
+          "oklch(15% 0.0266 171.90)",
+          "oklch(26% 0.0266 171.90)",
+          "oklch(38% 0.0266 171.90)",
+          "oklch(49% 0.0266 171.90)",
+          "oklch(61% 0.0266 171.90)",
+          "oklch(72% 0.0266 171.90)",
+          "oklch(84% 0.0266 171.90)",
+          "oklch(95% 0.0266 171.90)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "浅灰绿控制面",
+        "tonalRamp": [
+          "oklch(15% 0.0090 134.87)",
+          "oklch(26% 0.0090 134.87)",
+          "oklch(38% 0.0090 134.87)",
+          "oklch(49% 0.0090 134.87)",
+          "oklch(61% 0.0090 134.87)",
+          "oklch(72% 0.0090 134.87)",
+          "oklch(84% 0.0090 134.87)",
+          "oklch(95% 0.0090 134.87)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "柔灰绿边线",
+        "tonalRamp": [
+          "oklch(15% 0.0245 153.32)",
+          "oklch(26% 0.0245 153.32)",
+          "oklch(38% 0.0245 153.32)",
+          "oklch(49% 0.0245 153.32)",
+          "oklch(61% 0.0245 153.32)",
+          "oklch(72% 0.0245 153.32)",
+          "oklch(84% 0.0245 153.32)",
+          "oklch(95% 0.0245 153.32)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "园林深绿",
+        "tonalRamp": [
+          "oklch(15% 0.0570 170.39)",
+          "oklch(26% 0.0570 170.39)",
+          "oklch(38% 0.0570 170.39)",
+          "oklch(49% 0.0570 170.39)",
+          "oklch(61% 0.0570 170.39)",
+          "oklch(72% 0.0570 170.39)",
+          "oklch(84% 0.0570 170.39)",
+          "oklch(95% 0.0570 170.39)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "阴天雾色",
+        "tonalRamp": [
+          "oklch(15% 0.0147 148.75)",
+          "oklch(26% 0.0147 148.75)",
+          "oklch(38% 0.0147 148.75)",
+          "oklch(49% 0.0147 148.75)",
+          "oklch(61% 0.0147 148.75)",
+          "oklch(72% 0.0147 148.75)",
+          "oklch(84% 0.0147 148.75)",
+          "oklch(95% 0.0147 148.75)"
+        ]
+      },
+      "pressed-ink": {
+        "role": "neutral",
+        "displayName": "选中浅字",
+        "tonalRamp": [
+          "oklch(15% 0.0146 110.88)",
+          "oklch(26% 0.0146 110.88)",
+          "oklch(38% 0.0146 110.88)",
+          "oklch(49% 0.0146 110.88)",
+          "oklch(61% 0.0146 110.88)",
+          "oklch(72% 0.0146 110.88)",
+          "oklch(84% 0.0146 110.88)",
+          "oklch(95% 0.0146 110.88)"
+        ]
+      },
+      "night-ink": {
+        "role": "neutral",
+        "displayName": "夜间灰白文字",
+        "tonalRamp": [
+          "oklch(15% 0.0177 140.02)",
+          "oklch(26% 0.0177 140.02)",
+          "oklch(38% 0.0177 140.02)",
+          "oklch(49% 0.0177 140.02)",
+          "oklch(61% 0.0177 140.02)",
+          "oklch(72% 0.0177 140.02)",
+          "oklch(84% 0.0177 140.02)",
+          "oklch(95% 0.0177 140.02)"
+        ]
+      },
+      "night-muted": {
+        "role": "neutral",
+        "displayName": "夜间浅灰说明",
+        "tonalRamp": [
+          "oklch(15% 0.0189 161.01)",
+          "oklch(26% 0.0189 161.01)",
+          "oklch(38% 0.0189 161.01)",
+          "oklch(49% 0.0189 161.01)",
+          "oklch(61% 0.0189 161.01)",
+          "oklch(72% 0.0189 161.01)",
+          "oklch(84% 0.0189 161.01)",
+          "oklch(95% 0.0189 161.01)"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "夜间墨绿控制面",
+        "tonalRamp": [
+          "oklch(15% 0.0224 177.57)",
+          "oklch(26% 0.0224 177.57)",
+          "oklch(38% 0.0224 177.57)",
+          "oklch(49% 0.0224 177.57)",
+          "oklch(61% 0.0224 177.57)",
+          "oklch(72% 0.0224 177.57)",
+          "oklch(84% 0.0224 177.57)",
+          "oklch(95% 0.0224 177.57)"
+        ]
+      },
+      "night-line": {
+        "role": "neutral",
+        "displayName": "夜间灰绿边线",
+        "tonalRamp": [
+          "oklch(15% 0.0253 163.90)",
+          "oklch(26% 0.0253 163.90)",
+          "oklch(38% 0.0253 163.90)",
+          "oklch(49% 0.0253 163.90)",
+          "oklch(61% 0.0253 163.90)",
+          "oklch(72% 0.0253 163.90)",
+          "oklch(84% 0.0253 163.90)",
+          "oklch(95% 0.0253 163.90)"
+        ]
+      },
+      "night-accent": {
+        "role": "primary",
+        "displayName": "夜间苔灰绿",
+        "tonalRamp": [
+          "oklch(15% 0.0406 131.13)",
+          "oklch(26% 0.0406 131.13)",
+          "oklch(38% 0.0406 131.13)",
+          "oklch(49% 0.0406 131.13)",
+          "oklch(61% 0.0406 131.13)",
+          "oklch(72% 0.0406 131.13)",
+          "oklch(84% 0.0406 131.13)",
+          "oklch(95% 0.0406 131.13)"
+        ]
+      },
+      "night-pressed-ink": {
+        "role": "neutral",
+        "displayName": "夜间选中深字",
+        "tonalRamp": [
+          "oklch(15% 0.0318 169.14)",
+          "oklch(26% 0.0318 169.14)",
+          "oklch(38% 0.0318 169.14)",
+          "oklch(49% 0.0318 169.14)",
+          "oklch(61% 0.0318 169.14)",
+          "oklch(72% 0.0318 169.14)",
+          "oklch(84% 0.0318 169.14)",
+          "oklch(95% 0.0318 169.14)"
+        ]
+      },
+      "wood": {
+        "role": "secondary",
+        "displayName": "粗木构材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0387 69.82)",
+          "oklch(26% 0.0387 69.82)",
+          "oklch(38% 0.0387 69.82)",
+          "oklch(49% 0.0387 69.82)",
+          "oklch(61% 0.0387 69.82)",
+          "oklch(72% 0.0387 69.82)",
+          "oklch(84% 0.0387 69.82)",
+          "oklch(95% 0.0387 69.82)"
+        ]
+      },
+      "dark-wood": {
+        "role": "secondary",
+        "displayName": "程序陈设木材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0404 68.44)",
+          "oklch(26% 0.0404 68.44)",
+          "oklch(38% 0.0404 68.44)",
+          "oklch(49% 0.0404 68.44)",
+          "oklch(61% 0.0404 68.44)",
+          "oklch(72% 0.0404 68.44)",
+          "oklch(84% 0.0404 68.44)",
+          "oklch(95% 0.0404 68.44)"
+        ]
+      },
+      "plaster": {
+        "role": "neutral",
+        "displayName": "粉墙材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0260 92.40)",
+          "oklch(26% 0.0260 92.40)",
+          "oklch(38% 0.0260 92.40)",
+          "oklch(49% 0.0260 92.40)",
+          "oklch(61% 0.0260 92.40)",
+          "oklch(72% 0.0260 92.40)",
+          "oklch(84% 0.0260 92.40)",
+          "oklch(95% 0.0260 92.40)"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "湿石材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0136 156.84)",
+          "oklch(26% 0.0136 156.84)",
+          "oklch(38% 0.0136 156.84)",
+          "oklch(49% 0.0136 156.84)",
+          "oklch(61% 0.0136 156.84)",
+          "oklch(72% 0.0136 156.84)",
+          "oklch(84% 0.0136 156.84)",
+          "oklch(95% 0.0136 156.84)"
+        ]
+      },
+      "tile": {
+        "role": "neutral",
+        "displayName": "扫描瓦材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0238 128.79)",
+          "oklch(26% 0.0238 128.79)",
+          "oklch(38% 0.0238 128.79)",
+          "oklch(49% 0.0238 128.79)",
+          "oklch(61% 0.0238 128.79)",
+          "oklch(72% 0.0238 128.79)",
+          "oklch(84% 0.0238 128.79)",
+          "oklch(95% 0.0238 128.79)"
+        ]
+      },
+      "lamp": {
+        "role": "secondary",
+        "displayName": "灯纸暖色",
+        "tonalRamp": [
+          "oklch(15% 0.0725 81.04)",
+          "oklch(26% 0.0725 81.04)",
+          "oklch(38% 0.0725 81.04)",
+          "oklch(49% 0.0725 81.04)",
+          "oklch(61% 0.0725 81.04)",
+          "oklch(72% 0.0725 81.04)",
+          "oklch(84% 0.0725 81.04)",
+          "oklch(95% 0.0725 81.04)"
+        ]
+      },
+      "lamp-emission": {
+        "role": "secondary",
+        "displayName": "灯火暖光",
+        "tonalRamp": [
+          "oklch(15% 0.1483 68.18)",
+          "oklch(26% 0.1483 68.18)",
+          "oklch(38% 0.1483 68.18)",
+          "oklch(49% 0.1483 68.18)",
+          "oklch(61% 0.1483 68.18)",
+          "oklch(72% 0.1483 68.18)",
+          "oklch(84% 0.1483 68.18)",
+          "oklch(95% 0.1483 68.18)"
+        ]
+      },
+      "rock": {
+        "role": "neutral",
+        "displayName": "湖石材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0226 98.21)",
+          "oklch(26% 0.0226 98.21)",
+          "oklch(38% 0.0226 98.21)",
+          "oklch(49% 0.0226 98.21)",
+          "oklch(61% 0.0226 98.21)",
+          "oklch(72% 0.0226 98.21)",
+          "oklch(84% 0.0226 98.21)",
+          "oklch(95% 0.0226 98.21)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "书页纹理底色",
+        "tonalRamp": [
+          "oklch(15% 0.0422 90.27)",
+          "oklch(26% 0.0422 90.27)",
+          "oklch(38% 0.0422 90.27)",
+          "oklch(49% 0.0422 90.27)",
+          "oklch(61% 0.0422 90.27)",
+          "oklch(72% 0.0422 90.27)",
+          "oklch(84% 0.0422 90.27)",
+          "oklch(95% 0.0422 90.27)"
+        ]
+      },
+      "linen": {
+        "role": "neutral",
+        "displayName": "麻布材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0391 83.82)",
+          "oklch(26% 0.0391 83.82)",
+          "oklch(38% 0.0391 83.82)",
+          "oklch(49% 0.0391 83.82)",
+          "oklch(61% 0.0391 83.82)",
+          "oklch(72% 0.0391 83.82)",
+          "oklch(84% 0.0391 83.82)",
+          "oklch(95% 0.0391 83.82)"
+        ]
+      },
+      "woven": {
+        "role": "secondary",
+        "displayName": "编织座面纹理底色",
+        "tonalRamp": [
+          "oklch(15% 0.0383 77.18)",
+          "oklch(26% 0.0383 77.18)",
+          "oklch(38% 0.0383 77.18)",
+          "oklch(49% 0.0383 77.18)",
+          "oklch(61% 0.0383 77.18)",
+          "oklch(72% 0.0383 77.18)",
+          "oklch(84% 0.0383 77.18)",
+          "oklch(95% 0.0383 77.18)"
+        ]
+      },
+      "bark": {
+        "role": "secondary",
+        "displayName": "树皮材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0223 87.56)",
+          "oklch(26% 0.0223 87.56)",
+          "oklch(38% 0.0223 87.56)",
+          "oklch(49% 0.0223 87.56)",
+          "oklch(61% 0.0223 87.56)",
+          "oklch(72% 0.0223 87.56)",
+          "oklch(84% 0.0223 87.56)",
+          "oklch(95% 0.0223 87.56)"
+        ]
+      },
+      "scene-day-background": {
+        "role": "neutral",
+        "displayName": "场景日间雾色",
+        "tonalRamp": [
+          "oklch(15% 0.0145 155.54)",
+          "oklch(26% 0.0145 155.54)",
+          "oklch(38% 0.0145 155.54)",
+          "oklch(49% 0.0145 155.54)",
+          "oklch(61% 0.0145 155.54)",
+          "oklch(72% 0.0145 155.54)",
+          "oklch(84% 0.0145 155.54)",
+          "oklch(95% 0.0145 155.54)"
+        ]
+      },
+      "scene-night-background": {
+        "role": "neutral",
+        "displayName": "场景夜间雾色",
+        "tonalRamp": [
+          "oklch(15% 0.0438 248.44)",
+          "oklch(26% 0.0438 248.44)",
+          "oklch(38% 0.0438 248.44)",
+          "oklch(49% 0.0438 248.44)",
+          "oklch(61% 0.0438 248.44)",
+          "oklch(72% 0.0438 248.44)",
+          "oklch(84% 0.0438 248.44)",
+          "oklch(95% 0.0438 248.44)"
+        ]
+      },
+      "bed-curtain": {
+        "role": "neutral",
+        "displayName": "原色麻布床帘乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0345 80.29)",
+          "oklch(26% 0.0345 80.29)",
+          "oklch(38% 0.0345 80.29)",
+          "oklch(49% 0.0345 80.29)",
+          "oklch(61% 0.0345 80.29)",
+          "oklch(72% 0.0345 80.29)",
+          "oklch(84% 0.0345 80.29)",
+          "oklch(95% 0.0345 80.29)"
+        ]
+      },
+      "quilt": {
+        "role": "neutral",
+        "displayName": "蓝亚麻被褥乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0107 145.47)",
+          "oklch(26% 0.0107 145.47)",
+          "oklch(38% 0.0107 145.47)",
+          "oklch(49% 0.0107 145.47)",
+          "oklch(61% 0.0107 145.47)",
+          "oklch(72% 0.0107 145.47)",
+          "oklch(84% 0.0107 145.47)",
+          "oklch(95% 0.0107 145.47)"
+        ]
+      },
+      "brick": {
+        "role": "neutral",
+        "displayName": "扫描砖材质乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0184 137.05)",
+          "oklch(26% 0.0184 137.05)",
+          "oklch(38% 0.0184 137.05)",
+          "oklch(49% 0.0184 137.05)",
+          "oklch(61% 0.0184 137.05)",
+          "oklch(72% 0.0184 137.05)",
+          "oklch(84% 0.0184 137.05)",
+          "oklch(95% 0.0184 137.05)"
+        ]
+      },
+      "wet-wood": {
+        "role": "secondary",
+        "displayName": "风化曲廊木板乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0355 86.31)",
+          "oklch(26% 0.0355 86.31)",
+          "oklch(38% 0.0355 86.31)",
+          "oklch(49% 0.0355 86.31)",
+          "oklch(61% 0.0355 86.31)",
+          "oklch(72% 0.0355 86.31)",
+          "oklch(84% 0.0355 86.31)",
+          "oklch(95% 0.0355 86.31)"
+        ]
+      },
+      "earth": {
+        "role": "secondary",
+        "displayName": "森林地表乘色",
+        "tonalRamp": [
+          "oklch(15% 0.0588 134.20)",
+          "oklch(26% 0.0588 134.20)",
+          "oklch(38% 0.0588 134.20)",
+          "oklch(49% 0.0588 134.20)",
+          "oklch(61% 0.0588 134.20)",
+          "oklch(72% 0.0588 134.20)",
+          "oklch(84% 0.0588 134.20)",
+          "oklch(95% 0.0588 134.20)"
+        ]
+      },
+      "ceramic": {
+        "role": "secondary",
+        "displayName": "釉陶瓷纹理底色",
+        "tonalRamp": [
+          "oklch(15% 0.0393 142.80)",
+          "oklch(26% 0.0393 142.80)",
+          "oklch(38% 0.0393 142.80)",
+          "oklch(49% 0.0393 142.80)",
+          "oklch(61% 0.0393 142.80)",
+          "oklch(72% 0.0393 142.80)",
+          "oklch(84% 0.0393 142.80)",
+          "oklch(95% 0.0393 142.80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "作品标题",
+        "purpose": "页头名称。"
+      },
+      "headline": {
+        "displayName": "场所标题",
+        "purpose": "画布上的当前空间名。"
+      },
+      "destination": {
+        "displayName": "地点名称",
+        "purpose": "移步换景入口。"
+      },
+      "body": {
+        "displayName": "操作正文",
+        "purpose": "帮助说明。"
+      },
+      "label": {
+        "displayName": "副注",
+        "purpose": "地点与天气说明。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "visit-panel",
+        "value": "0 8px 25px #243e3824",
+        "purpose": "去处面板。"
+      },
+      {
+        "name": "help-panel",
+        "value": "0 10px 35px #142a3d35",
+        "purpose": "帮助面板。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "loading-turn",
+        "value": "2s linear infinite",
+        "purpose": "加载环旋转；prefers-reduced-motion 时停止。"
+      },
+      {
+        "name": "orbit-damping",
+        "value": ".065",
+        "purpose": "OrbitControls 的阻尼系数。"
+      },
+      {
+        "name": "day-smoothing",
+        "value": "1 - exp(-dt * 1.4)",
+        "purpose": "连续光照趋近目标时辰。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "普通控制按钮",
+      "kind": "button",
+      "refersTo": "button-plain",
+      "description": "复位与操作等普通动作。",
+      "html": "<button class=\"ds-button\">回到初景</button>",
+      "css": ".ds-button{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);font-size:13px;border:1px solid transparent;background:transparent;padding:10px 16px;border-radius:5px;cursor:pointer}.ds-button:hover{background:#315f5010}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "选中控制按钮",
+      "kind": "button",
+      "refersTo": "button-selected",
+      "description": "当前日景或视角。",
+      "html": "<button class=\"ds-button\" aria-pressed=\"true\">日景</button>",
+      "css": ".ds-button{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);font-size:13px;border:1px solid transparent;padding:10px 16px;border-radius:5px;cursor:pointer}.ds-button[aria-pressed=\"true\"]{background:var(--accent,#315f50);color:#f2f3e8}.ds-button:hover{background:#315f5010}.ds-button[aria-pressed=\"true\"]:hover{background:var(--accent,#315f50)}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "视角切换",
+      "kind": "nav",
+      "refersTo": "view-switch",
+      "description": "环绕与入园模式分组。",
+      "html": "<div class=\"ds-switch\" role=\"group\" aria-label=\"视角\"><button class=\"ds-button\" aria-pressed=\"true\">环绕园林</button><button class=\"ds-button\" aria-pressed=\"false\">入园漫游</button></div>",
+      "css": ".ds-switch{display:flex;gap:4px;background:#a6b6aa29;padding:4px;border-radius:7px;width:fit-content}.ds-button{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);font-size:13px;border:1px solid transparent;background:transparent;padding:10px 16px;border-radius:5px;min-height:38px;cursor:pointer}.ds-button:hover{background:#315f5010}.ds-button[aria-pressed=\"true\"]{background:var(--accent,#315f50);color:#f2f3e8}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "移步换景面板",
+      "kind": "card",
+      "refersTo": "visit-panel",
+      "description": "地点名、副注与 SVG 折叠箭头组成的室内入口。",
+      "html": "<aside class=\"ds-visit\"><button class=\"ds-toggle\" aria-expanded=\"true\">移步换景 <svg class=\"ds-chevron\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 6l5 5 5-5\"/></svg></button><nav class=\"ds-destinations\"><button class=\"ds-destination\"><span class=\"ds-destination-name\">待客堂屋</span><small class=\"ds-destination-note\">明间 · 梁柱露明</small></button><button class=\"ds-destination\"><span class=\"ds-destination-name\">听雨书房</span><small class=\"ds-destination-note\">次间 · 案头清供</small></button></nav></aside>",
+      "css": ".ds-visit{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);width:195px;padding:18px 20px;background:#e9ede7ed;border-radius:8px;box-shadow:0 8px 25px #243e3824}.ds-toggle{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);font-size:15px;width:100%;background:transparent;border:1px solid transparent;padding:0 0 10px;text-align:left;cursor:pointer}.ds-chevron{float:right;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3;transform:rotate(180deg)}.ds-toggle[aria-expanded=\"false\"]{padding-bottom:0}.ds-toggle[aria-expanded=\"false\"] .ds-chevron{transform:none}.ds-destinations{display:flex;flex-direction:column;gap:3px}.ds-destination{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);background:transparent;border:1px solid transparent;padding:9px 0;text-align:left;display:flex;flex-direction:column;gap:5px;border-radius:0;min-height:51px;cursor:pointer}.ds-destination:hover{color:#1c7963}.ds-destination-name{font-size:16px}.ds-destination-note{font:11px system-ui,sans-serif;color:var(--muted,#52665f)}.ds-toggle:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "时辰滑杆",
+      "kind": "input",
+      "refersTo": "day-range",
+      "description": "连续日夜光照。",
+      "html": "<label class=\"ds-range-label\" for=\"ds-time\">光照时辰</label><input class=\"ds-range\" id=\"ds-time\" type=\"range\" min=\"0\" max=\"100\" value=\"100\">",
+      "css": ".ds-range-label{font:12px system-ui,sans-serif;color:var(--ink,#253e38);margin-right:8px}.ds-range{width:145px;accent-color:var(--accent,#315f50);cursor:pointer}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "木构揭顶选择",
+      "kind": "input",
+      "refersTo": "roof-control",
+      "description": "原生复选框配工具栏文字。",
+      "html": "<label class=\"ds-roof\"><input class=\"ds-checkbox\" type=\"checkbox\">揭顶看木构</label>",
+      "css": ".ds-roof{font:12px system-ui,sans-serif;display:flex;align-items:center;gap:7px;white-space:nowrap;color:var(--ink,#253e38)}.ds-checkbox{accent-color:var(--accent,#315f50)}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    },
+    {
+      "name": "操作帮助浮层",
+      "kind": "card",
+      "refersTo": "help-panel",
+      "description": "可滚动的游园方式说明。",
+      "html": "<aside class=\"ds-help\"><h2 class=\"ds-help-title\">游园方式</h2><p class=\"ds-help-copy\">漫游：WASD 或方向键移动，拖动画面转头；按 Shift 加快步伐，Esc 回到环绕。</p></aside>",
+      "css": ".ds-help{font-family:\"Noto Serif SC\",\"Songti SC\",\"STSong\",serif;color:var(--ink,#253e38);width:min(380px,calc(100% - 48px));padding:24px;background:var(--surface,#e9ede7);box-shadow:0 10px 35px #142a3d35;border-radius:8px;max-height:70vh;overflow:auto}.ds-help-title{font-size:20px;margin:0 0 15px;font-weight:500}.ds-help-copy{font:13px/1.9 system-ui,sans-serif;margin:0}"
+    },
+    {
+      "name": "触屏移动键",
+      "kind": "button",
+      "refersTo": "walk-control",
+      "description": "按住触发移动，以 held 标记状态。",
+      "html": "<button class=\"ds-touch\">前进</button><button class=\"ds-touch ds-held\">左移</button>",
+      "css": ".ds-touch{background:#e9ede7e8;border:1px solid #a6b6aa;font:12px system-ui,sans-serif;color:var(--ink,#253e38);min-height:43px;padding:9px;border-radius:5px;cursor:pointer}.ds-touch:hover{background:#315f5010}.ds-touch.ds-held{background:#315f50;color:#fff}.ds-button:focus-visible,.ds-destination:focus-visible,.ds-range:focus-visible,.ds-checkbox:focus-visible,.ds-touch:focus-visible{outline:2px solid var(--accent,#315f50);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "观察到入内",
+    "overview": "从环绕观察走向入园近看：浅灰绿界面围绕可漫游的实时三维园林，宋体标题承接中文游园文字，系统无衬线承担操纵说明。非对称池岸与曲廊连接三开间主屋，进入堂屋、书房、卧房后可近看梁柱、格扇和陈设。\n\n当前实现以实体几何、实拍 PBR 材质、阴天 HDRI 环境、软阴影、环境遮蔽、雨线、涟漪和低雾建立空间。木构使用 Rough Wood，其余程序陈设木件使用 Wood Table 001；主要椅子与桌案使用 CC0 Chinese Armchair / Chinese Tea Table 的完整模型及 2K PBR 材质；墙、石、瓦、砖、曲廊木板、地表和麻布均有实际授权扫描材质。床帘与枕使用重染为原色的麻布，帘形由重力、距离弹簧、顶部悬挂与束带约束计算后静态缓存；被褥在重力、床垫接触及横向摩擦、双向剪切与弯曲约束下松弛，填棉平滑后生成闭合体积，保留蓝亚麻织纹；挂轴采用大都会博物馆开放的文徵明公版画作。\n\n乔木使用 CC0 Tree Small 02 的真实几何和材质，蕨类使用 CC0 Fern 02 四种几何，按比例、朝向和位置组成原创造景；林下与池岸地被连成片，以四株中层小树和 CC0 Shrub 04 实例连接蕨床与树冠，并配合起伏地表。竹丛、藤、荷叶、建筑、其余陈设和织物体积由源码构建；模型原始几何与 UV 保留。近景陈设包括授权木椅与桌案、线装书、香炉、闭合被褥、软矩形枕与不透明麻布床帘。写实、宋明江南与电影感是方向要求，本文不宣称已经达到照片或电影制作水准；具体品质与验收结论由 docs/QUALITY.md 记录。",
+    "keyCharacteristics": [
+      "浅灰绿日间界面与墨绿夜间界面。",
+      "宋体空间名称搭配系统无衬线操纵文字。",
+      "可进入的三开间木构与非对称临水曲廊。",
+      "近距离观察、连续日夜光照与持续细雨。"
+    ],
+    "rules": [
+      {
+        "name": "近看承托",
+        "body": "木构的层次应能在入内与揭顶视角中被观察；空间说明必须对应实际几何。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 以可进入的几何空间支撑环绕和漫游两种观察方式。",
+      "Do 保持柱、梁、承檩短柱、檩和椽之间可观察的承托关系。",
+      "Do 同步昼夜文字、控制面与场景光照，保留键盘焦点。",
+      "Do 标明照片贴图来源，并把程序生成的材质如实记为程序生成。",
+      "Do 从 src/ 修改并构建独立 demo，详细说明放在 docs/。"
+    ],
+    "donts": [
+      "Don’t 以静态效果图替代可进入的建筑。",
+      "Don’t 给粉墙贴上不参与开口的假窗；现有窗洞和格扇由几何构成。",
+      "Don’t 用界面装饰遮挡近距离木构观察。",
+      "Don’t 将 PBR、照片贴图或后处理本身等同于已实现电影级写实。"
+    ]
+  }
+}

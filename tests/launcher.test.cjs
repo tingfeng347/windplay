@@ -38,5 +38,5 @@ test('启动台可以通过文件协议完整加载', async () => {
  assert.doesNotMatch(homepage,/tingfeng-reel|Tingfeng Reel/);
  assert.match(homepage,/works\/mario-world\/demo\/index.html/);
  await access(path.join(root,'works/tingfeng-reel/src/index.html'));
- assert.equal((homepage.match(/class="work-card /g)||[]).length,10);
+ assert.equal((homepage.match(/class="work-card /g)||[]).length,12);
  });
