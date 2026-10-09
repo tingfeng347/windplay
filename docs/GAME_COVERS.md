@@ -34,7 +34,7 @@
 | 临界行动 | `assets/screenshots/strike-arena.jpg` |
 | 方块旷野 | `assets/screenshots/voxel-frontier.png` |
 | 余烬荒野 | `assets/screenshots/ember-wilds.png` |
-| 点云图像 | `assets/screenshots/point-cloud-studio.png` |
+| 点云照片 | `assets/screenshots/point-cloud-studio.png` |
 | 超级马里奥 | `assets/screenshots/mario-world.png` |
 
 启动台截图保存在 `assets/screenshots/launcher.jpg`，手机端保存在 `assets/screenshots/launcher-mobile.jpg`。

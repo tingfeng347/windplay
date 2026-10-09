@@ -1,4 +1,4 @@
-# 点云图像
+# 点云照片
 
 > WindPlay 作品：`works/point-cloud-studio`
 

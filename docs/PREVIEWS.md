@@ -14,7 +14,7 @@
 | [临界行动 · Strike Arena](../works/strike-arena/) | 3D 第一人称枪战 | [直接打开成品](https://tingfeng347.github.io/windplay/works/strike-arena/demo/index.html) | 原创工业园战场，包含步枪/手枪、瞄准换弹、手雷、战术敌人、击杀目标与结算 |
 | [方块旷野 · Voxel Frontier](../works/voxel-frontier/) | 第一人称方块沙盒 | [直接打开成品](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) | 我的世界玩法启发的原创方块世界，支持采集、建造、制作、创造/生存模式与本地存档 |
 | [余烬荒野 · Ember Wilds](../works/ember-wilds/) | 手绘荒野生存 | [直接打开成品](https://tingfeng347.github.io/windplay/works/ember-wilds/demo/index.html) | 饥荒玩法启发的原创生存游戏，包含采集、制作、营火、烹饪、昼夜、敌人与生命/饥饿/精神状态 |
-| [点云图像](../works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
+| [点云照片](../works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
 | [超级马里奥 · 像素冒险](../works/mario-world/) | 像素平台冒险 | [直接打开成品](../works/mario-world/demo/index.html) | FC 初代玩法重制：8 个世界 32 关，跳跃、踩怪、蘑菇、火球、水下与城堡，支持触屏与进度保存 |
 
 ## 截图
@@ -51,9 +51,9 @@
 
 [![余烬荒野：手绘荒野生存，包含营火、昼夜与战斗](../assets/screenshots/ember-wilds.png)](../works/ember-wilds/demo/index.html)
 
-### [点云图像](../works/point-cloud-studio/)
+### [点云照片](../works/point-cloud-studio/)
 
-[![点云图像：把照片转成彩色点阵与三维点云](../assets/screenshots/point-cloud-studio.png)](../works/point-cloud-studio/demo/index.html)
+[![点云照片：把照片转成彩色点阵与三维点云](../assets/screenshots/point-cloud-studio.png)](../works/point-cloud-studio/demo/index.html)
 
 ### [超级马里奥 · 像素冒险](../works/mario-world/)
 

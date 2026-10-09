@@ -22,7 +22,7 @@
 | [临界行动 · Strike Arena](works/strike-arena/) | 3D 第一人称枪战 | [打开](https://tingfeng347.github.io/windplay/works/strike-arena/demo/index.html) |
 | [方块旷野 · Voxel Frontier](works/voxel-frontier/) | 方块沙盒 | [打开](https://tingfeng347.github.io/windplay/works/voxel-frontier/demo/index.html) |
 | [余烬荒野 · Ember Wilds](works/ember-wilds/) | 荒野生存 | [打开](https://tingfeng347.github.io/windplay/works/ember-wilds/demo/index.html) |
-| [点云图像](works/point-cloud-studio/) | 点云人像工具 | [打开](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) |
+| [点云照片](works/point-cloud-studio/) | 点云人像工具 | [打开](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) |
 | [超级马里奥 · 像素冒险](works/mario-world/) | 32 关像素平台冒险 | [打开](https://tingfeng347.github.io/windplay/works/mario-world/demo/index.html) |
 
 ## 开发

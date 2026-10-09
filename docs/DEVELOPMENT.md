@@ -27,7 +27,7 @@ npm run dev --workspace @windplay/point-cloud-studio
 | 临界行动 | `npm run dev:shooter` |
 | 方块旷野 | `npm run dev:voxel` |
 | 余烬荒野 | `npm run dev:survival` |
-| 点云图像 | `npm run dev:point-cloud` |
+| 点云照片 | `npm run dev:point-cloud` |
 | 超级马里奥 | `npm run dev:mario` |
 | Tingfeng Reel（已隐藏） | `npm run dev:reel` |
 
