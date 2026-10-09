@@ -34,8 +34,8 @@
 | 临界行动 | `assets/screenshots/strike-arena.jpg` |
 | 方块旷野 | `assets/screenshots/voxel-frontier.png` |
 | 余烬荒野 | `assets/screenshots/ember-wilds.png` |
-| Point Cloud Studio | `assets/screenshots/point-cloud-studio.png` |
-| Tingfeng Reel | `assets/screenshots/tingfeng-reel.png` |
+| 点云图像 | `assets/screenshots/point-cloud-studio.png` |
+| 超级马里奥 | `assets/screenshots/mario-world.png` |
 
 启动台截图保存在 `assets/screenshots/launcher.jpg`，手机端保存在 `assets/screenshots/launcher-mobile.jpg`。
 首页布局变化时同步刷新这两张图片；作品界面变化时刷新对应截图，并确认 README 的图片链接与作品入口一致。
