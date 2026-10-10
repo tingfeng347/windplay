@@ -28,23 +28,84 @@ function crossesGate(a,b,g){
  return Math.hypot(dx,dy,dz)<g.radius;
 }
 function seeded(seed){return ()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};}
+const WORLD_BOUNDS={minX:-820,maxX:880,minZ:-300,maxZ:1880};
+const STREETS_X=[-720,-540,-360,-180,0,180,600,780],STREETS_Z=[-180,0,180,360,600,840,1080,1380,1680];
+const riverX=z=>390+Math.sin(z/240)*38;
+function groundAt(x,z){
+ const dx=Math.min(...STREETS_X.map(s=>Math.abs(x-s))),dz=Math.min(...STREETS_Z.map(s=>Math.abs(z-s)));
+ const river=Math.abs(x-riverX(z))<30,road=dx<12||dz<12;
+ if(river&&dz>=12)return {kind:'water',stripe:false};
+ if(road){const along=dx<dz?z:x;return {kind:river?'bridge':'road',stripe:(Math.min(dx,dz)<.55&&Math.floor(along/6)%3!==0),crosswalk:(dx<10&&dz>15&&dz<21)||(dz<10&&dx>15&&dx<21)};}
+ if(x>-170&&x<-20&&z>610&&z<830)return {kind:'park',stripe:false};
+ return {kind:dx<17||dz<17?'pavement':'grass',stripe:false};
+}
 function city(){
  const random=seeded(8419),objects=[];
- for(let bx=-5;bx<=5;bx++)for(let bz=-3;bz<=14;bz++){
-  for(const side of [-1,1]){
-   const height=18+random()*68;
-   objects.push({kind:'building',x:bx*120+side*(30+random()*5),y:height/2,z:bz*120+32,xSize:25+random()*9,ySize:height,zSize:42,shade:Math.floor(random()*3)});
-   const h2=16+random()*42;
-   objects.push({kind:'building',x:bx*120+side*35,y:h2/2,z:bz*120+83,xSize:32,ySize:h2,zSize:31,shade:Math.floor(random()*3)});
-  }
-  for(const x of [-13,13]) for(const z of [22,70,96]) objects.push({kind:'tree',x:bx*120+x,y:5,z:bz*120+z,xSize:5,ySize:10,zSize:5});
+ const box=(x,y,z,xSize,ySize,zSize,extra={})=>objects.push({kind:'building',x,y,z,xSize,ySize,zSize,shade:0,...extra});
+ function tree(x,z,height=9){
+  if(groundAt(x,z).kind==='water')return;
+  box(x,height*.24,z,1.1,height*.48,1.1,{kind:'tree',foliage:false});
+  box(x,height*.68,z,5.5,height*.65,5.5,{kind:'tree',foliage:true,shade:Math.floor(random()*3)});
+  box(x+.8,height*.94,z-.6,3.5,height*.34,3.5,{kind:'tree',foliage:true,shade:Math.floor(random()*3)});
  }
+ function building(x,z,width,depth,district){
+  if(Math.abs(x-riverX(z))<width/2+40)return;
+  const industrial=district==='industrial',tall=district==='downtown';
+  const height=industrial?15+random()*19:tall?48+random()*85:14+random()*30;
+  const shade=industrial?3:tall?Math.floor(random()*2):2+Math.floor(random()*2);
+  box(x,height/2,z,width,height,depth,{district,shade,windowStep:industrial?8:tall?4:5,windows:true});
+  if(tall){
+   const crown=6+random()*14;
+   box(x,height+crown/2,z,width*.65,crown,depth*.62,{district,shade,windows:true,windowStep:4});
+   if(random()>.6)box(x,height+crown+7,z,1.1,14,1.1,{district,shade:4,windows:false});
+  }else{
+   box(x+width*.18,height+1.7,z-depth*.15,width*.26,3.4,depth*.28,{district,shade:4,windows:false});
+   if(industrial)box(x-width*.28,height+9,z+depth*.2,3,18,3,{district,shade:3,windows:false});
+  }
+ }
+ for(let ix=0;ix<STREETS_X.length-1;ix++)for(let iz=0;iz<STREETS_Z.length-1;iz++){
+  const left=STREETS_X[ix],right=STREETS_X[ix+1],front=STREETS_Z[iz],back=STREETS_Z[iz+1];
+  const park=left===-180&&front===600;
+  const district=front>=1080?'industrial':left>=0&&left<600&&front<600?'downtown':'residential';
+  if(park){for(let n=0;n<19;n++)tree(left+28+random()*110,front+30+random()*170,7+random()*11);continue;}
+  const slots=Math.max(1,Math.floor((right-left-40)/58));
+  for(let n=0;n<slots;n++)for(const z of [front+40,back-40]){
+   const x=left+28+(n+.5)*(right-left-56)/slots;
+   building(x,z,28+random()*17,29+random()*14,district);
+  }
+  for(let z=front+100;z<back-60;z+=65)for(const x of [left+40,right-40])building(x,z,30+random()*12,30+random()*16,district);
+  for(let z=front+28;z<back-22;z+=42)for(const x of [left+17,right-17])tree(x,z,6+random()*6);
+ }
+ // River crossings have a deck, parapets and paired piers; the air above remains open.
+ for(const z of [180,600,1080,1380]){
+  const x=riverX(z);
+  box(x,3,z,106,3,24,{district:'river',shade:4,windows:false});
+  for(const side of [-1,1]){
+   box(x,5.3,z+side*13,106,1.6,1.4,{district:'river',shade:4,windows:false});
+   box(x+side*36,1,z,4,4,20,{district:'river',shade:4,windows:false});
+  }
+ }
+ // Two covered passages and an industrial gantry create optional under/over flight choices.
+ for(const [x,z,height] of [[0,510,54],[180,720,68]]){
+  for(const side of [-1,1])box(x+side*28,height/2,z,4,height,7,{district:'downtown',shade:4,windows:false});
+  box(x,height,z,60,5,10,{district:'downtown',shade:1,windows:true,windowStep:4});
+ }
+ for(const x of [-480,-240]){
+  for(const side of [-1,1])box(x+side*20,23,1260,3,46,5,{district:'industrial',shade:5,windows:false});
+  box(x,47,1260,46,3,6,{district:'industrial',shade:5,windows:false});
+  box(x+8,38,1260,1,18,1,{district:'industrial',shade:4,windows:false});
+ }
+ // A narrow clock tower and stepped plaza pavilion break up the low western skyline.
+ box(-270,27,450,15,54,15,{district:'landmark',shade:2,windows:true,windowStep:9});
+ box(-270,58,450,23,8,23,{district:'landmark',shade:4,windows:false});
+ for(let level=0;level<3;level++)box(-95,3+level*4,720,46-level*11,4,34-level*8,{district:'park',shade:2,windows:false});
  return objects;
 }
 const ROUTES=[
- {name:'沿街初航',description:'沿主街穿过 8 道航门，熟悉俯仰与油门。',points:[[0,27,50],[0,33,155],[0,39,265],[0,27,380],[0,23,495],[0,35,620],[0,42,735],[0,28,850]]},
- {name:'街角转弯',description:'在十字路口向右转，再沿侧街向前。',points:[[0,27,50],[0,30,180],[0,30,300],[27,30,357],[85,30,360],[120,30,390],[120,27,480],[120,38,600]]},
- {name:'低空巡游',description:'高低交错的航门，穿梭两条长街。',points:[[0,18,50],[0,35,170],[0,22,300],[28,26,357],[90,26,360],[120,34,395],[120,18,500],[120,38,650],[120,20,810]]}
+ {name:'城市穿针',description:'穿过高楼街谷与两座空中连廊，低飞穿洞，再抬升越过屋顶。',points:[[0,27,50],[0,35,155],[0,42,280],[0,30,400],[0,26,510],[0,38,575],[35,44,600],[125,50,600],[180,48,645],[180,35,720],[180,55,820],[180,78,980]]},
+ {name:'滨河回环',description:'从商业区向东穿过河桥，沿对岸转弯，再越桥返回城市。',points:[[0,27,70],[0,36,280],[0,40,540],[35,38,600],[140,35,600],[290,26,600],[410,22,600],[560,30,600],[600,35,645],[600,45,820],[600,38,1015],[560,34,1080],[420,28,1080],[280,34,1080],[210,40,1080],[180,42,1120],[180,54,1290],[180,46,1510]]},
+ {name:'公园低空',description:'绕过钟楼与林地，沿西侧街道连续转弯，在树冠和屋顶之间巡游。',points:[[0,18,60],[0,30,300],[-35,30,360],[-145,28,360],[-180,32,410],[-180,30,555],[-180,24,730],[-180,38,805],[-220,40,840],[-320,34,840],[-360,26,880],[-360,24,1030],[-325,30,1080],[-220,32,1080],[-180,36,1130],[-180,45,1310]]},
+ {name:'工业远征',description:'长距离穿越仓库、烟囱和吊架，跨越三条街区，完成工业区折返。',points:[[0,30,90],[0,45,330],[0,30,510],[0,55,820],[0,62,1030],[-45,60,1080],[-170,55,1080],[-315,50,1080],[-360,45,1125],[-360,38,1300],[-405,55,1380],[-505,62,1380],[-540,55,1425],[-540,72,1615]]}
 ];
 function gates(route){let last={x:0,z:-50};return route.points.map(([x,y,z])=>{const length=Math.hypot(x-last.x,z-last.z),g={x,y,z,radius:12,nx:(x-last.x)/length,nz:(z-last.z)/length};last=g;return g;});}
-module.exports={LIMIT,TURN_RATE,CONTROL_RATE,clamp,createState,step,segmentBox,collision,crossesGate,seeded,city,ROUTES,gates};
+module.exports={LIMIT,TURN_RATE,CONTROL_RATE,WORLD_BOUNDS,STREETS_X,STREETS_Z,groundAt,clamp,createState,step,segmentBox,collision,crossesGate,seeded,city,ROUTES,gates};

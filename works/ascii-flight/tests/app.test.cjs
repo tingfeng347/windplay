@@ -28,3 +28,8 @@ test('slow frames preserve control rates instead of truncating elapsed flight ti
 test('paused frames keep the last picture without repeatedly tracing the city',()=>{
  const h=harness();h.elements.get('start').onclick();h.tick();h.tick();h.elements.get('pause').onclick();const count=h.draws;h.tick(100);h.tick(100);assert.equal(h.draws,count);
 });
+test('industrial route selection uses its own gate count and supports returning to free flight',()=>{
+ const h=harness();h.elements.get('route').value='3';h.elements.get('route').onchange();
+ assert.equal(h.elements.get('route-name').textContent,'工业远征');assert.equal(h.elements.get('gate-count').textContent,'航门 0 / 14');
+ h.elements.get('route').value='free';h.elements.get('route').onchange();assert.equal(h.elements.get('gate-count').textContent,'自由航线');
+});

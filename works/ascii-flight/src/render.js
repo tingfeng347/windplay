@@ -1,4 +1,5 @@
 // A CPU ray tracer writes only printable ASCII glyphs to a 2D canvas.
+import core from './core.cjs';
 export function basis(s){
  const cy=Math.cos(s.yaw),sy=Math.sin(s.yaw),cp=Math.cos(s.pitch),sp=Math.sin(s.pitch),cr=Math.cos(s.roll),sr=Math.sin(s.roll);
  return {f:[sy*cp,sp,cy*cp],r:[cy*cr+sy*sp*sr,-cp*sr,-sy*cr+cy*sp*sr],u:[cy*sr-sy*sp*cr,cp*cr,-sy*sr-cy*sp*cr]};
@@ -11,28 +12,41 @@ function rayBox(o,d,b){
   let a=(min-o[i])/v,c=(max-o[i])/v;if(a>c){const swap=a;a=c;c=swap;}if(a>near){near=a;axis=i;}far=Math.min(far,c);if(near>far)return null;
  }return near>0?{t:near,axis}:null;
 }
-const colors={building:['#6b9ca5','#a3a9b8','#c5aa7c'],window:'#f0cb89',tree:'#6eaa6e',trunk:'#a68c6a',road:'#7c8396',line:'#c5c1b0',grass:'#426949',gate:'#f5bb55',dim:'#9a7041'};
+const colors={building:['#6b9ca5','#a3a9b8','#c5aa7c','#aa7864','#82929c','#dab05d'],window:'#f0cb89',tree:['#6eaa6e','#83ad65','#4f947d'],trunk:'#a68c6a',road:'#7c8396',line:'#c5c1b0',grass:'#426949',water:'#437e9c',pavement:'#99958a',gate:'#f5bb55',dim:'#9a7041'};
 export function render(canvas,s,world,gates,active){
  const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,cell=9,line=14,cols=Math.floor(w/cell),rows=Math.floor(h/line),b=basis(s),o=[s.x,s.y,s.z],focal=cols*.68;
  for(const obj of world)if(!obj.bounds)obj.bounds=[obj.x-obj.xSize/2,obj.x+obj.xSize/2,obj.y-obj.ySize/2,obj.y+obj.ySize/2,obj.z-obj.zSize/2,obj.z+obj.zSize/2];
  const near=world.filter(o=>{const dx=o.x-s.x,dz=o.z-s.z;return dx*dx+dz*dz<330*330&&(dx*b.f[0]+dz*b.f[2]>-80);}),buffer=new Array(cols*rows),depth=new Float32Array(cols*rows).fill(600);
+ // Project conservative box bounds once, so each character column traces only its own buildings.
+ const columns=Array.from({length:cols},()=>[]);
+ for(const obj of near){
+  let left=Infinity,right=-Infinity,minZ=Infinity,maxZ=-Infinity;
+  for(const x of [obj.bounds[0],obj.bounds[1]])for(const y of [obj.bounds[2],obj.bounds[3]])for(const z of [obj.bounds[4],obj.bounds[5]]){
+   const p=[x-s.x,y-s.y,z-s.z],forward=p.reduce((n,v,i)=>n+v*b.f[i],0);
+   minZ=Math.min(minZ,forward);maxZ=Math.max(maxZ,forward);
+   if(forward>0){const screen=cols/2+p.reduce((n,v,i)=>n+v*b.r[i],0)*focal/forward;left=Math.min(left,screen);right=Math.max(right,screen);}
+  }
+  if(maxZ<=0)continue;
+  if(minZ<=.01){left=0;right=cols-1;}
+  for(let x=Math.max(0,Math.floor(left)-1);x<=Math.min(cols-1,Math.ceil(right)+1);x++)columns[x].push(obj);
+ }
  ctx.fillStyle='#000';ctx.fillRect(0,0,w,h);ctx.font='12px "Courier New",monospace';ctx.textBaseline='top';
  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
   const vx=(x-cols/2)/focal,vy=-(y-rows/2)*line/cell/focal,d=[0,1,2].map(i=>b.f[i]+b.r[i]*vx+b.u[i]*vy);let t=600,hit=null;
   if(d[1]<-0.0001){const ground=-s.y/d[1];if(ground<600){t=ground;hit={kind:'ground'};}}
-  for(const obj of near){const r=rayBox(o,d,obj);if(r&&r.t<t){t=r.t;hit={...obj,axis:r.axis};}}
+  for(const obj of columns[x]){const r=rayBox(o,d,obj);if(r&&r.t<t){t=r.t;hit={...obj,axis:r.axis};}}
   if(!hit)continue;
   const px=s.x+d[0]*t,py=s.y+d[1]*t,pz=s.z+d[2]*t;let char,color;
   if(hit.kind==='ground'){
-   const ax=Math.abs(((px+60)%120+120)%120-60),az=Math.abs(((pz+60)%120+120)%120-60),road=ax<10||az<10;
-   const stripe=(ax<.45||az<.45)&&Math.floor((ax<.45?pz:px)/5)%3!==0;
-   char=road?(stripe?'=':'.'):', ';char=char[0];color=road?(stripe?colors.line:colors.road):colors.grass;
+   const surface=core.groundAt(px,pz);
+   if(surface.kind==='water'){char=Math.floor(px+pz*.3)%4===0?'~':'-';color=colors.water;}
+   else if(surface.kind==='road'||surface.kind==='bridge'){char=surface.crosswalk?'|':surface.stripe?'=':'.';color=surface.stripe||surface.crosswalk?colors.line:colors.road;}
+   else if(surface.kind==='pavement'){char=':';color=colors.pavement;}
+   else{char=surface.kind==='park'?'`':',';color=colors.grass;}
   }else if(hit.kind==='tree'){
-   const leaf=py>3&&Math.abs(px-hit.x)+Math.abs(pz-hit.z)<5;
-   if(!leaf&&py>3)continue;
-   char=py<3?'|':('*+&'[Math.abs(Math.floor(px*2+pz*3+py))%3]);color=py<3?colors.trunk:colors.tree;
+   char=hit.foliage?('*+&'[Math.abs(Math.floor(px*2+pz*3+py))%3]):'|';color=hit.foliage?colors.tree[hit.shade]:colors.trunk;
   }else{
-   const window=hit.axis!==1&&((py%5+5)%5)>1.6&&((py%5+5)%5)<3.5&&(((hit.axis===0?pz:px)%5+5)%5)>1.4;
+   const spacing=hit.windowStep||5,window=hit.windows!==false&&hit.axis!==1&&((py%spacing+spacing)%spacing)>spacing*.3&&((py%spacing+spacing)%spacing)<spacing*.7&&(((hit.axis===0?pz:px)%spacing+spacing)%spacing)>spacing*.3;
    char=window?'H':hit.axis===1?'=':(Math.floor(py)%5===0?'-':'#');color=window?colors.window:colors.building[hit.shade];
   }
   const index=y*cols+x;buffer[index]={char,color,alpha:Math.max(.23,1-t/450)};depth[index]=t;

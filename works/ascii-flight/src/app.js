@@ -1,9 +1,9 @@
 import core from './core.cjs';
 import {render} from './render.js';
-const {createState,step,collision,crossesGate,city,ROUTES,gates}=core;
-const preview=new URLSearchParams(location.search).has('preview');
+const {createState,step,collision,crossesGate,city,ROUTES,gates,WORLD_BOUNDS}=core;
+const parameters=new URLSearchParams(location.search),preview=parameters.has('preview');
 document.body.classList.toggle('preview',preview);
-const $=id=>document.getElementById(id),canvas=$('view'),world=city(),input={},storeKey='windplay-ascii-flight-best';
+const $=id=>document.getElementById(id),canvas=$('view'),world=city(),input={},storeKey='windplay-ascii-flight-best-city-v2';
 let state=createState(),routeIndex=0,routeGates=gates(ROUTES[0]),last=0,drawLast=0,noticeUntil=0,drawDirty=true;
 function fit(){const rect=canvas.getBoundingClientRect(),scale=Math.min(1,1440/rect.width);canvas.width=preview?1280:Math.max(360,Math.round(rect.width*scale));canvas.height=preview?Math.round(1280*rect.height/Math.max(1,rect.width)):Math.round(rect.height*scale);draw();}
 function draw(){render(canvas,state,world,routeGates,state.gate);drawDirty=false;}
@@ -29,7 +29,7 @@ function frame(now){
    if(state.gate===routeGates.length)finish();
    else notice(`航门 ${state.gate} / ${routeGates.length} · 继续前行`);
   }
-  if(state.status==='flying'&&(Math.abs(state.x)>600||state.z>1650||state.z<-350))finish('飞出城市');
+  if(state.status==='flying'&&(state.x<WORLD_BOUNDS.minX||state.x>WORLD_BOUNDS.maxX||state.z>WORLD_BOUNDS.maxZ||state.z<WORLD_BOUNDS.minZ))finish('飞出城市');
  }
  if(now-drawLast>40&&(state.status==='flying'||drawDirty)){drawLast=now;draw();update();}
  if(now>noticeUntil&&state.status!=='paused')$('notice').textContent='';
@@ -39,4 +39,9 @@ window.addEventListener('keydown',e=>{if(e.target.matches('select,input,textarea
 window.addEventListener('keyup',e=>delete input[e.key.toLowerCase()]);window.addEventListener('blur',()=>{clearInput();if(state.status==='flying')pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.status==='flying')pause();});
 for(const button of document.querySelectorAll('[data-key]')){button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);input[button.dataset.key]=true;button.classList.add('held');});const release=()=>{delete input[button.dataset.key];button.classList.remove('held');};button.addEventListener('pointerup',release);button.addEventListener('pointercancel',release);button.addEventListener('lostpointercapture',release);}
 $('start').onclick=start;$('retry').onclick=start;$('reset').onclick=start;$('pause').onclick=pause;$('choose').onclick=()=>{state=createState();$('result').hidden=true;$('start-panel').hidden=false;$('pause').disabled=true;selectRoute();};$('route').onchange=selectRoute;$('help').onclick=()=>{const open=$('instructions').hidden;$('instructions').hidden=!open;$('help').setAttribute('aria-expanded',open);if(open&&state.status==='flying')pause();};
-new ResizeObserver(fit).observe(canvas);selectRoute();fit();if(!preview)requestAnimationFrame(frame);
+new ResizeObserver(fit).observe(canvas);selectRoute();
+if(preview){
+ const views={river:{x:240,y:48,z:600,yaw:1.3,pitch:-.25},park:{x:-180,y:32,z:660,yaw:1.2,pitch:-.1},industrial:{x:-360,y:60,z:1120,yaw:-.4,pitch:-.12}};
+ Object.assign(state,views[parameters.get('view')]||{});
+}
+fit();if(!preview)requestAnimationFrame(frame);

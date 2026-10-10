@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-09T07:08:13.373608+00:00",
+  "generatedAt": "2026-10-10T12:52:39.709Z",
   "title": "Design System: 字间飞行",
   "extensions": {
     "colorMeta": {
@@ -282,6 +282,76 @@
           "oklch(72% 0.0828 68.03)",
           "oklch(84% 0.0828 68.03)",
           "oklch(95% 0.0828 68.03)"
+        ]
+      },
+      "industrial-brick": {
+        "role": "secondary",
+        "displayName": "工业砖红",
+        "tonalRamp": [
+          "color-mix(in oklab, #aa7864 30%, #000000)",
+          "color-mix(in oklab, #aa7864 52%, #000000)",
+          "color-mix(in oklab, #aa7864 76%, #000000)",
+          "color-mix(in oklab, #aa7864 98%, #000000)",
+          "color-mix(in oklab, #aa7864 78%, #ffffff)",
+          "color-mix(in oklab, #aa7864 56%, #ffffff)",
+          "color-mix(in oklab, #aa7864 32%, #ffffff)",
+          "color-mix(in oklab, #aa7864 10%, #ffffff)"
+        ]
+      },
+      "roof-steel": {
+        "role": "neutral",
+        "displayName": "屋顶钢灰",
+        "tonalRamp": [
+          "color-mix(in oklab, #82929c 30%, #000000)",
+          "color-mix(in oklab, #82929c 52%, #000000)",
+          "color-mix(in oklab, #82929c 76%, #000000)",
+          "color-mix(in oklab, #82929c 98%, #000000)",
+          "color-mix(in oklab, #82929c 78%, #ffffff)",
+          "color-mix(in oklab, #82929c 56%, #ffffff)",
+          "color-mix(in oklab, #82929c 32%, #ffffff)",
+          "color-mix(in oklab, #82929c 10%, #ffffff)"
+        ]
+      },
+      "crane-yellow": {
+        "role": "secondary",
+        "displayName": "吊架黄",
+        "tonalRamp": [
+          "color-mix(in oklab, #dab05d 30%, #000000)",
+          "color-mix(in oklab, #dab05d 52%, #000000)",
+          "color-mix(in oklab, #dab05d 76%, #000000)",
+          "color-mix(in oklab, #dab05d 98%, #000000)",
+          "color-mix(in oklab, #dab05d 78%, #ffffff)",
+          "color-mix(in oklab, #dab05d 56%, #ffffff)",
+          "color-mix(in oklab, #dab05d 32%, #ffffff)",
+          "color-mix(in oklab, #dab05d 10%, #ffffff)"
+        ]
+      },
+      "river": {
+        "role": "secondary",
+        "displayName": "河水蓝",
+        "tonalRamp": [
+          "color-mix(in oklab, #437e9c 30%, #000000)",
+          "color-mix(in oklab, #437e9c 52%, #000000)",
+          "color-mix(in oklab, #437e9c 76%, #000000)",
+          "color-mix(in oklab, #437e9c 98%, #000000)",
+          "color-mix(in oklab, #437e9c 78%, #ffffff)",
+          "color-mix(in oklab, #437e9c 56%, #ffffff)",
+          "color-mix(in oklab, #437e9c 32%, #ffffff)",
+          "color-mix(in oklab, #437e9c 10%, #ffffff)"
+        ]
+      },
+      "pavement": {
+        "role": "neutral",
+        "displayName": "人行道石灰",
+        "tonalRamp": [
+          "color-mix(in oklab, #99958a 30%, #000000)",
+          "color-mix(in oklab, #99958a 52%, #000000)",
+          "color-mix(in oklab, #99958a 76%, #000000)",
+          "color-mix(in oklab, #99958a 98%, #000000)",
+          "color-mix(in oklab, #99958a 78%, #ffffff)",
+          "color-mix(in oklab, #99958a 56%, #ffffff)",
+          "color-mix(in oklab, #99958a 32%, #ffffff)",
+          "color-mix(in oklab, #99958a 10%, #ffffff)"
         ]
       }
     },

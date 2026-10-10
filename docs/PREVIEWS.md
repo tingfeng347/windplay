@@ -16,7 +16,7 @@
 | [余烬荒野 · Ember Wilds](../works/ember-wilds/) | 手绘荒野生存 | [直接打开成品](https://tingfeng347.github.io/windplay/works/ember-wilds/demo/index.html) | 饥荒玩法启发的原创生存游戏，包含采集、制作、营火、烹饪、昼夜、敌人与生命/饥饿/精神状态 |
 | [点云照片](../works/point-cloud-studio/) | 点云人像 / 交互工具 | [直接打开成品](https://tingfeng347.github.io/windplay/works/point-cloud-studio/demo/index.html) | 将照片转换为彩色点阵 SVG 和可交互三维点云 |
 | [超级马里奥 · 像素冒险](../works/mario-world/) | 像素平台冒险 | [直接打开成品](../works/mario-world/demo/index.html) | FC 初代玩法重制：8 个世界 32 关，跳跃、踩怪、蘑菇、火球、水下与城堡，支持触屏与进度保存 |
-| [字间飞行](../works/ascii-flight/) | ASCII 第一视角飞行 | [直接打开成品](../works/ascii-flight/demo/index.html) | 彩色字符城市，WASD 俯仰与滚转，Z/X 变速，三条航线与自由飞行 |
+| [字间飞行](../works/ascii-flight/) | ASCII 第一视角飞行 | [直接打开成品](../works/ascii-flight/demo/index.html) | 彩色字符楼群、河桥、公园与工业区，四条航线及自由飞行 |
 | [烟雨江南](../works/jiangnan-garden/) | 园林与室内漫游 | [直接打开成品](../works/jiangnan-garden/demo/index.html) | 三开间露明木构、堂屋书房卧房、日夜细雨与环绕漫游 |
 
 ## 截图
