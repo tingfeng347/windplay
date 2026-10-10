@@ -11,8 +11,9 @@ function harness(search=''){
  return{elements,frames,classes,get draws(){return draws;},key(key,type='keydown',tag='BUTTON'){events.get(type)({key,repeat:false,target:{matches(selector){return selector.split(',').includes(tag.toLowerCase());}},preventDefault(){}});},event(name){events.get(name)();},tick(ms=40){time+=ms;const frame=frames.shift();assert.ok(frame);frame(time);}};
 }
 test('keyboard controls work after clicking start, even with the start button focused',()=>{
- const h=harness();h.elements.get('start').onclick();h.tick();h.key('s');h.tick();assert.notEqual(h.elements.get('pitch').textContent,'俯仰 +0°');h.key('s','keyup');const pitch=h.elements.get('pitch').textContent;h.tick();assert.equal(h.elements.get('pitch').textContent,pitch);
- h.key('d');h.tick();assert.notEqual(h.elements.get('roll').textContent,'滚转 +0°');h.key('d','keyup');
+ const h=harness();h.elements.get('start').onclick();h.tick();h.key('s');h.tick();assert.match(h.elements.get('pitch').textContent,/俯仰 -[1-9]\d*°/);h.key('s','keyup');const pitch=h.elements.get('pitch').textContent;h.tick();assert.equal(h.elements.get('pitch').textContent,pitch);
+ h.elements.get('reset').onclick();h.key('w');h.tick();assert.match(h.elements.get('pitch').textContent,/俯仰 \+[1-9]\d*°/);h.key('w','keyup');
+ h.key('d');h.tick(50);assert.notEqual(h.elements.get('roll').textContent,'滚转 +0°');h.key('d','keyup');
 });
 test('losing focus pauses and clears held keys before resuming',()=>{
  const h=harness();h.elements.get('start').onclick();h.tick();h.key('d');h.tick();const roll=h.elements.get('roll').textContent;h.event('blur');assert.equal(h.elements.get('pause').textContent,'继续');h.tick();assert.equal(h.elements.get('roll').textContent,roll);h.elements.get('pause').onclick();h.tick();assert.equal(h.elements.get('roll').textContent,roll);

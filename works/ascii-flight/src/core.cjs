@@ -4,7 +4,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function createState(){return {x:0,y:27,z:-50,pitch:0,roll:0,yaw:0,speed:25,distance:0,time:0,gate:0,status:'ready'};}
 function step(state,input,dt){
  dt=clamp(dt,0,0.1); if(state.status!=='flying')return state;
- state.pitch=clamp(state.pitch+((input.s?1:0)-(input.w?1:0))*CONTROL_RATE*dt,-LIMIT,LIMIT);
+ state.pitch=clamp(state.pitch+((input.w?1:0)-(input.s?1:0))*CONTROL_RATE*dt,-LIMIT,LIMIT);
  state.roll=clamp(state.roll+((input.d?1:0)-(input.a?1:0))*CONTROL_RATE*dt,-LIMIT,LIMIT);
  state.speed=clamp(state.speed+((input.z?1:0)-(input.x?1:0))*10*dt,10,50);
  state.yaw+=state.roll/LIMIT*TURN_RATE*dt;

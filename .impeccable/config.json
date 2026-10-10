@@ -8,6 +8,24 @@
         "value": "helvetica",
         "createdAt": "2026-10-06T07:44:39.447Z",
         "reason": "Agent: Helvetica Neue is the pre-existing WindPlay launcher font stack; the requested polish preserves the incumbent visual identity and does not introduce a new typeface."
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "works/ascii-flight/src/index.html"
+        ],
+        "createdAt": "2026-10-10T12:01:57.027Z",
+        "reason": "Agent: existing flight instrument labels and short control hints use 11px, explicitly documented in works/ascii-flight/DESIGN.md; this input-direction change preserves that design."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "new",
+        "files": [
+          "works/ascii-flight/src/index.html"
+        ],
+        "createdAt": "2026-10-10T12:01:57.069Z",
+        "reason": "Agent: Courier New is explicitly declared in works/ascii-flight/DESIGN.md; the isolated new token is a font-name parsing false positive."
       }
     ]
   }
