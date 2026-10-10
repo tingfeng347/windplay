@@ -15,6 +15,9 @@ const mime = {
   '.js':'text/javascript; charset=utf-8',
   '.jpg':'image/jpeg',
   '.png':'image/png',
+  '.webp':'image/webp',
+  '.gz':'application/gzip',
+  '.hdr':'application/octet-stream',
   '.svg':'image/svg+xml'
 };
 

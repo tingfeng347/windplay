@@ -1,5 +1,5 @@
 import { access, cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -24,12 +24,18 @@ let workCount = 0;
 for (const entry of entries) {
   if (!entry.isDirectory()) continue;
   const demo = resolve(root, 'works', entry.name, 'demo');
+  const workRoot=resolve(root,'works',entry.name);
+  const metadata=JSON.parse(await readFile(resolve(workRoot,'package.json'),'utf8'));
+  const publish=metadata.windplay?.webOutput?resolve(workRoot,metadata.windplay.webOutput):demo;
+  const inside=relative(workRoot,publish);
+  if(inside.startsWith('..')||isAbsolute(inside))throw new Error(`作品 ${entry.name} 的发布目录超出作品范围`);
   try {
     await access(resolve(demo, 'index.html'));
   } catch {
     throw new Error(`作品 ${entry.name} 缺少 demo/index.html`);
   }
-  await cp(demo, resolve(output, 'works', entry.name, 'demo'), { recursive:true });
+  await access(resolve(publish,'index.html'));
+  await cp(publish, resolve(output, 'works', entry.name, 'demo'), { recursive:true });
   workCount += 1;
 }
 

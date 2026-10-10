@@ -39,6 +39,14 @@ Chinese Armchair、Chinese Tea Table 与 Shrub 04 不减面、不量化改写拓
 - [乔木原始几何](https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/tree_small_02/tree_small_02.bin)
 - [蕨类原始几何](https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fern_02/fern_02.bin)
 
-完整原始几何的 SHA-256、减面参数和三角形数量保留在 model.gltf 的 asset.extras。正常构建仅需已跟踪的处理结果，不下载素材。构建时将几何无损 gzip 内联；运行时本地解压，支持原生流解压并提供 fflate 回退，所有模型贴图内联，不依赖外部网络。
+完整原始几何的 SHA-256、减面参数和三角形数量保留在 model.gltf 的 asset.extras。正常构建仅需已跟踪的处理结果，不下载素材。当前几何交付使用下节所述 Meshopt + gzip；运行时本地解压，支持原生流解压并提供 fflate 回退。离线版内联资源，在线版从同源加载，不依赖外部 CDN。
 
 建筑、承重木构、其余小桌的三块拼板、织物体积、竹丛、藤、荷叶、苔与安静动态由作品源码生成。椅、主要桌案与灌木属于上表授权模型。被褥通过 settleQuilt 的重力、床垫与床架接触及横向摩擦、双向剪切与弯曲距离约束松弛，再经过填棉平滑并封闭上下层和侧边，使用已列出的蓝亚麻扫描材质，没有新增被褥扫描。床帘网格由 src/cloth.js 的重力 Verlet、距离弹簧、顶部悬挂与束带压缩约束计算并缓存，缝边和悬挂环由源码构建；它使用已列出的 Rough Linen 材质，没有新增布料扫描。釉陶瓷的颜色纹理与清漆响应由源码材质生成，没有新增外部陶瓷素材。Three.js、Meshoptimizer 与 fflate 使用 MIT 许可证；内联构建保留依赖授权注释。
+
+## 2026-10-10 交付派生资源
+
+原始照片、授权模型、model.bin、原始 glTF 与来源清单保持，不用优化文件替换源资产。scripts/optimize-assets.mjs 为在线和离线输出生成 quality 90 WebP：首批最长边不超过 512px，近看升级至原有 1K/2K 分辨率；不划算的转换保留原 JPEG。当前在线目录另有 104 个 WebP 来源 JSON sidecar，WebP 内嵌来源元数据；它们追溯原作者/资产，不表示新采集的扫描或 AI 图像。原素材授权及精确哈希仍见原清单。
+
+几何交付使用 Meshopt + gzip。完整近景拓扑、位置与 UV 保留，整数法线采用 12-bit 八面体编码并有小幅方向损失；远景仅简化乔木叶片细分、误差阈值 .001、无 Prune 或随机删叶，近看恢复 1,334,988 个三角形的完整树网格。该部署处理与原始源素材分开，不改家具、灌木或蕨类的完整细节三角形。
+
+布料结果在构建时由原求解器产生，成品内嵌完全相同的 Float32 顶点。派生缓存 .cache/garden-optimized 可重建、不跟踪；新 meshoptimizer 编码依赖采用 MIT。在线同源输出、离线内联输出和证据范围见 [PERFORMANCE.md](PERFORMANCE.md)。
