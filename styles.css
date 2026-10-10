@@ -220,8 +220,6 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
      Nothing is faded or masked — a work is either in the band at its own size or it is past the edge. */
   transform: translate(-50%, -50%);
 }
-/* Only the work in the gate answers the pointer; the rest are on their way past. */
-.catalog:is([data-motion="active"],[data-motion="paused"]) .work-card:not(.is-live) { pointer-events: none; }
 /* Only the works that are actually on the stage are promoted: ten promoted cards of this size would
    be ten full-size layers, and two of them are the whole story. */
 .catalog:is([data-motion="active"],[data-motion="paused"]) .work-card.is-near { will-change: transform; }

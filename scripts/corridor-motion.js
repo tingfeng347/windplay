@@ -390,6 +390,8 @@
   grid.addEventListener('focusin', event => {
     if (!enabled() || !metrics) return;
     const card = event.target.closest?.('.work-card');
+    // Pointer focus must not move the link between press and release, cancelling its click.
+    if (!card?.matches(':focus-visible')) return;
     const index = card ? cards.findIndex(entry => entry.element === card) : -1;
     if (index < 0) return;
     const box = grid.getBoundingClientRect();
