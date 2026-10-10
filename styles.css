@@ -94,8 +94,9 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .motion-toggle:disabled { cursor:default; color:var(--muted); }
 .hero-art { --progress:0; --pointer-x:0; --pointer-y:0; --velocity:0; position:relative; margin-top:24px; isolation:isolate; }
 .art-stage { position:relative; padding:40px 36px 54px; perspective:1600px; overflow:clip; }
-.art-field { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; }
-.art-layer { display:block; min-width:0; position:relative; transform-style:preserve-3d; }
+/* Let links behind the field's plane receive hits instead of its empty 3D surface. */
+.art-field { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); align-content:center; gap:22px; position:relative; z-index:2; transform-style:preserve-3d; pointer-events:none; }
+.art-layer { display:block; min-width:0; position:relative; transform-style:preserve-3d; pointer-events:auto; }
 .art-frame { overflow:hidden; border-radius:var(--radius); background:var(--surface); box-shadow:0 18px 28px -20px rgb(0 0 0 / 45%),0 0 0 1px var(--line); transition:box-shadow 180ms ease; }
 .art-layer:hover .art-frame { box-shadow:0 24px 36px -20px rgb(0 0 0 / 55%),0 0 0 1px var(--muted); }
 .art-layer:focus-visible { z-index:5; border-radius:var(--radius); }
