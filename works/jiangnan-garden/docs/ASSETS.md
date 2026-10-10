@@ -50,3 +50,5 @@ Chinese Armchair、Chinese Tea Table 与 Shrub 04 不减面、不量化改写拓
 几何交付使用 Meshopt + gzip。完整近景拓扑、位置与 UV 保留，整数法线采用 12-bit 八面体编码并有小幅方向损失；远景仅简化乔木叶片细分、误差阈值 .001、无 Prune 或随机删叶，近看恢复 1,334,988 个三角形的完整树网格。该部署处理与原始源素材分开，不改家具、灌木或蕨类的完整细节三角形。
 
 布料结果在构建时由原求解器产生，成品内嵌完全相同的 Float32 顶点。派生缓存 .cache/garden-optimized 可重建、不跟踪；新 meshoptimizer 编码依赖采用 MIT。在线同源输出、离线内联输出和证据范围见 [PERFORMANCE.md](PERFORMANCE.md)。
+
+第二轮将 52 张首批 WebP 预览与原 HDRI 打包为带 JSON 索引的 gzip 文件；解压后原字节与来源元数据不变，没有增加有损转码。52 张近景 WebP 仍独立交付，104 个来源 sidecar 保留。原 1024px 程序纹理改由后台 Worker 计算，原算法像素与随机序列的 SHA-256 fixtures 位于 tests/fixtures/surface-pixels.json；没有新增外部图片或采样素材。可选 CDN 只镜像本次构建的同一资源，来源与授权不变，默认同源及离线独立性保持。

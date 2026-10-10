@@ -4,7 +4,7 @@ test('the full-detail offline archive stays below 36 MiB compressed',()=>{
  assert.ok(gzipSync(html,{level:9}).length<36*1024*1024,'Do not reintroduce the 60 MiB embedded transfer');
 });
 test('online entry does not inline resources or require external CDNs',async()=>{
- const {compile}=await import('../scripts/build.mjs'),{html,assets,initialAssets}=await compile(true);
+ const {compile}=await import('../scripts/build.mjs'),{html,assets,initialAssets}=await compile(true,{assetBase:null});
  assert.ok(Buffer.byteLength(html)<16*1024,'HTML can paint without waiting for model data');
  assert.doesNotMatch(html,/data:|https?:\/\//);
  const scripts=[...html.matchAll(/src="([^"]+\.js)"/g)];assert.equal(scripts.length,1);assert.ok(assets.has(scripts[0][1]));

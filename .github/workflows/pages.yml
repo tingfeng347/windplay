@@ -33,6 +33,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build static site
+        env:
+          WINDPLAY_GARDEN_ASSET_BASE: ${{ vars.GARDEN_ASSET_BASE }}
         run: npm run build
       - name: Test launcher and works
         run: npm test

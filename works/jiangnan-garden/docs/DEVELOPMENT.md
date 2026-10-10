@@ -2,9 +2,23 @@
 
 ## 运行
 
-开发需要 Node.js 22+，在仓库根目录运行 `npm ci`。作品使用仓库已有的 Three.js 与 esbuild，不加载外部 CDN；离线成品内联授权贴图、HDRI 和模型，在线成品从同源加载并按观察距离补充细节。
+开发需要 Node.js 22+，在仓库根目录运行 `npm ci`。作品使用仓库已有的 Three.js 与 esbuild；离线成品内联授权贴图、HDRI 和模型，在线成品默认同源，也可配置公开 CDN 镜像，并按观察距离补充细节。
 
-`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.18 MiB；同时输出同源在线目录 dist/web，入口 10,785 B、首批资源 11.18 MiB。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
+`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.19 MiB；同时输出在线目录 dist/web，入口 10,868 B、首批资源 11.00 MiB、7 个资源请求（不含 HTML）。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
+
+## 可选 CDN
+
+默认部署无需 CDN。接入已有的公开 HTTPS 静态资源镜像时，将 `dist/web/assets/` 原样同步到镜像根目录的 `assets/`，保留内容哈希文件名。以下域名仅为配置示例，替换为实际镜像目录：
+
+```sh
+WINDPLAY_GARDEN_ASSET_BASE=https://cdn.example.com/garden/ npm run build
+```
+
+GitHub Pages 自动构建也可在仓库 Actions Variables 中设置 `GARDEN_ASSET_BASE`，值同上。构建产物中的资源请求将使用 `https://cdn.example.com/garden/assets/<文件名>`；入口与应用脚本仍由站点同源提供。未设置或删除该变量后重新构建，即恢复纯同源。离线单文件始终不依赖 CDN。
+
+镜像需允许匿名跨域 GET（公开资源可用 `Access-Control-Allow-Origin: *`）。内容哈希资源可设 `Cache-Control: public, max-age=31536000, immutable`；`.gz` 是应用自行解压的文件，使用 `Content-Type: application/gzip`，不要将文件自身的 gzip 层标记成 `Content-Encoding: gzip`。首次发布应先同步该次构建的资源，再发布引用它们的 HTML。CDN 失败、响应版本错误或超过 350 ms 仍未完成时启用同源备选；竞速完成后取消另一请求。缓存受限时仍可正常在线加载。
+
+CDN 地址是可选构建配置，本仓库没有代建 CDN 服务或默认外部域名。公网效果需在镜像发布后测量，当前本机样本不支持稳定提速比例。
 
 需要支持 WebGL 2、启用硬件加速的现代 Chrome、Edge、Firefox 或 Safari。较慢的设备可使用“流畅画质”，关闭屏幕空间环境遮蔽和泛光并降低像素比与阴影分辨率。精细模式首次载入需生成纹理并编译多种材质，实际载入时间随设备、材质编译缓存和画质而变，较慢设备可能更久。画面品质依赖设备；当前采用浏览器实时光栅化、实拍 PBR 与真实植物及家具几何；质量验收结论单独记录在 [QUALITY.md](QUALITY.md)。
 
@@ -53,6 +67,8 @@ PBR 材质使用 metallic-roughness 工作流，非金属材质的 metalness 为
 
 - src/world.cjs：坐标、主要空间、阻挡、动线、起伏地表与日夜参数。
 - src/materials.js：实拍 PBR、磨损与湿润响应、逐叶纹理。
+- src/surface-pixels.js：与原算法逐字节相同的 1024px 程序纹理、LCG 跳步及最多两个 Worker 的生成/回退。
+- src/resource-loader.js：初始资源包解压、内容哈希缓存、可选 CDN 和同源回退、临时 URL 释放。
 - src/offline-gltf.js：内联或同源几何 gzip 解压、Meshopt 解码、GLTFLoader 解析和临时 URL 释放。
 - src/texture-streaming.js：512px 预览纹理登记、原分辨率纹理延后升级和状态保留。
 - src/tree-instances.js：共享树网格、GPU 弯曲与一致的深度/距离阴影。

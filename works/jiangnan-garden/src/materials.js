@@ -1,6 +1,8 @@
 import * as T from 'three';
 import world from './world.cjs';
 import {watchTexture} from './texture-streaming.js';
+import {advanceSeed,generateSurfaces} from './surface-pixels.js';
+import {resourceURL} from './resource-loader.js';
 import woodAlbedo from '../assets/textures/wood_table_001_diff_1k.jpg';
 import woodNormal from '../assets/textures/wood_table_001_nor_gl_1k.jpg';
 import woodRough from '../assets/textures/wood_table_001_rough_1k.jpg';
@@ -36,40 +38,25 @@ import soilAlbedo from '../assets/textures/forest_floor_diff_1k.jpg';
 import soilNormal from '../assets/textures/forest_floor_nor_gl_1k.jpg';
 import soilRough from '../assets/textures/forest_floor_rough_1k.jpg';
 
-const random=world.seeded(519);
-// Procedural relief for stone, tile, brick, ceramic and cloth complements CC0 photographic wood/plaster maps.
-function surface(kind,base){
- const size=1024,c=document.createElement('canvas');c.width=c.height=size;const ctx=c.getContext('2d'),im=ctx.createImageData(size,size),height=new Float32Array(size*size);
- const rgb=new T.Color(base);rgb.convertLinearToSRGB();const values=[rgb.r*255,rgb.g*255,rgb.b*255];
- for(let y=0;y<size;y++)for(let x=0;x<size;x++){
-  let n=(random()-.5)*.1,h=.5;
-  if(kind==='wood'){const grain=Math.sin(x*.17+Math.sin(y*.018)*1.8+Math.sin(x*.008)*8);n+=grain*.055+Math.sin(x*.68+Math.sin(y*.006)*12)*.025;h=.5+grain*.14+(random()-.5)*.16;const knot=Math.hypot((x-370)*1.7,(y-410)*.25);if(knot<100)n+=Math.sin(knot*.2)*.055;}
-  else if(kind==='stone'){n+=Math.sin(x*.04+Math.sin(y*.015)*4)*Math.cos(y*.029)*.06;h=.4+random()*.32+Math.sin(x*.027)*Math.sin(y*.039)*.12;}
-  else if(kind==='plaster'){n+=Math.sin(y*.011)*Math.sin(x*.018)*.025;h=.5+random()*.15;}
-  else if(kind==='brick'){const yy=y%128,xx=(x+(Math.floor(y/128)%2)*128)%256,joint=yy<5||xx<5;n+=joint?-.25:Math.sin(Math.floor(x/256)*4+Math.floor(y/128)*2)*.035;h=joint?.15:.6+random()*.14;}
-  else if(kind==='tile'){n+=Math.sin(x*.025)*.025+Math.sin(y*.037)*.018;h=.5+random()*.18;}
-  else if(kind==='ceramic'){const crazing=Math.pow(Math.max(0,Math.cos(x*.075+Math.sin(y*.02)*8)*Math.cos(y*.11+Math.sin(x*.021)*5)),18);n+=Math.sin(x*.042)*Math.sin(y*.028)*.045-crazing*.07;h=.5+random()*.015-crazing*.08;}
-  else if(kind==='linen'){const warp=Math.sin(x*Math.PI/3),weft=Math.sin(y*Math.PI/3),cross=(Math.floor(x/6)+Math.floor(y/6))%2;n+=(cross?warp:weft)*.025;h=.5+(cross?warp:weft)*.15;}
-  else if(kind==='paper'){n+=Math.sin(x*.13+Math.sin(y*.03)*2)*.025;h=.5+Math.sin(x*1.7+y*.02)*.07+random()*.035;}
-  const i=(y*size+x)*4;for(let k=0;k<3;k++)im.data[i+k]=Math.max(0,Math.min(255,values[k]*(1+n)));im.data[i+3]=255;height[y*size+x]=h;
+const requests=[['ceramic','#b9c2ae'],['paper','#d4c9ab'],['stone','#556c37'],['linen','#aa9c7c'],['linen','#71624c'],...['#4b535c','#50493e','#465148'].map(c=>['linen',c]),['ceramic','#afc4ad']];
+let seed=519;const jobs=requests.map(([kind,base])=>{const rgb=new T.Color(base);rgb.convertLinearToSRGB();const job={kind,values:[rgb.r*255,rgb.g*255,rgb.b*255],seed};seed=advanceSeed(seed,1024*1024*(kind==='linen'?1:2));return job;});
+const random=world.seeded(seed);
+async function proceduralMaterials(){
+ const pixels=await generateSurfaces(jobs.slice(1)),surfaces=new Map();let linenRelief;
+ for(let i=0;i<pixels.length;i++){
+  const textures=pixels[i].map(data=>{const canvas=document.createElement('canvas');canvas.width=canvas.height=1024;const context=canvas.getContext('2d'),image=context.createImageData(1024,1024);image.data.set(data);context.putImageData(image,0,0);const texture=new T.CanvasTexture(canvas);texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.anisotropy=4;return texture;});textures[0].colorSpace=T.SRGBColorSpace;
+  if(requests[i+1][0]==='linen'){if(linenRelief){textures[1].dispose();textures[2].dispose();textures.splice(1,2,...linenRelief);}else linenRelief=textures.slice(1);}
+  surfaces.set(requests[i+1].join(':'),{map:textures[0],bumpMap:textures[1],roughnessMap:textures[2]});
  }
- ctx.putImageData(im,0,0);
- // Fine weathering streaks have different scale and orientation from the grain.
- if(kind==='wood'||kind==='plaster'){ctx.strokeStyle=kind==='wood'?'#190e0920':'#64776b15';for(let i=0;i<320;i++){const x=random()*size,y=random()*size;ctx.lineWidth=.3+random()*1.5;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+(random()-.5)*3,y+20+random()*180);ctx.stroke();}}
- const data=document.createElement('canvas');data.width=data.height=size;const dctx=data.getContext('2d'),di=dctx.createImageData(size,size);
- for(let i=0;i<height.length;i++){const v=Math.round(height[i]*255);di.data.set([v,v,v,255],i*4);}dctx.putImageData(di,0,0);
- const rough=document.createElement('canvas');rough.width=rough.height=size;const rctx=rough.getContext('2d'),ri=rctx.createImageData(size,size);
- for(let i=0;i<height.length;i++){const v=Math.round(140+height[i]*90);ri.data.set([v,v,v,255],i*4);}rctx.putImageData(ri,0,0);
- const map=new T.CanvasTexture(c),bump=new T.CanvasTexture(data),roughness=new T.CanvasTexture(rough);map.colorSpace=T.SRGBColorSpace;
- for(const texture of [map,bump,roughness]){texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.anisotropy=4;}
- return {map,bumpMap:bump,roughnessMap:roughness};
+ return (kind,base)=>surfaces.get([kind,base].join(':'));
 }
 export async function materials(){
- const loader=new T.TextureLoader();
- async function photographic(urls){const textures=await Promise.all(urls.map(url=>loader.loadAsync(url)));textures[0].colorSpace=T.SRGBColorSpace;for(const [i,t] of textures.entries()){watchTexture(t,urls[i]);t.wrapS=t.wrapT=T.RepeatWrapping;t.anisotropy=8;}return {map:textures[0],normalMap:textures[1],roughnessMap:textures[2]};}
- const [wood,plaster,rock,bark,painting,linen,roofScan,brickScan,deckScan,soilScan,beamScan]=await Promise.all([photographic([woodAlbedo,woodNormal,woodRough]),photographic([plasterAlbedo,plasterNormal,plasterRough]),photographic([rockAlbedo,rockNormal,rockRough]),photographic([barkAlbedo,barkNormal,barkRough]),loader.loadAsync(scrollImage),photographic([linenAlbedo,linenNormal,linenRough]),photographic([roofAlbedo,roofNormal,roofRough]),photographic([brickAlbedo,brickNormal,brickRough]),photographic([deckAlbedo,deckNormal,deckRough]),photographic([soilAlbedo,soilNormal,soilRough]),photographic([beamAlbedo,beamNormal,beamRough])]);watchTexture(painting,scrollImage);painting.colorSpace=T.SRGBColorSpace;painting.anisotropy=8;
+ const proceduralStart=performance.now(),procedural=proceduralMaterials().then(result=>{if(document.querySelector?.('#scene'))document.querySelector('#scene').dataset.proceduralMs=Math.round(performance.now()-proceduralStart);return result;}),loader=new T.TextureLoader();
+ async function texture(url){return resourceURL(url,local=>loader.loadAsync(local));}
+ async function photographic(urls){const textures=await Promise.all(urls.map(texture));textures[0].colorSpace=T.SRGBColorSpace;for(const [i,t] of textures.entries()){watchTexture(t,urls[i]);t.wrapS=t.wrapT=T.RepeatWrapping;t.anisotropy=8;}return {map:textures[0],normalMap:textures[1],roughnessMap:textures[2]};}
+ const [wood,plaster,rock,bark,painting,linen,roofScan,brickScan,deckScan,soilScan,beamScan]=await Promise.all([photographic([woodAlbedo,woodNormal,woodRough]),photographic([plasterAlbedo,plasterNormal,plasterRough]),photographic([rockAlbedo,rockNormal,rockRough]),photographic([barkAlbedo,barkNormal,barkRough]),texture(scrollImage),photographic([linenAlbedo,linenNormal,linenRough]),photographic([roofAlbedo,roofNormal,roofRough]),photographic([brickAlbedo,brickNormal,brickRough]),photographic([deckAlbedo,deckNormal,deckRough]),photographic([soilAlbedo,soilNormal,soilRough]),photographic([beamAlbedo,beamNormal,beamRough])]);const surface=await procedural;watchTexture(painting,scrollImage);painting.colorSpace=T.SRGBColorSpace;painting.anisotropy=8;
  const mat=(kind,color,roughness=.75,bump=.035)=>new T.MeshStandardMaterial({...surface(kind,color),roughness,metalness:0,bumpScale:bump});
- const m={wood:new T.MeshPhysicalMaterial({...beamScan,color:'#b7a38d',clearcoat:.02,clearcoatRoughness:.72,roughness:.88,normalScale:new T.Vector2(.6,.6)}),darkWood:new T.MeshPhysicalMaterial({...wood,color:'#cdb7a0',clearcoat:.12,clearcoatRoughness:.54,roughness:.62,normalScale:new T.Vector2(.45,.45)}),stone:new T.MeshPhysicalMaterial({...rock,color:'#8a938d',roughness:.60,normalScale:new T.Vector2(.52,.52),clearcoat:.13,clearcoatRoughness:.40}),rock:new T.MeshStandardMaterial({...rock,color:'#b4b1a1',roughness:.83,normalScale:new T.Vector2(.7,.7)}),plaster:new T.MeshStandardMaterial({...plaster,color:'#efe9d6',roughness:.95,normalScale:new T.Vector2(.4,.4)}),brick:new T.MeshPhysicalMaterial({...brickScan,color:'#91998e',roughness:.76,normalScale:new T.Vector2(.35,.35),clearcoat:.1,clearcoatRoughness:.5}),tile:new T.MeshPhysicalMaterial({...roofScan,color:'#bbc3b3',roughness:.68,normalScale:new T.Vector2(.22,.22),clearcoat:.2,clearcoatRoughness:.32}),ceramic:mat('ceramic','#b9c2ae',.26,.005),earth:new T.MeshStandardMaterial({...soilScan,color:'#b4bd94',roughness:.94,normalScale:new T.Vector2(.75,.75)}),paper:mat('paper','#d4c9ab',.96,.003)};
+ const m={wood:new T.MeshPhysicalMaterial({...beamScan,color:'#b7a38d',clearcoat:.02,clearcoatRoughness:.72,roughness:.88,normalScale:new T.Vector2(.6,.6)}),darkWood:new T.MeshPhysicalMaterial({...wood,color:'#cdb7a0',clearcoat:.12,clearcoatRoughness:.54,roughness:.62,normalScale:new T.Vector2(.45,.45)}),stone:new T.MeshPhysicalMaterial({...rock,color:'#8a938d',roughness:.60,normalScale:new T.Vector2(.52,.52),clearcoat:.13,clearcoatRoughness:.40}),rock:new T.MeshStandardMaterial({...rock,color:'#b4b1a1',roughness:.83,normalScale:new T.Vector2(.7,.7)}),plaster:new T.MeshStandardMaterial({...plaster,color:'#efe9d6',roughness:.95,normalScale:new T.Vector2(.4,.4)}),brick:new T.MeshPhysicalMaterial({...brickScan,color:'#91998e',roughness:.76,normalScale:new T.Vector2(.35,.35),clearcoat:.1,clearcoatRoughness:.5}),tile:new T.MeshPhysicalMaterial({...roofScan,color:'#bbc3b3',roughness:.68,normalScale:new T.Vector2(.22,.22),clearcoat:.2,clearcoatRoughness:.32}),earth:new T.MeshStandardMaterial({...soilScan,color:'#b4bd94',roughness:.94,normalScale:new T.Vector2(.75,.75)}),paper:mat('paper','#d4c9ab',.96,.003)};
  m.earth=new T.MeshPhysicalMaterial({...soilScan,color:'#607653',roughness:.80,normalScale:new T.Vector2(.85,.85),clearcoat:.12,clearcoatRoughness:.5});
  // Keep grain/pore size tied to metres rather than stretching a full image over a beam.
  for(const material of [m.wood,m.darkWood,m.plaster]){

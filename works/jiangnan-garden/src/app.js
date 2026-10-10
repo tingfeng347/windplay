@@ -16,6 +16,7 @@ import {landscape} from './landscape.js';
 import {batchArchitecture} from './render-batches.js';
 import world from './world.cjs';
 import {upgradeTextures} from './texture-streaming.js';
+import {resourceBytes} from './resource-loader.js';
 const preview=new URLSearchParams(location.search).has('preview');
 document.body.classList.toggle('preview',preview);
 const $=id=>document.getElementById(id),canvas=$('scene');
@@ -34,11 +35,11 @@ async function init(){
  const fill=new T.DirectionalLight('#c7d6dc',.3);fill.position.set(20,8,-15);scene.add(fill);
  scene.fog=new T.FogExp2('#c7d0c8',.009);scene.background=new T.Color('#c7d0c8');
  // A real overcast HDR environment supplies directional diffuse and wet-surface reflections.
- const [hdr,m,flora,furniture]=await Promise.all([new RGBELoader().loadAsync(rainyEnvironment),materials(),floraModels(),furnitureModels()]);m.furniture=furniture;hdr.mapping=T.EquirectangularReflectionMapping;
+ const [hdr,m,flora,furniture]=await Promise.all([resourceBytes(rainyEnvironment).then(bytes=>{const hdr=new RGBELoader().parse(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength));return new T.DataTexture(hdr.data,hdr.width,hdr.height,T.RGBAFormat,hdr.type);}),materials(),floraModels(),furnitureModels()]);canvas.dataset.assetsMs=Math.round(performance.now()-started);m.furniture=furniture;hdr.colorSpace=T.LinearSRGBColorSpace;hdr.minFilter=hdr.magFilter=T.LinearFilter;hdr.flipY=true;hdr.generateMipmaps=false;hdr.needsUpdate=true;hdr.mapping=T.EquirectangularReflectionMapping;
  const pmrem=new T.PMREMGenerator(renderer),envTarget=pmrem.fromEquirectangular(hdr);scene.environment=envTarget.texture;scene.environmentRotation.y=.8;hdr.dispose();pmrem.dispose();
  const a=architecture(scene,m);batchArchitecture(a,m);const garden=landscape(scene,m,a,flora);
  RectAreaLightUniformsLib.init();const windowBounce=[-9,-5,-1].map(x=>{const light=new T.RectAreaLight('#d4e0e4',1.9,3.25,2.8);light.position.set(x,2.35,-.9);light.lookAt(x,2,-7.5);scene.add(light);return light;});
- const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const ao=new SSAOPass(scene,camera,800,600,16);ao.kernelRadius=.75;ao.minDistance=.001;ao.maxDistance=.065;composer.addPass(ao);const bloom=new UnrealBloomPass(new T.Vector2(800,600),.13,.35,1.25);composer.addPass(bloom);composer.addPass(new OutputPass());
+ canvas.dataset.sceneBuildMs=Math.round(performance.now()-started);const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const ao=new SSAOPass(scene,camera,800,600,16);ao.kernelRadius=.75;ao.minDistance=.001;ao.maxDistance=.065;composer.addPass(ao);const bloom=new UnrealBloomPass(new T.Vector2(800,600),.13,.35,1.25);composer.addPass(bloom);composer.addPass(new OutputPass());
  let detailZone=false;let walking=false,yaw=0,pitch=0,day=1,targetDay=1,quality=true,drag=null,last=performance.now(),elapsed=0,visible=true,lookIdle=0;const input={},night=new T.Color('#172b3e'),dayColor=new T.Color('#c4cec7');
  function fitOverview(){const portrait=camera.aspect<.85;controls.target.set(0,1.1,0);if(portrait){const distance=34/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.aspect)*1.10;camera.position.set(0,1.1+distance*.86,distance*.51);}else{const scale=Math.max(1,1.25/camera.aspect);camera.position.set(27*scale,1.1+18.9*scale,31*scale);}controls.update();}
  function resize(){const rect=canvas.parentElement.getBoundingClientRect();const width=preview?1280:rect.width,height=preview?Math.round(1280*rect.height/Math.max(1,rect.width)):rect.height;renderer.setSize(width,height,false);camera.aspect=rect.width/rect.height;if(!walking)fitOverview();camera.updateProjectionMatrix();composer.setSize(width,height);ao.setSize(Math.min(width,1000),Math.min(height,750));if(preview)composer.render();}

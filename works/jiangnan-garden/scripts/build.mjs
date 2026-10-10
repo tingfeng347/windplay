@@ -3,11 +3,12 @@ import {readFile,mkdir,writeFile,rm} from 'node:fs/promises';
 import {dirname,resolve,basename,extname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 import {imageAsset,modelAsset,bakedCloth} from './optimize-assets.mjs';
 export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex').slice(0,16);
 let cloth;
-export async function compile(online=false){
+export async function compile(online=false,{assetBase=process.env.WINDPLAY_GARDEN_ASSET_BASE}={}){
  const assets=new Map(),initialAssets=new Set();
  function asset(bytes,name,type,deferred=false){
   if(!online)return `data:${type};base64,${Buffer.from(bytes).toString('base64')}`;
@@ -39,9 +40,23 @@ export async function compile(online=false){
    });
   }}]})
  ]);
+ let packFile;
+ if(online){
+  const entries={},chunks=[];let offset=0;
+  for(const file of [...initialAssets].sort())if(/\.(webp|jpg|png|hdr)$/.test(file)){
+   const bytes=assets.get(file);entries[file]={offset,size:bytes.length};chunks.push(bytes);offset+=bytes.length;assets.delete(file);initialAssets.delete(file);
+  }
+  const header=Buffer.from(JSON.stringify(entries)),length=Buffer.alloc(4);length.writeUInt32LE(header.length);
+  const packed=gzipSync(Buffer.concat([length,header,...chunks]),{level:9});packFile=`assets/initial-${hash(packed)}.pack.gz`;assets.set(packFile,packed);initialAssets.add(packFile);
+ }
  const script=result.outputFiles[0].text;
  let html=template.replace('<link rel="stylesheet" href="styles.css">',()=>`<style>${css}</style>`);
- if(online){const file=`assets/app-${hash(script)}.js`;assets.set(file,Buffer.from(script));initialAssets.add(file);html=html.replace('<script type="module" src="app.js"></script>',()=>`<script defer src="${file}"></script>`);}
+ if(online){
+  let metadata=`<meta name="windplay-asset-pack" content="${packFile}">`;
+  const configured=assetBase;
+  if(configured){const base=new URL(configured);if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash)throw new Error('CDN base must be a public HTTPS directory URL');if(!base.pathname.endsWith('/'))base.pathname+='/';metadata+=`<meta name="windplay-asset-base" content="${base.href.replaceAll('&','&amp;').replaceAll('"','&quot;')}"><link rel="preconnect" href="${base.origin}" crossorigin>`;}
+  html=html.replace('</head>',metadata+'</head>');
+  const file=`assets/app-${hash(script)}.js`;assets.set(file,Buffer.from(script));initialAssets.add(file);html=html.replace('<script type="module" src="app.js"></script>',()=>`<script defer src="${file}"></script>`);}
  else html=html.replace('<script type="module" src="app.js"></script>',()=>`<script>${script.replace(/<\/script/gi,'<\\/script')}</script>`);
  if(/__[A-Z0-9_]+__/.test(html.replace(/__THREE(?:_DEVTOOLS)?__/g,'')))throw new Error('Unresolved build token');
  return {html,assets,initialAssets};
@@ -53,7 +68,7 @@ export async function build(write=true){
   for(const dir of ['demo','dist']){await mkdir(resolve(root,dir),{recursive:true});await writeFile(resolve(root,dir,'index.html'),offline.html);}
   const output=resolve(root,'dist/web');await rm(output,{recursive:true,force:true});await mkdir(output,{recursive:true});await writeFile(resolve(output,'index.html'),web.html);
   for(const [file,bytes] of web.assets){await mkdir(dirname(resolve(output,file)),{recursive:true});await writeFile(resolve(output,file),bytes);}
-  const report={entryBytes:Buffer.byteLength(web.html),initialResourceBytes:[...web.initialAssets].reduce((n,file)=>n+web.assets.get(file).length,0),resourceBytes:[...web.assets.values()].reduce((n,b)=>n+b.length,0),files:web.assets.size,offlineBytes:Buffer.byteLength(offline.html)};
+  const report={entryBytes:Buffer.byteLength(web.html),initialResourceBytes:[...web.initialAssets].reduce((n,file)=>n+web.assets.get(file).length,0),resourceBytes:[...web.assets.values()].reduce((n,b)=>n+b.length,0),files:web.assets.size,initialRequests:web.initialAssets.size,offlineBytes:Buffer.byteLength(offline.html)};
   await writeFile(resolve(root,'dist/loading-report.json'),JSON.stringify(report,null,2));console.log('Garden loading:',report);
  }
  return offline.html;

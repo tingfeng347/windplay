@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "ceramic",
+    "color": "#b9c2ae",
+    "seed": 519,
+    "hashes": [
+      "48f844183e19ba7af742aaddc6e86504b6b9a89e58eae0451a6b2b8e40995a89",
+      "84a74cbe6772463ee292867476760a82054cdc6a453ab9d9c5c8ed3894efdf31",
+      "2076f7693a0531d61a7449ea50689e53f0b3bb693552f1d9a7f381ae22888ae0"
+    ]
+  },
+  {
+    "kind": "paper",
+    "color": "#d4c9ab",
+    "seed": 3760194055,
+    "hashes": [
+      "7c87f4d7bb6977aca854cb67cd14ed8cdd66901b7df6bbc4ac3721c62e118b98",
+      "40754040ebf145f7bc017af4ec7b45bdcf5dd76b833954938eb9a01311d7d94e",
+      "f347783d83f32e6a3dd0d716610d48ed4709c1d1417848d1cb44a71a24fee3b1"
+    ]
+  },
+  {
+    "kind": "stone",
+    "color": "#556c37",
+    "seed": 3225420295,
+    "hashes": [
+      "6c75ab45dfcefa00a15e441a89825d94aa79b3da0601d95cd511526fb57a6398",
+      "dbc80039f7844c51858118d3e8035aea7a2ab23e3af078f6dea69fa1020891f5",
+      "3bccc24e54710806b4a92bb68fcb56e611129e73722a106b80c1fcec5e148ccb"
+    ]
+  },
+  {
+    "kind": "linen",
+    "color": "#aa9c7c",
+    "seed": 2690646535,
+    "hashes": [
+      "1c787cc062ec85e8e98469f21f2b4ebf6e57e3339f218924cae4a888c0e545c0",
+      "57b3473ab45caeb44a63c7c645fe50d4181befed2b29039d719018bc98ac9e89",
+      "5daa1c034dec4d3517f4abb2def53683504b54cf18e552ed1f6d1bdb2d173e7a"
+    ]
+  },
+  {
+    "kind": "linen",
+    "color": "#71624c",
+    "seed": 2423259655,
+    "hashes": [
+      "e3dff7f2c0600a45820fe94d51e0cc16af969b80cff466d4f83db19ae5858286",
+      "57b3473ab45caeb44a63c7c645fe50d4181befed2b29039d719018bc98ac9e89",
+      "5daa1c034dec4d3517f4abb2def53683504b54cf18e552ed1f6d1bdb2d173e7a"
+    ]
+  },
+  {
+    "kind": "linen",
+    "color": "#4b535c",
+    "seed": 2155872775,
+    "hashes": [
+      "78ba9f0accea577680d87abdf50ce882efb5267d0beee3299ea1237306acd916",
+      "57b3473ab45caeb44a63c7c645fe50d4181befed2b29039d719018bc98ac9e89",
+      "5daa1c034dec4d3517f4abb2def53683504b54cf18e552ed1f6d1bdb2d173e7a"
+    ]
+  },
+  {
+    "kind": "linen",
+    "color": "#50493e",
+    "seed": 1888485895,
+    "hashes": [
+      "7d64ef4eb9bf9e83cb5130e378d255faf810600a105cf2f2b1e9e95c39e01f9e",
+      "57b3473ab45caeb44a63c7c645fe50d4181befed2b29039d719018bc98ac9e89",
+      "5daa1c034dec4d3517f4abb2def53683504b54cf18e552ed1f6d1bdb2d173e7a"
+    ]
+  },
+  {
+    "kind": "linen",
+    "color": "#465148",
+    "seed": 1621099015,
+    "hashes": [
+      "f08fdd41cbebd9c4083ce87c6c268a77fab38efdb9f34c8218feaa4c7650afed",
+      "57b3473ab45caeb44a63c7c645fe50d4181befed2b29039d719018bc98ac9e89",
+      "5daa1c034dec4d3517f4abb2def53683504b54cf18e552ed1f6d1bdb2d173e7a"
+    ]
+  },
+  {
+    "kind": "ceramic",
+    "color": "#afc4ad",
+    "seed": 1353712135,
+    "hashes": [
+      "14ad5e1f89b3eee03ba19f592c905903a0ec10d10e6cf6e7c6294e7a261e32be",
+      "d44a40b529cace259888744f59c7c38ff20cd5c4dc1ec9ec10a460de53cdc25e",
+      "9ba310e57c66c7b94e44b915fd8c23138c68374234b0db3227ac0d0c5c7a70ce"
+    ]
+  }
+]
