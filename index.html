@@ -43,16 +43,17 @@
   <main class="container">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-      <h1 id="hero-title">把好奇心，<br>放进浏览器。</h1>
+      <h1 id="hero-title">把好奇心，<br><span class="hero-emphasis">放进浏览器。<svg viewBox="0 0 460 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 17C115 2 290 2 449 12M362 18l87-6-17 9"/></svg></span></h1>
       <p class="hero-note">点云、影像、跑酷、枪战，还有自由探索的世界。<br>打开一个作品，动手玩一会儿。</p>
       <div class="hero-actions"><a class="button primary-button" href="#works">
         探索作品
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a></div>
+      </a><button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" hidden>暂停动效</button></div>
       </div>
 
       <div class="hero-art" id="hero-art" role="group" aria-label="十二个作品的互动缩略图画廊">
         <div class="art-stage" id="art-stage">
+          <canvas class="hero-wind" id="hero-wind" aria-hidden="true"></canvas>
           <svg class="art-wind" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden="true"><path class="wind-trail" d="M-60 455C160 455 80 90 350 90s70 450 370 450 110-380 340-380 140 260 240 260"/><path class="art-progress" pathLength="1" d="M-60 455C160 455 80 90 350 90s70 450 370 450 110-380 340-380 140 260 240 260"/></svg>
           <span class="art-word" aria-hidden="true">Play.</span>
           <div class="art-field">
@@ -119,7 +120,7 @@
             </a>
 
           </div>
-          <p class="art-caption"><span>十二个小世界，随风展开。</span><span class="art-controls"><span class="scroll-note">继续滚动，看作品展开<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span><button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" hidden>暂停动效</button></span></p>
+          <p class="art-caption"><span>十二个小世界，随风展开。</span><span class="art-controls"><span class="scroll-note">继续滚动，看作品展开<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></span></p>
         </div>
       </div>
     </section>
@@ -372,6 +373,7 @@
 
   </script>
   <script src="scripts/launcher-motion.js"></script>
+  <script src="scripts/hero-wind.js"></script>
   <script src="scripts/corridor-motion.js"></script>
 </body>
 </html>
