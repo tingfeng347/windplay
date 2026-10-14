@@ -82,8 +82,6 @@
   let elapsedTime = 0;
   let drag = null;
   let moved = null;
-  let previewsWanted = false;
-  let previewsWarmed = false;
 
   function property(element, name, value) {
     let values = written.get(element);
@@ -176,6 +174,7 @@
 
     if (nearest !== activeIndex) {
       activeIndex = nearest;
+      document.dispatchEvent(new CustomEvent('windplay:previewchange', { detail: nearest }));
       cards.forEach((card, index) => card.element.classList.toggle('is-live', index === nearest));
       for (let index = 0; index < ticks.length; index += 1) {
         ticks[index].classList.toggle('is-on', index === nearest);
@@ -236,6 +235,9 @@
     const next = clamp(progress, 0, 1);
     if (next === target.progress) return;
     target.progress = next;
+    const destination = cards.reduce((best, card, index) =>
+      Math.abs(card.t - next) < Math.abs(cards[best].t - next) ? index : best, 0);
+    document.dispatchEvent(new CustomEvent('windplay:previewchange', { detail: destination }));
     begin();
   }
 
@@ -319,32 +321,6 @@
       render();
     }).catch(drop);
   }
-
-  // The band is a carousel, so any work can be asked for at any moment and none of the ten bitmaps
-  // can be left to arrive on demand. Left lazy, a work begins downloading at the instant it slides
-  // into frame — which is the one moment in the interaction when there is no time to spare, and the
-  // reason a swipe could stutter while the pictures caught up. They are asked for, and decoded, while
-  // the band is still a screen or more away, and only once the ribbon is actually in play: on a page
-  // that never reaches the band, or one that has been asked to hold still, nothing is fetched.
-  //
-  // The page itself goes first. The band sits less than a screen below the hero, so it is already
-  // "near" the moment the page opens, and warming on that alone would have ten pictures competing
-  // with the two the reader is actually looking at.
-  function warmPreviews() {
-    if (previewsWarmed || !previewsWanted || !enabled()) return;
-    if (document.readyState !== 'complete') return;
-    previewsWarmed = true;
-    for (const image of grid.querySelectorAll('img')) {
-      image.loading = 'eager';
-      image.decode?.().catch(() => {});
-    }
-  }
-
-  const warmth = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    previewsWanted = true;
-    warmPreviews();
-  }, { rootMargin: '150% 0px' });
 
   // A wheel event, in pixels, along whichever axis the gesture leans on — a trackpad swiping sideways
   // across the band means the same thing there as a wheel does.
@@ -433,7 +409,6 @@
     // longer belong to, so they are cleared rather than merely ignored.
     if (!enabled()) {
       current.velocity = 0;
-      warmth.unobserve(grid);
       for (const card of cards) {
         card.transform = '';
         card.element.style.transform = '';
@@ -447,7 +422,6 @@
     activeIndex = -1;
     current.progress = target.progress;
     current.velocity = 0;
-    warmth.observe(grid);
     // The band's own size is what the geometry is measured against, so measure only after the
     // attribute has landed. If the measurement trips over something, the band is put back rather
     // than left as ten cards stacked on one another.
@@ -479,8 +453,6 @@
   window.addEventListener('resize', invalidateGeometry, { passive: true });
   window.addEventListener('load', () => {
     invalidateGeometry();
-    // Now that the page has everything it was waiting for, the band's ten bitmaps may go.
-    warmPreviews();
   }, { once: true });
   document.fonts?.ready.then(invalidateGeometry);
   document.addEventListener('visibilitychange', () => {

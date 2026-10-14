@@ -22,7 +22,7 @@ test('启动台链接所有公开作品的完整成品', async () => {
 
 test('启动台可以通过文件协议完整加载', async () => {
   const homepage = await readFile(path.join(root, 'index.html'), 'utf8');
-  const preview = 'assets/point-cloud-studio-preview.png';
+  const preview = 'assets/launcher/point-cloud-studio-preview-480.webp';
 
   assert.doesNotMatch(homepage, /(?:href|src)=["']\//, '本地入口必须使用相对路径');
   assert.doesNotMatch(homepage, /__[A-Z0-9_]+__/, '启动台不能含有构建占位符');
