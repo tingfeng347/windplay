@@ -23,4 +23,9 @@ test('shared trees retain placement, shader deformation, and depth/distance shad
  a.updateMatrix();template.updateMatrixWorld();const expected=new T.Matrix4().multiplyMatrices(a.matrix,source.matrixWorld),actual=new T.Matrix4();mesh.getMatrixAt(0,actual);for(let i=0;i<16;i++)assert.ok(Math.abs(actual.elements[i]-expected.elements[i])<1e-6);
  for(const material of [mesh.material,mesh.customDepthMaterial,mesh.customDistanceMaterial]){const shader={vertexShader:'#include <begin_vertex>\n#include <beginnormal_vertex>'};material.onBeforeCompile(shader);assert.match(shader.vertexShader,/treeBend\*position.y\*position.y/);}
  assert.ok(b.position.x===-2);
+ const overview=mesh.geometry,full=new T.Group();full.add(new T.Mesh(new T.BoxGeometry(1,1,1,3,3,3),source.material));
+ trees.detail(full);assert.equal(mesh.geometry,overview,'Loading detail alone does not override smooth quality');
+ assert.equal(trees.setDetail(true),true);const detailed=mesh.geometry;assert.ok(detailed.getAttribute('position').count>overview.getAttribute('position').count);
+ assert.equal(detailed.getAttribute('treeBend'),overview.getAttribute('treeBend'));
+ assert.equal(trees.setDetail(false),false);assert.equal(mesh.geometry,overview);trees.setDetail(true);assert.equal(mesh.geometry,detailed,'Re-enabling quality reuses the decoded mesh');
 });

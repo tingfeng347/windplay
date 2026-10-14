@@ -4,7 +4,7 @@
 
 开发需要 Node.js 22+，在仓库根目录运行 `npm ci`。作品使用仓库已有的 Three.js 与 esbuild；离线成品内联授权贴图、HDRI 和模型，在线成品默认同源，也可配置公开 CDN 镜像，并按观察距离补充细节。
 
-`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.19 MiB；同时输出在线目录 dist/web，入口 10,868 B、首批资源 11.00 MiB、7 个资源请求（不含 HTML）。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
+`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.19 MiB；同时输出在线目录 dist/web，入口 10,846 B、首批资源 11.00 MiB、7 个资源请求（不含 HTML）。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
 
 ## 可选 CDN
 
@@ -20,7 +20,7 @@ GitHub Pages 自动构建也可在仓库 Actions Variables 中设置 `GARDEN_ASS
 
 CDN 地址是可选构建配置，本仓库没有代建 CDN 服务或默认外部域名。公网效果需在镜像发布后测量，当前本机样本不支持稳定提速比例。
 
-需要支持 WebGL 2、启用硬件加速的现代 Chrome、Edge、Firefox 或 Safari。较慢的设备可使用“流畅画质”，关闭屏幕空间环境遮蔽和泛光并降低像素比与阴影分辨率。精细模式首次载入需生成纹理并编译多种材质，实际载入时间随设备、材质编译缓存和画质而变，较慢设备可能更久。画面品质依赖设备；当前采用浏览器实时光栅化、实拍 PBR 与真实植物及家具几何；质量验收结论单独记录在 [QUALITY.md](QUALITY.md)。
+需要支持 WebGL 2、启用硬件加速的现代 Chrome、Edge、Firefox 或 Safari。较慢的设备可使用“流畅画质”（手机端也可切换），关闭屏幕空间环境遮蔽和泛光、降低像素比与阴影分辨率，并使用 512px 预览贴图和远景树网格，不再请求高清细节。切回精细画质后按当前房间、视野与距离补充细节；已下载的资源复用缓存。精细模式首次载入需生成纹理并编译多种材质，实际载入时间随设备、材质编译缓存和画质而变，较慢设备可能更久。画面品质依赖设备；当前采用浏览器实时光栅化、实拍 PBR 与真实植物及家具几何；质量验收结论单独记录在 [QUALITY.md](QUALITY.md)。
 
 ## 游园
 
@@ -70,7 +70,8 @@ PBR 材质使用 metallic-roughness 工作流，非金属材质的 metalness 为
 - src/surface-pixels.js：与原算法逐字节相同的 1024px 程序纹理、LCG 跳步及最多两个 Worker 的生成/回退。
 - src/resource-loader.js：初始资源包解压、内容哈希缓存、可选 CDN 和同源回退、临时 URL 释放。
 - src/offline-gltf.js：内联或同源几何 gzip 解压、Meshopt 解码、GLTFLoader 解析和临时 URL 释放。
-- src/texture-streaming.js：512px 预览纹理登记、原分辨率纹理延后升级和状态保留。
+- src/detail-selection.js：缓存原始构件与植物实例范围，按房间、视野、距离和可见性筛选高清资源。
+- src/texture-streaming.js：512px 预览纹理登记、随视角更新的四路加载队列、原分辨率升级、失败重试和画质回退。
 - src/tree-instances.js：共享树网格、GPU 弯曲与一致的深度/距离阴影。
 - src/flora-models.js：真实乔木整体弯曲、四种蕨类和 Shrub 04 的实例化与提交。
 - src/furniture-models.js：完整授权椅与桌模型的物理材质、尺寸适配和放置。

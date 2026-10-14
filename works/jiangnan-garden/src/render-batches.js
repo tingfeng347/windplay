@@ -40,7 +40,7 @@ export function batchArchitecture(a,m){
    }
    g.applyMatrix4(new T.Matrix4().multiplyMatrices(inverse,o.matrixWorld));
    if(!sets.has(o.material))sets.set(o.material,[]);sets.get(o.material).push(g);
-   o.visible=false;
+   o.visible=false;o.userData.detailProxy=true;
   });
   for(const [material,geometries] of sets){
    const mesh=new T.Mesh(mergeGeometries(geometries),material);
