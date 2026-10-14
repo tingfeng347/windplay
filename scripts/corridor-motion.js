@@ -163,6 +163,12 @@
       const travel = side * spread * trip(reach) + lean * (1 - reach);
       const scale = 1 - FOCUS * smooth(reach);
 
+      // Defocus the arriving cover, then resolve it as travel settles. Velocity
+      // also clears a card stopped between positions; no timer can leave it blurry.
+      const blur = mode === 'active' && warm
+        ? 8 * smooth(reach) * Math.min(1, Math.abs(current.velocity) / spacing / 4) : 0;
+      property(card.element, '--preview-blur', `${blur.toFixed(2)}px`);
+
       // Written straight onto the card: transform composites and is not inherited, so the two works
       // that are moving are the only thing a frame repaints.
       const transform = `translate(-50%,-50%) translateX(${travel.toFixed(1)}px) scale(${scale.toFixed(4)})`;
@@ -412,6 +418,7 @@
       for (const card of cards) {
         card.transform = '';
         card.element.style.transform = '';
+        property(card.element, '--preview-blur', '0.00px');
         card.element.classList.remove('is-near', 'is-live');
         card.warm = false;
       }

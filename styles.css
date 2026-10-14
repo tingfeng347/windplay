@@ -257,6 +257,13 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   transform: scale(1.06);
   will-change: auto;
 }
+/* Only the two passing covers defocus; labels and controls stay readable. */
+.catalog[data-motion="active"] .work-card.is-near .preview-image img {
+  filter: blur(var(--preview-blur, 0px));
+}
+.catalog[data-motion="active"][data-moving="true"] .work-card.is-near .preview-image img {
+  will-change: filter;
+}
 .catalog:is([data-motion="active"],[data-motion="paused"]) .corridor-caption {
   position: absolute;
   inset: auto 0 0;

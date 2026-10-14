@@ -8,6 +8,12 @@
 - 临界行动：`works/strike-arena/assets/preview.svg` → `assets/strike-arena-preview.svg`。
 - 两图均为 1600 × 900，16:9。源资产与启动台副本内容相同。
 
+## 中文封面与构建字库
+
+余烬荒野的可编辑插画保留在 `works/ember-wilds/assets/preview.svg`。启动台的 `assets/ember-wilds-preview.svg` 将标题、英文副标题及两行说明固化为字形路径（宋体与 Georgia Italic），并保留文字标签。这样 Linux 发布环境没有中文字库时也不会把中文栅格化成字符编码方框。
+
+更新封面文字时，应在具备对应字体的绘图工具中将文字转为轮廓，再更新启动台 SVG；不要把仍含 `<text>` 的版本直接交给图片构建器。构建会拒绝依赖运行环境字体的 SVG。之后运行 `npm run build:images`，提交 SVG、WebP、清单和首页引用。
+
 ## 调整范围
 
 城市疾跑保留原城市背景、夕阳、金币和跑者。轨道、枕木、支架与列车使用同一个透视投影；车头保持竖直，侧窗沿车厢侧面排列，车身色带在转角处连续，车轮与阴影落在右侧轨道上。相关 SVG 分组为 `tracks`、`gantries` 和 `train`。

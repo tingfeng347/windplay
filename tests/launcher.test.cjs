@@ -22,11 +22,11 @@ test('启动台链接所有公开作品的完整成品', async () => {
 
 test('启动台可以通过文件协议完整加载', async () => {
   const homepage = await readFile(path.join(root, 'index.html'), 'utf8');
-  const preview = 'assets/launcher/point-cloud-studio-preview-480.webp';
+  const preview = homepage.match(/src="(assets\/launcher\/point-cloud-studio-preview-480-[a-f0-9]{10}\.webp)"/)?.[1];
 
   assert.doesNotMatch(homepage, /(?:href|src)=["']\//, '本地入口必须使用相对路径');
   assert.doesNotMatch(homepage, /__[A-Z0-9_]+__/, '启动台不能含有构建占位符');
-  assert.match(homepage, new RegExp(`src=["']${preview}["']`));
+  assert.ok(preview, '预览图使用带内容版本的本地图片');
   await access(path.join(root, preview));
   const assets = [...homepage.matchAll(/(?:src|href)=["']((?:assets\/[^"']+|scripts\/[^"']+\.js|styles\.css))["']/g)]
     .map(match => match[1]);

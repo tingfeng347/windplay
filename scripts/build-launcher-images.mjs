@@ -24,13 +24,16 @@ for (const [tag, source] of images) {
 for (const [source, widths] of needed) {
   if (!source.startsWith('assets/') || source.split('/').includes('..')) throw new Error(`Invalid source: ${source}`);
   const bytes = await readFile(resolve(root, source));
+  if (extname(source) === '.svg' && /<text\b/i.test(bytes.toString('utf8'))) {
+    throw new Error(`${source}: outline SVG lettering before rasterizing; build machines may have no CJK fonts`);
+  }
   const metadata = await sharp(bytes).metadata();
   const stem = source.slice(7, -extname(source).length).replaceAll('/', '-');
   const variants = [];
   for (const width of [...new Set([...widths].map(width => Math.min(width, metadata.width)))].sort((a, b) => a - b)) {
     const { data, info } = await sharp(bytes).resize({ width, withoutEnlargement: true })
       .webp({ quality: settings.quality }).toBuffer({ resolveWithObject: true });
-    const file = `assets/launcher/${stem}-${info.width}.webp`;
+    const file = `assets/launcher/${stem}-${info.width}-${digest(data).slice(0, 10)}.webp`;
     await writeFile(resolve(root, file), data);
     variants.push({ file, width: info.width, height: info.height, bytes: data.length, sha256: digest(data) });
   }

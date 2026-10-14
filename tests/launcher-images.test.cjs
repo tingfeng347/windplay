@@ -29,6 +29,7 @@ test('原图、派生图片和页面引用一致，所有候选尺寸均可离�
     for (const variant of entry.variants) {
       const bytes = await readFile(path.join(root, variant.file));
       assert.equal(hash(bytes), variant.sha256, `${variant.file} 已变化，请重新生成`);
+      assert.ok(variant.file.endsWith(`-${hash(bytes).slice(0, 10)}.webp`), '图片内容变化后必须更新缓存地址');
       assert.equal(bytes.length, variant.bytes);
       const metadata = await sharp(bytes).metadata();
       assert.equal(metadata.width, variant.width);
@@ -144,4 +145,13 @@ test('减少动态模式只升级可见卡片，暂停模式仍可浏览相邻�
   assert.equal(app.requests.length, 3);
   app.seek(11);
   assert.equal(app.requests.length, 5);
+});
+
+test('SVG 封面字形不依赖发布机器安装的字体', async () => {
+  const html = await readFile(path.join(root, 'index.html'), 'utf8');
+  const sources = new Set([...html.matchAll(/data-image-source="([^"]+\.svg)"/g)].map(match => match[1]));
+  for (const source of sources) {
+    const svg = await readFile(path.join(root, source), 'utf8');
+    assert.doesNotMatch(svg, /<text\b/, `${source} 的文字应转为路径，避免 Linux 构建缺少中文字库时输出方框`);
+  }
 });

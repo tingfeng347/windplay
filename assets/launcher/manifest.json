@@ -19,35 +19,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-prism-path-320.webp",
+          "file": "assets/launcher/screenshots-prism-path-320-41eb2cf2fd.webp",
           "width": 320,
           "height": 200,
           "bytes": 2672,
           "sha256": "41eb2cf2fd97a8e72912ba85393d22ac9424c5856b4208efdf7e2a900341baab"
         },
         {
-          "file": "assets/launcher/screenshots-prism-path-480.webp",
+          "file": "assets/launcher/screenshots-prism-path-480-3eb7d0afef.webp",
           "width": 480,
           "height": 300,
           "bytes": 4948,
           "sha256": "3eb7d0afefaabb0b4114c52a982b16d3ab8f0eeccafd837dfd06e64cfacf69ab"
         },
         {
-          "file": "assets/launcher/screenshots-prism-path-640.webp",
+          "file": "assets/launcher/screenshots-prism-path-640-034076dadf.webp",
           "width": 640,
           "height": 400,
           "bytes": 7576,
           "sha256": "034076dadfb8c8da6a27ff23f527ad9b66a0845f93b4d3b0d9661ea035a57923"
         },
         {
-          "file": "assets/launcher/screenshots-prism-path-960.webp",
+          "file": "assets/launcher/screenshots-prism-path-960-26b3f43929.webp",
           "width": 960,
           "height": 600,
           "bytes": 13774,
           "sha256": "26b3f439292168a49ba16313a48ad94026fcab8da2ed3c1c41dbd555670ecd80"
         },
         {
-          "file": "assets/launcher/screenshots-prism-path-1280.webp",
+          "file": "assets/launcher/screenshots-prism-path-1280-7082068acf.webp",
           "width": 1280,
           "height": 800,
           "bytes": 21722,
@@ -61,35 +61,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-ascii-delve-320.webp",
+          "file": "assets/launcher/screenshots-ascii-delve-320-4f640fb566.webp",
           "width": 320,
           "height": 200,
           "bytes": 2800,
           "sha256": "4f640fb5664193e0e207ba176fbfd4bda46f4de7284be95e32f41ea01053456b"
         },
         {
-          "file": "assets/launcher/screenshots-ascii-delve-480.webp",
+          "file": "assets/launcher/screenshots-ascii-delve-480-3dc3780bb2.webp",
           "width": 480,
           "height": 300,
           "bytes": 4700,
           "sha256": "3dc3780bb250a9b837e91a8fe059a8f59ab0a3af18f0cf77e7dc70e2d0394fe1"
         },
         {
-          "file": "assets/launcher/screenshots-ascii-delve-640.webp",
+          "file": "assets/launcher/screenshots-ascii-delve-640-5e3dc2ffab.webp",
           "width": 640,
           "height": 400,
           "bytes": 7650,
           "sha256": "5e3dc2ffab03b9bc49c98569aee75bd62dffa20dc97425404369675000fc8870"
         },
         {
-          "file": "assets/launcher/screenshots-ascii-delve-960.webp",
+          "file": "assets/launcher/screenshots-ascii-delve-960-fdddb3328a.webp",
           "width": 960,
           "height": 600,
           "bytes": 14154,
           "sha256": "fdddb3328a29128ddbfc17c524059749befed954c96f878810715161e5ae3db4"
         },
         {
-          "file": "assets/launcher/screenshots-ascii-delve-1280.webp",
+          "file": "assets/launcher/screenshots-ascii-delve-1280-ec5cfc1c55.webp",
           "width": 1280,
           "height": 800,
           "bytes": 21392,
@@ -103,21 +103,21 @@
       "height": 1180,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-wind-garden-320.webp",
+          "file": "assets/launcher/screenshots-wind-garden-320-7b2373d192.webp",
           "width": 320,
           "height": 295,
           "bytes": 6188,
           "sha256": "7b2373d1927ef1fd91e8ad2a510e226e8396d98f29b8394c62791d8dc6f33905"
         },
         {
-          "file": "assets/launcher/screenshots-wind-garden-480.webp",
+          "file": "assets/launcher/screenshots-wind-garden-480-b84f909072.webp",
           "width": 480,
           "height": 443,
           "bytes": 11580,
           "sha256": "b84f909072a17b5acdc0c115269267a1a8f23eeb92df163cadfa46ebfa333ad3"
         },
         {
-          "file": "assets/launcher/screenshots-wind-garden-640.webp",
+          "file": "assets/launcher/screenshots-wind-garden-640-f464616cde.webp",
           "width": 640,
           "height": 590,
           "bytes": 17920,
@@ -131,21 +131,21 @@
       "height": 1050,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-shadow-atelier-320.webp",
+          "file": "assets/launcher/screenshots-shadow-atelier-320-7bce74e485.webp",
           "width": 320,
           "height": 263,
           "bytes": 5904,
           "sha256": "7bce74e4856aee2af44d53dd6049705fb6191fed498965d0110fdd97b8b12af5"
         },
         {
-          "file": "assets/launcher/screenshots-shadow-atelier-480.webp",
+          "file": "assets/launcher/screenshots-shadow-atelier-480-7d1d58856a.webp",
           "width": 480,
           "height": 394,
           "bytes": 10214,
           "sha256": "7d1d58856af0d533634f34a311a777edb6dc64f579715d51f2e1282282755213"
         },
         {
-          "file": "assets/launcher/screenshots-shadow-atelier-640.webp",
+          "file": "assets/launcher/screenshots-shadow-atelier-640-f547a91093.webp",
           "width": 640,
           "height": 525,
           "bytes": 15470,
@@ -159,21 +159,21 @@
       "height": 1082,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-metro-rush-320.webp",
+          "file": "assets/launcher/screenshots-metro-rush-320-6ff5982c3e.webp",
           "width": 320,
           "height": 568,
           "bytes": 17750,
           "sha256": "6ff5982c3e7470a8000d47e5aafb9f68af9dc4641e86e67a98f6ef332e1938f2"
         },
         {
-          "file": "assets/launcher/screenshots-metro-rush-480.webp",
+          "file": "assets/launcher/screenshots-metro-rush-480-1f9a7936b2.webp",
           "width": 480,
           "height": 851,
           "bytes": 29136,
           "sha256": "1f9a7936b2aa46fe4aa0f2da45ec8e8d05009d51db00147dce19a6f229b39001"
         },
         {
-          "file": "assets/launcher/screenshots-metro-rush-610.webp",
+          "file": "assets/launcher/screenshots-metro-rush-610-01929ec131.webp",
           "width": 610,
           "height": 1082,
           "bytes": 42540,
@@ -187,21 +187,21 @@
       "height": 1026,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-strike-arena-320.webp",
+          "file": "assets/launcher/screenshots-strike-arena-320-4e587aeed9.webp",
           "width": 320,
           "height": 338,
           "bytes": 7328,
           "sha256": "4e587aeed9b235dfae786910e374ea4bf408502b80fb63b0130dfb423e526916"
         },
         {
-          "file": "assets/launcher/screenshots-strike-arena-480.webp",
+          "file": "assets/launcher/screenshots-strike-arena-480-2ae5d92460.webp",
           "width": 480,
           "height": 508,
           "bytes": 13354,
           "sha256": "2ae5d92460ad80d0d33f8190ba5dfba8dc59424b12398e6140257431bdeb515a"
         },
         {
-          "file": "assets/launcher/screenshots-strike-arena-640.webp",
+          "file": "assets/launcher/screenshots-strike-arena-640-0adfeeb7dc.webp",
           "width": 640,
           "height": 677,
           "bytes": 20832,
@@ -215,21 +215,21 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-voxel-frontier-welcome-320.webp",
+          "file": "assets/launcher/screenshots-voxel-frontier-welcome-320-1353bcd219.webp",
           "width": 320,
           "height": 200,
           "bytes": 8586,
           "sha256": "1353bcd2191224acd679cd19b14224ec963f7befcab99e8e8da08d8620960d04"
         },
         {
-          "file": "assets/launcher/screenshots-voxel-frontier-welcome-480.webp",
+          "file": "assets/launcher/screenshots-voxel-frontier-welcome-480-ee67138211.webp",
           "width": 480,
           "height": 300,
           "bytes": 17476,
           "sha256": "ee671382117ea5ac018489f6eee3b5c3ef1d77d5a266987e8e9a4fe07340a2c9"
         },
         {
-          "file": "assets/launcher/screenshots-voxel-frontier-welcome-640.webp",
+          "file": "assets/launcher/screenshots-voxel-frontier-welcome-640-a1bfc0dba0.webp",
           "width": 640,
           "height": 400,
           "bytes": 28316,
@@ -243,21 +243,21 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-ember-wilds-320.webp",
+          "file": "assets/launcher/screenshots-ember-wilds-320-fc00bd5215.webp",
           "width": 320,
           "height": 200,
           "bytes": 3256,
           "sha256": "fc00bd521515fe3566657c8401fa9bd8c0cf8c66a0841da3caec716b6999c282"
         },
         {
-          "file": "assets/launcher/screenshots-ember-wilds-480.webp",
+          "file": "assets/launcher/screenshots-ember-wilds-480-8f232cdeaa.webp",
           "width": 480,
           "height": 300,
           "bytes": 5288,
           "sha256": "8f232cdeaa1695516c5ff64b7084e9ea244403261810c33f5d303d937a5178dc"
         },
         {
-          "file": "assets/launcher/screenshots-ember-wilds-640.webp",
+          "file": "assets/launcher/screenshots-ember-wilds-640-edcc2ca74b.webp",
           "width": 640,
           "height": 400,
           "bytes": 7942,
@@ -271,21 +271,21 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-point-cloud-studio-320.webp",
+          "file": "assets/launcher/screenshots-point-cloud-studio-320-9607504ad1.webp",
           "width": 320,
           "height": 200,
           "bytes": 7830,
           "sha256": "9607504ad19765cecc3d2aeac533b309d7d09badb19046f06dc1ae8d7980b587"
         },
         {
-          "file": "assets/launcher/screenshots-point-cloud-studio-480.webp",
+          "file": "assets/launcher/screenshots-point-cloud-studio-480-a22ea8bb52.webp",
           "width": 480,
           "height": 300,
           "bytes": 17600,
           "sha256": "a22ea8bb529bb776210120385e9a241003bb635d36c8527cd298baeec6759102"
         },
         {
-          "file": "assets/launcher/screenshots-point-cloud-studio-640.webp",
+          "file": "assets/launcher/screenshots-point-cloud-studio-640-406aa34b31.webp",
           "width": 640,
           "height": 400,
           "bytes": 30540,
@@ -299,35 +299,35 @@
       "height": 1000,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-mario-world-320.webp",
+          "file": "assets/launcher/screenshots-mario-world-320-8f8a0304c2.webp",
           "width": 320,
           "height": 222,
           "bytes": 5400,
           "sha256": "8f8a0304c2decedc4a16e8d8bfc7d28a212e992fa1181fe33e9a0365b147a7e4"
         },
         {
-          "file": "assets/launcher/screenshots-mario-world-480.webp",
+          "file": "assets/launcher/screenshots-mario-world-480-90f3d602f0.webp",
           "width": 480,
           "height": 333,
           "bytes": 9424,
           "sha256": "90f3d602f044fdcc934c0ce1cc01aae18f66ff2e2275c88abc3ffbd99c3f2722"
         },
         {
-          "file": "assets/launcher/screenshots-mario-world-640.webp",
+          "file": "assets/launcher/screenshots-mario-world-640-c8fff4fa2b.webp",
           "width": 640,
           "height": 444,
           "bytes": 13490,
           "sha256": "c8fff4fa2bfa77f1f29d59540d7d22a8f4978b60b5a558cb9131080eb9ce0ce3"
         },
         {
-          "file": "assets/launcher/screenshots-mario-world-960.webp",
+          "file": "assets/launcher/screenshots-mario-world-960-cf22d4813d.webp",
           "width": 960,
           "height": 667,
           "bytes": 23354,
           "sha256": "cf22d4813d73c5db8efe4cdfbab0b45d67644d85863bcb1dfdacc8cb01a91fa8"
         },
         {
-          "file": "assets/launcher/screenshots-mario-world-1280.webp",
+          "file": "assets/launcher/screenshots-mario-world-1280-1882f96d36.webp",
           "width": 1280,
           "height": 889,
           "bytes": 34956,
@@ -341,35 +341,35 @@
       "height": 720,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-new-games-ascii-flight-320.webp",
+          "file": "assets/launcher/screenshots-new-games-ascii-flight-320-8c42e090a2.webp",
           "width": 320,
           "height": 180,
           "bytes": 9790,
           "sha256": "8c42e090a2cd3493d1a8cae34def6c0c40b116c2e1aa9ad634880b06334345e6"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-ascii-flight-480.webp",
+          "file": "assets/launcher/screenshots-new-games-ascii-flight-480-d31266313b.webp",
           "width": 480,
           "height": 270,
           "bytes": 25422,
           "sha256": "d31266313b0c5baaf424cd1e20db4a6bd22da77b6a0666689249da4300f0337c"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-ascii-flight-640.webp",
+          "file": "assets/launcher/screenshots-new-games-ascii-flight-640-7df75b71ee.webp",
           "width": 640,
           "height": 360,
           "bytes": 45002,
           "sha256": "7df75b71eee744f812649381593852e03d633b6a8eab4ea9d9aee85a2b57bfd6"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-ascii-flight-960.webp",
+          "file": "assets/launcher/screenshots-new-games-ascii-flight-960-55c5f94fc5.webp",
           "width": 960,
           "height": 540,
           "bytes": 90510,
           "sha256": "55c5f94fc591560918a258da8aa36f94544ccbacdd909d0d65217bded8ac6658"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-ascii-flight-1280.webp",
+          "file": "assets/launcher/screenshots-new-games-ascii-flight-1280-688ff5d768.webp",
           "width": 1280,
           "height": 720,
           "bytes": 157808,
@@ -383,35 +383,35 @@
       "height": 800,
       "variants": [
         {
-          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-320.webp",
+          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-320-2d81dd0c4e.webp",
           "width": 320,
           "height": 200,
           "bytes": 5878,
           "sha256": "2d81dd0c4eec5da5c4bfc4386395d866ca21408ffc1b283a0108b0b853f812fe"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-480.webp",
+          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-480-71c6ca2a4a.webp",
           "width": 480,
           "height": 300,
           "bytes": 12246,
           "sha256": "71c6ca2a4af20a272d7e8504acf1b2fe9d04d2a85359ea6002f323702b7f70e4"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-640.webp",
+          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-640-0b9943aaab.webp",
           "width": 640,
           "height": 400,
           "bytes": 20460,
           "sha256": "0b9943aaabe7b9470b0b96be14a77b8ea6f74dad3622c9a033a645b932f07ee2"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-960.webp",
+          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-960-a3e622c6e0.webp",
           "width": 960,
           "height": 600,
           "bytes": 43862,
           "sha256": "a3e622c6e0fdf38d121438032f81774884966504dc76a2fee3ffafe5bbd198d9"
         },
         {
-          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-1280.webp",
+          "file": "assets/launcher/screenshots-new-games-jiangnan-garden-1280-7cd7fa9058.webp",
           "width": 1280,
           "height": 800,
           "bytes": 82104,
@@ -425,28 +425,28 @@
       "height": 489,
       "variants": [
         {
-          "file": "assets/launcher/wind-garden-preview-320.webp",
+          "file": "assets/launcher/wind-garden-preview-320-da6bdcbfbc.webp",
           "width": 320,
           "height": 180,
           "bytes": 5094,
           "sha256": "da6bdcbfbc834f54856f72c28ac3d29c21f35bc67a0a28dc2d2d7e585ce86d25"
         },
         {
-          "file": "assets/launcher/wind-garden-preview-480.webp",
+          "file": "assets/launcher/wind-garden-preview-480-948d0cd2a2.webp",
           "width": 480,
           "height": 269,
           "bytes": 8816,
           "sha256": "948d0cd2a2e1bc51fdaeb9818663df2544af40d794ae29b6b33b421d2d11b991"
         },
         {
-          "file": "assets/launcher/wind-garden-preview-640.webp",
+          "file": "assets/launcher/wind-garden-preview-640-9ac57b98cc.webp",
           "width": 640,
           "height": 359,
           "bytes": 13094,
           "sha256": "9ac57b98ccb94d92c0878ffcc8dec7e14fdb0319b24815ce6729f7810f8001fc"
         },
         {
-          "file": "assets/launcher/wind-garden-preview-871.webp",
+          "file": "assets/launcher/wind-garden-preview-871-ce300035f6.webp",
           "width": 871,
           "height": 489,
           "bytes": 20608,
@@ -460,35 +460,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/shadow-atelier-preview-320.webp",
+          "file": "assets/launcher/shadow-atelier-preview-320-5abbc7db23.webp",
           "width": 320,
           "height": 180,
           "bytes": 4568,
           "sha256": "5abbc7db238075e65a51fc58b543ebd623798672b9bf3b7d5e25f13644600aa6"
         },
         {
-          "file": "assets/launcher/shadow-atelier-preview-480.webp",
+          "file": "assets/launcher/shadow-atelier-preview-480-f7a04ffa63.webp",
           "width": 480,
           "height": 270,
           "bytes": 7672,
           "sha256": "f7a04ffa632e6eac9317222f6be6dd2322665efbda741a9909a87fbbf190eb04"
         },
         {
-          "file": "assets/launcher/shadow-atelier-preview-640.webp",
+          "file": "assets/launcher/shadow-atelier-preview-640-2632f76e3b.webp",
           "width": 640,
           "height": 360,
           "bytes": 11278,
           "sha256": "2632f76e3bf7705cb281cdc582807cc1b2797a6e4e4d61939971829ffb3e541a"
         },
         {
-          "file": "assets/launcher/shadow-atelier-preview-960.webp",
+          "file": "assets/launcher/shadow-atelier-preview-960-ef5bfdb635.webp",
           "width": 960,
           "height": 540,
           "bytes": 20134,
           "sha256": "ef5bfdb6359c41d75c993012723af59cfe9fdb21977db608fba2112ffe48c43b"
         },
         {
-          "file": "assets/launcher/shadow-atelier-preview-1280.webp",
+          "file": "assets/launcher/shadow-atelier-preview-1280-423b744fcd.webp",
           "width": 1280,
           "height": 720,
           "bytes": 28660,
@@ -502,35 +502,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/metro-rush-preview-320.webp",
+          "file": "assets/launcher/metro-rush-preview-320-9484d395e2.webp",
           "width": 320,
           "height": 180,
           "bytes": 5942,
           "sha256": "9484d395e2e0a5e4573f4d238165f887748971374159de3e342364c3e967ae23"
         },
         {
-          "file": "assets/launcher/metro-rush-preview-480.webp",
+          "file": "assets/launcher/metro-rush-preview-480-10764286ed.webp",
           "width": 480,
           "height": 270,
           "bytes": 9168,
           "sha256": "10764286ed311c5517861e0382a8b603c9b69b4dc63d984104bb19fa9db261bc"
         },
         {
-          "file": "assets/launcher/metro-rush-preview-640.webp",
+          "file": "assets/launcher/metro-rush-preview-640-bf13515111.webp",
           "width": 640,
           "height": 360,
           "bytes": 12734,
           "sha256": "bf135151116fc6beeb2075068b5644a2506cbd7bcf671cba6749f94a785eae1e"
         },
         {
-          "file": "assets/launcher/metro-rush-preview-960.webp",
+          "file": "assets/launcher/metro-rush-preview-960-3e43ea8710.webp",
           "width": 960,
           "height": 540,
           "bytes": 20208,
           "sha256": "3e43ea87104df8a0f12440586fe2ced21c59768b4928c137e2c9b22309d4e6d1"
         },
         {
-          "file": "assets/launcher/metro-rush-preview-1280.webp",
+          "file": "assets/launcher/metro-rush-preview-1280-473a1e3206.webp",
           "width": 1280,
           "height": 720,
           "bytes": 27772,
@@ -544,35 +544,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/strike-arena-preview-320.webp",
+          "file": "assets/launcher/strike-arena-preview-320-741b963bf1.webp",
           "width": 320,
           "height": 180,
           "bytes": 4120,
           "sha256": "741b963bf17a5159fdb2d4cf11bbc895aaf50244f0a29ca423e94c5e0a985134"
         },
         {
-          "file": "assets/launcher/strike-arena-preview-480.webp",
+          "file": "assets/launcher/strike-arena-preview-480-347d065dd7.webp",
           "width": 480,
           "height": 270,
           "bytes": 6544,
           "sha256": "347d065dd73721b53a450f80a4c363ab262b044b58aa30fa4cb3b6d19ce77e39"
         },
         {
-          "file": "assets/launcher/strike-arena-preview-640.webp",
+          "file": "assets/launcher/strike-arena-preview-640-6d5fa633e9.webp",
           "width": 640,
           "height": 360,
           "bytes": 8778,
           "sha256": "6d5fa633e962a74a8f5c5ec33fb7c2620db2c9718cb6517b0b04af87f8409aca"
         },
         {
-          "file": "assets/launcher/strike-arena-preview-960.webp",
+          "file": "assets/launcher/strike-arena-preview-960-4e89891209.webp",
           "width": 960,
           "height": 540,
           "bytes": 13474,
           "sha256": "4e89891209b4c3a0d07851fed4e55394d577788f92a64ddd18309b45754fddc5"
         },
         {
-          "file": "assets/launcher/strike-arena-preview-1280.webp",
+          "file": "assets/launcher/strike-arena-preview-1280-6b15ba803e.webp",
           "width": 1280,
           "height": 720,
           "bytes": 18126,
@@ -586,35 +586,35 @@
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/voxel-frontier-preview-320.webp",
+          "file": "assets/launcher/voxel-frontier-preview-320-23ae84ea9d.webp",
           "width": 320,
           "height": 180,
           "bytes": 6912,
           "sha256": "23ae84ea9d4abfcd99d248b4a1da2552ab11b1ac1cd1e1160ac8dc22893704e7"
         },
         {
-          "file": "assets/launcher/voxel-frontier-preview-480.webp",
+          "file": "assets/launcher/voxel-frontier-preview-480-e173c136c8.webp",
           "width": 480,
           "height": 270,
           "bytes": 12624,
           "sha256": "e173c136c8d8537ed57a9d21b94a86a5e1d66e863bbc46aa39e1a95d677fef98"
         },
         {
-          "file": "assets/launcher/voxel-frontier-preview-640.webp",
+          "file": "assets/launcher/voxel-frontier-preview-640-dc316fe112.webp",
           "width": 640,
           "height": 360,
           "bytes": 19468,
           "sha256": "dc316fe112feef65b86b798f5b35358e8488a7413ce8cc9a96941a396dd1a1bc"
         },
         {
-          "file": "assets/launcher/voxel-frontier-preview-960.webp",
+          "file": "assets/launcher/voxel-frontier-preview-960-756da8fe6e.webp",
           "width": 960,
           "height": 540,
           "bytes": 36238,
           "sha256": "756da8fe6e8223fc2ed78b34de3dbd0b4adadb94b1dff17c8d08aaecea8b9060"
         },
         {
-          "file": "assets/launcher/voxel-frontier-preview-1280.webp",
+          "file": "assets/launcher/voxel-frontier-preview-1280-b97782ee9f.webp",
           "width": 1280,
           "height": 720,
           "bytes": 54820,
@@ -623,44 +623,44 @@
       ]
     },
     "assets/ember-wilds-preview.svg": {
-      "sha256": "7532d5685adbf62f7499fddc06d59e3639ec94a6dcb30e3fe3e5ad2dc8b82ab1",
+      "sha256": "48cdd7dddfbb2d1eabb91e3ac043e4b4c226bd23b2226ebe58f9ae6d0e806fba",
       "width": 1600,
       "height": 900,
       "variants": [
         {
-          "file": "assets/launcher/ember-wilds-preview-320.webp",
+          "file": "assets/launcher/ember-wilds-preview-320-73c1ec14b5.webp",
           "width": 320,
           "height": 180,
-          "bytes": 4132,
-          "sha256": "ebc6a5b989a4e5639fbc5c1215b112517ee6704d955117785cfb09d23a015037"
+          "bytes": 4122,
+          "sha256": "73c1ec14b5c542045deb7729fe0d6ac20def137fd346b4c342f976b009b02791"
         },
         {
-          "file": "assets/launcher/ember-wilds-preview-480.webp",
+          "file": "assets/launcher/ember-wilds-preview-480-b07dfe55e9.webp",
           "width": 480,
           "height": 270,
-          "bytes": 7192,
-          "sha256": "f45859beabf8aac34a723ddc86eee8dfdf2e1948ac5498df111a70778e0f3c32"
+          "bytes": 7242,
+          "sha256": "b07dfe55e9460e8954dc3bf7871ee57752707e18d43b7c34cf24b927d232a316"
         },
         {
-          "file": "assets/launcher/ember-wilds-preview-640.webp",
+          "file": "assets/launcher/ember-wilds-preview-640-eab077c3e7.webp",
           "width": 640,
           "height": 360,
-          "bytes": 10392,
-          "sha256": "ffa8002d5e0e1ce3572c3edcbbdcd68a7c0617355f555f858735db537607b132"
+          "bytes": 10564,
+          "sha256": "eab077c3e7db00fcfe95ef5e57d93379808f9324a7edd085653d62dfc6fa3b74"
         },
         {
-          "file": "assets/launcher/ember-wilds-preview-960.webp",
+          "file": "assets/launcher/ember-wilds-preview-960-04d4e32659.webp",
           "width": 960,
           "height": 540,
-          "bytes": 17412,
-          "sha256": "ee3f6caa3dc09e3bd9c96b7e86371611d5bcef01fbf1ae6f05627bc1aa2de98b"
+          "bytes": 17630,
+          "sha256": "04d4e3265985157d7877d6f161aa2279ccf1f558b9a3f61686b2caaa89cb041e"
         },
         {
-          "file": "assets/launcher/ember-wilds-preview-1280.webp",
+          "file": "assets/launcher/ember-wilds-preview-1280-10be33665a.webp",
           "width": 1280,
           "height": 720,
-          "bytes": 25404,
-          "sha256": "d99ee5d5b7fa64261182ed516bfb153635b25b2e7f2ca73e0039b32bbdedb022"
+          "bytes": 25570,
+          "sha256": "10be33665a8b0476dd32ca422135a52e99f4cd93841d5547658c607d91243fe2"
         }
       ]
     },
@@ -670,35 +670,35 @@
       "height": 1600,
       "variants": [
         {
-          "file": "assets/launcher/point-cloud-studio-preview-320.webp",
+          "file": "assets/launcher/point-cloud-studio-preview-320-ece5805b13.webp",
           "width": 320,
           "height": 320,
           "bytes": 14880,
           "sha256": "ece5805b1319041ff6869eaf3e5f501e8bbe5e745a973533b18fb88848728ade"
         },
         {
-          "file": "assets/launcher/point-cloud-studio-preview-480.webp",
+          "file": "assets/launcher/point-cloud-studio-preview-480-7c0b01327d.webp",
           "width": 480,
           "height": 480,
           "bytes": 36718,
           "sha256": "7c0b01327de79f2f50882528ecb856c838439b920db79c799e92a500e97c7acf"
         },
         {
-          "file": "assets/launcher/point-cloud-studio-preview-640.webp",
+          "file": "assets/launcher/point-cloud-studio-preview-640-b41f60d074.webp",
           "width": 640,
           "height": 640,
           "bytes": 59664,
           "sha256": "b41f60d0740d5d3efae4cf08c24af3931c4f1e294fd19a81103b4fc3380a35e0"
         },
         {
-          "file": "assets/launcher/point-cloud-studio-preview-960.webp",
+          "file": "assets/launcher/point-cloud-studio-preview-960-a04d7f0ed7.webp",
           "width": 960,
           "height": 960,
           "bytes": 106806,
           "sha256": "a04d7f0ed7f20b1b7dcdbc109b737f1b4f917bbd32fbabcc0c7c423fc8b32b7a"
         },
         {
-          "file": "assets/launcher/point-cloud-studio-preview-1280.webp",
+          "file": "assets/launcher/point-cloud-studio-preview-1280-eeae0b7dbf.webp",
           "width": 1280,
           "height": 1280,
           "bytes": 146622,
