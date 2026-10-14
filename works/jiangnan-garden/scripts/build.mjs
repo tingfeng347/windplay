@@ -53,6 +53,10 @@ export async function compile(online=false,{assetBase=process.env.WINDPLAY_GARDE
  let html=template.replace('<link rel="stylesheet" href="styles.css">',()=>`<style>${css}</style>`);
  if(online){
   let metadata=`<meta name="windplay-asset-pack" content="${packFile}">`;
+  // The script is already running when progress begins. Count only the six
+  // initial data resources, including the packed images, not deferred detail.
+  const loadingFiles=Object.fromEntries([...initialAssets].sort().map(file=>[file,assets.get(file).length]));
+  metadata+=`<meta name="windplay-loading-files" content="${JSON.stringify(loadingFiles).replaceAll('"','&quot;')}">`;
   const configured=assetBase;
   if(configured){const base=new URL(configured);if(base.protocol!=='https:'||base.username||base.password||base.search||base.hash)throw new Error('CDN base must be a public HTTPS directory URL');if(!base.pathname.endsWith('/'))base.pathname+='/';metadata+=`<meta name="windplay-asset-base" content="${base.href.replaceAll('&','&amp;').replaceAll('"','&quot;')}"><link rel="preconnect" href="${base.origin}" crossorigin>`;}
   html=html.replace('</head>',metadata+'</head>');

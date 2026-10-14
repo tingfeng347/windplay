@@ -18,16 +18,18 @@ import world from './world.cjs';
 import {upgradeTextures} from './texture-streaming.js';
 import {detailSelection} from './detail-selection.js';
 import {resourceBytes} from './resource-loader.js';
+import {createLoadingProgress} from './loading-progress.js';
 const preview=new URLSearchParams(location.search).has('preview');
 document.body.classList.toggle('preview',preview);
-const $=id=>document.getElementById(id),canvas=$('scene');
+const $=id=>document.getElementById(id),canvas=$('scene'),loading=createLoadingProgress();
 $('reload').onclick=()=>location.reload();
-function showError(text){$('loading').hidden=true;$('error').hidden=false;$('error-text').textContent=text;}
+function showError(text){loading.stop();$('loading').hidden=true;$('error').hidden=false;$('error-text').textContent=text;}
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();showError('图形上下文已中断。请重新打开园林，或关闭其他占用显卡的页面。');});
 // Let the loading surface paint before generating textures and geometry.
-requestAnimationFrame(()=>{init().catch(e=>{console.error(e);showError('需要支持 WebGL 2 的浏览器与硬件加速。请检查浏览器设置后重试。');});});
+requestAnimationFrame(()=>{init().catch(e=>{console.error(e);showError(`未能完成“${loading.label}”。请检查网络连接，并确认浏览器支持 WebGL 2 且已启用硬件加速后重试。`);});});
 async function init(){
- const started=performance.now();
+ const started=performance.now();await loading.stage('resources');
+ const track=(name,promise)=>promise.then(result=>{loading.taskDone(name);return result;});
  const scene=new T.Scene(),renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});
  renderer.setPixelRatio(preview?1:Math.min(window.devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;renderer.outputColorSpace=T.SRGBColorSpace;
  const camera=new T.PerspectiveCamera(43,1,.08,250),controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.065;controls.maxPolarAngle=Math.PI*.485;controls.minDistance=3;controls.maxDistance=130;controls.target.set(0,1.1,0);camera.position.set(27,20,31);controls.update();
@@ -36,11 +38,13 @@ async function init(){
  const fill=new T.DirectionalLight('#c7d6dc',.3);fill.position.set(20,8,-15);scene.add(fill);
  scene.fog=new T.FogExp2('#c7d0c8',.009);scene.background=new T.Color('#c7d0c8');
  // A real overcast HDR environment supplies directional diffuse and wet-surface reflections.
- const [hdr,m,flora,furniture]=await Promise.all([resourceBytes(rainyEnvironment).then(bytes=>{const hdr=new RGBELoader().parse(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength));return new T.DataTexture(hdr.data,hdr.width,hdr.height,T.RGBAFormat,hdr.type);}),materials(),floraModels(),furnitureModels()]);canvas.dataset.assetsMs=Math.round(performance.now()-started);m.furniture=furniture;hdr.colorSpace=T.LinearSRGBColorSpace;hdr.minFilter=hdr.magFilter=T.LinearFilter;hdr.flipY=true;hdr.generateMipmaps=false;hdr.needsUpdate=true;hdr.mapping=T.EquirectangularReflectionMapping;
+ const [hdr,m,flora,furniture]=await Promise.all([track('environment',resourceBytes(rainyEnvironment).then(bytes=>{const hdr=new RGBELoader().parse(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength));return new T.DataTexture(hdr.data,hdr.width,hdr.height,T.RGBAFormat,hdr.type);})),track('materials',materials()),track('flora',floraModels()),track('furniture',furnitureModels())]);canvas.dataset.assetsMs=Math.round(performance.now()-started);m.furniture=furniture;hdr.colorSpace=T.LinearSRGBColorSpace;hdr.minFilter=hdr.magFilter=T.LinearFilter;hdr.flipY=true;hdr.generateMipmaps=false;hdr.needsUpdate=true;hdr.mapping=T.EquirectangularReflectionMapping;
+ await loading.stage('environment');
  const pmrem=new T.PMREMGenerator(renderer),envTarget=pmrem.fromEquirectangular(hdr);scene.environment=envTarget.texture;scene.environmentRotation.y=.8;hdr.dispose();pmrem.dispose();
+ await loading.stage('scene');
  const a=architecture(scene,m);batchArchitecture(a,m);const garden=landscape(scene,m,a,flora),selectDetail=detailSelection(scene,{interior:a.group,roof:a.roof});
  RectAreaLightUniformsLib.init();const windowBounce=[-9,-5,-1].map(x=>{const light=new T.RectAreaLight('#d4e0e4',1.9,3.25,2.8);light.position.set(x,2.35,-.9);light.lookAt(x,2,-7.5);scene.add(light);return light;});
- canvas.dataset.sceneBuildMs=Math.round(performance.now()-started);const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const ao=new SSAOPass(scene,camera,800,600,16);ao.kernelRadius=.75;ao.minDistance=.001;ao.maxDistance=.065;composer.addPass(ao);const bloom=new UnrealBloomPass(new T.Vector2(800,600),.13,.35,1.25);composer.addPass(bloom);composer.addPass(new OutputPass());
+ canvas.dataset.sceneBuildMs=Math.round(performance.now()-started);await loading.stage('render');const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const ao=new SSAOPass(scene,camera,800,600,16);ao.kernelRadius=.75;ao.minDistance=.001;ao.maxDistance=.065;composer.addPass(ao);const bloom=new UnrealBloomPass(new T.Vector2(800,600),.13,.35,1.25);composer.addPass(bloom);composer.addPass(new OutputPass());
  let nextDetailCheck=0,detailRevision=0;let walking=false,yaw=0,pitch=0,day=1,targetDay=1,quality=true,drag=null,last=performance.now(),elapsed=0,visible=true,lookIdle=0;const input={},night=new T.Color('#172b3e'),dayColor=new T.Color('#c4cec7');
  function fitOverview(){const portrait=camera.aspect<.85;controls.target.set(0,1.1,0);if(portrait){const distance=34/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2))*camera.aspect)*1.10;camera.position.set(0,1.1+distance*.86,distance*.51);}else{const scale=Math.max(1,1.25/camera.aspect);camera.position.set(27*scale,1.1+18.9*scale,31*scale);}controls.update();}
  function resize(){const rect=canvas.parentElement.getBoundingClientRect();const width=preview?1280:rect.width,height=preview?Math.round(1280*rect.height/Math.max(1,rect.width)):rect.height;renderer.setSize(width,height,false);camera.aspect=rect.width/rect.height;if(!walking)fitOverview();camera.updateProjectionMatrix();composer.setSize(width,height);ao.setSize(Math.min(width,1000),Math.min(height,750));if(preview)composer.render();}
@@ -74,5 +78,5 @@ async function init(){
  canvas.addEventListener('pointerdown',e=>{if(!walking)return;drag={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!walking||!drag||drag.id!==e.pointerId)return;yaw-=(e.clientX-drag.x)*.004;pitch=Math.max(-1.2,Math.min(1.2,pitch-(e.clientY-drag.y)*.004));drag.x=e.clientX;drag.y=e.clientY;pose();});canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
  document.querySelectorAll('[data-move]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();input[b.dataset.move]=true;b.classList.add('held');b.setPointerCapture(e.pointerId);});const release=()=>{delete input[b.dataset.move];b.classList.remove('held');};b.addEventListener('pointerup',release);b.addEventListener('pointercancel',release);b.addEventListener('lostpointercapture',release);});
  // Stable functional metadata is also used by the automated scene contract tests.
- canvas.dataset.rooms=world.ROOMS.map(r=>r.id).join(',');new ResizeObserver(resize).observe(canvas.parentElement);resize();lighting(0);composer.render();$('loading').hidden=true;canvas.dataset.initMs=Math.round(performance.now()-started);canvas.dataset.loadMs=Math.round(performance.now());canvas.dataset.ready='true';canvas.dataset.textureDetail='overview';canvas.dataset.treeDetail='overview';if(!preview)requestAnimationFrame(tick);
+ canvas.dataset.rooms=world.ROOMS.map(r=>r.id).join(',');new ResizeObserver(resize).observe(canvas.parentElement);resize();lighting(0);composer.render();loading.stop();$('loading').hidden=true;canvas.dataset.initMs=Math.round(performance.now()-started);canvas.dataset.loadMs=Math.round(performance.now());canvas.dataset.ready='true';canvas.dataset.textureDetail='overview';canvas.dataset.treeDetail='overview';if(!preview)requestAnimationFrame(tick);
 }

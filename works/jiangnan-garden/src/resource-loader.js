@@ -1,6 +1,16 @@
 // Versioned bytes are shared between image, HDR and glTF loaders. Offline data
 // URIs bypass the CDN, pack and persistent cache entirely.
 import {gunzipSync} from 'three/addons/libs/fflate.module.js';
+const progressListeners=new Set();
+export function onResourceProgress(listener){progressListeners.add(listener);return ()=>progressListeners.delete(listener);}
+function progress(url,loaded,complete=false){for(const listener of progressListeners)listener({url,loaded,complete});}
+export async function readResourceResponse(response,url){
+ if(!progressListeners.size||!response.body?.getReader){const bytes=new Uint8Array(await response.arrayBuffer());progress(url,bytes.length);return bytes;}
+ const reader=response.body.getReader(),chunks=[];let length=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;chunks.push(value);length+=value.length;progress(url,length);}}
+ finally{reader.releaseLock();}
+ const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}return bytes;
+}
 export async function decompressResource(bytes){
  if(bytes[0]!==31||bytes[1]!==139)return bytes;
  if(typeof DecompressionStream==='undefined')return gunzipSync(bytes);
@@ -27,7 +37,7 @@ async function verified(url,bytes){
 async function networkBytes(local){
  const base=meta('windplay-asset-base'),cdn=base&&new URL('assets/'+local.pathname.split('/assets/').pop(),base).href;
  const controllers=[],timers=[];
- async function request(url){const controller=new AbortController();controllers.push(controller);const response=await fetch(url,{credentials:'omit',signal:controller.signal});if(!response.ok)throw new Error(`Resource HTTP ${response.status}`);return verified(url,new Uint8Array(await response.arrayBuffer()));}
+ async function request(url){const controller=new AbortController();controllers.push(controller);const response=await fetch(url,{credentials:'omit',signal:controller.signal});if(!response.ok)throw new Error(`Resource HTTP ${response.status}`);const bytes=await verified(url,await readResourceResponse(response,local.href));progress(local.href,bytes.length,true);return bytes;}
  try{
   if(!cdn||new URL(cdn).origin===local.origin)return await request(local.href);
   // A stalled CDN cannot hold up a working same-origin copy. Race complete
@@ -40,7 +50,7 @@ async function networkBytes(local){
 async function storedBytes(url){
  const local=new URL(url,document.baseURI),versioned=/-[a-f0-9]{16}\.[a-z.]+$/.test(local.pathname),store=versioned?await cacheStore():null;
  let cached;try{cached=await store?.match(local.href);}catch{}
- if(cached){record('assetCacheHits');return new Uint8Array(await cached.arrayBuffer());}
+ if(cached){record('assetCacheHits');const bytes=new Uint8Array(await cached.arrayBuffer());progress(local.href,bytes.length,true);return bytes;}
  const bytes=await networkBytes(local);if(store)(async()=>{try{await store.put(local.href,new Response(bytes));const keys=await store.keys?.();if(keys?.length>96)await Promise.all(keys.slice(0,keys.length-96).map(key=>store.delete(key)));}catch{}})();return bytes;
 }
 export async function resourceBytes(url){

@@ -8,6 +8,8 @@ test('a configured CDN changes resource metadata while keeping the script local'
 test('packed initial assets retain all original bytes and need at most eight requests',async()=>{
  const {compile}=await import('../scripts/build.mjs'),{unpackResources,decompressResource}=await import('../src/resource-loader.js'),{createHash}=require('node:crypto');
  const {html,assets,initialAssets}=await compile(true);assert.ok(initialAssets.size<=8);const name=/name="windplay-asset-pack" content="([^"]+)"/.exec(html)[1],unpacked=unpackResources(await decompressResource(assets.get(name)));
+ const loadingFiles=JSON.parse(/name="windplay-loading-files" content="([^"]+)"/.exec(html)[1].replaceAll('&quot;','"'));
+ assert.deepEqual(loadingFiles,Object.fromEntries([...initialAssets].filter(name=>!name.endsWith('.js')).sort().map(name=>[name,assets.get(name).length])),'Loading totals must describe the actual initial data, excluding script and deferred detail');
  assert.equal(unpacked.size,53);for(const [name,bytes] of unpacked){assert.match(name,new RegExp(createHash('sha256').update(bytes).digest('hex').slice(0,16)));assert.equal(assets.has(name),false,'Do not duplicate packed bytes in the deployment');}
  assert.throws(()=>unpackResources(new Uint8Array([255,255,255,255])),/Invalid/);
  const sample=new Uint8Array([0,1,255,3]);assert.deepEqual(await decompressResource(gzipSync(sample)),sample);assert.strictEqual(await decompressResource(sample),sample);

@@ -4,7 +4,15 @@
 
 开发需要 Node.js 22+，在仓库根目录运行 `npm ci`。作品使用仓库已有的 Three.js 与 esbuild；离线成品内联授权贴图、HDRI 和模型，在线成品默认同源，也可配置公开 CDN 镜像，并按观察距离补充细节。
 
-`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.19 MiB；同时输出在线目录 dist/web，入口 10,846 B、首批资源 11.00 MiB、7 个资源请求（不含 HTML）。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
+`npm run dev --workspace @windplay/jiangnan-garden` 启动预览；通过 `PORT` 指定端口。`npm run build --workspace @windplay/jiangnan-garden` 输出 dist/index.html 与 tracked demo/index.html，代码、样式、Three.js、贴图、HDRI 与模型内联。当前离线成品 44.19 MiB；同时输出在线目录 dist/web，入口 13,255 B、首批资源 11.00 MiB、7 个资源请求（不含 HTML）。首次打开需要解压几何并上传贴图，载入耗时取决于设备。根构建按 windplay.webOutput 将在线目录组装进 _site，公开路径保持；部署 _site，离线 demo 可用 file:// 打开。体积、加载策略和测量限制见 [PERFORMANCE.md](PERFORMANCE.md)。
+
+## 进入进度
+
+进入页面后依次显示“加载程序 → 读取资源 → 准备光照 → 搭建园林 → 首次渲染”。资源阶段按实际读取的字节显示百分比、MiB 和就绪文件数；百分比只代表初始数据资源，不代表整个园林已经可用。读取到 100% 后仍可能需要校验、解压模型和生成纹理，界面会继续提示待处理内容。
+
+初始总量由构建器写入页面，包含资源包和五份初始几何，不包含已执行的应用脚本或之后按需加载的高清细节。CDN 与同源竞速、重试不会重复累计；命中缓存的资源会直接计入已就绪。光照、场景和首次绘制没有可靠的工作量百分比，显示当前阶段及不定进度条；阶段开始前让页面先绘制一次。离线单文件显示资源解析及四类资源就绪数量，不伪装成网络下载。
+
+失败提示会保留出错阶段，供重试排查。进度监听在首帧完成或失败时解除，游戏内的高清资源升级不影响入口进度。
 
 ## 可选 CDN
 
@@ -68,7 +76,8 @@ PBR 材质使用 metallic-roughness 工作流，非金属材质的 metalness 为
 - src/world.cjs：坐标、主要空间、阻挡、动线、起伏地表与日夜参数。
 - src/materials.js：实拍 PBR、磨损与湿润响应、逐叶纹理。
 - src/surface-pixels.js：与原算法逐字节相同的 1024px 程序纹理、LCG 跳步及最多两个 Worker 的生成/回退。
-- src/resource-loader.js：初始资源包解压、内容哈希缓存、可选 CDN 和同源回退、临时 URL 释放。
+- src/resource-loader.js：初始资源包解压、内容哈希缓存、可选 CDN 和同源回退、真实分块读取进度、临时 URL 释放。
+- src/loading-progress.js：初始资源字节汇总、去重和阶段提示。
 - src/offline-gltf.js：内联或同源几何 gzip 解压、Meshopt 解码、GLTFLoader 解析和临时 URL 释放。
 - src/detail-selection.js：缓存原始构件与植物实例范围，按房间、视野、距离和可见性筛选高清资源。
 - src/texture-streaming.js：512px 预览纹理登记、随视角更新的四路加载队列、原分辨率升级、失败重试和画质回退。
