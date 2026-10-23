@@ -1,6 +1,10 @@
 (function (root) {
   'use strict';
   const E=root.EmberWilds, C={ink:'#272d22',grass:'#6c7450',soil:'#777950',paper:'#d4c398',bark:'#77704b',leaf:'#3e4f37',rock:'#979685'};
+  // One shared palette, day-tuned at dawn/noon/dusk/night; t 是 0-1 的天色位置。
+  const SKY=[[.07,'#3a4436','#5a6248'],[.3,'#cfc394','#8a8f63'],[.5,'#d9c99e','#93996b'],[.66,'#8a6248','#4c4a3c'],[.72,'#39413a','#222a24'],[1,'#3a4436','#5a6248']];
+  function skyAt(t){for(let i=1;i<SKY.length;i++)if(t<=SKY[i][0]){const prev=SKY[i-1],curr=SKY[i],a=prev[0],b=curr[0],k=(t-a)/(b-a||1);return[mix(prev[1],curr[1],k),mix(prev[2],curr[2],k)];}return[SKY[0][1],SKY[0][2]];}
+  function mix(a,b,k){const h=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));const[ar,ag,ab]=h(a),[br,bg,bb]=h(b);return`rgb(${Math.round(ar+(br-ar)*k)},${Math.round(ag+(bg-ag)*k)},${Math.round(ab+(bb-ab)*k)})`;}
   const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
   class Painter {
     constructor(canvas,map){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.map=map;this.mctx=map.getContext('2d');this.overlay=document.createElement('canvas');this.ow=this.overlay.getContext('2d');this.width=0;this.height=0;this.pointer=null;this.scale=1;this.lastMap=-1;this.resize();}
@@ -10,7 +14,10 @@
     path(points,fill,stroke=C.ink,width=2){const c=this.ctx;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke();}}
     line(points,color=C.ink,width=1.5){const c=this.ctx;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.strokeStyle=color;c.lineWidth=width;c.stroke();}
     ellipse(x,y,rx,ry,color,stroke){const c=this.ctx;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fillStyle=color;c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=1.5;c.stroke();}}
-    terrain(s){const c=this.ctx;c.fillStyle='#6d7350';c.fillRect(0,0,this.width,this.height);
+    terrain(s){const c=this.ctx;
+      // 天光是一整块竖直渐变，随昼夜换色，让荒野先有天、再有地。
+      const t=(s.time%E.DAY)/E.DAY,[top,bottom]=skyAt(t),g=c.createLinearGradient(0,0,0,this.height);
+      g.addColorStop(0,top);g.addColorStop(1,bottom);c.fillStyle=g;c.fillRect(0,0,this.width,this.height);
       const startX=Math.floor((s.player.x-this.width/this.scale/2)/160)-1,endX=Math.ceil((s.player.x+this.width/this.scale/2)/160)+1;
       const startY=Math.floor((s.player.y-this.height/this.scale/.66/2)/160)-2,endY=Math.ceil((s.player.y+this.height/this.scale/.66/2)/160)+2;
       for(let gy=startY;gy<=endY;gy++)for(let gx=startX;gx<=endX;gx++){
@@ -23,7 +30,7 @@
       // A winding pale path gives the wilderness a distinctive ink-map structure.
       c.strokeStyle='#a59b7139';c.lineWidth=74*this.scale;c.beginPath();for(let y=0;y<=E.SIZE;y+=50){const p=this.toScreen(1300+Math.sin(y/310)*170,y);y?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y);}c.stroke();
       c.strokeStyle='#c0b2801c';c.lineWidth=38*this.scale;c.stroke();
-      const top=this.toScreen(0,0),bottom=this.toScreen(E.SIZE,E.SIZE);c.fillStyle='#303c2b';if(top.x>0)c.fillRect(0,0,top.x,this.height);if(bottom.x<this.width)c.fillRect(bottom.x,0,this.width-bottom.x,this.height);if(top.y>0)c.fillRect(0,0,this.width,top.y);if(bottom.y<this.height)c.fillRect(0,bottom.y,this.width,this.height-bottom.y);
+      const mapTop=this.toScreen(0,0),mapBottom=this.toScreen(E.SIZE,E.SIZE);c.fillStyle='#303c2b';if(mapTop.x>0)c.fillRect(0,0,mapTop.x,this.height);if(mapBottom.x<this.width)c.fillRect(mapBottom.x,0,this.width-mapBottom.x,this.height);if(mapTop.y>0)c.fillRect(0,0,this.width,mapTop.y);if(mapBottom.y<this.height)c.fillRect(0,mapBottom.y,this.width,this.height-mapBottom.y);
     }
     tree(e,t){const c=this.ctx,v=e.variant||.5,lean=(v-.5)*16,shake=e.shake&&t-e.shake<.18?Math.sin((t-e.shake)*50)*4:0;c.translate(shake,0);
       this.ellipse(9,4,37,13,'#2633213d');
@@ -49,11 +56,32 @@
     trap(e){this.ellipse(0,3,21,7,'#26332236');this.path([[-20,3],[-11,-22],[10,-24],[21,1],[0,8]],'#927744');for(let i=0;i<4;i++)this.line([[-12+i*8,-21],[-13+i*9,6]],'#d3bb83',2);this.line([[-18,-7],[17,-11]],'#473c2b',2);if(e.caught){this.ellipse(0,-4,7,7,'#c8bea4',C.ink);this.ellipse(-3,-15,2,9,'#c8bea4',C.ink);}}
     animal(e,t){this.ellipse(0,3,e.type==='rabbit'?12:24,7,'#2633213d');if(e.type==='rabbit'){const hop=Math.sin(t*7+e.id)*2;this.ellipse(0,-10-hop,12,11,'#bdbba0',C.ink);this.ellipse(9,-16-hop,7,7,'#cbc5aa',C.ink);this.ellipse(7,-30-hop,2.8,12,'#ccc4a5',C.ink);this.ellipse(13,-28-hop,2.7,11,'#ccc4a5',C.ink);this.ellipse(11,-18-hop,1.5,1.5,C.ink);this.ellipse(-10,-8-hop,4,4,'#e1d6b7',C.ink);}
       else if(e.type==='spider'){for(let i=0;i<4;i++){const y=-7-i*4;this.line([[-5,y],[-21-i*2,y-8],[-30,y+8]],'#282b24',2);this.line([[5,y],[21+i*2,y-8],[30,y+8]],'#282b24',2);}this.ellipse(0,-13,14,15,'#343e2e',C.ink);this.ellipse(0,-27,9,7,'#3d4431',C.ink);this.ellipse(-4,-29,2,2,'#daaa65');this.ellipse(4,-29,2,2,'#daaa65');}
-      else{this.path([[-23,-2],[-22,-26],[-8,-31],[2,-27],[10,-47],[16,-33],[26,-36],[21,-15],[7,-7],[1,7],[-9,7]],'#4c4c38');this.path([[10,-47],[18,-50],[18,-35]],'#353c2b');this.ellipse(20,-30,2,2,'#d99d67');this.line([[-21,-20],[-38,-34],[-28,-8]],'#343e2c',4);this.line([[-13,0],[-15,9]],C.ink,4);this.line([[0,2],[1,11]],C.ink,4);}}
-    player(p,t){const c=this.ctx,bob=p.walk?Math.sin(p.walk)*2:Math.sin(t*2)*.6;this.ellipse(0,5,18,7,'#25332261');c.translate(0,bob);const step=p.walk?Math.sin(p.walk)*4:0;this.line([[-6,-4],[-7,11+step]],'#252c25',5);this.line([[6,-4],[8,11-step]],'#252c25',5);
-      this.path([[-14,-14],[-8,-38],[9,-38],[17,-13],[7,-5],[-9,-5]],'#cbbd90');this.path([[-10,-34],[-17,-12],[-9,-16],[-4,-32]],'#a49b76');this.line([[-7,-29],[-3,-14],[8,-12]],'#625f43',1.2);this.path([[-10,-38],[-7,-55],[5,-61],[12,-52],[10,-38],[2,-31]],'#d2bd8a');this.path([[-11,-45],[-14,-57],[-4,-67],[7,-62],[15,-57],[13,-43],[8,-52],[3,-47],[-3,-55]],'#2f3227');this.ellipse(5,-43,1.2,1.5,C.ink);
-      this.path([[-10,-34],[8,-33],[11,-26],[-2,-28],[-16,-16],[-15,-27]],'#ac6650');this.line([[11,-24],[19,-9]],'#272e23',3);
-      if(p.torch>0){this.line([[20,-5],[21,-33]],'#58462d',3);this.path([[17,-32],[17,-42],[21,-48-Math.sin(t*8)*3],[25,-38],[24,-30]],'#e7af59','#6c4f30',.7);}
+      else{const stalk=Math.sin(t*3+e.id)*.5+.5;
+        // 狼：低伏的背线、竖起的耳、尾尖上翘，随步伐起伏。
+        this.path([[-23,-2],[-22,-26],[-8,-31],[2,-27],[10,-47],[16,-33],[26,-36],[21,-15],[7,-7],[1,7],[-9,7]],'#4c4c38');
+        this.path([[10,-47],[18,-50],[18,-35]],'#353c2b');
+        // 狼耳与尾，耳尖在移动时抖动。
+        const earFlick=stalk*3;
+        this.line([[10,-47],[10,-52-earFlick]],C.ink,2);
+        this.line([[16,-33],[22,-38+earFlick]],C.ink,2);
+        this.ellipse(20,-30,2,2,'#d99d67');
+        this.line([[-21,-20],[-38,-34],[-28,-8]],'#343e2c',4);
+        this.line([[-13,0],[-15,9]],C.ink,4);this.line([[0,2],[1,11]],C.ink,4);}}
+    player(p,t){const c=this.ctx,bob=p.walk?Math.sin(p.walk)*2:Math.sin(t*2)*.6;this.ellipse(0,5,18,7,'#25332261');c.translate(0,bob);const step=p.walk?Math.sin(p.walk)*4:0;
+      // 行走的节拍：迈步时身体前倾、手臂摆动，停下时安静站立。
+      const stride=p.walk?Math.min(1,Math.abs(Math.sin(p.walk))):0;
+      this.line([[-6,-4],[-7,11+step]],'#252c25',5);this.line([[6,-4],[8,11-step]],'#252c25',5);
+      this.path([[-14,-14],[-8,-38],[9,-38],[17,-13],[7,-5],[-9,-5]],'#cbbd90');this.path([[-10,-34],[-17,-12],[-9,-16],[-4,-32]],'#a49b76');this.line([[-7,-29],[-3,-14],[8,-12]],'#625f43',1.2);
+      // 头部：圆颅、兜帽与侧视的鼻尖，行走时微微前倾。
+      const lean=stride*3;
+      this.path([[-10+lean*.3,-38],[-7+lean,-55],[5+lean,-61],[12+lean*.7,-52],[10+lean*.3,-38],[2,-31]],'#d2bd8a');
+      this.path([[-11+lean*.4,-45],[-14+lean,-57],[-4+lean,-67],[7+lean*.8,-62],[15+lean*.6,-57],[13+lean*.2,-43],[8+lean*.5,-52],[3+lean*.3,-47],[-3+lean*.4,-55]],'#2f3227');
+      this.ellipse(5+lean*.6,-43,1.2,1.5,C.ink);
+      // 背包与握持的手：摆幅与步伐同步，让静止与移动一眼可辨。
+      this.path([[-10,-34],[8,-33],[11,-26],[-2,-28],[-16,-16],[-15,-27]],'#ac6650');
+      const arm=p.walk?Math.sin(p.walk+Math.PI)*7:0;
+      this.line([[11,-24],[19+arm,-9]],'#272e23',3);
+      if(p.torch>0){const swing=arm*.4;this.line([[20,-5],[21+swing,-33]],'#58462d',3);this.path([[17+swing,-32],[17+swing,-42],[21+swing,-48-Math.sin(t*8)*3],[25+swing,-38],[24+swing,-30]],'#e7af59','#6c4f30',.7);}
       if(p.invulnerable>0){c.globalAlpha=.8;this.ellipse(0,-26,25,36,'#e7a67922');}
     }
     drawEntity(e,s){const p=this.toScreen(e.x,e.y);if(p.x< -100||p.x>this.width+100||p.y< -160||p.y>this.height+100)return;const c=this.ctx;c.save();c.translate(p.x,p.y);c.scale(this.scale,this.scale);
@@ -71,6 +99,12 @@
       this.hover=null;if(this.pointer){const world=this.toWorld(this.pointer.x,this.pointer.y);let d=60;for(const e of s.entities){if(e.available===false||['stump','rubble','dead'].includes(e.type))continue;const dd=Math.hypot(world.x-e.x,world.y-e.y+35);if(dd<d){d=dd;this.hover=e.id;}}}
       const objects=[...s.entities,{id:0,type:'player',x:s.player.x,y:s.player.y}];objects.sort((a,b)=>a.y-b.y).forEach(e=>this.drawEntity(e,s));
       if(s.target&&!s.target.id){const p=this.toScreen(s.target.x,s.target.y);this.ellipse(p.x,p.y,8*this.scale,4*this.scale,'#dcc08a22','#dac28b');}
+      // 前景草叶：只画在画面下缘，随风摇摆，给镜头一个“贴着地面”的层次。
+      {const c=this.ctx;c.save();c.globalAlpha=.5;
+       for(let i=0;i<26;i++){const fx=(i*97.3)%1,fy=(i*61.7)%1,x=fx*this.width,y=this.height-6-fy*46;
+        const sway=Math.sin(s.time*1.1+i)*7;c.strokeStyle=i%2?'#3a452f':'#4b5236';c.lineWidth=2.2;
+        c.beginPath();c.moveTo(x,y);c.quadraticCurveTo(x+sway*.4,y-26,x+sway,y-52-fy*20);c.stroke();}
+       c.restore();}
       this.night(s);
       if(s.weather==='rain'){c.strokeStyle='#b5c0aa50';c.lineWidth=.8;for(let i=0;i<75;i++){const x=(i*113.77+s.time*71)%this.width,y=(i*57.36+s.time*480)%this.height;c.beginPath();c.moveTo(x,y);c.lineTo(x-8,y+17);c.stroke();}}
       const vignette=c.createRadialGradient(this.width/2,this.height*.5,this.height*.25,this.width/2,this.height*.5,Math.max(this.width,this.height)*.65);vignette.addColorStop(0,'#1b271100');vignette.addColorStop(1,'#15211066');c.fillStyle=vignette;c.fillRect(0,0,this.width,this.height);this.minimap(s);this.canvas.style.cursor=this.hover?'pointer':'crosshair';}

@@ -8,7 +8,7 @@
   try{saved=E.restore(localStorage.getItem(KEY));}catch{}
   if(saved&&!saved.dead){$('continue').hidden=false;$('continue').textContent=`继续第 ${saved.day} 天`;}
   Object.defineProperty(E,'game',{get:()=>JSON.parse(E.serialize(s))});
-  function beep(frequency=350,duration=.08){if(!sound)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.type='triangle';o.frequency.value=frequency;g.gain.setValueAtTime(.08,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+duration);}catch{}}
+  function beep(frequency=350,duration=.08,type='triangle',volume=.08){if(!sound)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.value=frequency;g.gain.setValueAtTime(volume,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+duration);}catch{}}
   function toast(text){$('toast').textContent=text;$('toast').classList.add('visible');toastUntil=performance.now()+3200;}
   function save(){if(!started)return false;try{localStorage.setItem(KEY,E.serialize(s));lastSave=s.time;return true;}catch{toast('当前浏览器无法保存存档。旅程仍可继续。');return false;}}
   function begin(continueSave=false){s=continueSave&&saved?saved:E.create($('seed').value.trim()||'windplay');started=true;keys.clear();touch.clear();s.paused=false;s.dead=false;deathShown=false;painter.lastMap=-1;$('welcome').hidden=true;$('death-screen').hidden=true;$('pause-screen').hidden=true;lastSave=s.time;lastMessage='';update(true);save();beep(280,.18);}
@@ -73,6 +73,16 @@
   }
   function frame(now){const dt=last?Math.min(.1,(now-last)/1000):0;last=now;
     if(started&&!s.paused&&!s.dead){const x=(keys.has('d')||keys.has('arrowright')||touch.has('right')?1:0)-(keys.has('a')||keys.has('arrowleft')||touch.has('left')?1:0),y=(keys.has('s')||keys.has('arrowdown')||touch.has('down')?1:0)-(keys.has('w')||keys.has('arrowup')||touch.has('up')?1:0);E.tick(s,dt,{x,y,sprint:keys.has('shift')});if(keys.has('e'))interact();if(keys.has(' '))attackEnemy();if(s.time-lastSave>=15)save();}
+    // 昼夜与天气各有一个声音签名：入夜低鸣、落雨细响、清晨一声轻亮。
+    if(started&&sound){
+      if(s.phase!==frame.phase){if(s.phase==='night')beep(120,.5,'sine',.05);if(s.phase==='dusk')beep(190,.3,'sine',.04);if(s.phase==='day')beep(520,.25,'triangle',.05);frame.phase=s.phase;}
+      if(s.weather!==frame.weather){if(s.weather==='rain')beep(900,.06,'sine',.02);frame.weather=s.weather;}
+    }
+    // 角色动作的音效提示：奔跑、受击、入夜危险。
+    if(started&&sound&&!s.paused&&!s.dead){
+      if(s.player.walk&&Math.abs(Math.sin(s.player.walk))>.96)beep(80,.03,'sine',.015);
+      if(s.player.invulnerable>.25&&s.player.invulnerable<.35)beep(180,.12,'sawtooth',.04);
+    }
     painter.render(s);update();if(now>toastUntil)$('toast').classList.remove('visible');requestAnimationFrame(frame);
   }
   update(true);requestAnimationFrame(frame);window.addEventListener('pagehide',save);
